@@ -1,0 +1,95 @@
+.gridSection {
+  padding-bottom: 20px;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #7b7b7b;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  letter-spacing: -0.04em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+}
+
+.thumbnail {
+  position: relative;
+  height: 220px;
+}
+
+.badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.cardBody {
+  padding: 16px;
+}
+
+.cardTopRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cardTopRow h3 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.rating {
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.cardBody p {
+  margin: 6px 0 0;
+  color: #707070;
+}
+
+.cardBody strong {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.message {
+  margin: 0;
+  padding: 28px;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #666666;
+}
