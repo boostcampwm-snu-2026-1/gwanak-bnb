@@ -123,10 +123,6 @@ function App() {
 
         <div className={styles.heroCopy}>
           <h1>마음에 드는 숙소를 찾아보세요.</h1>
-          <p className={styles.description}>
-            Airbnb 메인 화면을 참고해 숙소 탐색 경험을 연습하는 React
-            프로젝트입니다.
-          </p>
         </div>
 
         <SearchBar
