@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import SearchBar from "./components/SearchBar";
 import StayGrid from "./components/StayGrid";
 import styles from "./App.module.css";
+
+const categoryLabels = ["한옥", "호수 근처", "인기 급상승", "오두막", "전망 좋은 숙소"];
 
 function App() {
   const [stays, setStays] = useState([]);
@@ -46,6 +49,21 @@ function App() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
+        <div className={styles.brandRow}>
+          <div className={styles.brand}>gwanak-bnb</div>
+          <nav className={styles.topNav} aria-label="메인 메뉴">
+            <button type="button" className={styles.navButton}>
+              숙소
+            </button>
+            <button type="button" className={styles.navButton}>
+              체험
+            </button>
+            <button type="button" className={styles.navButton}>
+              온라인 체험
+            </button>
+          </nav>
+        </div>
+
         <div className={styles.heroCopy}>
           <h1>마음에 드는 숙소를 찾아보세요.</h1>
           <p className={styles.description}>
@@ -53,9 +71,26 @@ function App() {
             프로젝트입니다.
           </p>
         </div>
+
+        <SearchBar guestSummary="여행자 추가" />
+
+        <div className={styles.filterRow}>
+          {categoryLabels.map((label) => (
+            <button key={label} type="button" className={styles.filterChip}>
+              {label}
+            </button>
+          ))}
+        </div>
       </header>
 
       <main className={styles.content}>
+        <section className={styles.summaryCard}>
+          <div>
+            <p className={styles.summaryLabel}>현재 검색 조건</p>
+            <strong>어디든지 · 5월 1일 - 5월 15일 · 여행자 추가</strong>
+          </div>
+        </section>
+
         <StayGrid
           stays={stays}
           isLoading={isLoading}

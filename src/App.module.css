@@ -5,11 +5,42 @@
 }
 
 .header {
-  padding: 40px clamp(20px, 4vw, 48px) 24px;
+  padding: 24px clamp(20px, 4vw, 48px) 28px;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 44px;
+}
+
+.brand {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #ff385c;
+}
+
+.topNav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navButton {
+  padding: 10px 16px;
+  border: 1px solid #e7e7e7;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #444444;
+  font-weight: 500;
 }
 
 .heroCopy {
   max-width: 720px;
+  margin-bottom: 24px;
 }
 
 .heroCopy h1 {
@@ -25,12 +56,54 @@
   color: #666666;
 }
 
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.filterChip {
+  padding: 10px 14px;
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #555555;
+  font-weight: 500;
+}
+
 .content {
   padding: 0 clamp(20px, 4vw, 48px) 48px;
 }
 
+.summaryCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 18px 20px;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.summaryLabel {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  color: #757575;
+}
+
 @media (max-width: 640px) {
   .header {
-    padding-top: 32px;
+    padding-top: 20px;
+  }
+
+  .brandRow {
+    margin-bottom: 28px;
+  }
+
+  .topNav {
+    flex-wrap: wrap;
   }
 }
