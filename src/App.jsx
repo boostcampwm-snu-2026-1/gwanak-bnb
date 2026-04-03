@@ -1,11 +1,44 @@
 import { useEffect, useState } from "react";
+import GuestSelector from "./components/GuestSelector";
 import SearchBar from "./components/SearchBar";
 import StayGrid from "./components/StayGrid";
 import styles from "./App.module.css";
 
+const guestConfig = {
+  adults: {
+    title: "성인",
+    description: "13세 이상",
+    max: 8,
+  },
+  children: {
+    title: "어린이",
+    description: "2~12세",
+    max: 6,
+  },
+  infants: {
+    title: "유아",
+    description: "2세 미만",
+    max: 4,
+  },
+  pets: {
+    title: "반려동물",
+    description: "반려동물 동반 가능 숙소만 표시",
+    max: 3,
+  },
+};
+
+const initialGuests = {
+  adults: 0,
+  children: 0,
+  infants: 0,
+  pets: 0,
+};
+
 const categoryLabels = ["한옥", "호수 근처", "인기 급상승", "오두막", "전망 좋은 숙소"];
 
 function App() {
+  const [guests, setGuests] = useState(initialGuests);
+  const [isGuestSelectorOpen, setIsGuestSelectorOpen] = useState(false);
   const [stays, setStays] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -46,6 +79,30 @@ function App() {
     };
   }, []);
 
+  const totalTravelers = guests.adults + guests.children;
+  const guestSummary =
+    totalTravelers > 0 ? `게스트 ${totalTravelers}명` : "여행자 추가";
+  const petSummary = guests.pets > 0 ? ` · 반려동물 ${guests.pets}마리` : "";
+
+  function updateGuestCount(type, delta) {
+    setGuests((currentGuests) => {
+      const nextValue = currentGuests[type] + delta;
+
+      if (nextValue < 0 || nextValue > guestConfig[type].max) {
+        return currentGuests;
+      }
+
+      return {
+        ...currentGuests,
+        [type]: nextValue,
+      };
+    });
+  }
+
+  function closeGuestSelector() {
+    setIsGuestSelectorOpen(false);
+  }
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -72,7 +129,21 @@ function App() {
           </p>
         </div>
 
-        <SearchBar guestSummary="여행자 추가" />
+        <SearchBar
+          guestSummary={`${guestSummary}${petSummary}`}
+          isGuestSelectorOpen={isGuestSelectorOpen}
+          onToggleGuestSelector={() =>
+            setIsGuestSelectorOpen((currentOpen) => !currentOpen)
+          }
+          onCloseGuestSelector={closeGuestSelector}
+        >
+          <GuestSelector
+            guests={guests}
+            guestConfig={guestConfig}
+            onDecrement={(type) => updateGuestCount(type, -1)}
+            onIncrement={(type) => updateGuestCount(type, 1)}
+          />
+        </SearchBar>
 
         <div className={styles.filterRow}>
           {categoryLabels.map((label) => (
@@ -87,7 +158,7 @@ function App() {
         <section className={styles.summaryCard}>
           <div>
             <p className={styles.summaryLabel}>현재 검색 조건</p>
-            <strong>어디든지 · 5월 1일 - 5월 15일 · 여행자 추가</strong>
+            <strong>어디든지 · 5월 1일 - 5월 15일 · {guestSummary}</strong>
           </div>
         </section>
 
