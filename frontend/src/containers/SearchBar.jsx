@@ -1,5 +1,3 @@
-import React from 'react';
-
 function SearchBar({ adults, children, infants, isModalOpen, setIsModalOpen }) {
   const totalGuests = adults + children;
   const getDisplayText = () => {
