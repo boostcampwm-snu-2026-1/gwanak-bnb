@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './styles/App.css'
+import TravelerModal from './containers/TravelerModal'
 
 function App() {
   const [adults, setAdults] = useState(0)
@@ -18,9 +19,11 @@ function App() {
         </div>
       </section>
       {isModalOpen && (
-        <div style={{ padding: '20px', background: '#fff', marginTop: '10px', borderRadius: '10px' }}>
-          인원 선택 모달
-        </div>
+        <TravelerModal
+          adults={adults} setAdults={setAdults}
+          children={children} setChildren={setChildren}
+          infants={infants} setInfants={setInfants}
+        />
       )}
     </main>
   );
