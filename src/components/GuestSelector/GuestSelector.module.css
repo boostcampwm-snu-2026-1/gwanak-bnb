@@ -1,0 +1,22 @@
+.guestSelector {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 40px;
+}
+
+.guestSelector:hover {
+  background-color: #f7f7f7;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.value {
+  font-size: 14px;
+  color: #717171;
+  white-space: nowrap;
+}
