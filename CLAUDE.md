@@ -46,8 +46,8 @@
 ```
 src/
 ├── api/                  # API 클라이언트 + 엔드포인트 정의
-│   ├── apis/localServer/ # 로컬 서버 엔드포인트
-│   ├── apis/externalServer/ # 외부 서버(S3 등) 엔드포인트
+│   ├── apis/local-server/ # 로컬 서버 엔드포인트
+│   ├── apis/external-server/ # 외부 서버(S3 등) 엔드포인트
 │   └── client.ts         # implApi / implExternalApi
 ├── components/           # 피처에 독립적인 공통 UI 컴포넌트
 │   └── ui/               # shadcn 기반 Radix UI 래퍼
@@ -115,7 +115,16 @@ externalCall (fetch 래퍼, App.tsx 정의)
 
 ---
 
+## 폴더 및 파일 네이밍 규칙
+
+- 모든 폴더와 파일은 'xxx-xxx' 꼴로 작성.
+- App.tsx 제외 대문자 사용 금지
+
+
 ## 코딩 컨벤션
+
+- named export만 사용. default export 사용하지 않음.
+- import 시 절대경로 사용 ('@'), 상대경로 사용하지 않음.
 
 ### 네이밍
 
@@ -124,8 +133,6 @@ externalCall (fetch 래퍼, App.tsx 정의)
 | 컴포넌트/타입 | PascalCase | `PostCard`, `PostService` |
 | 함수/변수/훅 | camelCase | `implPostService`, `useRouteNavigation` |
 | 상수 | UPPER_SNAKE_CASE | `PATH`, `JOB_CATEGORY_MAP` |
-| 파일명 (컴포넌트) | PascalCase | `PostCard.tsx` |
-| 파일명 (훅/서비스) | camelCase | `postService.ts`, `useGuardContext.ts` |
 
 타입 네이밍에서 IType 등 헝가리안 네이밍 금지
 
@@ -143,6 +150,7 @@ externalCall (fetch 래퍼, App.tsx 정의)
 ## 스타일링 규칙
 
 - **CSS 파일 작성 금지** — TailwindCSS 유틸리티 클래스만 사용
+- 단, index.css에 대해서는 예외적으로 허용
 - 조건부 클래스 조합: `cn()` 함수 사용 (`clsx` + `tailwind-merge` 래퍼)
   ```ts
   import { cn } from '@/lib/utils';

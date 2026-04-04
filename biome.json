@@ -103,7 +103,27 @@
         "useConst": "error",
         "noParameterAssign": "error",
         "useBlockStatements": "error"
+      },
+      "nursery": {
+        "useSortedClasses": "error"
       }
+    }
+  },
+  "css": {
+    "parser": {
+      "cssModules": false,
+      "tailwindDirectives": true
+    },
+    "linter": {
+      "enabled": true
+    },
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineEnding": "lf",
+      "lineWidth": 80,
+      "quoteStyle": "double"
     }
   },
   "javascript": {
@@ -117,16 +137,6 @@
       "quoteStyle": "single",
       "attributePosition": "auto",
       "bracketSpacing": true
-    }
-  },
-  "css": {
-    "formatter": {
-      "enabled": true,
-      "indentStyle": "space",
-      "indentWidth": 2,
-      "lineEnding": "lf",
-      "lineWidth": 80,
-      "quoteStyle": "single"
     }
   },
   "html": {
