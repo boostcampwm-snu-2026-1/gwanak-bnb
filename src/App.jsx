@@ -1,6 +1,7 @@
 import Header from './components/Header/Header'
 import SearchBar from './components/SearchBar/SearchBar'
 import AccommodationCard from './components/AccommodationCard/AccommodationCard'
+import Footer from './components/Footer/Footer'
 import accommodations from './data/accommodations'
 import './App.css'
 
@@ -16,6 +17,7 @@ function App() {
           ))}
         </section>
       </main>
+      <Footer />
     </div>
   )
 }
