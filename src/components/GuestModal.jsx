@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./GuestModal.module.css";
 import GuestCounter from "./GuestCounter";
 
 function GuestModal() {
@@ -8,7 +9,7 @@ function GuestModal() {
   const [pets, setPets] = useState(0);
 
   return (
-    <div>
+    <div className={styles.modal}>
       <GuestCounter
         label="Adults"
         description="Ages 13 or above"
