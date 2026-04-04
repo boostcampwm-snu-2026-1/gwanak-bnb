@@ -7,7 +7,10 @@ function GuestSelector() {
 
   return (
     <div className={styles.container}>
-      <button onClick={() => SetIsOpen(!isOpen)}>Who</button>
+      <div className={styles.field} onClick={() => SetIsOpen(!isOpen)}>
+        <span className={styles.fieldLabel}>Guests</span>
+        <span className={styles.fieldValue}>Add guests</span>
+      </div>
       {isOpen && <GuestModal />}
     </div>
   );
