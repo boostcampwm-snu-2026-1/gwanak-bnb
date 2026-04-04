@@ -1,13 +1,15 @@
+/* Modal.css */
 .traveler-modal {
   position: absolute;
-  top: 75px;
-  right: 0;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 400px;
   background: white;
   border-radius: 32px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   padding: 16px 32px;
-  z-index: 100;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 8px 28px rgba(0,0,0,0.12);
+  z-index: 200;
 }
 
 .counter-group {
@@ -24,12 +26,13 @@
 
 .counter-label h3 {
   font-size: 16px;
-  font-weight: 600;
+  margin: 0;
 }
 
 .counter-label p {
   font-size: 14px;
-  color: #717171;
+  color: var(--text-sub);
+  margin: 4px 0 0 0;
 }
 
 .counter-controls {
@@ -44,13 +47,12 @@
   border-radius: 50%;
   border: 1px solid #b0b0b0;
   background: white;
+  color: #717171;
+  font-size: 20px;
   cursor: pointer;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 20px;
-  color: #717171;
-  transition: all 0.2s;
+  justify-content: center;
 }
 
 .counter-btn:hover:not(:disabled) {
@@ -67,6 +69,6 @@
 .counter-number {
   font-size: 16px;
   font-weight: 400;
-  min-width: 20px;
+  width: 20px;
   text-align: center;
 }

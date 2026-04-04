@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './styles/App.css'
 import TravelerModal from './containers/TravelerModal'
+import SearchBar from './containers/SearchBar'
 
 function App() {
   const [adults, setAdults] = useState(0)
@@ -9,14 +10,14 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(0)
   return (
     <main className = "app-container">
-      <section id = "header">
-        <div className = "search-bar-placeholder">
-          <h1>Gwanak-bnb Search Bar</h1>
-          <p>성인: {adults}, 어린이: {children}, 유아: {infants}</p>
-          <button onClick={() => setIsModalOpen(!isModalOpen)}>
-            {isModalOpen ? '모달 닫기' : '여행자 선택하기'}
-          </button>
-        </div>
+      <section id="header">
+        <SearchBar 
+          adults={adults} 
+          children={children} 
+          infants={infants}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
       </section>
       {isModalOpen && (
         <TravelerModal
@@ -25,6 +26,9 @@ function App() {
           infants={infants} setInfants={setInfants}
         />
       )}
+      <div className="content-placeholder">
+        <p>인원 선택을 완료하고 멋진 숙소를 찾아보세요!</p>
+      </div>
     </main>
   );
 }
