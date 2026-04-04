@@ -1,13 +1,14 @@
-import { useState } from "react";
-import styles from "./GuestModal.module.css";
 import GuestCounter from "./GuestCounter";
+import styles from "./GuestModal.module.css";
 
-function GuestModal() {
-  const [adults, setAdults] = useState(0);
-  const [children, setChildren] = useState(0);
-  const [infants, setInfants] = useState(0);
-  const [pets, setPets] = useState(0);
-
+function GuestModal({
+  adults,
+  setAdults,
+  children,
+  setChildren,
+  infants,
+  setInfants,
+}) {
   return (
     <div className={styles.modal}>
       <GuestCounter
@@ -27,12 +28,6 @@ function GuestModal() {
         description="Under 2"
         count={infants}
         onChange={setInfants}
-      />
-      <GuestCounter
-        label="Pets"
-        description="Bringing a service animal?"
-        count={pets}
-        onChange={setPets}
       />
     </div>
   );
