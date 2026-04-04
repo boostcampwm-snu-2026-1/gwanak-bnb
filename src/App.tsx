@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import GuestModal from './components/guest/GuestModal';
+import SearchBar from './components/common/SearchBar';
 
 const App: React.FC = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = () => {
+        setIsModalOpen(prev => !prev);
+    };
+
     const [counts, setCounts] = useState({
         adult: 0,
         child: 0,
@@ -19,9 +25,9 @@ const App: React.FC = () => {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-20 px-4">
 
-            <h1 className="text-2xl font-bold mb-8 text-gray-800">에어비앤비 게스트 선택</h1>
-
-            <GuestModal
+            <SearchBar
+                onOpen={toggleModal}
+                isModalOpen={isModalOpen}
                 counts={counts}
                 updateCount={updateCount}
             />
