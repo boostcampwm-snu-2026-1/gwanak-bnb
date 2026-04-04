@@ -1,0 +1,70 @@
+.searchBar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dddddd;
+  border-radius: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  background: white;
+  width: fit-content;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 40px;
+  min-width: 160px;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.field:hover {
+  background-color: #f0f0f0;
+}
+
+.fieldLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.fieldInput {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #717171;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background-color: #dddddd;
+  flex-shrink: 0;
+}
+
+.searchButton {
+  margin: 6px;
+  padding: 14px 20px;
+  background-color: #ff385c;
+  border: none;
+  border-radius: 40px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.searchButton:hover {
+  background-color: #e31c5f;
+}
+
+.fieldValue {
+  font-size: 14px;
+  color: #717171;
+}
