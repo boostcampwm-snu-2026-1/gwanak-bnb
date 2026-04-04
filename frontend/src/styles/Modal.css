@@ -1,0 +1,72 @@
+.traveler-modal {
+  position: absolute;
+  top: 75px;
+  right: 0;
+  width: 400px;
+  background: white;
+  border-radius: 32px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  padding: 16px 32px;
+  z-index: 100;
+}
+
+.counter-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.counter-group:last-child {
+  border-bottom: none;
+}
+
+.counter-label h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.counter-label p {
+  font-size: 14px;
+  color: #717171;
+}
+
+.counter-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.counter-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #b0b0b0;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #717171;
+  transition: all 0.2s;
+}
+
+.counter-btn:hover:not(:disabled) {
+  border-color: #222222;
+  color: #222222;
+}
+
+.counter-btn:disabled {
+  border-color: #ebebeb;
+  color: #ebebeb;
+  cursor: not-allowed;
+}
+
+.counter-number {
+  font-size: 16px;
+  font-weight: 400;
+  min-width: 20px;
+  text-align: center;
+}
