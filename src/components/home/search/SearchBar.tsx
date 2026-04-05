@@ -1,5 +1,5 @@
 import { GuestDropdown } from "./dropdown/GuestDropdown";
-import { useGuestCount } from "../../../hooks/useGuestCounts";
+import { useGuestCount } from "../../../hooks/useGuestCount";
 
 export const SearchBar = () => {
   const { counts, disabledStates, decreaseCount, increaseCount } =

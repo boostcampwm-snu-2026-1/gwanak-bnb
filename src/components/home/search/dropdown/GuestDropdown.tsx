@@ -3,7 +3,7 @@ import type {
   GuestCategory,
   GuestCounts,
   GuestDisabledStates,
-} from "../../../../hooks/useGuestCounts";
+} from "../../../../hooks/useGuestCount";
 import { Dropdown } from "../../../common/Dropdown";
 import { GuestCounter } from "./GuestCounter";
 

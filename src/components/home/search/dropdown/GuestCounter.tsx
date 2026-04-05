@@ -1,4 +1,4 @@
-import type { CountButtonDisabledState } from "../../../../hooks/useGuestCounts";
+import type { CountButtonDisabledState } from "../../../../hooks/useGuestCount";
 import { IconButton } from "../../../common/IconButton";
 import { Plus, Minus } from "lucide-react";
 
