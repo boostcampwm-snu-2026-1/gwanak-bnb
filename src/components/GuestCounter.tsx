@@ -1,7 +1,8 @@
+//components/GuestCounter.tsx
 
 import { useState } from "react";
 
-type GuestCounterProps = {
+export type GuestCounterProps = {
     name: string;
     description: string;
 };
