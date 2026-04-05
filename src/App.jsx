@@ -174,7 +174,7 @@ const styles = {
   searchBar: {
     position: 'relative',
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     width: '850px',
     height: '66px',
     backgroundColor: '#fff',
