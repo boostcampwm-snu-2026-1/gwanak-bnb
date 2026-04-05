@@ -1,0 +1,71 @@
+{
+  "stays": [
+    {
+      "id": 1,
+      "title": "북촌 감성 한옥 스테이",
+      "location": "서울, 종로구",
+      "distance": "도심까지 도보 14분",
+      "dates": "5월 1일 - 5월 15일",
+      "price": "₩128,000 /박",
+      "rating": 4.93,
+      "badge": "게스트 선호",
+      "gradient": "linear-gradient(135deg, #f7cab5 0%, #f9f0d9 100%)"
+    },
+    {
+      "id": 2,
+      "title": "숲 전망이 있는 모던 하우스",
+      "location": "가평군, 경기도",
+      "distance": "차로 1시간 20분",
+      "dates": "5월 1일 - 5월 15일",
+      "price": "₩176,000 /박",
+      "rating": 4.88,
+      "badge": "신규",
+      "gradient": "linear-gradient(135deg, #a7d7c5 0%, #f2f7e8 100%)"
+    },
+    {
+      "id": 3,
+      "title": "한강이 보이는 루프탑 스튜디오",
+      "location": "서울, 성동구",
+      "distance": "지하철 3정거장",
+      "dates": "5월 1일 - 5월 15일",
+      "price": "₩154,000 /박",
+      "rating": 4.95,
+      "badge": "인기",
+      "gradient": "linear-gradient(135deg, #9ec5fe 0%, #fef9d7 100%)"
+    },
+    {
+      "id": 4,
+      "title": "통창 거실이 있는 감성 오두막",
+      "location": "양평군, 경기도",
+      "distance": "차로 55분",
+      "dates": "5월 1일 - 5월 15일",
+      "price": "₩203,000 /박",
+      "rating": 4.9,
+      "badge": "슈퍼호스트",
+      "gradient": "linear-gradient(135deg, #d5c4f1 0%, #fce8df 100%)"
+    },
+    {
+      "id": 5,
+      "title": "제주 감귤밭 옆 미니 하우스",
+      "location": "제주시, 제주도",
+      "distance": "공항에서 차로 18분",
+      "dates": "5월 1일 - 5월 15일",
+      "price": "₩139,000 /박",
+      "rating": 4.97,
+      "badge": "게스트 선호",
+      "gradient": "linear-gradient(135deg, #ffd166 0%, #fff0c1 100%)"
+    },
+    {
+      "id": 6,
+      "title": "바다 앞 테라스 스테이",
+      "location": "강릉시, 강원도",
+      "distance": "해변까지 도보 3분",
+      "dates": "5월 1일 - 5월 15일",
+      "price": "₩212,000 /박",
+      "rating": 4.86,
+      "badge": "바다 전망",
+      "gradient": "linear-gradient(135deg, #8ecae6 0%, #e0fbfc 100%)"
+    }
+  ]
+}
+
