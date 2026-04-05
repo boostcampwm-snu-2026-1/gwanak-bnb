@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import SearchBar from './components/SearchBar.jsx'
 
 function App() {
@@ -10,6 +10,8 @@ function App() {
     infants: 0,
     pets: 0,
   })
+
+  const searchAreaRef = useRef(null)
 
   const totalGuests = guests.adults + guests.children
   const summaryText = useMemo(() => {
@@ -60,6 +62,31 @@ function App() {
     })
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchAreaRef.current &&
+        !searchAreaRef.current.contains(event.target)
+      ) {
+        setActiveTab(null)
+      }
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setActiveTab(null)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   return (
     <main className="min-h-screen bg-[#f7f7f7] px-4 py-10 sm:px-8">
       <section className="mx-auto w-full max-w-5xl">
@@ -73,7 +100,7 @@ function App() {
           </h1>
 
           <div className="mt-8 pb-2">
-            <div className="min-w-[720px]">
+            <div ref={searchAreaRef} className="min-w-[720px]">
               <SearchBar
                 activeTab={activeTab}
                 summaryText={summaryText}

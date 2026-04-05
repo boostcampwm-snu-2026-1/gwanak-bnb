@@ -95,7 +95,7 @@ function GuestModal({ guests, onChangeGuestCount }) {
 
         <GuestRow
           label="어린이"
-          description="2세~12세"
+          description="2~12세"
           count={guests.children}
           onIncrease={() => onChangeGuestCount('children', 1)}
           onDecrease={() => onChangeGuestCount('children', -1)}
