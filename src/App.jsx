@@ -1,4 +1,4 @@
-import BarContainer from "./search bar/BarContainer"
+import BarContainer from "./searchBar/BarContainer"
 
 function App() {
   return (

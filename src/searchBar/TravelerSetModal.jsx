@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "../css/SetModal.module.css";
 
 function TravelerSetModal() {
 
@@ -17,14 +18,24 @@ function TravelerSetModal() {
     return ( 
         <div>
             {guestTypes.map((g) => (
-                <div key={g.label}>
-                    <div>{g.label}</div>
-                    <div>{g.desc}</div>
-                    <button onClick={() => g.setState(prev => Math.max(prev - 1, 0))} disabled={g.state === 0}>
+                <div key={g.label} className={styles.container}>
+                    <div className={styles.content}>
+                        <div className={styles.title}>{g.label}</div>
+                        <div className={styles.desc}>{g.desc}</div>
+                    </div>
+                    <button 
+                        onClick={() => g.setState(prev => Math.max(prev - 1, 0))} 
+                        disabled={g.state === 0}
+                        className={styles.button}
+                    >
                         -
                     </button>
-                    <span>{g.state}</span>
-                    <button onClick={() => g.setState(prev => prev + 1)} disabled={g.state >= 9}>
+                    <span className={styles.count}>{g.state}</span>
+                    <button 
+                        onClick={() => g.setState(prev => prev + 1)} 
+                        disabled={g.state >= 9} 
+                        className={styles.button}
+                    >
                         +
                     </button>
                 </div>
