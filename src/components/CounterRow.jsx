@@ -1,4 +1,4 @@
-
+import './CounterRow.css';
 
 function CounterRow({ title, desc, count, onIncrease, onDecrease }) {
   return (

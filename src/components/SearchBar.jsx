@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TravelerPopup from './TravelerPopup' // 여행자 팝업 컴포넌트
+import './SearchBar.css'
 
 function SearchBar() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)

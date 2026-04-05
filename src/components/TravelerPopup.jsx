@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import CounterRow from './CounterRow'
+import './TravelerPopup.css'
 
 function TravelerPopup() {
   const [adultCount, setAdultCount] = useState(0)
