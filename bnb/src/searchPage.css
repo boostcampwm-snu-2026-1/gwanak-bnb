@@ -19,6 +19,24 @@
   display: flex;
   align-items: center;
   border-radius: 35px;
+  cursor: pointer;
+}
+
+.search:hover {
+  background-color: #eee;
+}
+
+.search:has(.search-btn:hover) {
+  background-color: transparent;
+}
+
+.active {
+  border: 1px solid #bbb;
+  box-shadow: -4px 0px 8px #ddd;
+}
+
+.block {
+  display: none;
 }
 
 .search h6 {
@@ -44,10 +62,19 @@
   background-color: #e00b41;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 25px;
   border: none;
   margin-right: 15px;
   padding: 0;
   display: block;
   color: white;
+}
+
+.search-btn:hover {
+  background-color: #FF385C;
+}
+
+.search-btn_active {
+  background-color: #FF385C;
+  width: 75px !important;
 }

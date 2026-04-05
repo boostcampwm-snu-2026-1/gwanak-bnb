@@ -4,10 +4,15 @@ import SearchPage from './searchPage'
 import CountPage from './countPage'
 
 function App() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
         <>
-            <SearchPage/>
-            <CountPage/>
+            <SearchPage 
+                onToggle={() => setIsModalOpen(!isModalOpen)}
+                isOpen={isModalOpen}
+            />
+            {isModalOpen && <CountPage />}
         </>
     )
 }
