@@ -1,0 +1,63 @@
+.header {
+    position: sticky;
+    top: 0;
+    background: white;
+    border-bottom: 1px solid #ebebeb;
+    padding: 16px 24px;
+    z-index: 50;
+  }
+  
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FF385C;
+    text-decoration: none;
+  }
+  
+  .userMenu {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .hostLink {
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    cursor: pointer;
+  }
+  
+  .hostLink:hover {
+    text-decoration: underline;
+  }
+  
+  .profileButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid #dddddd;
+    border-radius: 24px;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .profileButton:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .menuIcon {
+    font-size: 16px;
+  }
+  
+  .profileIcon {
+    font-size: 20px;
+  }
