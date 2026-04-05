@@ -1,0 +1,75 @@
+.guest-selector {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 320px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  padding: 24px;
+  z-index: 200;
+}
+
+.guest-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+
+.guest-row:not(:last-child) {
+  border-bottom: 1px solid #ebebeb;
+}
+
+.guest-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.guest-type {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+.guest-desc {
+  font-size: 14px;
+  color: #717171;
+  margin-top: 2px;
+}
+
+.guest-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.guest-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #b0b0b0;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #717171;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+
+.guest-btn:hover:not(:disabled) {
+  border-color: #222;
+  color: #222;
+}
+
+.guest-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.guest-count {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}

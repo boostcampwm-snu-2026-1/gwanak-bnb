@@ -1,0 +1,49 @@
+.categories {
+  padding: 12px 24px;
+  border-bottom: 1px solid #ebebeb;
+  overflow-x: auto;
+}
+
+.categories-scroll {
+  display: flex;
+  gap: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 2px solid transparent;
+  opacity: 0.7;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.category-item:hover {
+  opacity: 1;
+  border-bottom-color: #ddd;
+}
+
+.category-item.active {
+  opacity: 1;
+  border-bottom-color: #222;
+}
+
+.category-icon {
+  font-size: 24px;
+}
+
+.category-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #717171;
+  white-space: nowrap;
+}
+
+.category-item.active .category-label {
+  color: #222;
+}
