@@ -25,7 +25,7 @@ const rows = [
 
 function GuestModal({ id, guestCounts, onIncrement, onDecrement }) {
   return (
-    <section className={styles.modal} id={id}>
+    <section className={styles.modal} id={id} role="dialog" aria-modal="true" aria-label="여행자 선택">
       {rows.map((row) => {
         const count = guestCounts[row.key]
         const decrementDisabled = count === 0

@@ -90,6 +90,7 @@ function SearchBar({ guestCounts, setGuestCounts }) {
             onClick={() => setIsGuestModalOpen((prev) => !prev)}
             aria-expanded={isGuestModalOpen}
             aria-controls="guest-modal"
+            aria-haspopup="dialog"
           >
             <span className={styles.label}>여행자</span>
             <span className={styles.placeholder}>{guestSummary}</span>
