@@ -1,3 +1,7 @@
+export const MAX_GUESTS = 16;
+export const MAX_INFANTS = 5;
+export const MAX_PETS = 5;
+
 export const GUEST_TYPES = [
   { category: "adult", title: "성인", description: "13세 이상" },
   { category: "child", title: "어린이", description: "2~12세" },
