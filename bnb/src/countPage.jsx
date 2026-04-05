@@ -1,96 +1,59 @@
 import './countPage.css'
 
+const guestTypes = [
+    {id: 'adults', title: '성인', desc: '13세 이상'},
+    {id: 'children', title: '어린이', desc: '2~12세'},
+    {id: 'infants', title: '유아', desc: ' 2세 미만'},
+    {id: 'pets', title: '애완동물', desc: '애완동물'}
+];
+
+function CounterRow({ type, count, update, isLast }) {
+    return (
+        <div className="number-count">
+            <div className='counter-row'>
+                <div>
+                    <h4>{type.title}</h4>
+                    <p>{type.desc}</p>
+                </div>
+                <form style={{ marginLeft: "auto" }}>
+                    <button
+                        className='count-btn'
+                        onClick={() => update(type.id, -1)}
+                        type='button'
+                    > - </button>
+                    <span>{count}</span>
+                    <button 
+                        className='count-btn'
+                        onClick={() => update(type.id, 1)}
+                        type='button'
+                    > + </button>
+                </form>
+            </div>
+            {!isLast && <div className='divider-bottom'></div>}
+        </div>
+    )
+};
+
 function CountPage({ counts, setCounts }) {
+
+    const update = (id, amount) => {
+        setCounts(prev => ({
+            ...prev,
+            [id]: Math.max(0, prev[id] + amount)
+        }))
+    };
+
     return (
         <div className='search-anchor'>
             <div className='modal--number'>
-                <div className="number-count">
-                    <div className='counter-row'>
-                        <div>
-                            <h4>성인</h4>
-                            <p>13세 이상</p>
-                        </div>
-                        <form style={{ marginLeft: "auto" }}>
-                            <button
-                                className='count-btn'
-                                onClick={() => setCounts({ ...counts, adults: Math.max(0, counts.adults - 1) })}
-                                type='button'
-                            >-</button>
-                            <span>{counts.adults}</span>
-                            <button 
-                                className='count-btn'
-                                onClick={() => setCounts({ ...counts, adults: counts.adults + 1})}
-                                type='button'
-                            >+</button>
-                        </form>
-                    </div>
-                    <div className='divider-bottom'></div>
-                </div>
-                <div className="number-count">
-                    <div className='counter-row'>
-                        <div>
-                            <h4>어린이</h4>
-                            <p>2~12세</p>
-                        </div>
-                        <form style={{ marginLeft: "auto" }}>
-                            <button 
-                                className='count-btn'
-                                onClick={() => setCounts({ ...counts, children: Math.max(0, counts.children - 1) })}
-                                type='button'
-                            >-</button>
-                            <span>{counts.children}</span>
-                            <button 
-                                className='count-btn'
-                                onClick={() => setCounts({ ...counts, children: counts.children + 1})}  
-                                type='button'  
-                            >+</button>
-                        </form>
-                    </div>
-                    <div className='divider-bottom'></div>
-                </div>
-                <div className="number-count">
-                    <div className='counter-row'>
-                        <div>
-                            <h4>유아</h4>
-                            <p>2세 미만</p>
-                        </div>
-                        <form style={{ marginLeft: "auto" }}>
-                            <button 
-                                className='count-btn'
-                                onClick={() => setCounts({ ...counts, infants: Math.max(0, counts.infants - 1) })}
-                                type='button'
-                            >-</button>
-                            <span>{counts.infants}</span>
-                            <button 
-                                className='count-btn'
-                                onClick={() => setCounts({ ...counts, infants: counts.infants + 1})}
-                                type='button'
-                            >+</button>
-                        </form>
-                    </div>
-                    <div className='divider-bottom'></div>
-                </div>
-                <div className="number-count">
-                    <div className='counter-row'>
-                        <div>
-                            <h4>애완동물</h4>
-                            <p>애완동물</p>
-                        </div>
-                        <form style={{ marginLeft: "auto" }}>
-                            <button 
-                                className='count-btn'
-                                onClick={() => setCounts({ ...counts, pets: Math.max(0, counts.pets - 1) })}
-                                type='button'
-                            >-</button>
-                            <span>{counts.pets}</span>
-                            <button 
-                                className='count-btn'
-                                onClick={() => setCounts({ ...counts, pets: counts.pets + 1})}
-                                type='button'
-                            >+</button>
-                        </form>
-                    </div>
-                </div>
+                {guestTypes.map((item, index) => (
+                    <CounterRow
+                        type={item}
+                        count={counts[item.id]}
+                        update={update}
+                        isLast={index === guestTypes.length - 1}
+                    />
+                ))}
             </div>
         </div>
     )
