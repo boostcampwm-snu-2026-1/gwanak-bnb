@@ -1,44 +1,28 @@
 function GuestRow({ title, description, count, onIncrease, onDecrease, isMin, isMax }) {
-
-  // 비활성화 시 사용할 공통 스타일
-  const buttonStyle = (isDisabled) => ({
-    width: '32px',
-    height: '32px',
-    borderRadius: '50%',
-    border: `1px solid #b0b0b0`,
-    backgroundColor: 'white',
-    cursor: isDisabled ? 'not-allowed' : 'pointer', // 클릭 불가 표시
-    fontSize: '18px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    outline: 'none',
-    opacity: isDisabled ? 0.3 : 1,
-    pointerEvents: isDisabled ? 'none' : 'auto',
-  });
-
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+    <div className="flex justify-between items-center py-4 border-b border-gray-100 last:border-0">
       <div>
-        <div style={{ fontWeight: 'bold' }}>{title}</div>
-        <div style={{ fontSize: '0.85rem', color: '#717171' }}>{description}</div>
+        <div className="font-semibold text-gray-800">{title}</div>
+        <div className="text-sm text-gray-500">{description}</div>
       </div>
       
-      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+      <div className="flex items-center gap-4">
         <button 
           onClick={onDecrease}
           disabled={isMin}
-          style={buttonStyle(isMin)}
+          className={`w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-xl transition-all
+            ${isMin ? 'opacity-20 cursor-not-allowed' : 'hover:border-black active:scale-90'}`}
         >
           -
         </button>
 
-        <span style={{ width: '20px', textAlign: 'center' }}>{count}</span>
+        <span className="w-6 text-center font-medium">{count}</span>
 
         <button 
           onClick={onIncrease} 
-          disabled={isMax} 
-          style={buttonStyle(isMax)}
+          disabled={isMax}
+          className={`w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-xl transition-all
+            ${isMax ? 'opacity-20 cursor-not-allowed' : 'hover:border-black active:scale-90'}`}
         >
           +
         </button>
