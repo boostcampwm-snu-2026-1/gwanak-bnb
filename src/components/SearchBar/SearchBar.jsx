@@ -6,12 +6,32 @@ import GuestField from './GuestField/GuestField'
 function SearchButton({ isOpen }) {
   return (
     <div className="relative w-12 h-12 flex-shrink-0 mr-2">
-      <button className={`absolute right-0 top-0 h-12 bg-[#FF385C] rounded-full flex items-center gap-2 text-white hover:bg-[#e0314f] transition-all duration-200 cursor-pointer ${isOpen ? 'px-4' : 'w-12 justify-center'}`}>
+      <button
+        className={`
+          absolute right-0 top-0 h-12
+          bg-[#FF385C] rounded-full overflow-hidden
+          flex items-center pl-4
+          text-white hover:bg-[#e0314f] cursor-pointer
+          transition-[width] duration-300 ease-in-out
+          ${isOpen ? 'w-[108px]' : 'w-12'}
+        `}
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="11" cy="11" r="7" />
           <line x1="16.5" y1="16.5" x2="22" y2="22" />
         </svg>
-        {isOpen && <span className="text-sm font-semibold whitespace-nowrap">검색</span>}
+        <span
+          className={`
+            text-sm font-semibold whitespace-nowrap overflow-hidden
+            transition-[max-width,opacity,margin] ease-in-out
+            ${isOpen
+              ? 'max-w-[80px] opacity-100 ml-2 duration-200 delay-[250ms]'
+              : 'max-w-0 opacity-0 ml-0 duration-150 delay-0'
+            }
+          `}
+        >
+          검색
+        </span>
       </button>
     </div>
   )
