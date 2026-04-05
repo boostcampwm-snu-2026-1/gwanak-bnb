@@ -15,6 +15,9 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onOpen, isModalOpen, counts, updateCount }) => {
+
+    const totalGuests = counts.adult + counts.child;
+
     return (
         <div className="relative flex items-center bg-white border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-shadow cursor-pointer py-2 px-4 w-full max-w-[850px] mx-auto">
             <div className="flex-1 flex flex-col px-4 border-r border-gray-200">
@@ -32,8 +35,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ onOpen, isModalOpen, counts, upda
                 onClick={onOpen}
             >
                 <span className="text-xs font-bold">여행자</span>
-                <span className="text-sm text-gray-500">게스트 추가</span>
-
+                <div className="text-sm">
+                    {totalGuests > 0 ? (
+                        <span className="text-black font-semibold">
+                            게스트 {totalGuests}명
+                            {counts.infant > 0 && <span className="text-black font-semibold">, 유아 {counts.infant}명</span>}
+                            {counts.pet > 0 && <span className="text-black font-semibold">, 반려동물 {counts.pet}마리</span>}
+                        </span>
+                    ) : (
+                        <span className="text-gray-500">게스트 추가</span>
+                    )}
+                </div>
                 {isModalOpen && (
                     <div
                         className="absolute top-full right-0 mt-4 z-50"
