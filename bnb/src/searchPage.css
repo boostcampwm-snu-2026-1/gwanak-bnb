@@ -30,6 +30,10 @@
   background-color: transparent;
 }
 
+.search:has(.delete-btn:hover) {
+  background-color: transparent;
+}
+
 .active {
   border: 1px solid #bbb;
   box-shadow: -4px 0px 8px #ddd;
@@ -77,4 +81,19 @@
 .search-btn_active {
   background-color: #FF385C;
   width: 75px !important;
+}
+
+.form-actions {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.delete-btn {
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }

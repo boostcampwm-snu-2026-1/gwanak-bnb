@@ -1,6 +1,6 @@
 import './searchPage.css'
 
-function SearchPage({ onToggle, isOpen }) {
+function SearchPage({ onToggle, isOpen, guestMessage, onReset, showReset }) {
     return (
         <div style={{background: "#eee"}}>
             <div className='main-container'>
@@ -26,12 +26,26 @@ function SearchPage({ onToggle, isOpen }) {
                 >
                     <div>
                         <h6>여행자</h6>
-                        <p>게스트 추가</p>
+                        <p>{guestMessage}</p>
                     </div>
-                    <form style={{marginLeft: "auto"}}>
+                    <form className='form-actions'>
+                        {showReset && (
+                            <button 
+                                type='button' 
+                                className='delete-btn'
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    onReset();
+                                }}
+                            >X</button>
+                        )}
                         <button 
                             type='button' 
-                            className={`search-btn ${isOpen ? 'search-btn_active' : ''}`}>
+                            className={`search-btn ${isOpen ? 'search-btn_active' : ''}`}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                            }}
+                        >
                             <i className="fa-solid fa-magnifying-glass fa-lg"></i>
                             {isOpen && <span style={{ fontSize: '16px', marginLeft: '5px' }}>검색</span>}
                         </button>
