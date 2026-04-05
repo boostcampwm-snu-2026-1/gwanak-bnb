@@ -1,13 +1,58 @@
-button {
+.total {
+  margin: 0 0 16px;
   font-size: 18px;
-  padding: 10px 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  cursor: pointer;
+  font-weight: 700;
 }
 
-button:disabled {
-  background: #d0d0d0;
-  color: #777;
+.guest-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.guest-label {
+  min-width: 120px;
+  margin: 0;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.guest-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid #b0b0b0;
+  background: #fff;
+  color: #222;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.step-btn:hover:not(:disabled) {
+  border-color: #222;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.step-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+  background: #f3f4f6;
+}
+
+.step-btn:focus-visible {
+  outline: 3px solid #ffd3da;
+  outline-offset: 2px;
+}
+
+.step-btn:disabled {
+  color: #b8b8b8;
+  border-color: #e0e0e0;
+  background: #fafafa;
   cursor: not-allowed;
+  box-shadow: none;
 }

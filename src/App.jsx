@@ -19,11 +19,14 @@ function App() {
   
   return (
     <div>
+      
+      <p className="total-guest">Total Guest: {guests["adult"]+guests["child"]+guests["baby"]}</p>
+
       {guestTypes.map((type) => (
-        <div key={type}>
-          <button onClick={() => changeGuest(type, -1)} disabled={guests[type] === 0}>-</button>
-          <p>{type}: {guests[type]}</p>
-          <button onClick={() => changeGuest(type, 1)}>+</button>
+        <div key={type} className="guest-row">
+          <button className="guest-btn" onClick={() => changeGuest(type, -1)} disabled={guests[type] === 0}>-</button>
+          <p className="guest-label">{type}: {guests[type]}</p>
+          <button className="guest-btn" onClick={() => changeGuest(type, 1)}>+</button>
         </div>
       ))}
     </div>
