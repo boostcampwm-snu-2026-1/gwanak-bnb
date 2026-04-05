@@ -5,6 +5,7 @@ function GuestRow({
   onIncrease,
   onDecrease,
   isDecreaseDisabled,
+  isIncreaseDisabled,
 }) {
   const controlBaseClass =
     'inline-flex h-8 w-8 items-center justify-center rounded-full border transition'
@@ -51,8 +52,14 @@ function GuestRow({
         <button
           type="button"
           onClick={onIncrease}
+          disabled={isIncreaseDisabled}
           aria-label={`${label} 증가`}
-          className={`${controlBaseClass} border-zinc-400 text-zinc-700 hover:border-zinc-600`}
+          className={[
+            controlBaseClass,
+            isIncreaseDisabled
+              ? 'cursor-not-allowed border-zinc-200 text-zinc-300'
+              : 'border-zinc-400 text-zinc-700 hover:border-zinc-600',
+          ].join(' ')}
         >
           <svg
             aria-hidden="true"
@@ -75,9 +82,11 @@ function GuestRow({
 }
 
 function GuestModal({ guests, onChangeGuestCount }) {
+  const totalPrimaryGuests = guests.adults + guests.children
   const hasDependentGuests =
     guests.children > 0 || guests.infants > 0 || guests.pets > 0
   const isAdultDecreaseDisabled = guests.adults <= (hasDependentGuests ? 1 : 0)
+  const isPrimaryIncreaseDisabled = totalPrimaryGuests >= 16
 
   return (
     <section className="-mt-1 px-5">
@@ -89,6 +98,7 @@ function GuestModal({ guests, onChangeGuestCount }) {
           onIncrease={() => onChangeGuestCount('adults', 1)}
           onDecrease={() => onChangeGuestCount('adults', -1)}
           isDecreaseDisabled={isAdultDecreaseDisabled}
+          isIncreaseDisabled={isPrimaryIncreaseDisabled}
         />
 
         <div className="h-px bg-zinc-100" />
@@ -100,6 +110,7 @@ function GuestModal({ guests, onChangeGuestCount }) {
           onIncrease={() => onChangeGuestCount('children', 1)}
           onDecrease={() => onChangeGuestCount('children', -1)}
           isDecreaseDisabled={guests.children === 0}
+          isIncreaseDisabled={isPrimaryIncreaseDisabled}
         />
 
         <div className="h-px bg-zinc-100" />
@@ -111,6 +122,7 @@ function GuestModal({ guests, onChangeGuestCount }) {
           onIncrease={() => onChangeGuestCount('infants', 1)}
           onDecrease={() => onChangeGuestCount('infants', -1)}
           isDecreaseDisabled={guests.infants === 0}
+          isIncreaseDisabled={guests.infants >= 5}
         />
 
         <div className="h-px bg-zinc-100" />
@@ -122,6 +134,7 @@ function GuestModal({ guests, onChangeGuestCount }) {
           onIncrease={() => onChangeGuestCount('pets', 1)}
           onDecrease={() => onChangeGuestCount('pets', -1)}
           isDecreaseDisabled={guests.pets === 0}
+          isIncreaseDisabled={guests.pets >= 5}
         />
       </div>
     </section>

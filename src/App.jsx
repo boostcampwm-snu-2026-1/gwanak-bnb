@@ -15,7 +15,12 @@ function App() {
 
   const totalGuests = guests.adults + guests.children
   const summaryText = useMemo(() => {
-    const guestLabel = totalGuests === 0 ? '게스트 추가' : `게스트 ${totalGuests}명`
+    const guestLabel =
+      totalGuests >= 16
+        ? '게스트 16명 이상'
+        : totalGuests === 0
+          ? '게스트 추가'
+          : `게스트 ${totalGuests}명`
     const extraLabels = []
 
     if (guests.infants > 0) {
@@ -40,8 +45,13 @@ function App() {
   const handleGuestCountChange = (type, delta) => {
     setGuests((prev) => {
       const next = { ...prev }
+      const totalPrimaryGuests = prev.adults + prev.children
 
       if (type === 'adults') {
+        if (delta > 0 && totalPrimaryGuests >= 16) {
+          return prev
+        }
+
         const hasDependentGuests =
           prev.children > 0 || prev.infants > 0 || prev.pets > 0
         const minAdults = hasDependentGuests ? 1 : 0
@@ -49,7 +59,25 @@ function App() {
         return next
       }
 
-      next[type] = Math.max(0, prev[type] + delta)
+      if (type === 'children' && delta > 0 && totalPrimaryGuests >= 16) {
+        return prev
+      }
+
+      if (type === 'infants') {
+        if (delta > 0) {
+          next.infants = Math.min(5, prev.infants + delta)
+        } else {
+          next.infants = Math.max(0, prev.infants + delta)
+        }
+      } else if (type === 'pets') {
+        if (delta > 0) {
+          next.pets = Math.min(5, prev.pets + delta)
+        } else {
+          next.pets = Math.max(0, prev.pets + delta)
+        }
+      } else {
+        next[type] = Math.max(0, prev[type] + delta)
+      }
 
       const hasDependentGuests =
         next.children > 0 || next.infants > 0 || next.pets > 0
