@@ -2,7 +2,7 @@ import { GuestDropdown } from "./dropdown/GuestDropdown";
 import { useGuestCount } from "../../../hooks/useGuestCounts";
 
 export const SearchBar = () => {
-  const { counts, increaseCount, decreaseCount } = useGuestCount({
+  const { counts, decreaseCount, increaseCount } = useGuestCount({
     adult: 0,
     child: 0,
     infant: 0,
@@ -13,8 +13,8 @@ export const SearchBar = () => {
     <div>
       <GuestDropdown
         counts={counts}
-        increaseCount={increaseCount}
         decreaseCount={decreaseCount}
+        increaseCount={increaseCount}
       />
     </div>
   );

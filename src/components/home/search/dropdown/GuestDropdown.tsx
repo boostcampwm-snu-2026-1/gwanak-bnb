@@ -8,14 +8,14 @@ import { GuestCounter } from "./GuestCounter";
 
 type GuestDropdownProps = {
   counts: GuestCounts;
-  increaseCount: (guestCategory: GuestCategory) => void;
   decreaseCount: (guestCategory: GuestCategory) => void;
+  increaseCount: (guestCategory: GuestCategory) => void;
 };
 
 export const GuestDropdown = ({
   counts,
-  increaseCount,
   decreaseCount,
+  increaseCount,
 }: GuestDropdownProps) => {
   return (
     <Dropdown>
@@ -25,8 +25,9 @@ export const GuestDropdown = ({
           title={item.title}
           description={item.description}
           count={counts[item.category]}
-          onIncrease={() => increaseCount(item.category)}
-          onDecrease={() => decreaseCount(item.category)}
+            onDecrease={() => decreaseCount(item.category)}
+            onIncrease={() => increaseCount(item.category)}
+          />
         />
       ))}
     </Dropdown>

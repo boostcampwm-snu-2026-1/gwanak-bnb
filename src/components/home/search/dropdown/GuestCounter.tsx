@@ -5,16 +5,16 @@ type GuestCounterProp = {
   title: string;
   description: string;
   count: number;
-  onIncrease: () => void;
   onDecrease: () => void;
+  onIncrease: () => void;
 };
 
 export const GuestCounter = ({
   title,
   description,
   count,
-  onIncrease,
   onDecrease,
+  onIncrease,
 }: GuestCounterProp) => {
   return (
     <div>
@@ -22,13 +22,13 @@ export const GuestCounter = ({
         <p>{title}</p>
         <p>{description}</p>
       </div>
-      <div>
-        <IconButton onClick={onIncrease}>
-          <Plus />
-        </IconButton>
-        <p>{count}</p>
+      <div className="flex w-[100px] flex-row items-center justify-between">
         <IconButton onClick={onDecrease} disabled={count === 0}>
           <Minus />
+        </IconButton>
+        <p className="text-base">{count}</p>
+        <IconButton onClick={onIncrease}>
+          <Plus />
         </IconButton>
       </div>
     </div>

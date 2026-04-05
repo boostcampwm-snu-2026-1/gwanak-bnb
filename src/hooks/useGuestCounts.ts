@@ -18,9 +18,9 @@ export const useGuestCount = (initialCounts: GuestCounts) => {
     }));
   };
 
-  const increaseCount = (category: GuestCategory) => updateCount(category, 1);
   const decreaseCount = (category: GuestCategory) => updateCount(category, -1);
+  const increaseCount = (category: GuestCategory) => updateCount(category, 1);
   const resetCount = () => setCounts(initialCounts);
 
-  return { counts, increaseCount, decreaseCount, resetCount };
+  return { counts, decreaseCount, increaseCount, resetCount };
 };
