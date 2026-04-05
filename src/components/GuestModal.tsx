@@ -4,7 +4,6 @@ import GuestCounter from "./GuestCounter";
 
 export default function GuestModal() {
 
-
     return (
         <div>
             <GuestCounter name="성인" description="만 13세 이상" />
