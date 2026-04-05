@@ -11,13 +11,9 @@ function Header() {
 
         <SearchBar />
 
-        <div className={styles.userMenu}>
-          <span className={styles.hostLink}>당신의 공간을 에어비앤비하세요</span>
-          <button className={styles.profileButton}>
-            <span className={styles.menuIcon}>☰</span>
-            <span className={styles.profileIcon}>👤</span>
-          </button>
-        </div>
+        <button className={styles.menuButton}>
+          ☰
+        </button>
       </div>
     </header>
   );
