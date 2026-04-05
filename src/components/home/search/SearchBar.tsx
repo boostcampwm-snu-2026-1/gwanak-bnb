@@ -5,7 +5,7 @@ export const SearchBar = () => {
   const { counts, increaseCount, decreaseCount } = useGuestCount({
     adult: 0,
     child: 0,
-    baby: 0,
+    infant: 0,
     pet: 0,
   });
 

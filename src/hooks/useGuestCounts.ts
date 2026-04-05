@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export type GuestCategory = "adult" | "child" | "baby" | "pet";
+export type GuestCategory = "adult" | "child" | "infant" | "pet";
 export type GuestCounts = {
   adult: number;
   child: number;
-  baby: number;
+  infant: number;
   pet: number;
 };
 
