@@ -16,9 +16,9 @@ function TravelerSetModal() {
     ];
 
     return ( 
-        <div>
+        <div className={styles.container}>
             {guestTypes.map((g) => (
-                <div key={g.label} className={styles.container}>
+                <div key={g.label} className={styles.unit}>
                     <div className={styles.content}>
                         <div className={styles.title}>{g.label}</div>
                         <div className={styles.desc}>{g.desc}</div>
