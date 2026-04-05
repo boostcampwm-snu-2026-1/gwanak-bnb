@@ -17,17 +17,57 @@ function SearchButton({ isOpen }) {
   )
 }
 
+function Divider({ hidden }) {
+  return (
+    <div className={`w-px h-8 bg-gray-200 flex-shrink-0 transition-opacity duration-150 ${hidden ? 'opacity-0' : 'opacity-100'}`} />
+  )
+}
+
 export default function SearchBar() {
   const [guestOpen, setGuestOpen] = useState(false)
+  const [hovered, setHovered] = useState(null)
+
+  const divider1Hidden = hovered === 'destination' || hovered === 'date'
+  const divider2Hidden = hovered === 'date' || hovered === 'guest' || guestOpen
+
+  const tabClass = (name) =>
+    `flex-1 flex items-center rounded-full h-full transition-colors cursor-pointer ${hovered === name && !(name === 'guest' && guestOpen) ? 'bg-gray-100' : ''}`
 
   return (
     <div className="flex items-center bg-white rounded-full border border-gray-200 shadow-md h-16 w-full max-w-3xl">
-      <DestinationField />
-      <div className="w-px h-8 bg-gray-200 flex-shrink-0" />
-      <DateField />
-      <div className="w-px h-8 bg-gray-200 flex-shrink-0" />
-      <GuestField isOpen={guestOpen} onToggle={setGuestOpen} />
-      <SearchButton isOpen={guestOpen} />
+
+      {/* 여행지 */}
+      <div
+        className={tabClass('destination')}
+        onMouseEnter={() => setHovered('destination')}
+        onMouseLeave={() => setHovered(null)}
+      >
+        <DestinationField />
+      </div>
+
+      <Divider hidden={divider1Hidden} />
+
+      {/* 날짜 */}
+      <div
+        className={tabClass('date')}
+        onMouseEnter={() => setHovered('date')}
+        onMouseLeave={() => setHovered(null)}
+      >
+        <DateField />
+      </div>
+
+      <Divider hidden={divider2Hidden} />
+
+      {/* 여행자 + 검색버튼 */}
+      <div
+        className={tabClass('guest')}
+        onMouseEnter={() => setHovered('guest')}
+        onMouseLeave={() => setHovered(null)}
+      >
+        <GuestField isOpen={guestOpen} onToggle={setGuestOpen} />
+        <SearchButton isOpen={guestOpen} />
+      </div>
+
     </div>
   )
 }

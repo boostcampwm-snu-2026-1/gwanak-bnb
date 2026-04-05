@@ -12,7 +12,7 @@ function getSummary(guests) {
   return parts.join(', ')
 }
 
-export default function GuestField({ isOpen, onToggle, searchButton }) {
+export default function GuestField({ isOpen, onToggle }) {
   const [guests, setGuests] = useState(initialGuests)
   const containerRef = useRef(null)
 
@@ -32,10 +32,10 @@ export default function GuestField({ isOpen, onToggle, searchButton }) {
   const summary = getSummary(guests)
 
   return (
-    <div ref={containerRef} className="relative flex-1">
+    <div ref={containerRef} className="relative flex-1 h-full flex items-center">
       <button
         onClick={() => onToggle(prev => !prev)}
-        className="flex flex-col items-start px-6 py-3 text-left cursor-pointer w-full"
+        className="flex flex-col items-start px-6 h-16 justify-center text-left cursor-pointer w-full"
       >
         <span className="text-xs font-semibold text-gray-900">여행자</span>
         <span className={`text-sm mt-0.5 ${summary ? 'text-gray-900' : 'text-gray-400'}`}>
