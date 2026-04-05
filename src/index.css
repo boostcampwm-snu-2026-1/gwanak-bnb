@@ -1,0 +1,175 @@
+/* =========================================
+   index.css - 에어비앤비 스타일 적용
+   ========================================= */
+
+/* 1. 기본 브라우저 스타일 초기화 및 깔끔한 폰트 적용 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f7f7f7; /* 배경을 살짝 회색으로 해서 하얀색 요소를 돋보이게 */
+  color: #222222; /* 에어비앤비 기본 텍스트 색상 */
+}
+
+/* 2. 화면 전체를 중앙으로 정렬하는 컨테이너 */
+.app-container {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: flex-start; /* 세로 위쪽 정렬 */
+  min-height: 100vh;
+  padding-top: 2rem; /* 위쪽 여백 */
+}
+
+/* 3. SearchBar (검색바) 스타일 - 에어비앤비의 둥근 알약 모양 */
+.search-bar-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 양쪽 끝으로 밀어내기 */
+  height: 66px;
+  min-width: 320px;
+  background: #ffffff;
+  border-radius: 9999px;
+  border: 1px solid #dddddd;
+  padding: 0 0.5rem 0 1.5rem; /* 오른쪽 패딩을 줄여서 버튼과 밀착 */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  position: relative;
+}
+
+.search-bar-trigger:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* 호버 시 그림자 강화 */
+}
+
+.search-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #222222;
+}
+
+.search-value {
+  font-size: 0.875rem;
+  margin-top: 0.125rem;
+  color: #717171; /* 비활성 색상 */
+}
+
+.search-value.has-value {
+  color: #222222;
+  font-weight: 600;
+}
+
+/* 4. GuestModal (게스트 모달) 스타일 - 흰색 둥근 컨테이너 */
+.guest-modal {
+  position: absolute;
+  top: 100%; /* 검색바 바로 아래 */
+  left: 50%;
+  transform: translateX(-50%); /* 중앙 정렬 */
+  margin-top: 0.75rem;
+  width: 22rem; /* 충분한 넓이 */
+  background-color: #ffffff;
+  border-radius: 32px; /* 아주 둥근 모서리 */
+  box-shadow: 0 16px 32px rgba(0,0,0,0.15); /* 깊은 그림자 */
+  padding: 1rem 2rem; /* 내부 여백 */
+  z-index: 100;
+}
+
+/* 5. 모달 내부 각 행(성인, 어린이 등) 스타일 */
+.guest-row {
+  display: flex;
+  justify-content: space-between; /* 텍스트는 왼쪽, 버튼은 오른쪽 */
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e5e5e5; /* 구분선 */
+}
+
+.guest-row:last-child {
+  border-bottom: none; /* 마지막 구분선 제거 */
+}
+
+.guest-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.guest-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222222;
+}
+
+.guest-desc {
+  font-size: 0.875rem;
+  color: #717171;
+  margin-top: 0.25rem;
+}
+
+/* 6. 증감 버튼 스타일 */
+.guest-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* 버튼 사이 간격 */
+}
+
+.control-btn {
+  width: 2.25rem; /* 버튼 크기 */
+  height: 2.25rem;
+  border-radius: 50%; /* 완전 둥글게 */
+  border: 1px solid #b0b0b0;
+  background-color: #ffffff;
+  color: #717171;
+  font-size: 1.25rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.control-btn:hover:not(:disabled) {
+  border-color: #222222;
+  color: #222222;
+}
+
+.control-btn:disabled {
+  opacity: 0.3; /* 비활성화 시 투명 */
+  cursor: not-allowed;
+  border-color: #e0e0e0;
+  color: #e0e0e0;
+}
+
+.guest-count {
+  width: 2rem; /* 숫자가 바뀌어도 공간 유지 */
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #222222;
+}
+
+.search-submit-btn {
+  background-color: #ff385c; /* 에어비앤비 시그니처 핑크 */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0 1rem;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.search-submit-btn:hover {
+  background-color: #d90b3e; /* 호버 시 살짝 진해짐 */
+}
