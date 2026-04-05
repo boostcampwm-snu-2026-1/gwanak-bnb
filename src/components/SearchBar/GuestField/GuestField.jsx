@@ -48,10 +48,12 @@ export default function GuestField() {
       </button>
 
       {/* 검색 버튼 */}
-      <button className="w-12 h-12 bg-[#FF385C] rounded-full flex items-center justify-center text-white hover:bg-[#e0314f] transition-colors cursor-pointer flex-shrink-0 mr-2">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-4 h-4" fill="currentColor">
-          <path d="M13 24a11 11 0 1 1 0-22 11 11 0 0 1 0 22zm0-2a9 9 0 1 0 0-18 9 9 0 0 0 0 18zm8.192-2.393 1.415 1.414-5.657 5.657-1.415-1.414z" />
+      <button className="h-12 px-4 bg-[#FF385C] rounded-full flex items-center gap-2 text-white hover:bg-[#e0314f] transition-colors cursor-pointer flex-shrink-0 mr-2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="7" />
+          <line x1="16.5" y1="16.5" x2="22" y2="22" />
         </svg>
+        <span className="text-sm font-semibold">검색</span>
       </button>
 
       {/* 드롭다운 모달 */}
