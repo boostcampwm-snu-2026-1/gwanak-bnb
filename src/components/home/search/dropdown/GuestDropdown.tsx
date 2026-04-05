@@ -19,17 +19,18 @@ export const GuestDropdown = ({
 }: GuestDropdownProps) => {
   return (
     <Dropdown>
-      {GUEST_TYPES.map((item) => (
-        <GuestCounter
-          key={item.category}
-          title={item.title}
-          description={item.description}
-          count={counts[item.category]}
+      <div className="flex flex-col">
+        {GUEST_TYPES.map((item) => (
+          <GuestCounter
+            key={item.category}
+            title={item.title}
+            description={item.description}
+            count={counts[item.category]}
             onDecrease={() => decreaseCount(item.category)}
             onIncrease={() => increaseCount(item.category)}
           />
-        />
-      ))}
+        ))}
+      </div>
     </Dropdown>
   );
 };

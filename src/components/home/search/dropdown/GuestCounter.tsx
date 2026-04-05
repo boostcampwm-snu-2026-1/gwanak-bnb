@@ -17,10 +17,10 @@ export const GuestCounter = ({
   onIncrease,
 }: GuestCounterProp) => {
   return (
-    <div>
-      <div>
-        <p>{title}</p>
-        <p>{description}</p>
+    <div className="flex min-w-[330px] flex-row flex-nowrap items-center justify-between gap-2.5 border-b border-b-[#ebebeb] py-6 last:border-none">
+      <div className="flex-row">
+        <h3 className="text-base font-medium">{title}</h3>
+        <p className="pt-1 text-sm font-normal text-[#6a6a6a]">{description}</p>
       </div>
       <div className="flex w-[100px] flex-row items-center justify-between">
         <IconButton onClick={onDecrease} disabled={count === 0}>
