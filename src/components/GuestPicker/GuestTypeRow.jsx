@@ -1,7 +1,7 @@
 import Counter from './Counter';
-import './GestTypeRow.css';
+import './GuestTypeRow.css';
 
-function GuestTypeRow(label, description, count, onIncrement, onDecrement, minDisabled, maxDisbaled){
+function GuestTypeRow({ label, description, count, onIncrement, onDecrement, minDisabled, maxDisbaled }){
     return (
     <div className="guest-type-row">
         <div className="guset-type-info">

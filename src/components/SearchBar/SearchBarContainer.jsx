@@ -6,7 +6,7 @@ import {useState, useEffect, useRef} from 'react';
 
 function SearchBarContainer(){
 
-    const [gusets, setGuests] = useState({adult : 0, chlid : 0, infant : 0, dogs : 0});
+    const [guests, setGuests] = useState({adult : 0, child : 0, infant : 0, dogs : 0});
     const [activeField, setActiveField] = useState(null);
     const containerRef = useRef(null);
 
@@ -25,7 +25,7 @@ function SearchBarContainer(){
             <SearchTabMenu/>
             
             <SearchInputGroup 
-                gusets = {gusets}
+                guests = {guests}
                 setGuests = {setGuests}
                 activeField = {activeField}
                 setActiveField = {setActiveField}

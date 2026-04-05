@@ -1,4 +1,4 @@
-import './GusetNotice.css';
+import './GuestNotice.css';
 
 function GusetNotice(){
     return (

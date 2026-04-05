@@ -1,6 +1,6 @@
 import './Counter.css';
 
-function Counter(count, onIncrement, onDecrement, maxDisbaled, minDisabled){
+function Counter({ count, onIncrement, onDecrement, maxDisbaled, minDisabled }){
     return (
     <div className="counter-container">
         <button className="counter-btn" disabled={minDisabled} onClick={onDecrement} >

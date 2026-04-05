@@ -1,10 +1,9 @@
 import SearchField from './SearchField';
-import GuestPickerModal from '../GuestPicker/GusetPickerModal';
+import GuestPickerModal from '../GuestPicker/GuestPickerModal';
 import './SearchInputGroup.css';
 
 
-function SearchInputGroup(guests, setGuests, activeField, setActiveField) {
-
+function SearchInputGroup({ guests, setGuests, activeField, setActiveField }) {
     const getGuestSummary = () =>{
         const total = guests.adult + guests.child;
         if(total == 0) return '';
