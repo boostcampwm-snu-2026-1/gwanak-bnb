@@ -139,22 +139,30 @@ return (
         }}>
           <GuestRow 
             title="성인" description="13세 이상" 
-            count={adults} onIncrease={handleIncreaseAdult} onDecrease={handleDecreaseAdult} 
+            count={adults} onIncrease={handleIncreaseAdult} onDecrease={handleDecreaseAdult}
+            isMin={adults === 0 || (needsAdult && adults <= 1)} // 성인이 0이거나, 다른 게스트가 있는데 1명일 때
+            isMax={isMaxGuestsReached} // 전체가 16명이면 금지
           />
           
           <GuestRow 
             title="어린이" description="2~12세" 
             count={children} onIncrease={handleIncreaseChildren} onDecrease={() => children > 0 && setChildren(prev => prev - 1)} 
+            isMin={children === 0} 
+            isMax={isMaxGuestsReached}
           />
 
           <GuestRow 
             title="유아" description="2세 미만" 
             count={infants} onIncrease={handleIncreaseInfants} onDecrease={() => infants > 0 && setInfants(prev => prev - 1)} 
+            isMin={infants === 0} 
+            isMax={infants >= 5}
           />
 
           <GuestRow 
             title="반려동물" description="보조동물을 동반하시나요?" 
             count={pets} onIncrease={handleIncreasePets} onDecrease={() => pets > 0 && setPets(prev => prev - 1)} 
+            isMin={pets === 0} 
+            isMax={pets >= 5}
           />
       </div>
       )}
