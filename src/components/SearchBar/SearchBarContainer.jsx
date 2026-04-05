@@ -1,5 +1,5 @@
 import SearchTabMenu from './SearchTabMenu';
-//import SearchInputGroup from './SearchInputGroup';
+import SearchInputGroup from './SearchInputGroup';
 import './SearchBarContainer.css';
 import {useState, useEffect, useRef} from 'react';
 
