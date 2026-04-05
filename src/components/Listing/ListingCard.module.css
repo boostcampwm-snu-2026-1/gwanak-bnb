@@ -1,0 +1,53 @@
+.card {
+  min-width: 170px;
+}
+
+.imageWrap {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background: #fff;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  padding: 6px 10px;
+}
+
+.wishButton {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 28px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.title {
+  display: block;
+  color: #222;
+  margin-bottom: 4px;
+  font-size: 18px;
+}
+
+.meta {
+  margin: 0;
+  color: #6a6a6a;
+  font-size: 16px;
+}

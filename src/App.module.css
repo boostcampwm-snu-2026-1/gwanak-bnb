@@ -1,0 +1,23 @@
+.app {
+  min-height: 100vh;
+  background: #f7f7f7;
+  color: #222;
+}
+
+.mainContent {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 40px 48px;
+}
+
+@media (max-width: 1024px) {
+  .mainContent {
+    padding: 20px 24px 36px;
+  }
+}
+
+@media (max-width: 720px) {
+  .mainContent {
+    padding: 16px;
+  }
+}

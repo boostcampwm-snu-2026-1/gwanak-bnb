@@ -1,0 +1,95 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 80px;
+  padding: 0 40px;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  color: #ff385c;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.mainTabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab {
+  border: 0;
+  background: transparent;
+  color: #6a6a6a;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.active {
+  color: #222;
+  border-bottom: 3px solid #222;
+  border-radius: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hostingButton {
+  border: 0;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.circleButton {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: #f2f2f2;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 0 20px;
+  }
+
+  .mainTabs {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .header {
+    height: 72px;
+    padding: 0 14px;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  .hostingButton {
+    display: none;
+  }
+}
