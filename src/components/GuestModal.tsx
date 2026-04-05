@@ -1,5 +1,27 @@
 //components/GuestModal.tsx
-import GuestCounter from "./GuestCounter";
+import { useState } from "react";
+
+
+type GuestCounterProps = {
+    name: string;
+    description: string;
+};
+
+function GuestCounter({name, description}:GuestCounterProps) {
+    const [count, setCount] = useState(0);
+
+    return (
+        <div>
+            <span>{name}, {description}</span>
+            <div>
+                <button type = "button" disabled = {count === 0} onClick={() => setCount(count - 1)}>-</button>
+                {count}
+                <button type = "button" onClick={() => setCount(count + 1)}>+</button>
+            </div>
+
+        </div>
+    );
+}
 
 
 export default function GuestModal() {
