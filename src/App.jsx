@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import GuestRow from './components/GuestRow'
 
 function App() {
   const [adults, setAdults] = useState(0);
@@ -6,67 +7,88 @@ function App() {
   const [infants, setInfants] = useState(0);
   const [pets, setPets] = useState(0);
 
-  // count 1 증가
-  const increase = () => {
-    setGuestCount(guestCount + 1);
-  };
+  const totalGuests = adults + children; // 성인 + 어린이 합계
+  const isMaxGuestsReached = totalGuests >= 16;
+  const needsAdult = children > 0 || infants > 0 || pets > 0;
 
-  // count 1 감소 (0보다 작아지지는 않음)
-  const decrease = () => {
-    if (guestCount > 0) {
-      setGuestCount(guestCount - 1);
+  const handleIncreaseAdult = () => {
+    if (totalGuests < 16) {
+      setAdults(prev => prev + 1);
     }
   };
 
-  return (
-    <div>
-      <header>
-        <h1>Airbnb Clone</h1>
-      </header>
-      
-      <main>
+  const handleDecreaseAdult = () => {
+    // 다른 게스트가 있는데 성인을 0으로 만들려고 하면 차단
+    if (needsAdult && adults <= 1) return;
+    if (adults > 0) setAdults(prev => prev - 1);
+  };
+
+  const handleIncreaseChildren = () => {
+    if (isMaxGuestsReached) return;
+
+    // 성인이 0명인데 어린이를 추가하면 성인도 자동으로 1명 추가
+    if (adults === 0) {
+        setAdults(1);
+        setChildren(prev => prev + 1);
+    } else{
+      setChildren(prev => prev + 1);
+    }
+  };
+
+  const handleIncreaseInfants = () => {
+    if (infants >= 5) return; // 유아 최대 5명 제한
+
+    if (adults === 0) {
+      setAdults(1);
+    }
+    setInfants(prev => prev + 1);
+  };
+
+  const handleIncreasePets = () => {
+    if (pets >= 5) return; // 반려동물 최대 5마리 제한
+
+    if (adults === 0) {
+      setAdults(1);
+    }
+    setPets(prev => prev + 1);
+  };
+
+return (
+    <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ddd', borderRadius: '12px' }}>
+      <header style={{ marginBottom: '20px' }}>
         <h2>여행자 선택</h2>
-        {/* 성인 */}
-        <div>
-          <span>성인 (13세 이상)</span>
-          <button onClick={() => adults > 0 && setAdults(adults - 1)}>-</button>
-          <span>{adults}</span>
-          <button onClick={() => setAdults(adults + 1)}>+</button>
-        </div>
+      </header>
 
-        {/* 어린이 */}
-        <div>
-          <span>어린이 (2~12세)</span>
-          <button onClick={() => children > 0 && setChildren(children - 1)}>-</button>
-          <span>{children}</span>
-          <button onClick={() => setChildren(children + 1)}>+</button>
+      <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #eee' , marginBottom: '20px' }}>
+        <div style={{ fontWeight: 'bold' }}>
+          {`게스트 ${totalGuests}명`}
+          {isMaxGuestsReached && "+"}
         </div>
+        {infants > 0 && <div style={{ fontSize: '0.9rem' }}>유아 {infants}명</div>}
+        {pets > 0 && <div style={{ fontSize: '0.9rem' }}>반려동물 {pets}마리</div>}
+      </div>
 
-        {/* 유아 */}
-        <div>
-          <span>유아 (2세 미만)</span>
-          <button onClick={() => infants > 0 && setInfants(infants - 1)}>-</button>
-          <span>{infants}</span>
-          <button onClick={() => setInfants(infants + 1)}>+</button>
-        </div>
+      <GuestRow 
+        title="성인" description="13세 이상" 
+        count={adults} onIncrease={handleIncreaseAdult} onDecrease={handleDecreaseAdult} 
+      />
+      
+      <GuestRow 
+        title="어린이" description="2~12세" 
+        count={children} onIncrease={handleIncreaseChildren} onDecrease={() => children > 0 && setChildren(prev => prev - 1)} 
+      />
 
-        {/* 반려동물 */}
-        <div>
-          <span>반려동물</span>
-          <button onClick={() => pets > 0 && setPets(pets - 1)}>-</button>
-          <span>{pets}</span>
-          <button onClick={() => setPets(pets + 1)}>+</button>
-        </div>
+      <GuestRow 
+        title="유아" description="2세 미만" 
+        count={infants} onIncrease={handleIncreaseInfants} onDecrease={() => infants > 0 && setInfants(prev => prev - 1)} 
+      />
 
-        <hr />
-        <div>
-          <strong>게스트 {adults + children}명, 유아 {infants}명</strong>
-          {pets > 0 && <strong> (반려동물 {pets}마리)</strong>}
-        </div>
-
-      </main>
+      <GuestRow 
+        title="반려동물" description="보조동물을 동반하시나요?" 
+        count={pets} onIncrease={handleIncreasePets} onDecrease={() => pets > 0 && setPets(prev => prev - 1)} 
+      />
     </div>
-  )
+  );
 }
 
 export default App
