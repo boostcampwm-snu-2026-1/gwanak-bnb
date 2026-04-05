@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 export default function App() {
-  // 1. 모달의 열림/닫힘 상태
+  // 모달 열림/닫힘 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 2. 각 인원 유형별 상태 관리 (useState 사용)
+  // 인원 유형별 상태 관리
   const [guests, setGuests] = useState({
     adult: 0,
     child: 0,
@@ -24,7 +24,7 @@ export default function App() {
         newCount = currentCount - 1;
       }
 
-      // 에어비앤비 룰 적용: 어린이, 유아, 반려동물이 추가되면 성인은 최소 1명 이상이어야 함
+      // 어린이, 유아, 반려동물이 추가되면 성인은 최소 1명 이상
       let newAdult = prev.adult;
       if (type !== 'adult' && operation === 'plus' && prev.adult === 0) {
         newAdult = 1;
@@ -51,8 +51,9 @@ export default function App() {
 
   return (
     <div style={styles.container}>
-      {/* 검색 바 영역 */}
+      {/* 전체 검색 바 */}
       <div style={styles.searchBar}>
+        
         {/* 여행지 */}
         <div style={styles.searchSection}>
           <div style={styles.label}>여행지</div>
@@ -69,12 +70,13 @@ export default function App() {
 
         <div style={styles.divider} />
 
-        {/* 여행자 (클릭 시 모달 토글) */}
+        {/* 여행자 + 검색 버튼 */}
         <div 
-          style={{...styles.searchSection, ...styles.guestSection}} 
+          style={styles.guestSection} 
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
-          <div>
+          {/* 텍스트들만 담은 div */}
+          <div style={styles.guestTextGroup}>
             <div style={styles.label}>여행자</div>
             <div style={guests.adult > 0 ? styles.activeText : styles.placeholder}>
               {getGuestText()}
@@ -134,7 +136,7 @@ export default function App() {
   );
 }
 
-// 재사용 가능한 카운터 행 컴포넌트
+// 카운터 행 컴포넌트
 function GuestRow({ title, desc, count, onMinus, onPlus, minusDisabled, isLink }) {
   return (
     <div style={styles.row}>
@@ -159,7 +161,7 @@ function GuestRow({ title, desc, count, onMinus, onPlus, minusDisabled, isLink }
   );
 }
 
-// 인라인 스타일 (CSS-in-JS 형태)
+// 인라인 스타일
 const styles = {
   container: {
     display: 'flex',
@@ -172,7 +174,7 @@ const styles = {
   searchBar: {
     position: 'relative',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '850px',
     height: '66px',
     backgroundColor: '#fff',
@@ -185,13 +187,30 @@ const styles = {
     padding: '14px 24px',
     cursor: 'pointer',
     borderRadius: '100px',
-    '&:hover': { backgroundColor: '#f5f5f5' }, // 실제 적용하려면 CSS 사용 권장
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start', 
+    justifyContent: 'center',
+    height: '100%',
+    boxSizing: 'border-box',
+    '&:hover': { backgroundColor: '#f5f5f5' },
   },
   guestSection: {
+    flex: 1,
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between', 
     alignItems: 'center',
-    paddingRight: '8px',
+    padding: '0 8px 0 24px',
+    cursor: 'pointer',
+    borderRadius: '100px',
+    height: '100%',
+    boxSizing: 'border-box',
+    '&:hover': { backgroundColor: '#f5f5f5' },
+  },
+  guestTextGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   divider: {
     width: '1px',
