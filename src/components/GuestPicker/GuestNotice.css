@@ -1,0 +1,11 @@
+.guest-notice {
+  padding: 16px 0 8px;
+}
+
+.guest-notice-text {
+  font-size: 14px;
+  color: #222;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -1,15 +1,8 @@
-/* App.css — 앱 전역 레이아웃 스타일 */
-
-/* 앱 최상위 컨테이너 */
 .app {
-  /* 전체 높이를 뷰포트에 맞춤 */
   min-height: 100vh;
-  /* 배경색 */
   background-color: #fff;
 }
 
-/* 메인 콘텐츠 영역 */
 .main-content {
-  /* 좌우 패딩 — 헤더와 동일하게 맞춤 */
   padding: 24px 80px;
 }

@@ -1,0 +1,28 @@
+.guest-type-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.guest-type-row:last-of-type {
+  border-bottom: none;
+}
+
+.guset-type-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.guest-type-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+.guest-type-description {
+  font-size: 14px;
+  color: #717171;
+}
