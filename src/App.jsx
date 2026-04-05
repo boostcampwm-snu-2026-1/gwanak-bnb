@@ -4,7 +4,7 @@ import SearchBar from './components/SearchBar.jsx'
 function App() {
   const [activeTab, setActiveTab] = useState(null)
 
-  const [guests] = useState({
+  const [guests, setGuests] = useState({
     adults: 0,
     children: 0,
     infants: 0,
@@ -35,6 +35,31 @@ function App() {
     setActiveTab((prev) => (prev === tab ? null : tab))
   }
 
+  const handleGuestCountChange = (type, delta) => {
+    setGuests((prev) => {
+      const next = { ...prev }
+
+      if (type === 'adults') {
+        const hasDependentGuests =
+          prev.children > 0 || prev.infants > 0 || prev.pets > 0
+        const minAdults = hasDependentGuests ? 1 : 0
+        next.adults = Math.max(minAdults, prev.adults + delta)
+        return next
+      }
+
+      next[type] = Math.max(0, prev[type] + delta)
+
+      const hasDependentGuests =
+        next.children > 0 || next.infants > 0 || next.pets > 0
+
+      if (hasDependentGuests && next.adults === 0) {
+        next.adults = 1
+      }
+
+      return next
+    })
+  }
+
   return (
     <main className="min-h-screen bg-[#f7f7f7] px-4 py-10 sm:px-8">
       <section className="mx-auto w-full max-w-5xl">
@@ -47,12 +72,14 @@ function App() {
             어디로 떠나볼까요?
           </h1>
 
-          <div className="mt-8 overflow-x-auto pb-2">
+          <div className="mt-8 pb-2">
             <div className="min-w-[720px]">
               <SearchBar
                 activeTab={activeTab}
                 summaryText={summaryText}
                 onSelectTab={handleSelectTab}
+                guests={guests}
+                onChangeGuestCount={handleGuestCountChange}
               />
             </div>
           </div>

@@ -1,8 +1,15 @@
 import DestinationSelector from './DestinationSelector.jsx'
 import DateSelector from './DateSelector.jsx'
 import GuestSelector from './GuestSelector.jsx'
+import GuestModal from './GuestModal.jsx'
 
-function SearchBar({ activeTab, summaryText, onSelectTab }) {
+function SearchBar({
+  activeTab,
+  summaryText,
+  onSelectTab,
+  guests,
+  onChangeGuestCount,
+}) {
   return (
     <section className="rounded-full border border-zinc-200/80 bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
       <div className="grid grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto_minmax(0,1fr)_auto] items-center">
@@ -20,11 +27,22 @@ function SearchBar({ activeTab, summaryText, onSelectTab }) {
 
         <div className="h-8 w-px bg-zinc-200" />
 
-        <GuestSelector
-          summaryText={summaryText}
-          isSelected={activeTab === 'guests'}
-          onSelect={() => onSelectTab('guests')}
-        />
+        <div className="relative">
+          <GuestSelector
+            summaryText={summaryText}
+            isSelected={activeTab === 'guests'}
+            onSelect={() => onSelectTab('guests')}
+          />
+
+          {activeTab === 'guests' ? (
+            <div className="absolute right-0 top-full z-30 mt-3">
+              <GuestModal
+                guests={guests}
+                onChangeGuestCount={onChangeGuestCount}
+              />
+            </div>
+          ) : null}
+        </div>
 
         <button
           type="button"
