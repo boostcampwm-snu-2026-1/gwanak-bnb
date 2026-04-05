@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.container:last-child {
+  border-bottom: none;
+}
+
+.labels {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #222;
+}
+
+.description {
+  font-size: 14px;
+  color: #717171;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #b0b0b0;
+  border-radius: 50%;
+  background-color: white;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #222;
+}
+
+.button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  color: #b0b0b0;
+}
+
+.count {
+  font-size: 16px;
+  min-width: 16;
+  text-align: center;
+  color: #222;
+}

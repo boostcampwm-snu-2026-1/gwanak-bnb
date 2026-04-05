@@ -1,0 +1,24 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 40px;
+  min-width: 160px;
+  align-items: flex-start;
+}
+
+.field:hover {
+  background-color: #f0f0f0;
+}
+
+.fieldLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.fieldValue {
+  font-size: 14px;
+  color: #717171;
+}
