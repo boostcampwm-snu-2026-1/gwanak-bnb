@@ -1,0 +1,371 @@
+.guest-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 80px 24px 24px;
+  background: rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.guest-modal-panel {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  outline: none;
+  color: #222;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+.guest-modal-header {
+  position: relative;
+  padding: 16px 24px;
+  border-bottom: 1px solid #ebebeb;
+  min-height: 48px;
+  box-sizing: border-box;
+}
+
+.guest-modal-close {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #222;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guest-modal-close:hover {
+  background: #f7f7f7;
+}
+
+.guest-modal-close:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 2px;
+}
+
+.guest-modal-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.guest-modal-body {
+  padding: 16px 24px 8px;
+}
+
+.guest-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.guest-row:last-of-type {
+  border-bottom: none;
+}
+
+.guest-row-text {
+  min-width: 0;
+  text-align: left;
+}
+
+.guest-row-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #222;
+}
+
+.guest-row-desc {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #717171;
+  line-height: 1.3;
+}
+
+.guest-row-desc-button {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: #222;
+  line-height: 1.3;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.guest-row-desc-button:hover {
+  color: #000;
+}
+
+.guest-row-desc-button:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.guest-stepper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.guest-stepper-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #b0b0b0;
+  background: #fff;
+  color: #717171;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.guest-stepper-btn:hover:not(:disabled) {
+  color: #222;
+  border-color: #222;
+}
+
+.guest-stepper-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.guest-stepper-btn:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 2px;
+}
+
+.guest-stepper-icon {
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.guest-stepper-value {
+  min-width: 2ch;
+  text-align: center;
+  font-size: 16px;
+  color: #222;
+}
+
+.guest-modal-hint {
+  margin: 0 24px 16px;
+  font-size: 12px;
+  color: #717171;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.guest-modal-footer {
+  padding: 16px 24px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid #ebebeb;
+}
+
+.guest-modal-summary {
+  font-size: 14px;
+  color: #222;
+  text-align: left;
+  flex: 1;
+  min-width: 0;
+}
+
+.guest-modal-done {
+  flex-shrink: 0;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.guest-modal-done:hover {
+  filter: brightness(0.95);
+}
+
+.guest-modal-done:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 2px;
+}
+
+.service-animal-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1010;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 24px 24px;
+  background: rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.service-animal-modal-panel {
+  width: 100%;
+  max-width: 568px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  outline: none;
+  color: #222;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+.service-animal-modal-header {
+  position: relative;
+  padding: 16px 24px;
+  min-height: 48px;
+  box-sizing: border-box;
+}
+
+.service-animal-modal-close {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #222;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-animal-modal-close:hover {
+  background: #f7f7f7;
+}
+
+.service-animal-modal-close:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 2px;
+}
+
+.service-animal-modal-body {
+  padding: 0 24px 24px;
+}
+
+.service-animal-modal-image-wrap {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.service-animal-modal-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.service-animal-modal-copy {
+  padding: 0 0 8px;
+}
+
+.service-animal-modal-title {
+  margin: 0 0 16px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.service-animal-modal-text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #222;
+}
+
+.service-animal-modal-link {
+  color: #222;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.service-animal-modal-link:hover {
+  color: #000;
+}
+
+.service-animal-modal-link:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (max-width: 480px) {
+  .guest-modal-root {
+    align-items: stretch;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .guest-modal-panel {
+    max-width: none;
+    border-radius: 0;
+    min-height: 100%;
+  }
+
+  .service-animal-modal-root {
+    padding: 16px;
+    align-items: stretch;
+  }
+
+  .service-animal-modal-panel {
+    max-width: none;
+    border-radius: 12px;
+  }
+}
