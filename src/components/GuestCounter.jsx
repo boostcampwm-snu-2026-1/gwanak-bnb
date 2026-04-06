@@ -9,7 +9,7 @@ function GuestCounter({ label, description, count, onIncrease, onDecrease }) {
         <button
           onClick={onDecrease}
           disabled={count === 0}
-          className="w-8 h-8 rounded-full border border-gray-400 text-gray-600 disabled:opacity-30 cursor-pointer"
+          className="w-8 h-8 rounded-full border border-gray-400 text-gray-600 disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed"
         >
           -
         </button>
