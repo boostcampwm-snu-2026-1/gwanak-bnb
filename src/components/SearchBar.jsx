@@ -37,7 +37,7 @@ function SearchBar() {
       <button className="text-sm font-semibold px-4 border-r">언제든지</button>
       <button
         onClick={() => setIsModalOpen(!isModalOpen)}
-        className="text-sm font-semibold px-4 text-gray-400"
+        className="text-sm font-semibold px-4 text-gray-400 cursor-pointer"
       >
         {totalGuests > 0 ? `여행자 ${totalGuests}명` : "여행자 추가"}
       </button>
