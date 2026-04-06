@@ -1,43 +1,28 @@
-import { useState } from "react"
 import GuestCounter from "./GuestCounter"
 
-function GuestModal({ onClose }) {
-  const [guests, setGuests] = useState({
-    adults: 0,
-    children: 0,
-    infants: 0,
-  })
-
-  const increase = (type) => {
-    setGuests((prev) => ({ ...prev, [type]: prev[type] + 1 }))
-  }
-
-  const decrease = (type) => {
-    setGuests((prev) => ({ ...prev, [type]: Math.max(0, prev[type] - 1) }))
-  }
-
+function GuestModal({ guests, onIncrease, onDecrease, onClose }) {
   return (
     <div className="absolute top-16 right-0 bg-white rounded-2xl shadow-xl p-6 w-80 z-10">
       <GuestCounter
         label="성인"
         description="13세 이상"
         count={guests.adults}
-        onIncrease={() => increase("adults")}
-        onDecrease={() => decrease("adults")}
+        onIncrease={() => onIncrease("adults")}
+        onDecrease={() => onDecrease("adults")}
       />
       <GuestCounter
         label="어린이"
         description="2~12세"
         count={guests.children}
-        onIncrease={() => increase("children")}
-        onDecrease={() => decrease("children")}
+        onIncrease={() => onIncrease("children")}
+        onDecrease={() => onDecrease("children")}
       />
       <GuestCounter
         label="유아"
         description="2세 미만"
         count={guests.infants}
-        onIncrease={() => increase("infants")}
-        onDecrease={() => decrease("infants")}
+        onIncrease={() => onIncrease("infants")}
+        onDecrease={() => onDecrease("infants")}
       />
       <button
         onClick={onClose}
