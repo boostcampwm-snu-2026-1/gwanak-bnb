@@ -1,3 +1,5 @@
+<!-- 웹 브라우저가 가장 먼저 읽는 빈 도화지 -->
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -5,8 +7,10 @@
     <title>Airbnb Clone</title>
   </head>
   <body>
-    <div id="root"></div>
-    
+    <div id="root"></div> 
+    <!-- SPA의 핵심 원리: 상자 하나(root), 연결선 하나(main.jsx)만으로 개발 -->
+    <!-- 향후 기능이 추가되더라도 단 하나의 root 상자 안에서 가지를 치며 자라나게 함 -->
+    <!-- 스크립트도 main.jsx만 연결해두고, 나머지 모든 화면 그리기, 데이터 통신, 페이지 이동은 전부 React(시작점: main.jsx)로 넘김 -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -5,7 +5,7 @@ export default function GuestModal({ guests, updateGuestCount }) {
   const handleDecrease = (type) => updateGuestCount(type, -1);
 
   return (
-    // 'guest-modal' 클래스로 둥글고 그림자 있는 컨테이너를 만듭니다.
+    // 'guest-modal' 클래스로 둥글고 그림자 있는 컨테이너를 만듦
     <div className="guest-modal" onClick={(e) => e.stopPropagation()}>
       
       {/* 각 행 스타일 적용 */}
