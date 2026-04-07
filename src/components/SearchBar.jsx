@@ -69,8 +69,8 @@ export default function SearchBar() {
         onClick={() => setIsGuestOpen(!isGuestOpen)}
       >
         <div className="search-bar__text">
-            <p className="search-bar__label">여행자</p>
-            <p className="search-bar__value">게스트 추가</p>
+          <p className="search-bar__label">여행자</p>
+          <p className="search-bar__value">게스트 추가</p>
         </div>
       </div>
 
