@@ -2,6 +2,7 @@ import DestinationSelector from './DestinationSelector.jsx'
 import DateSelector from './DateSelector.jsx'
 import GuestSelector from './GuestSelector.jsx'
 import GuestModal from './GuestModal.jsx'
+import { SearchIcon } from './icons'
 
 function SearchBar({
   activeTab,
@@ -49,18 +50,7 @@ function SearchBar({
           aria-label="검색"
           className="ml-2 inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rose-500 to-pink-500 text-white shadow-[0_8px_18px_rgba(255,56,92,0.35)] transition duration-200 hover:scale-105 hover:shadow-[0_10px_22px_rgba(255,56,92,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
         >
-          <svg
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-          </svg>
+          <SearchIcon />
         </button>
       </div>
     </section>
