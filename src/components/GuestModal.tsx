@@ -1,7 +1,8 @@
 //components/GuestModal.tsx
 
-import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
+import { useState } from "react";
+
 
 type GuestCounterProps = {
     name: string;

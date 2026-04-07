@@ -1,21 +1,26 @@
 //components/SearchBar.tsx
+import { Search } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-import { useEffect, useRef, useState } from "react";
 import DateModal from "./DateModal";
 import GuestModal from "./GuestModal";
-import LocationtModal from "./LocationModal";
-import { Search } from "lucide-react";
+import LocationModal from "./LocationModal";
+
 
 
 
 export default function SearchBar() {
     const [openModal, setOpenModal] = useState<"location" | "date" | "guest" | null>(null);
 
-    const modalRefs = {
-        location: useRef<HTMLDivElement>(null),
-        date: useRef<HTMLDivElement>(null),
-        guest: useRef<HTMLDivElement>(null),
-    };
+    const locationRef = useRef<HTMLDivElement>(null);
+    const dateRef = useRef<HTMLDivElement>(null);
+    const guestRef = useRef<HTMLDivElement>(null);
+
+    const modalRefs = useMemo(() => ({
+        location: locationRef,
+        date: dateRef,
+        guest: guestRef,
+    }), []);
     
     useEffect(() => {
         if (!openModal) return;
@@ -29,10 +34,9 @@ export default function SearchBar() {
         return () => {
             document.removeEventListener("click", handleClick);
         };
-    }, [openModal]);
+    }, [openModal, modalRefs]);
 
     return (
-    <>
     <div className="bg-white rounded-full shadow-md flex items-center px-4 py-2 gap-4 w-full max-w-3xl mx-auto">
         <div ref={modalRefs.location} className="relative flex flex-col px-4 py-2 hover:bg-gray-100 rounded-full cursor-pointer flex-1">
             <span className="text-xs font-semibold">여행지</span>
@@ -40,7 +44,7 @@ export default function SearchBar() {
                 e.stopPropagation();
                 setOpenModal("location" );
             }}>여행지 검색</button>
-            {openModal === "location" && <LocationtModal />}
+            {openModal === "location" && <LocationModal />}
         </div>
         <div className="w-px h-8 bg-gray-300" /> {/* 구분선 */}
         <div ref={modalRefs.date} className="relative flex flex-col px-4 py-2 hover:bg-gray-100 rounded-full cursor-pointer flex-1">
@@ -64,7 +68,6 @@ export default function SearchBar() {
             <Search size={20} />
         </button>
     </div>
-    </>
 )
 
 
