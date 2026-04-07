@@ -1,8 +1,53 @@
-import './SearchBar.css'
 import { useState } from 'react'
+import GuestPopup from './GuestPopup'
+import './SearchBar.css'
+
 
 export default function SearchBar() {
   const [isGuestOpen, setIsGuestOpen] = useState(false)
+
+  const [adults, setAdults] = useState(0)
+  const [children, setChildren] = useState(0)
+  const [infants, setInfants] = useState(0)
+  const [pets, setPets] = useState(0)
+
+  const handleIncrease = (type) => {
+    switch (type) {
+      case 'adults':
+        setAdults(adults + 1)
+        break
+      case 'children':
+        setChildren(children + 1)
+        break
+      case 'infants':
+        setInfants(infants + 1)
+        break
+      case 'pets':
+        setPets(pets + 1)
+        break
+      default:
+        break
+    }
+  }
+
+  const handleDecrease = (type) => {
+    switch (type) {
+      case 'adults':
+        setAdults(Math.max(0, adults - 1))
+        break
+      case 'children':
+        setChildren(Math.max(0, children - 1))
+        break
+      case 'infants':
+        setInfants(Math.max(0, infants - 1))
+        break
+      case 'pets':
+        setPets(Math.max(0, pets - 1))
+        break
+      default:
+        break
+    }
+  }
   
   return <section className="search-bar">
     <div className="search-bar__section">
@@ -27,7 +72,9 @@ export default function SearchBar() {
                 <p className="search-bar__label">여행자</p>
                 <p className="search-bar__value">게스트 추가</p>
             </div>
-            <button type="button" className="search-bar__button" aria-label="검색">
+        </div>
+
+        <button type="button" className="search-bar__button" aria-label="검색">
                 <svg
                     width="18"
                     height="18"
@@ -42,11 +89,15 @@ export default function SearchBar() {
                     <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
             </button>
-        </div>
         {isGuestOpen && (
-            <div className="guest-popup">
-                팝업 내용
-            </div>
+            <GuestPopup
+            adults={adults}
+            children={children}
+            infants={infants}
+            pets={pets}
+            onIncrease={handleIncrease}
+            onDecrease={handleDecrease}
+            />
         )}
     </div>
   </section>
