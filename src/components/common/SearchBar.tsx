@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import GuestModal from '../guest/GuestModal';
 
-interface SearchBarProps {
-    onOpen: () => void;
-    isModalOpen: boolean;
-    counts: {
-        adult: number;
-        child: number;
-        infant: number;
-        pet: number;
-    };
-    updateCount: (type: 'adult' | 'child' | 'infant' | 'pet', diff: number) => void;
-}
+const SearchBar: React.FC = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-const SearchBar: React.FC<SearchBarProps> = ({ onOpen, isModalOpen, counts, updateCount }) => {
+    const toggleModal = () => {
+        setIsModalOpen(prev => !prev);
+    };
+
+    const [counts, setCounts] = useState({
+        adult: 0,
+        child: 0,
+        infant: 0,
+        pet: 0,
+    });
+
+    const updateCount = (type: keyof typeof counts, diff: number) => {
+        setCounts(prev => ({
+            ...prev,
+            [type]: Math.max(0, prev[type] + diff),
+        }));
+    };
 
     const totalGuests = counts.adult + counts.child;
 
@@ -32,7 +39,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onOpen, isModalOpen, counts, upda
 
             <div
                 className="relative flex-1 flex flex-col px-6 cursor-pointer hover:bg-gray-100 transition rounded-full"
-                onClick={onOpen}
+                onClick={toggleModal}
             >
                 <span className="text-xs font-bold">여행자</span>
                 <div className="text-sm">
