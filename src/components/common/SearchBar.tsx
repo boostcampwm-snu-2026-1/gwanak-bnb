@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import GuestModal from '../guest/GuestModal';
+import PlaceUI from '../place/PlaceUI';
 
 const SearchBar: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
+    const [isPlaceModalOpen, setIsPlaceModalOpen] = useState(false);
 
-    const toggleModal = () => {
-        setIsModalOpen(prev => !prev);
+    const toggleGuestModal = () => {
+        setIsGuestModalOpen(prev => !prev);
+        setIsPlaceModalOpen(false);
+    };
+
+    const togglePlaceModal = () => {
+        setIsPlaceModalOpen(prev => !prev);
+        setIsGuestModalOpen(false);
     };
 
     const [counts, setCounts] = useState({
@@ -27,9 +35,17 @@ const SearchBar: React.FC = () => {
 
     return (
         <div className="relative flex items-center bg-white border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-shadow cursor-pointer py-2 px-4 w-full max-w-[850px] mx-auto">
-            <div className="flex-1 flex flex-col px-4 border-r border-gray-200">
+            <div
+                className="relative flex-1 flex flex-col px-4 cursor-pointer hover:bg-gray-100 transition rounded-full border-r border-gray-200"
+                onClick={togglePlaceModal}
+            >
                 <span className="text-xs font-bold">여행지</span>
                 <span className="text-sm text-gray-500">여행지를 검색</span>
+                {isPlaceModalOpen && (
+                    <div onClick={(e) => e.stopPropagation()}>
+                        <PlaceUI />
+                    </div>
+                )}
             </div>
 
             <div className="flex-1 flex flex-col px-4 border-r border-gray-200">
@@ -39,7 +55,7 @@ const SearchBar: React.FC = () => {
 
             <div
                 className="relative flex-1 flex flex-col px-6 cursor-pointer hover:bg-gray-100 transition rounded-full"
-                onClick={toggleModal}
+                onClick={toggleGuestModal}
             >
                 <span className="text-xs font-bold">여행자</span>
                 <div className="text-sm">
@@ -53,7 +69,7 @@ const SearchBar: React.FC = () => {
                         <span className="text-gray-500">게스트 추가</span>
                     )}
                 </div>
-                {isModalOpen && (
+                {isGuestModalOpen && (
                     <div
                         className="absolute top-full right-0 mt-4 z-50"
                         onClick={(e) => e.stopPropagation()}
