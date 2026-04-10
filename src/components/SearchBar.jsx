@@ -1,5 +1,6 @@
 import React, { useState } from 'react'; 
 // useState는 이름으로 불러오기 --> 앞으로 사용시 React. 안붙이고 그냥 useState만으로 사용가능
+import GuestTrigger from './GuestTrigger';
 import GuestModal from './GuestModal';
 
 export default function SearchBar() {
@@ -36,13 +37,17 @@ export default function SearchBar() {
   // 렌더링될 때마다 현재 장부에 적힌 성인, 어린이, 유아 숫자를 모두 더해서 총합을 계산
 
   return (
-    <div className="search-bar-trigger" onClick={() => setIsModalOpen(!isModalOpen)}>
-      <div className="search-text-container">
-        <div className="search-label">여행자</div>
-        <div className={`search-value ${totalGuests > 0 ? 'has-value' : ''}`}>
-          {totalGuests === 0 ? '게스트 추가' : `게스트 ${totalGuests}명`}
-        </div>
+    <div className="search-bar-trigger" >
+
+      <div style={{ flex: 1, paddingRight: '1rem', borderRight: '1px solid #ddd' }}>
+        <div className="search-label">여행지</div>
+        <div className="search-value">검색어 입력창 들어올 자리...</div>
       </div>
+
+      <GuestTrigger 
+        totalGuests={totalGuests} 
+        onClick={() => setIsModalOpen(!isModalOpen)} 
+      />
 
       {/* 핑크색 검색 버튼 추가 */}
       <button className="search-submit-btn">
