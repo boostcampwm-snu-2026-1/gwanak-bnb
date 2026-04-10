@@ -5,9 +5,13 @@ import type { RecommendedLocationItem } from "@/types";
 
 interface RecommendationPopoverProps {
   items: readonly RecommendedLocationItem[];
+  onSelect?: (title: string) => void;
 }
 
-const RecommendationPopover = ({ items }: RecommendationPopoverProps) => {
+const RecommendationPopover = ({
+  items,
+  onSelect,
+}: RecommendationPopoverProps) => {
   return (
     <PopoverContent
       align="start"
@@ -22,7 +26,7 @@ const RecommendationPopover = ({ items }: RecommendationPopoverProps) => {
           </span>
         </div>
         <div className="max-h-72 overflow-y-auto">
-          <RecommendedLocationList items={items} />
+          <RecommendedLocationList items={items} onSelect={onSelect} />
         </div>
       </section>
     </PopoverContent>

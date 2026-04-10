@@ -3,9 +3,13 @@ import RecommendedLocationListItem from "./RecommendedLocationListItem";
 
 interface RecommendedLocationListProps {
   items: readonly RecommendedLocationItem[];
+  onSelect?: (title: string) => void;
 }
 
-const RecommendedLocationList = ({ items }: RecommendedLocationListProps) => {
+const RecommendedLocationList = ({
+  items,
+  onSelect,
+}: RecommendedLocationListProps) => {
   if (items.length === 0) {
     return (
       <div className="px-4 py-6 text-center text-sm text-muted-foreground">
@@ -22,6 +26,7 @@ const RecommendedLocationList = ({ items }: RecommendedLocationListProps) => {
           icon={item.icon}
           title={item.title}
           subtitle={item.subtitle}
+          onSelect={onSelect}
         />
       ))}
     </div>

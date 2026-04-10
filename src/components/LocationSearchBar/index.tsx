@@ -29,7 +29,10 @@ const LocationSearchBar = () => {
           }
         />
       </PopoverAnchor>
-      <RecommendationPopover items={recommendations} />
+      <RecommendationPopover
+        items={recommendations}
+        onSelect={(title) => setQuery(title)}
+      />
     </Popover>
   );
 };
