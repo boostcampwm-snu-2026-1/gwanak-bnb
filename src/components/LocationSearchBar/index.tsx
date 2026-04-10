@@ -6,14 +6,10 @@ import {
 
 import RecommendationPopover from "./LocationRecommendationPopover";
 import SearchBar from "./SearchBar";
-import { DEFAULT_RECOMMENDATIONS } from "./data";
-import { useState } from "react";
+import { useLocationAutocomplete } from "@/hooks/useLocationAutocomplete";
 
 const LocationSearchBar = () => {
-  const [recommendations, setRecommendations] = useState(
-    DEFAULT_RECOMMENDATIONS
-  );
-  const [query, setQuery] = useState("");
+  const { query, recommendations, setQuery } = useLocationAutocomplete();
 
   return (
     <Popover>

@@ -1,14 +1,7 @@
-import type { ComponentType, SVGProps } from "react";
-
 import { PopoverContent } from "@/components/ui/popover";
 
 import RecommendedLocationList from "./RecommendedLocationList";
-
-export interface RecommendedLocationItem {
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
-  title: string;
-  subtitle: string;
-}
+import type { RecommendedLocationItem } from "@/types";
 
 interface RecommendationPopoverProps {
   items: readonly RecommendedLocationItem[];

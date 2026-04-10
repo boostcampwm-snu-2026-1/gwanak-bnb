@@ -1,13 +1,11 @@
-import type { RecommendedLocationItem } from "./LocationRecommendationPopover";
+import type { RecommendedLocationItem } from "@/types";
 import RecommendedLocationListItem from "./RecommendedLocationListItem";
 
 interface RecommendedLocationListProps {
   items: readonly RecommendedLocationItem[];
 }
 
-const RecommendedLocationList = ({
-  items,
-}: RecommendedLocationListProps) => {
+const RecommendedLocationList = ({ items }: RecommendedLocationListProps) => {
   return (
     <div className="grid gap-0.5 p-1.5">
       {items.map((item) => (
