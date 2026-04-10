@@ -21,7 +21,7 @@ const RecommendationPopover = ({ items }: RecommendationPopoverProps) => {
             추천 여행지
           </span>
         </div>
-        <div className="h-72 overflow-y-scroll">
+        <div className="max-h-72 overflow-y-auto">
           <RecommendedLocationList items={items} />
         </div>
       </section>
