@@ -20,13 +20,13 @@ const SearchBar = forwardRef<HTMLLabelElement, SearchBarProps>(
       >
         <div className="min-w-0 flex-1 text-left">
           <span className="mb-1 block text-[11px] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-            Location
+            여행지
           </span>
           {inputSlot ?? (
             <input
               id="location-search-input"
               type="text"
-              placeholder="여행할 지역이나 도시를 검색해보세요"
+              placeholder="여행지 검색"
               className="w-full border-0 bg-transparent p-0 text-sm font-medium text-foreground placeholder:text-muted-foreground focus:outline-none"
             />
           )}

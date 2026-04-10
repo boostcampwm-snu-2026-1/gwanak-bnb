@@ -20,7 +20,7 @@ const LocationSearchBar = () => {
               <input
                 id="location-search-input"
                 type="text"
-                placeholder="여행할 지역이나 도시를 검색해보세요"
+                placeholder="여행지 검색"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 className="w-full border-0 bg-transparent p-0 text-sm font-medium text-foreground placeholder:text-muted-foreground focus:outline-none"
