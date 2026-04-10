@@ -1,8 +1,8 @@
 interface PlaceInputProps {
     value: string;
     onChange: (value: string) => void;
-    onKeyDown: () => void;
-    inputRef: React.RefObject<HTMLInputElement>;
+    onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    inputRef: React.RefObject<HTMLInputElement | null>;
 }
 
 const PlaceInput = ({ value, onChange, onKeyDown, inputRef }: PlaceInputProps) => {
