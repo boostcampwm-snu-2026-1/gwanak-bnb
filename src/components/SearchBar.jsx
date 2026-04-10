@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 // useState는 이름으로 불러오기 --> 앞으로 사용시 React. 안붙이고 그냥 useState만으로 사용가능
 import GuestTrigger from './GuestTrigger';
 import GuestModal from './GuestModal';
+import DestinationInput from './DestinationInput';
 
 export default function SearchBar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // isModalOpen: 모달 창이 열려있는지 닫혀있는지 기억하는 스위치 (처음에는 false로 시작)
   // setIsModalOpen: isModalOpen 상태 수정할 수 있는 리모컨
+
+  const [keyword, setKeyword] = useState('');
+  // 새로 추가된 상태: 검색어 데이터 관련
+
   const [guests, setGuests] = useState({
   // guest: 게스트 인원수를 기록해 두는 장부 
   // setGuests: guests의 데이터를 수정할 수 있는 리모컨
@@ -39,17 +44,22 @@ export default function SearchBar() {
   return (
     <div className="search-bar-trigger" >
 
-      <div style={{ flex: 1, paddingRight: '1rem', borderRight: '1px solid #ddd' }}>
-        <div className="search-label">여행지</div>
-        <div className="search-value">검색어 입력창 들어올 자리...</div>
-      </div>
+      {/* 1. 여행지 입력창 */}   
+      <DestinationInput 
+        keyword={keyword} 
+        onChange={setKeyword} 
+      />
 
+      {/* 2. 세로 구분선 */}
+      <div className="search-divider"></div>
+
+      {/* 3. 게스트 인원 표시 */}
       <GuestTrigger 
         totalGuests={totalGuests} 
         onClick={() => setIsModalOpen(!isModalOpen)} 
       />
 
-      {/* 핑크색 검색 버튼 추가 */}
+      {/* 4. 핑크색 검색 버튼 */}
       <button className="search-submit-btn">
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{display: 'block', fill: 'none', height: '16px', width: '16px', stroke: 'currentColor', strokeWidth: '4', overflow: 'visible'}}>
           <g fill="none"><path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path></g>
@@ -57,6 +67,7 @@ export default function SearchBar() {
         <span>검색</span>
       </button>
 
+      {/* 모달창 */}
       {isModalOpen && <GuestModal guests={guests} updateGuestCount={updateGuestCount} />} 
       {/* isModalOpen 스위치가 true인 경우에만 띄움 */}
     </div>
