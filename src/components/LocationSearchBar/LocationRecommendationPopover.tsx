@@ -1,0 +1,36 @@
+import type { ComponentType, SVGProps } from "react";
+
+import { PopoverContent } from "@/components/ui/popover";
+
+import RecommendedLocationList from "./RecommendedLocationList";
+
+export interface RecommendedLocationItem {
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
+  title: string;
+  subtitle: string;
+}
+
+interface RecommendationPopoverProps {
+  items: readonly RecommendedLocationItem[];
+}
+
+const RecommendationPopover = ({ items }: RecommendationPopoverProps) => {
+  return (
+    <PopoverContent
+      align="start"
+      sideOffset={8}
+      className="w-[min(26rem,calc(100vw-1rem))] rounded-[1.5rem] border border-border/70 bg-background p-2 shadow-[0_24px_60px_-34px_rgba(15,23,42,0.28)]"
+    >
+      <section className="overflow-hidden rounded-[1.1rem] bg-muted/35">
+        <div className="border-b border-border/60 px-4 py-3 text-left">
+          <span className="mt-0.5 text-base font-medium tracking-[-0.02em] text-foreground">
+            추천 여행지
+          </span>
+        </div>
+        <RecommendedLocationList items={items} />
+      </section>
+    </PopoverContent>
+  );
+};
+
+export default RecommendationPopover;
