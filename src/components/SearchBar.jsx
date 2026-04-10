@@ -1,17 +1,23 @@
 import { useEffect, useRef } from "react";
+import DestinationField from "./search/DestinationField";
 import styles from "./SearchBar.module.css";
 
 function SearchBar({
+  destinationValue,
+  suggestions,
   guestSummary,
-  isGuestSelectorOpen,
-  onToggleGuestSelector,
-  onCloseGuestSelector,
+  activePanel,
+  onOpenPanel,
+  onClosePanels,
+  onDestinationChange,
   children,
 }) {
   const searchBarRef = useRef(null);
+  const isDestinationOpen = activePanel === "destination";
+  const isGuestSelectorOpen = activePanel === "guests";
 
   useEffect(() => {
-    if (!isGuestSelectorOpen) {
+    if (!activePanel) {
       return undefined;
     }
 
@@ -20,13 +26,13 @@ function SearchBar({
         searchBarRef.current &&
         !searchBarRef.current.contains(event.target)
       ) {
-        onCloseGuestSelector();
+        onClosePanels();
       }
     }
 
     function handleKeyDown(event) {
       if (event.key === "Escape") {
-        onCloseGuestSelector();
+        onClosePanels();
       }
     }
 
@@ -37,15 +43,19 @@ function SearchBar({
       document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isGuestSelectorOpen, onCloseGuestSelector]);
+  }, [activePanel, onClosePanels]);
 
   return (
     <div className={styles.wrapper} ref={searchBarRef}>
       <div className={styles.searchBar}>
-        <button type="button" className={styles.segment}>
-          <span className={styles.segmentLabel}>어디로 여행가세요?</span>
-          <strong className={styles.segmentValue}>어디든지</strong>
-        </button>
+        <DestinationField
+          value={destinationValue}
+          suggestions={suggestions}
+          isOpen={isDestinationOpen}
+          onChange={onDestinationChange}
+          onClose={onClosePanels}
+          onOpen={() => onOpenPanel("destination")}
+        />
 
         <div className={styles.divider} />
 
@@ -59,7 +69,9 @@ function SearchBar({
         <button
           type="button"
           className={`${styles.segment} ${styles.guestSegment}`}
-          onClick={onToggleGuestSelector}
+          onClick={() =>
+            onOpenPanel(isGuestSelectorOpen ? null : "guests")
+          }
           aria-expanded={isGuestSelectorOpen}
           aria-haspopup="dialog"
         >

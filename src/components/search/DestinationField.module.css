@@ -1,0 +1,60 @@
+.wrapper {
+  position: relative;
+  min-width: 0;
+}
+
+.field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+  padding: 13px 16px;
+  border-radius: 18px;
+  background: transparent;
+}
+
+.field:hover,
+.fieldActive {
+  background: #f5f5f5;
+}
+
+.label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #6b6b6b;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #222222;
+  font-size: 0.98rem;
+  font-weight: 600;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  width: min(420px, 100vw - 40px);
+  z-index: 15;
+}
+
+@media (max-width: 900px) {
+  .field {
+    padding: 15px 16px;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import GuestSelector from "./components/GuestSelector";
 import SearchBar from "./components/SearchBar";
 import StayGrid from "./components/StayGrid";
+import destinationSuggestions from "./data/destinationSuggestions";
 import styles from "./App.module.css";
 
 const guestConfig = {
@@ -36,9 +37,26 @@ const initialGuests = {
 
 const categoryLabels = ["한옥", "호수 근처", "인기 급상승", "오두막", "전망 좋은 숙소"];
 
+function matchesDestination(stay, query) {
+  const normalizedTokens = query
+    .toLowerCase()
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter(Boolean);
+
+  if (normalizedTokens.length === 0) {
+    return true;
+  }
+
+  const searchableText = `${stay.title} ${stay.location}`.toLowerCase();
+
+  return normalizedTokens.every((token) => searchableText.includes(token));
+}
+
 function App() {
   const [guests, setGuests] = useState(initialGuests);
-  const [isGuestSelectorOpen, setIsGuestSelectorOpen] = useState(false);
+  const [activePanel, setActivePanel] = useState(null);
+  const [destination, setDestination] = useState("");
   const [stays, setStays] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -83,6 +101,10 @@ function App() {
   const guestSummary =
     totalTravelers > 0 ? `게스트 ${totalTravelers}명` : "여행자 추가";
   const petSummary = guests.pets > 0 ? ` · 반려동물 ${guests.pets}마리` : "";
+  const travelerSummary = `${guestSummary}${petSummary}`;
+  const hasDestination = destination.trim().length > 0;
+  const destinationSummary = hasDestination ? destination : "어디든지";
+  const filteredStays = stays.filter((stay) => matchesDestination(stay, destination));
 
   function updateGuestCount(type, delta) {
     setGuests((currentGuests) => {
@@ -99,8 +121,8 @@ function App() {
     });
   }
 
-  function closeGuestSelector() {
-    setIsGuestSelectorOpen(false);
+  function closePanels() {
+    setActivePanel(null);
   }
 
   return (
@@ -126,12 +148,13 @@ function App() {
         </div>
 
         <SearchBar
-          guestSummary={`${guestSummary}${petSummary}`}
-          isGuestSelectorOpen={isGuestSelectorOpen}
-          onToggleGuestSelector={() =>
-            setIsGuestSelectorOpen((currentOpen) => !currentOpen)
-          }
-          onCloseGuestSelector={closeGuestSelector}
+          destinationValue={destination}
+          suggestions={destinationSuggestions}
+          guestSummary={travelerSummary}
+          activePanel={activePanel}
+          onOpenPanel={setActivePanel}
+          onClosePanels={closePanels}
+          onDestinationChange={setDestination}
         >
           <GuestSelector
             guests={guests}
@@ -154,14 +177,22 @@ function App() {
         <section className={styles.summaryCard}>
           <div>
             <p className={styles.summaryLabel}>현재 검색 조건</p>
-            <strong>어디든지 · 5월 1일 - 5월 15일 · {guestSummary}</strong>
+            <strong>
+              {destinationSummary} · 5월 1일 - 5월 15일 · {travelerSummary}
+            </strong>
+            <p className={styles.summaryNote}>
+              {hasDestination
+                ? `${filteredStays.length}개의 추천 숙소가 즉시 반영되고 있어요.`
+                : "여행지를 입력하면 추천 검색어와 숙소 목록이 바로 바뀝니다."}
+            </p>
           </div>
         </section>
 
         <StayGrid
-          stays={stays}
+          stays={filteredStays}
           isLoading={isLoading}
           errorMessage={errorMessage}
+          destinationValue={destination}
         />
       </main>
     </div>
