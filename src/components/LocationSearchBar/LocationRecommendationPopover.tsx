@@ -23,11 +23,13 @@ const RecommendationPopover = ({ items }: RecommendationPopoverProps) => {
     >
       <section className="overflow-hidden rounded-[1.1rem] bg-muted/35">
         <div className="border-b border-border/60 px-4 py-3 text-left">
-          <span className="mt-0.5 text-base font-medium tracking-[-0.02em] text-foreground">
+          <span className="mt-0.5 text-base tracking-[-0.02em] text-foreground size-15">
             추천 여행지
           </span>
         </div>
-        <RecommendedLocationList items={items} />
+        <div className="h-72 overflow-y-scroll">
+          <RecommendedLocationList items={items} />
+        </div>
       </section>
     </PopoverContent>
   );
