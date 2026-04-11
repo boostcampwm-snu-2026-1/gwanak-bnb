@@ -211,24 +211,12 @@ export default function App() {
   const [focusIndex, setFocusIndex] = useState(-1);
   const [guests, setGuests]         = useState({ adult: 0, child: 0, infant: 0, pet: 0 });
 
-  const searchBarRef = useRef(null);
-  const inputRef     = useRef(null);
+  const inputRef      = useRef(null);
   const isKeyboardNav = useRef(false);
 
   const filteredResults = location.trim().length > 0
     ? SEARCH_DB.filter(item => item.name.includes(location) || item.sub.includes(location))
     : RECOMMENDATIONS;
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (searchBarRef.current && !searchBarRef.current.contains(e.target)) {
-        setActiveTab(null);
-        setFocusIndex(-1);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
     const getSectionBg = (tabName) => {
       // 하나 active
@@ -310,11 +298,26 @@ export default function App() {
       display: 'flex', justifyContent: 'center', paddingTop: 50,
       fontFamily: "'Pretendard', 'Noto Sans KR', sans-serif",
       background: '#f7f7f7', minHeight: '100vh',
+      position: 'relative',
+      isolation: 'isolate',
     }}
       onKeyDown={handleKeyDown}
       tabIndex={-1}
     >
-      <div ref={searchBarRef} style={{ position: 'relative', width: 850 }}>
+      {activeTab && (
+        <div
+          aria-hidden
+          style={{
+            position: 'fixed', inset: 0, zIndex: 0, cursor: 'default',
+          }}
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            setActiveTab(null);
+            setFocusIndex(-1);
+          }}
+        />
+      )}
+      <div style={{ position: 'relative', zIndex: 1, width: 850 }}>
 
         {/* 서치바 */}
         <div style={{
