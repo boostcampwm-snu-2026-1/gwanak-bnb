@@ -57,6 +57,14 @@ const RECOMMENDATIONS = [
     color: '#EBF3FF',
     iconColor: '#4A90D9',
   },
+  {
+    id: 8,
+    name: '후쿠오카시, 알본',
+    sub: '관광 명소: 후쿠오카타워',
+    type: 'lake',
+    color: '#EBF3FF',
+    iconColor: '#4A90D9',
+  },
 ];
 
 const SEARCH_DB = [
@@ -198,13 +206,13 @@ function GuestRow({ title, desc, count, onMinus, onPlus, minusDisabled, isLink }
 
 export default function App() {
   const [activeTab, setActiveTab]   = useState(null);
+  const [hoverTab, setHoverTab]     = useState(null);
   const [location, setLocation]     = useState('');
   const [focusIndex, setFocusIndex] = useState(-1);
   const [guests, setGuests]         = useState({ adult: 0, child: 0, infant: 0, pet: 0 });
 
   const searchBarRef = useRef(null);
   const inputRef     = useRef(null);
-
   const isKeyboardNav = useRef(false);
 
   const filteredResults = location.trim().length > 0
@@ -221,6 +229,22 @@ export default function App() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+    const getSectionBg = (tabName) => {
+      // 하나 active
+      if (activeTab === tabName) return '#fff';
+
+      // 하나라도 active 있을 때
+      if (activeTab) {
+        if (hoverTab === tabName) return '#dcdcdc'; // 다른 섹션 hover 진한 회색
+        return '#f7f7f7'; // 나머지 옅은 회색
+      }
+
+      // 아무것도 active 없을 때
+      if (hoverTab === tabName) return '#ebebeb'; // hover 옅은 회색
+
+      return 'transparent';
+    };
 
     const handleKeyDown = (e) => {
       if (activeTab !== 'location') return;
@@ -292,12 +316,14 @@ export default function App() {
     >
       <div ref={searchBarRef} style={{ position: 'relative', width: 850 }}>
 
-        {/* ── 서치바 ── */}
+        {/* 서치바 */}
         <div style={{
           display: 'flex', alignItems: 'center', width: '100%', height: 66,
-          background: '#fff', borderRadius: 100,
-          border: `1px solid ${activeTab ? '#ddd' : '#ddd'}`,
+          background: activeTab ? '#f7f7f7' : '#fff',
+          borderRadius: 100,
+          border: '1px solid #ddd',
           boxShadow: '0 3px 12px rgba(0,0,0,0.1)',
+          transition: 'background 0.2s ease',
         }}>
 
           {/* 여행지 */}
@@ -306,13 +332,20 @@ export default function App() {
               e.stopPropagation();
               openLocation();
             }}
+            onMouseEnter={() => setHoverTab('location')}
+            onMouseLeave={() => setHoverTab(null)}
             style={{
               flex: 1, height: '100%', padding: '0 24px 0 32px',
               cursor: 'pointer', borderRadius: 100,
               display: 'flex', flexDirection: 'column',
               alignItems: 'flex-start', justifyContent: 'center',
-              background: activeTab === 'location' ? '#ebebeb' : 'transparent',
-              transition: 'background 0.15s',
+              background: getSectionBg('location'),
+              position: 'relative',
+              zIndex: activeTab === 'location' ? 2 : 1,
+              boxShadow: activeTab === 'location'
+                ? '0 6px 20px rgba(0,0,0,0.18)'
+                : 'none',
+              transition: 'background 0.15s, box-shadow 0.15s',
             }}
           >
             <div style={{ fontSize: 12, fontWeight: 800, color: '#222', marginBottom: 2 }}>여행지</div>
@@ -350,11 +383,17 @@ export default function App() {
             flex: 1, height: '100%', padding: '0 24px', cursor: 'pointer',
             borderRadius: 100, display: 'flex', flexDirection: 'column',
             alignItems: 'flex-start', justifyContent: 'center',
-            transition: 'background 0.15s',
+            background: getSectionBg('date'),
+            transition: 'background 0.15s, box-shadow 0.15s',
+            position: 'relative',
+            zIndex: activeTab === 'date' ? 2 : 1,
+            boxShadow: activeTab === 'date'
+              ? '0 6px 20px rgba(0,0,0,0.18)'
+              : 'none',
           }}
             onClick={() => setActiveTab(null)}
-            onMouseEnter={e => e.currentTarget.style.background = '#ebebeb'}
-            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+            onMouseEnter={() => setHoverTab('date')}
+            onMouseLeave={() => setHoverTab(null)}
           >
             <div style={{ fontSize: 12, fontWeight: 800, color: '#222', marginBottom: 2 }}>날짜</div>
             <div style={{ fontSize: 14, color: '#717171' }}>날짜 추가</div>
@@ -368,12 +407,19 @@ export default function App() {
               e.stopPropagation();
               setActiveTab(activeTab === 'guests' ? null : 'guests');
             }}
+            onMouseEnter={() => setHoverTab('guests')}
+            onMouseLeave={() => setHoverTab(null)}
             style={{
               flex: 1, height: '100%', padding: '0 8px 0 24px', cursor: 'pointer',
               borderRadius: 100, display: 'flex', flexDirection: 'row',
               alignItems: 'center', justifyContent: 'space-between',
-              background: activeTab === 'guests' ? '#ebebeb' : 'transparent',
-              transition: 'background 0.15s',
+              background: getSectionBg('guests'),
+              transition: 'background 0.15s, box-shadow 0.15s',
+              position: 'relative',
+              zIndex: activeTab === 'guests' ? 2 : 1,
+              boxShadow: activeTab === 'guests'
+                ? '0 6px 20px rgba(0,0,0,0.18)'
+                : 'none',
             }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -404,7 +450,7 @@ export default function App() {
             position: 'absolute', top: 75, left: 0, width: 420,
             background: '#fff', borderRadius: 32,
             boxShadow: '0 8px 28px rgba(0,0,0,0.12)', zIndex: 100,
-            overflow: 'hidden',  // 스크롤바가 모달 밖으로 안 나가게
+            overflow: 'hidden',
           }}>
 
             {/* 타이틀 고정 영역 */}
@@ -412,7 +458,7 @@ export default function App() {
               <div style={{
                 padding: '16px 32px 8px',
                 fontSize: 12, fontWeight: 800, color: '#222',
-                textAlign: 'left',  // 좌측 정렬
+                textAlign: 'left',
               }}>
                 추천 여행지
               </div>
