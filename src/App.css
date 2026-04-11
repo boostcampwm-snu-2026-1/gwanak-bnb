@@ -1,3 +1,99 @@
+.destination-modal {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  width: 400px;
+  background-color: #fff;
+  border-radius: 32px;
+  padding: 16px 0;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  z-index: 100;
+}
+
+.modal-title {
+  padding: 16px 32px 8px 32px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #222;
+}
+
+.modal-list::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-list::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 999px;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 32px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.search-item.selected, .search-item:hover {
+  background-color: #F7F7F7;
+}
+
+.icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background-color: #F1F1F1;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  font-size: 24px;
+}
+
+/* 이미지의 위치 핀 아이콘 박스 */
+.pin-wrapper {
+  width: 48px;
+  height: 48px;
+  background-color: #EBEBEB;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+}
+
+.item-info { display: flex; flex-direction: column; text-align: left; }
+.item-name { font-size: 16px; color: #222; font-weight: 400; }
+.item-sub { font-size: 14px; color: #717171; }
+
+/* 입력 필드 초기화 */
+.search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0;
+  font-size: 14px;
+  color: #222;
+  background: transparent;
+}
+.search-input::placeholder { color: #717171; }
+
+/* 이미지의 입력창 X 버튼 */
+.clear-btn {
+  border: none;
+  background: #f1f1f1;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
 .container {
   display: flex;
   justify-content: center;
