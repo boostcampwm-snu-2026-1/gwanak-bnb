@@ -1,4 +1,6 @@
-import './countPage.css'
+import './guestCounter.css'
+import '../global.css'
+import { useGuest } from './guestContext';
 
 const guestTypes = [
     {id: 'adults', title: '성인', desc: '13세 이상'},
@@ -34,7 +36,8 @@ function CounterRow({ type, count, update, isLast }) {
     )
 };
 
-function CountPage({ counts, setCounts }) {
+function GuestCounter() {
+    const { isOpenGuest, counts, setCounts } = useGuest();
 
     const update = (id, amount) => {
         setCounts(prev => ({
@@ -44,7 +47,7 @@ function CountPage({ counts, setCounts }) {
     };
 
     return (
-        <div className='search-anchor'>
+        isOpenGuest && (<div className='search-anchor'>
             <div className='modal--number'>
                 {guestTypes.map((item, index) => (
                     <CounterRow
@@ -55,8 +58,8 @@ function CountPage({ counts, setCounts }) {
                     />
                 ))}
             </div>
-        </div>
+        </div>)
     )
 }
 
-export default CountPage
+export default GuestCounter;

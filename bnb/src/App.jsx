@@ -1,23 +1,27 @@
-import { useState } from 'react'
 import './App.css'
-import SearchPage from './componenet/guest/searchPage'
-import CountPage from './componenet/guest/countPage'
-import useGuestState from './componenet/guest/useGuestState'
+
+import { GuestProvider } from './componenet/guest/guestContext'
+import GuestSearch from './componenet/guest/guestSearch'
+import GuestCounter from './componenet/guest/guestCounter'
+import { useGuest } from './componenet/guest/guestContext'
+
+import DateSearch from './componenet/date/dateSearch'
+
+import DestinationSearch from './componenet/destination/destinationSearch'
 
 function App() {
-    const {
-        isModalOpen,
-        counts,
-        setCounts,
-        guestCount,
-        getGuestMessage,
-        resetGuestCount,
-        toggleModal
-    } = useGuestState();
-
     return (
         <>
-            <SearchPage />
+            <GuestProvider>
+                <div style={{background: "#eee"}}>
+                    <div className='main-container'>
+                        <DateSearch />
+                        <DestinationSearch />
+                        <GuestSearch />
+                    </div>
+                </div>
+                <GuestCounter />
+            </GuestProvider>
         </>
     )
 }

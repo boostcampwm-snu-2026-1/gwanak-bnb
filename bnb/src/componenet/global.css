@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.search {
+  width: 300px;
+  height: 70px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  border-radius: 35px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.search:hover {
+  background-color: #eee;
+}
+
+.divider-right {
+  height: 40px;
+  background-color: #ccc;
+  width: 1px;
+  margin-left: auto;
+}
