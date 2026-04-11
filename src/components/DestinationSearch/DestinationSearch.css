@@ -98,7 +98,8 @@
   transition: background 0.15s;
 }
 
-.destination-item:hover {
+.destination-item:hover,
+.destination-item.highlighted {
   background: #f5f5f5;
 }
 

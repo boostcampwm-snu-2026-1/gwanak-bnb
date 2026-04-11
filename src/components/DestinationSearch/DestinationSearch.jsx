@@ -42,8 +42,11 @@ const recommendedDestinations = [
 function DestinationSearch() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [selectedDestination, setSelectedDestination] = useState('');
+  const [highlightIndex, setHighlightIndex] = useState(-1);
   const containerRef = useRef(null);
+  const listRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -61,9 +64,48 @@ function DestinationSearch() {
       )
     : recommendedDestinations;
 
+  useEffect(() => {
+    setHighlightIndex(-1);
+  }, [query]);
+
+  useEffect(() => {
+    if (highlightIndex >= 0 && listRef.current) {
+      const items = listRef.current.querySelectorAll('.destination-item');
+      items[highlightIndex]?.scrollIntoView({ block: 'nearest' });
+    }
+  }, [highlightIndex]);
+
+  function handleInputChange(e) {
+    const value = e.target.value;
+    setQuery(value);
+    setInputValue(value);
+  }
+
+  function handleKeyDown(e) {
+    const len = filteredDestinations.length;
+    if (len === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const next = highlightIndex < len - 1 ? highlightIndex + 1 : 0;
+      setHighlightIndex(next);
+      setInputValue(filteredDestinations[next].name);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const next = highlightIndex > 0 ? highlightIndex - 1 : len - 1;
+      setHighlightIndex(next);
+      setInputValue(filteredDestinations[next].name);
+    } else if (e.key === 'Enter' && highlightIndex >= 0) {
+      e.preventDefault();
+      handleSelect(filteredDestinations[highlightIndex]);
+    }
+  }
+
   function handleSelect(destination) {
     setSelectedDestination(destination.name);
     setQuery('');
+    setInputValue('');
+    setHighlightIndex(-1);
     setIsOpen(false);
   }
 
@@ -85,18 +127,20 @@ function DestinationSearch() {
             className="destination-input"
             type="text"
             placeholder="여행지 검색"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
             autoFocus
           />
 
-          <div className="destination-list">
+          <div className="destination-list" ref={listRef}>
             <h4 className="destination-list-title">추천 여행지</h4>
-            {filteredDestinations.map((dest) => (
+            {filteredDestinations.map((dest, index) => (
               <button
                 key={dest.name}
-                className="destination-item"
+                className={`destination-item ${index === highlightIndex ? 'highlighted' : ''}`}
                 onClick={() => handleSelect(dest)}
+                onMouseEnter={() => setHighlightIndex(index)}
               >
                 <span className="destination-item-icon">{dest.icon}</span>
                 <div className="destination-item-text">
