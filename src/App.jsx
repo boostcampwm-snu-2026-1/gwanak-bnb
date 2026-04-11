@@ -376,7 +376,16 @@ export default function App() {
             </div>
           </div>
 
-          <div style={{ width: 1, height: 32, background: '#ddd', flexShrink: 0 }} />
+          <div style={{
+            width: 1,
+            height: 32,
+            background:
+              activeTab === 'location' || activeTab === 'date'
+                ? 'transparent'
+                : '#ddd',
+            flexShrink: 0,
+            transition: 'background 0.15s',
+          }} />
 
           {/* 날짜 */}
           <div style={{
@@ -399,7 +408,16 @@ export default function App() {
             <div style={{ fontSize: 14, color: '#717171' }}>날짜 추가</div>
           </div>
 
-          <div style={{ width: 1, height: 32, background: '#ddd', flexShrink: 0 }} />
+          <div style={{
+            width: 1,
+            height: 32,
+            background:
+              activeTab === 'date' || activeTab === 'guests'
+                ? 'transparent'
+                : '#ddd',
+            flexShrink: 0,
+            transition: 'background 0.15s',
+          }} />
 
           {/* 여행자 + 검색 버튼 */}
           <div
@@ -431,13 +449,13 @@ export default function App() {
             <button style={{
               display: 'flex', alignItems: 'center',
               background: '#FF385C', color: '#fff', border: 'none',
-              borderRadius: 100, padding: activeTab === 'guests' ? '12px 16px' : '12px',
-              cursor: 'pointer', transition: 'padding 0.2s',
+              borderRadius: 100, padding: activeTab ? '12px 16px' : '12px',
+              cursor: 'pointer', transition: 'all 0.25s ease', whiteSpace: 'nowrap',
             }}>
               <svg viewBox="0 0 32 32" style={{ width: 16, height: 16, fill: 'currentColor' }}>
                 <path d="M29.71 28.29l-6.5-6.5a12 12 0 1 0-1.42 1.42l6.5 6.5a1 1 0 0 0 1.42-1.42zM4 14a10 10 0 1 1 10 10A10 10 0 0 1 4 14z" />
               </svg>
-              {activeTab === 'guests' && (
+              {activeTab && (
                 <span style={{ marginLeft: 8, fontWeight: 700, fontSize: 14 }}>검색</span>
               )}
             </button>
