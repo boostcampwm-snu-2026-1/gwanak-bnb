@@ -440,13 +440,44 @@ export default function App() {
                 : 'none',
             }}
           >
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <div style={{
+              flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column',
+              alignItems: 'flex-start', justifyContent: 'center',
+            }}>
               <div style={{ fontSize: 12, fontWeight: 800, color: '#222', marginBottom: 2 }}>여행자</div>
-              <div style={{ fontSize: 14, color: hasGuests ? '#222' : '#717171', fontWeight: hasGuests ? 600 : 400 }}>
-                {getGuestText()}
-              </div>
+              {hasGuests ? (
+                <div style={{
+                  display: 'flex', flexDirection: 'row', alignItems: 'center',
+                  width: '100%', gap: 8,
+                }}>
+                  <div style={{
+                    flex: 1, minWidth: 0, fontSize: 14,
+                    color: '#222', fontWeight: 600,
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    textAlign: 'left',
+                  }}>
+                    {getGuestText()}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={e => {
+                      e.stopPropagation();
+                      setGuests({ adult: 0, child: 0, infant: 0, pet: 0 });
+                    }}
+                    aria-label="게스트 초기화"
+                    style={{
+                      border: 'none', background: '#b0b0b0', borderRadius: '50%',
+                      width: 20, height: 20, cursor: 'pointer', flexShrink: 0,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: 10, color: '#fff',
+                    }}
+                  >✕</button>
+                </div>
+              ) : (
+                <div style={{ fontSize: 14, color: '#717171' }}>{getGuestText()}</div>
+              )}
             </div>
-            <button style={{
+            <button type="button" style={{
               display: 'flex', alignItems: 'center',
               background: '#FF385C', color: '#fff', border: 'none',
               borderRadius: 100, padding: activeTab ? '12px 16px' : '12px',
