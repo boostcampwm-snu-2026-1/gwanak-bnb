@@ -41,6 +41,7 @@ const recommendedDestinations = [
 
 function DestinationSearch() {
   const [isOpen, setIsOpen] = useState(false);
+  const [query, setQuery] = useState('');
   const [selectedDestination, setSelectedDestination] = useState('');
   const containerRef = useRef(null);
 
@@ -54,8 +55,15 @@ function DestinationSearch() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const filteredDestinations = query
+    ? recommendedDestinations.filter(
+        (d) => d.name.includes(query) || d.description.includes(query)
+      )
+    : recommendedDestinations;
+
   function handleSelect(destination) {
     setSelectedDestination(destination.name);
+    setQuery('');
     setIsOpen(false);
   }
 
@@ -73,9 +81,18 @@ function DestinationSearch() {
 
       {isOpen && (
         <div className="destination-dropdown">
+          <input
+            className="destination-input"
+            type="text"
+            placeholder="여행지 검색"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            autoFocus
+          />
+
           <div className="destination-list">
             <h4 className="destination-list-title">추천 여행지</h4>
-            {recommendedDestinations.map((dest) => (
+            {filteredDestinations.map((dest) => (
               <button
                 key={dest.name}
                 className="destination-item"
@@ -90,6 +107,9 @@ function DestinationSearch() {
                 </div>
               </button>
             ))}
+            {filteredDestinations.length === 0 && (
+              <p className="destination-empty">검색 결과가 없습니다.</p>
+            )}
           </div>
         </div>
       )}
