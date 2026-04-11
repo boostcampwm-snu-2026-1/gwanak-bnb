@@ -34,7 +34,8 @@ const PlaceUI = () => {
     };
 
     return (
-        <div className="absolute top-full left-0 w-[400px] bg-white rounded-3xl shadow-2xl mt-4 overflow-hidden border border-gray-100 z-50">
+        <div className="flex flex-col justify-center h-full w-full px-6 py-2">
+            <span className="text-xs font-bold text-black mb-0.5">여행지</span>
             <PlaceInput
                 value={keyword}
                 inputRef={inputRef}

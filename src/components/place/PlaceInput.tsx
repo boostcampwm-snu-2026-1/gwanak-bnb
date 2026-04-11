@@ -13,7 +13,7 @@ const PlaceInput = ({ value, onChange, onKeyDown, inputRef }: PlaceInputProps) =
             value={value}
             onChange={(e) => onChange(e.target.value)}
             onKeyDown={onKeyDown}
-            className="w-full px-4 py-2 text-lg border-none focus:outline-none"
+            className="w-full bg-transparent text-sm font-semibold border-none focus:outline-none text-gray-900 placeholder-gray-500 p-0 m-0 leading-tight"
             placeholder="여행지 검색"
         />
     );
