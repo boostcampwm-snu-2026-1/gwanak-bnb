@@ -1,4 +1,10 @@
 import { MinusIcon, PlusIcon } from './icons'
+import {
+  MAX_INFANTS,
+  MAX_PETS,
+  MAX_PRIMARY_GUESTS,
+  MIN_ADULTS_WITH_DEPENDENTS,
+} from '../constants/guestLimits.js'
 
 function GuestRow({
   label,
@@ -62,8 +68,10 @@ function GuestModal({ guests, onChangeGuestCount }) {
   const totalPrimaryGuests = guests.adults + guests.children
   const hasDependentGuests =
     guests.children > 0 || guests.infants > 0 || guests.pets > 0
-  const isAdultDecreaseDisabled = guests.adults <= (hasDependentGuests ? 1 : 0)
-  const isPrimaryIncreaseDisabled = totalPrimaryGuests >= 16
+  const isAdultDecreaseDisabled =
+    guests.adults <=
+    (hasDependentGuests ? MIN_ADULTS_WITH_DEPENDENTS : 0)
+  const isPrimaryIncreaseDisabled = totalPrimaryGuests >= MAX_PRIMARY_GUESTS
 
   return (
     <section className="-mt-1 px-5">
@@ -99,7 +107,7 @@ function GuestModal({ guests, onChangeGuestCount }) {
           onIncrease={() => onChangeGuestCount('infants', 1)}
           onDecrease={() => onChangeGuestCount('infants', -1)}
           isDecreaseDisabled={guests.infants === 0}
-          isIncreaseDisabled={guests.infants >= 5}
+          isIncreaseDisabled={guests.infants >= MAX_INFANTS}
         />
 
         <div className="h-px bg-zinc-100" />
@@ -111,7 +119,7 @@ function GuestModal({ guests, onChangeGuestCount }) {
           onIncrease={() => onChangeGuestCount('pets', 1)}
           onDecrease={() => onChangeGuestCount('pets', -1)}
           isDecreaseDisabled={guests.pets === 0}
-          isIncreaseDisabled={guests.pets >= 5}
+          isIncreaseDisabled={guests.pets >= MAX_PETS}
         />
       </div>
     </section>

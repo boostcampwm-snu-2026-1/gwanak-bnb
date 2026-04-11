@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import SearchBar from './components/SearchBar.jsx'
+import {
+  MAX_INFANTS,
+  MAX_PETS,
+  MAX_PRIMARY_GUESTS,
+  MIN_ADULTS_WITH_DEPENDENTS,
+} from './constants/guestLimits.js'
 
 function App() {
   const [activeTab, setActiveTab] = useState(null)
@@ -16,8 +22,8 @@ function App() {
   const totalGuests = guests.adults + guests.children
   const summaryText = useMemo(() => {
     const guestLabel =
-      totalGuests >= 16
-        ? '게스트 16명 이상'
+      totalGuests >= MAX_PRIMARY_GUESTS
+        ? `게스트 ${MAX_PRIMARY_GUESTS}명 이상`
         : totalGuests === 0
           ? '게스트 추가'
           : `게스트 ${totalGuests}명`
@@ -48,30 +54,34 @@ function App() {
       const totalPrimaryGuests = prev.adults + prev.children
 
       if (type === 'adults') {
-        if (delta > 0 && totalPrimaryGuests >= 16) {
+        if (delta > 0 && totalPrimaryGuests >= MAX_PRIMARY_GUESTS) {
           return prev
         }
 
         const hasDependentGuests =
           prev.children > 0 || prev.infants > 0 || prev.pets > 0
-        const minAdults = hasDependentGuests ? 1 : 0
+        const minAdults = hasDependentGuests ? MIN_ADULTS_WITH_DEPENDENTS : 0
         next.adults = Math.max(minAdults, prev.adults + delta)
         return next
       }
 
-      if (type === 'children' && delta > 0 && totalPrimaryGuests >= 16) {
+      if (
+        type === 'children' &&
+        delta > 0 &&
+        totalPrimaryGuests >= MAX_PRIMARY_GUESTS
+      ) {
         return prev
       }
 
       if (type === 'infants') {
         if (delta > 0) {
-          next.infants = Math.min(5, prev.infants + delta)
+          next.infants = Math.min(MAX_INFANTS, prev.infants + delta)
         } else {
           next.infants = Math.max(0, prev.infants + delta)
         }
       } else if (type === 'pets') {
         if (delta > 0) {
-          next.pets = Math.min(5, prev.pets + delta)
+          next.pets = Math.min(MAX_PETS, prev.pets + delta)
         } else {
           next.pets = Math.max(0, prev.pets + delta)
         }
@@ -82,8 +92,11 @@ function App() {
       const hasDependentGuests =
         next.children > 0 || next.infants > 0 || next.pets > 0
 
-      if (hasDependentGuests && next.adults === 0) {
-        next.adults = 1
+      if (
+        hasDependentGuests &&
+        next.adults < MIN_ADULTS_WITH_DEPENDENTS
+      ) {
+        next.adults = MIN_ADULTS_WITH_DEPENDENTS
       }
 
       return next
