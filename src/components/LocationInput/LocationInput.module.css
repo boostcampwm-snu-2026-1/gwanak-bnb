@@ -25,15 +25,3 @@
   color: #717171;
   white-space: nowrap;
 }
-
-.dropdown {
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 0;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
-  padding: 24px;
-  width: 400px;
-  z-index: 100;
-}

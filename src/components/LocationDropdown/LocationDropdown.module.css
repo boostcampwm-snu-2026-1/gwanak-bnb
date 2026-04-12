@@ -1,0 +1,19 @@
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  width: 400px;
+  z-index: 100;
+}
+
+.heading {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  display: block;
+  margin-bottom: 8px;
+}
