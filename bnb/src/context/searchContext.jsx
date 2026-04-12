@@ -23,17 +23,18 @@ export const SearchProvider = ({ children }) => {
 
     const hasGuest = (guest.counts.adults + guest.counts.children + guest.counts.infants + guest.counts.pets) > 0;
 
-    const showReset = isOpenGuest && hasGuest;
+    const showResetGuest = isOpenGuest && hasGuest;
 
     const value = {
         activeModal,
         setActiveModal,
         isOpen,
         isOpenGuest,
-        showReset,
+        showResetGuest,
         isOpenDate,
         isOpenDestination,
         onToggleGuest: toggleGuest,
+        onToggleDestination: toggleDestination,
         guest
     };
 

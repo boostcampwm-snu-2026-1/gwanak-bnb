@@ -22,9 +22,59 @@ button:hover {
   background-color: #eee;
 }
 
+.search h6 {
+  font-size: 12px;
+  margin: 0;
+  margin-left: 30px;
+}
+
+.search p {
+  font-size: 14px;
+  margin: 0;
+  margin-left: 30px;
+}
+
 .divider-right {
   height: 40px;
   background-color: #ccc;
   width: 1px;
   margin-left: auto;
+}
+
+.active-right { /* Guest active 시 */
+  border: 1px solid #bbb;
+  box-shadow: -4px 0px 8px #ddd;
+  background-color: white;
+}
+
+.active-left { /* Destination active 시 */
+  border: 1px solid #bbb;
+  box-shadow: 4px 0px 8px #ddd;
+  background-color: white;
+}
+
+.block {
+  display: none;
+}
+
+.delete-btn {
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.divider-bottom {
+  width: 100%;
+  background-color: #ccc;
+  height: 1px;
+  margin-top: auto;
+}
+
+.search-anchor {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }

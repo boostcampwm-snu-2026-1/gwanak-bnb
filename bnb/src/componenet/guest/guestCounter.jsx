@@ -1,4 +1,3 @@
-import '../common/global.css'
 import './guest.css'
 import CounterRow from './createCounterRow';
 import { useSearch } from '../../context/searchContext';
@@ -21,17 +20,17 @@ function GuestCounter() {
     };
 
     return (
-        isOpenGuest && (<div className='search-anchor'>
-            <div className='modal--number'>
-                {guestTypes.map((item, index) => (
-                    <CounterRow
-                        type={item}
-                        count={guest.counts[item.id]}
-                        update={update}
-                        isLast={index === guestTypes.length - 1}
-                    />
-                ))}
-            </div>
+        isOpenGuest && (
+        <div className='modal--number'>
+            {guestTypes.map((item, index) => (
+                <CounterRow
+                    key={item.id}
+                    type={item}
+                    count={guest.counts[item.id]}
+                    update={update}
+                    isLast={index === guestTypes.length - 1}
+                />
+            ))}
         </div>)
     )
 }

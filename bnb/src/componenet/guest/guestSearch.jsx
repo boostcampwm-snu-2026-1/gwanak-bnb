@@ -1,14 +1,13 @@
-import '../common/global.css'
 import './guest.css'
 import { useSearch } from '../../context/searchContext';
 
 function GuestSearch() {
-    const { isOpen, onToggleGuest, isOpenGuest, showReset, guest } = useSearch();
+    const { isOpen, onToggleGuest, isOpenGuest, showResetGuest, guest } = useSearch();
     
     return (
         <>
             <div 
-                className={`search ${isOpenGuest ? 'active' : ''}`}
+                className={`search ${isOpenGuest ? 'active-right' : ''}`}
                 onClick={onToggleGuest}
             >
                 <div>
@@ -16,7 +15,7 @@ function GuestSearch() {
                     <p>{guest.guestMessage}</p>
                 </div>
                 <form className='form-actions'>
-                    {showReset && (
+                    {showResetGuest && (
                         <button 
                             type='button' 
                             className='delete-btn'
