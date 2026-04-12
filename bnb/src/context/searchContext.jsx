@@ -6,8 +6,7 @@ const SearchContext = createContext();
 export const SearchProvider = ({ children }) => {
     const [activeModal, setActiveModal] = useState(null);
 
-    const guest = useGuestState();
-
+    // 모달창 관리 변수
     const isOpenGuest = activeModal === 'guest';
     const isOpenDate = activeModal === 'date';
     const isOpenDestination = activeModal === 'destination';
@@ -21,9 +20,15 @@ export const SearchProvider = ({ children }) => {
     const openModal = (type) => setActiveModal(type);
     const closeModal = () => setActiveModal(null);
 
+    // 여행자 관리 변수
+    const guest = useGuestState();
+
     const hasGuest = (guest.counts.adults + guest.counts.children + guest.counts.infants + guest.counts.pets) > 0;
 
     const showResetGuest = isOpenGuest && hasGuest;
+
+    // 여행지 관리 변수
+    const [searchTerm, setSearchTerm] = useState("");
 
     const value = {
         activeModal,
@@ -35,7 +40,9 @@ export const SearchProvider = ({ children }) => {
         isOpenDestination,
         onToggleGuest: toggleGuest,
         onToggleDestination: toggleDestination,
-        guest
+        guest,
+        searchTerm,
+        setSearchTerm
     };
 
     return (

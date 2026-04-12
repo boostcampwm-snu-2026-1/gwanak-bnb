@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 400px;
+    width: 500px;
     padding: 25px;
     border: 1px solid #bbb;
     position: absolute;
@@ -71,4 +71,16 @@
 
 .onhover::placeholder {
     font-size: 14px;
+}
+
+.color-blue {
+    color: blue;
+}
+
+.color-red {
+    color: red;
+}
+
+.color-green {
+    color: green;
 }
