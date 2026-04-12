@@ -32,3 +32,18 @@
 .search-field-value.placeholder {
   color: #717171;
 }
+
+.search-field-input {
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  color: #222;
+  padding: 0;
+}
+
+.search-field-input::placeholder {
+  color: #717171;
+}
