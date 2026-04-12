@@ -15,8 +15,11 @@ export default function LocationModal({ locations, selectedIndex }: LocationModa
                         key={item.id}
                         className={`px-4 py-3 cursor-pointer hover:bg-gray-100 ${index === selectedIndex ? "bg-gray-100" : ""}`}
                     >
-                        <span className="font-semibold">{item.display_name}</span>
-                        <span className="text-sm text-gray-500 ml-2">{item.sub_title}</span>
+                        <span className="text-2xl">📍</span>
+                        <div>
+                            <span className="font-semibold">{item.display_name}</span>
+                            <span className="text-sm text-gray-500 ml-2">{item.sub_title}</span>
+                        </div>
                     </li>
                 ))}
             </ul>
