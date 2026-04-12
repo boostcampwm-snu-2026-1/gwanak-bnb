@@ -8,8 +8,18 @@ function App() {
   const [children, setChildren] = useState(0)
   const [infants, setInfants] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [searchState, setSearchState] = useState({
+    query: '',
+    isOpen: false,
+    selectedIndex: -1
+  });
+
+  const updateSearchState = (updates) => {
+    setSearchState(prev => ({ ...prev, ...updates }));
+  };
+
   return (
-    <main className = "app-container">
+    <main className="app-container">
       <section id="header">
         <SearchBar 
           adults={adults} 
@@ -17,8 +27,12 @@ function App() {
           infants={infants}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          
+          searchState={searchState}
+          updateSearchState={updateSearchState}
         />
       </section>
+      
       {isModalOpen && (
         <TravelerModal
           adults={adults} setAdults={setAdults}
@@ -26,6 +40,7 @@ function App() {
           infants={infants} setInfants={setInfants}
         />
       )}
+      
       <div className="content-placeholder">
         <p>인원 선택을 완료하고 멋진 숙소를 찾아보세요</p>
       </div>
