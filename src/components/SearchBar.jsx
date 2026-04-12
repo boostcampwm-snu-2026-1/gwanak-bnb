@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import GuestPopup from './GuestPopup'
 import DestinationPopup from './DestinationPopup'
 import './SearchBar.css'
@@ -7,14 +7,15 @@ const recommendedDestinations = [
   { id: 1, label: '여수', description: '전라남도 · 대한민국' },
   { id: 2, label: '부산', description: '대한민국의 대표 해안 도시' },
   { id: 3, label: '도쿄', description: '일본 · 대도시 여행지' },
+  { id: 4, label: '강릉', description: '강원도 · 바다 여행지' },
+  { id: 5, label: '속초', description: '강원도 · 해변과 산' },
 ]
-
-
 
 export default function SearchBar() {
   const [openPanel, setOpenPanel] = useState(null)
   // 'destination' | 'date' | 'guest' | null
 
+  const [searchKeyword, setSearchKeyword] = useState('')
   const [destinationInput, setDestinationInput] = useState('')
   const [destinationResults, setDestinationResults] = useState([])
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
@@ -30,7 +31,7 @@ export default function SearchBar() {
     pets: 0,
   })
 
-  const destinationItems = destinationInput.trim() === '' ? recommendedDestinations : destinationResults
+  const searchBarRef = useRef(null)
 
   const handleIncrease = (type) => {
     setGuests((prev) => ({
@@ -46,17 +47,91 @@ export default function SearchBar() {
     }))
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchBarRef.current &&
+        !searchBarRef.current.contains(event.target)
+      ) {
+        setOpenPanel(null)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
   const guestCount = guests.adults + guests.children
   const guestSummary = guestCount === 0 ? '게스트 추가' : `게스트 ${guestCount}명`
 
+  const filteredDestinations = recommendedDestinations.filter((item) =>
+    item.label.toLowerCase().includes(searchKeyword.trim().toLowerCase())
+  )
+
+  const destinationItems =
+    searchKeyword.trim() === '' ? recommendedDestinations : filteredDestinations
+
+  const handleSelectDestination = (item) => {
+    setSelectedDestination(item)
+    setDestinationInput(item.label)
+    setSearchKeyword(item.label)
+    setHighlightedIndex(-1)
+    setOpenPanel(null)
+  }
+
+  const handleDestinationKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      setOpenPanel(null)
+      return
+    }
+
+    if (destinationItems.length === 0) {
+      return
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+
+      const nextIndex =
+        highlightedIndex === destinationItems.length - 1
+          ? 0
+          : highlightedIndex + 1
+
+      setHighlightedIndex(nextIndex)
+      setDestinationInput(destinationItems[nextIndex].label)
+      return
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault()
+
+      const nextIndex =
+        highlightedIndex <= 0
+          ? destinationItems.length - 1
+          : highlightedIndex - 1
+
+      setHighlightedIndex(nextIndex)
+      setDestinationInput(destinationItems[nextIndex].label)
+      return
+    }
+
+    if (e.key === 'Enter') {
+      if (highlightedIndex >= 0) {
+        e.preventDefault()
+        handleSelectDestination(destinationItems[highlightedIndex])
+      }
+    }
+  }
+
   return (
-    <section className="search-bar">
+    <section className="search-bar" ref={searchBarRef}>
       <div className="destination-wrapper">
         <div
           className="search-bar__section"
-          onClick={() =>
-            setOpenPanel((prev) => (prev === 'destination' ? null : 'destination'))
-          }
+          onClick={() => setOpenPanel('destination')}
         >
           <p className="search-bar__label">여행지</p>
           <input
@@ -66,10 +141,14 @@ export default function SearchBar() {
             value={destinationInput}
             onClick={() => setOpenPanel('destination')}
             onChange={(e) => {
-              setDestinationInput(e.target.value)
-              setOpenPanel('destination')
+              const value = e.target.value
+              setDestinationInput(value)
+              setSearchKeyword(value)
+              setSelectedDestination(null)
               setHighlightedIndex(-1)
+              setOpenPanel('destination')
             }}
+            onKeyDown={handleDestinationKeyDown}
           />
         </div>
 
@@ -78,13 +157,9 @@ export default function SearchBar() {
             items={destinationItems}
             query={destinationInput}
             highlightedIndex={highlightedIndex}
-            isLoading={isLoading}
-            error={error}
-            onSelect={(item) => {
-              setSelectedDestination(item)
-              setDestinationInput(item.label)
-              setOpenPanel(null)
-            }}
+            isLoading={false}
+            error={null}
+            onSelect={handleSelectDestination}
           />
         )}
       </div>
