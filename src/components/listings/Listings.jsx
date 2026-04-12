@@ -1,5 +1,5 @@
 import ListingCard from './ListingCard';
-import './Listings.css';
+import styles from './Listings.module.css';
 
 const SAMPLE_LISTINGS = [
   { id: 1, title: '서울 관악구의 아늑한 한옥', distance: '3km 거리', date: '4월 10일~15일', price: 85000, rating: 4.92, image: 'https://picsum.photos/seed/gwanak1/400/380' },
@@ -14,8 +14,8 @@ const SAMPLE_LISTINGS = [
 
 export default function Listings() {
   return (
-    <div className="listings">
-      <div className="listings-grid">
+    <div className={styles.wrapper}>
+      <div className={styles.grid}>
         {SAMPLE_LISTINGS.map(listing => (
           <ListingCard key={listing.id} listing={listing} />
         ))}

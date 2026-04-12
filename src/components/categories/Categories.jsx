@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Categories.css';
+import styles from './Categories.module.css';
 
 const CATEGORIES = [
   { label: '한옥', icon: '🏠' },
@@ -20,16 +20,16 @@ export default function Categories() {
   const [active, setActive] = useState(0);
 
   return (
-    <div className="categories">
-      <div className="categories-scroll">
+    <div className={styles.wrapper}>
+      <div className={styles.scroll}>
         {CATEGORIES.map(({ label, icon }, i) => (
           <button
             key={label}
-            className={`category-item ${i === active ? 'active' : ''}`}
+            className={`${styles.item} ${i === active ? styles.active : ''}`}
             onClick={() => setActive(i)}
           >
-            <span className="category-icon">{icon}</span>
-            <span className="category-label">{label}</span>
+            <span className={styles.icon}>{icon}</span>
+            <span className={styles.label}>{label}</span>
           </button>
         ))}
       </div>

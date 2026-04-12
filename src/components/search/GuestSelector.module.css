@@ -1,0 +1,49 @@
+.selector {
+  composes: dropdown from '../../styles/common.module.css';
+  right: 0;
+  width: 320px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+
+.row:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.type {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.desc {
+  font-size: 14px;
+  color: var(--color-muted);
+  margin-top: 2px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn {
+  composes: counterBtn from '../../styles/common.module.css';
+}
+
+.count {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
