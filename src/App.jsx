@@ -6,9 +6,20 @@ import {
   MAX_PRIMARY_GUESTS,
   MIN_ADULTS_WITH_DEPENDENTS,
 } from './constants/guestLimits.js'
+import {
+  compareDays,
+  formatDayLabel,
+} from './utils/date.js'
 
 function App() {
   const [activeTab, setActiveTab] = useState(null)
+  const [dateModalTab, setDateModalTab] = useState('exact')
+  const [checkInDate, setCheckInDate] = useState(null)
+  const [checkOutDate, setCheckOutDate] = useState(null)
+  const [checkInFlexibility, setCheckInFlexibility] = useState('정확한 날짜')
+  const [checkOutFlexibility, setCheckOutFlexibility] = useState('정확한 날짜')
+  const [flexibleStay, setFlexibleStay] = useState(null)
+  const [flexibleMonths, setFlexibleMonths] = useState([])
 
   const [guests, setGuests] = useState({
     adults: 0,
@@ -20,7 +31,16 @@ function App() {
   const searchAreaRef = useRef(null)
 
   const totalGuests = guests.adults + guests.children
-  const summaryText = useMemo(() => {
+  const hasGuestValue =
+    guests.adults > 0 ||
+    guests.children > 0 ||
+    guests.infants > 0 ||
+    guests.pets > 0
+  const hasExactDateValue = checkInDate !== null || checkOutDate !== null
+  const hasFlexibleDateValue = flexibleStay !== null
+  const hasDateValue =
+    dateModalTab === 'flexible' ? hasFlexibleDateValue : hasExactDateValue
+  const guestSummaryText = useMemo(() => {
     const guestLabel =
       totalGuests >= MAX_PRIMARY_GUESTS
         ? `게스트 ${MAX_PRIMARY_GUESTS}명 이상`
@@ -43,9 +63,117 @@ function App() {
 
     return `${guestLabel} · ${extraLabels.join(' · ')}`
   }, [guests.infants, guests.pets, totalGuests])
+  const dateSummaryText = useMemo(() => {
+    const formatDateSummary = (date, flexibility) => {
+      const formattedDate = formatDayLabel(date)
+
+      if (flexibility === '정확한 날짜') {
+        return formattedDate
+      }
+
+      return `${formattedDate} (${flexibility})`
+    }
+    const formatFlexibleSummary = () => {
+      if (!flexibleStay) {
+        return '언제든지'
+      }
+
+      if (flexibleMonths.length === 0) {
+        return `언제든 ${flexibleStay}`
+      }
+
+      const sortedMonthLabels = [...flexibleMonths]
+        .sort((firstMonth, secondMonth) => firstMonth.getTime() - secondMonth.getTime())
+        .map((monthDate) => `${monthDate.getMonth() + 1}월`)
+      const visibleMonthLabels =
+        sortedMonthLabels.length <= 4
+          ? sortedMonthLabels.join(', ')
+          : `${sortedMonthLabels.slice(0, 4).join(', ')}...`
+
+      return `${visibleMonthLabels}의 ${flexibleStay}`
+    }
+
+    if (dateModalTab === 'flexible') {
+      return formatFlexibleSummary()
+    }
+
+    if (checkInDate && checkOutDate) {
+      return `${formatDateSummary(checkInDate, checkInFlexibility)} - ${formatDateSummary(checkOutDate, checkOutFlexibility)}`
+    }
+
+    if (checkInDate) {
+      return formatDateSummary(checkInDate, checkInFlexibility)
+    }
+
+    return '날짜 추가'
+  }, [
+    checkInDate,
+    checkInFlexibility,
+    checkOutDate,
+    checkOutFlexibility,
+    flexibleMonths,
+    flexibleStay,
+    dateModalTab,
+  ])
 
   const handleSelectTab = (tab) => {
     setActiveTab((prev) => (prev === tab ? null : tab))
+  }
+
+  const handleSelectExactDate = (date) => {
+    if (!checkInDate || checkOutDate) {
+      setCheckInDate(date)
+      setCheckOutDate(null)
+      return
+    }
+
+    const comparison = compareDays(date, checkInDate)
+
+    if (comparison < 0) {
+      setCheckInDate(date)
+      return
+    }
+
+    if (comparison === 0) {
+      setCheckOutDate(null)
+      return
+    }
+
+    setCheckOutDate(date)
+  }
+
+  const handleCheckInFlexibilityChange = (option) => {
+    setCheckInFlexibility(option)
+  }
+
+  const handleCheckOutFlexibilityChange = (option) => {
+    setCheckOutFlexibility(option)
+  }
+
+  const handleFlexibleStayChange = (option) => {
+    setFlexibleStay(option)
+  }
+
+  const handleFlexibleMonthChange = (month) => {
+    setFlexibleMonths((previousMonths) => {
+      const hasMonth = previousMonths.some(
+        (selectedMonth) =>
+          selectedMonth.getFullYear() === month.getFullYear() &&
+          selectedMonth.getMonth() === month.getMonth(),
+      )
+
+      if (hasMonth) {
+        return previousMonths.filter(
+          (selectedMonth) =>
+            !(
+              selectedMonth.getFullYear() === month.getFullYear() &&
+              selectedMonth.getMonth() === month.getMonth()
+            ),
+        )
+      }
+
+      return [...previousMonths, month]
+    })
   }
 
   const handleGuestCountChange = (type, delta) => {
@@ -128,6 +256,31 @@ function App() {
     }
   }, [])
 
+  const dateSelection = {
+    modalTab: dateModalTab,
+    hasValue: hasDateValue,
+    summaryText: dateSummaryText,
+    checkInDate,
+    checkOutDate,
+    checkInFlexibility,
+    checkOutFlexibility,
+    flexibleStay,
+    flexibleMonths,
+  }
+  const dateActions = {
+    onChangeModalTab: setDateModalTab,
+    onSelectExactDate: handleSelectExactDate,
+    onChangeCheckInFlexibility: handleCheckInFlexibilityChange,
+    onChangeCheckOutFlexibility: handleCheckOutFlexibilityChange,
+    onChangeFlexibleStay: handleFlexibleStayChange,
+    onChangeFlexibleMonth: handleFlexibleMonthChange,
+  }
+  const guestSelection = {
+    guests,
+    hasValue: hasGuestValue,
+    summaryText: guestSummaryText,
+  }
+
   return (
     <main className="min-h-screen bg-[#f7f7f7] px-4 py-10 sm:px-8">
       <section className="mx-auto w-full max-w-5xl">
@@ -144,9 +297,10 @@ function App() {
             <div ref={searchAreaRef} className="min-w-[720px]">
               <SearchBar
                 activeTab={activeTab}
-                summaryText={summaryText}
+                dateSelection={dateSelection}
+                dateActions={dateActions}
+                guestSelection={guestSelection}
                 onSelectTab={handleSelectTab}
-                guests={guests}
                 onChangeGuestCount={handleGuestCountChange}
               />
             </div>

@@ -1,20 +1,24 @@
 import DestinationSelector from './DestinationSelector.jsx'
 import DateSelector from './DateSelector.jsx'
+import DateModal from './DateModal.jsx'
 import GuestSelector from './GuestSelector.jsx'
 import GuestModal from './GuestModal.jsx'
 import { SearchIcon } from './icons'
 
 function SearchBar({
   activeTab,
-  summaryText,
+  dateSelection,
+  dateActions,
+  guestSelection,
   onSelectTab,
-  guests,
   onChangeGuestCount,
 }) {
   return (
-    <section className="rounded-full border border-zinc-200/80 bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+    <section className="relative rounded-full border border-zinc-200/80 bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
       <div className="grid grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto_minmax(0,1fr)_auto] items-center">
         <DestinationSelector
+          summaryText="여행지 검색"
+          hasValue={false}
           isSelected={activeTab === 'destination'}
           onSelect={() => onSelectTab('destination')}
         />
@@ -22,6 +26,8 @@ function SearchBar({
         <div className="h-8 w-px bg-zinc-200" />
 
         <DateSelector
+          summaryText={dateSelection.summaryText}
+          hasValue={dateSelection.hasValue}
           isSelected={activeTab === 'date'}
           onSelect={() => onSelectTab('date')}
         />
@@ -30,7 +36,8 @@ function SearchBar({
 
         <div className="relative">
           <GuestSelector
-            summaryText={summaryText}
+            summaryText={guestSelection.summaryText}
+            hasValue={guestSelection.hasValue}
             isSelected={activeTab === 'guests'}
             onSelect={() => onSelectTab('guests')}
           />
@@ -38,7 +45,7 @@ function SearchBar({
           {activeTab === 'guests' ? (
             <div className="absolute right-0 top-full z-30 mt-3">
               <GuestModal
-                guests={guests}
+                guests={guestSelection.guests}
                 onChangeGuestCount={onChangeGuestCount}
               />
             </div>
@@ -53,6 +60,12 @@ function SearchBar({
           <SearchIcon />
         </button>
       </div>
+
+      {activeTab === 'date' ? (
+        <div className="absolute left-1/2 top-full z-30 mt-4 w-[880px] max-w-[calc(100vw-2rem)] -translate-x-1/2">
+          <DateModal {...dateSelection} {...dateActions} />
+        </div>
+      ) : null}
     </section>
   )
 }
