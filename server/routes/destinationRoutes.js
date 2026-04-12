@@ -62,4 +62,16 @@ router.get("/autocomplete", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const results = await Destination.find()
+      .sort({ popularity: -1 })
+      .limit(10);
+
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ message: "데이터 불러오기 실패" });
+  }
+});
+
 export default router;
