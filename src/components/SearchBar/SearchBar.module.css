@@ -64,6 +64,57 @@
   text-overflow: ellipsis;
 }
 
+.destinationFieldActive {
+  background: #fff;
+  border-radius: 999px;
+  margin: 6px;
+}
+
+.destinationInputRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.destinationInput {
+  border: 0;
+  background: transparent;
+  min-width: 0;
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  font-size: 30px;
+  font-size: clamp(14px, 1.2vw, 30px);
+  color: #222;
+}
+
+.destinationInput::placeholder {
+  color: #6a6a6a;
+}
+
+.destinationInput:focus {
+  outline: none;
+}
+
+.clearButton {
+  border: 0;
+  background: transparent;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #3e3e3e;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.clearButton:hover {
+  background: #ececec;
+}
+
 .guestField {
   background: #fff;
   border-radius: 999px;
@@ -87,6 +138,144 @@
   font-size: clamp(16px, 1vw, 28px);
   line-height: 50px;
   text-align: center;
+}
+
+.destinationDropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  width: min(640px, 100%);
+  background: #fff;
+  border-radius: 32px;
+  padding: 34px 24px 24px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+  z-index: 20;
+}
+
+.dropdownTitle {
+  margin: 0 0 16px 12px;
+  font-size: 30px;
+  font-size: clamp(18px, 1.3vw, 30px);
+  font-weight: 700;
+  color: #222;
+}
+
+.suggestionList {
+  margin: 0;
+  padding: 0 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 460px;
+  overflow-y: auto;
+}
+
+.suggestionList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.suggestionList::-webkit-scrollbar-thumb {
+  background: #d2d2d2;
+  border-radius: 999px;
+}
+
+.suggestionItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 10px;
+  border-radius: 18px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.suggestionItem:hover {
+  background: #f1f1f1;
+}
+
+.suggestionItemHighlighted {
+  background: #efefef;
+}
+
+.suggestionItem:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: -2px;
+}
+
+.suggestionIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
+.toneblue {
+  background: #dbeafe;
+}
+
+.tonesand {
+  background: #f1efe7;
+}
+
+.tonecoral {
+  background: #ffe9e4;
+}
+
+.toneorange {
+  background: #fff0e1;
+}
+
+.tonerose {
+  background: #fff0ef;
+}
+
+.tonegreen {
+  background: #e4f3e7;
+}
+
+.tonegold {
+  background: #f7f2e7;
+}
+
+.toneNeutral {
+  background: #efefef;
+}
+
+.suggestionText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.suggestionTitle {
+  font-size: 32px;
+  font-size: clamp(18px, 1.3vw, 32px);
+  line-height: 1.3;
+  color: #222;
+}
+
+.suggestionSubtitle {
+  font-size: 32px;
+  font-size: clamp(16px, 1.2vw, 32px);
+  color: #6a6a6a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emptyResult {
+  padding: 16px 12px;
+  font-size: 15px;
+  color: #6a6a6a;
+  line-height: 1.5;
 }
 
 @media (max-width: 1024px) {
@@ -116,5 +305,36 @@
   .guestField {
     margin: 0;
     padding-right: 118px;
+  }
+
+  .destinationFieldActive {
+    margin: 0;
+  }
+
+  .destinationInput {
+    font-size: 16px;
+  }
+
+  .destinationDropdown {
+    position: static;
+    margin-top: 12px;
+    width: 100%;
+    border-radius: 24px;
+    padding: 20px 12px 16px;
+  }
+
+  .dropdownTitle {
+    margin-left: 8px;
+  }
+
+  .suggestionList {
+    max-height: 360px;
+    padding: 0 4px;
+  }
+
+  .suggestionIcon {
+    width: 54px;
+    height: 54px;
+    font-size: 24px;
   }
 }
