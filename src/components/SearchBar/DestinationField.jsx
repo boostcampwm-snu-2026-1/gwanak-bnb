@@ -1,7 +1,15 @@
 import { useRef } from 'react'
 import styles from './SearchBar.module.css'
 
-function DestinationField({ isActive, value, onActivate, onChange, onClear }) {
+function DestinationField({
+  isActive,
+  value,
+  activeOptionId,
+  onActivate,
+  onChange,
+  onClear,
+  onKeyDown,
+}) {
   const inputRef = useRef(null)
 
   const handleContainerClick = () => {
@@ -34,9 +42,15 @@ function DestinationField({ isActive, value, onActivate, onChange, onClear }) {
           className={styles.destinationInput}
           value={value}
           onChange={(event) => onChange(event.target.value)}
+          onKeyDown={onKeyDown}
           onFocus={onActivate}
           placeholder="여행지 검색"
           aria-label="여행지 검색어 입력"
+          role="combobox"
+          aria-expanded={isActive}
+          aria-controls="destination-dropdown-list"
+          aria-autocomplete="list"
+          aria-activedescendant={activeOptionId}
         />
         {value && (
           <button

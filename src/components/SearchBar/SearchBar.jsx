@@ -31,10 +31,12 @@ function getGuestSummary({ adults, children, infants, pets }) {
 function SearchBar({ guestCounts, setGuestCounts }) {
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
   const [isDestinationOpen, setIsDestinationOpen] = useState(false)
+  const [destinationQuery, setDestinationQuery] = useState('')
   const [destinationInput, setDestinationInput] = useState('')
+  const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const containerRef = useRef(null)
   const guestSummary = getGuestSummary(guestCounts)
-  const trimmedInput = destinationInput.trim()
+  const trimmedInput = destinationQuery.trim()
   const destinationMode = trimmedInput ? 'search' : 'recommended'
 
   const filteredDestinations = useMemo(() => {
@@ -48,6 +50,11 @@ function SearchBar({ guestCounts, setGuestCounts }) {
       return haystack.includes(normalizedQuery)
     })
   }, [destinationMode, trimmedInput])
+
+  const activeOptionId =
+    isDestinationOpen && highlightedIndex >= 0
+      ? `destination-option-${highlightedIndex}`
+      : undefined
 
   const adjustCount = (key, delta) => {
     setGuestCounts((prev) => {
@@ -102,22 +109,29 @@ function SearchBar({ guestCounts, setGuestCounts }) {
 
   const handleDestinationFieldActivate = () => {
     setIsGuestModalOpen(false)
+    setHighlightedIndex(-1)
     setIsDestinationOpen(true)
   }
 
   const handleDestinationInputChange = (nextInput) => {
+    setDestinationQuery(nextInput)
     setDestinationInput(nextInput)
+    setHighlightedIndex(-1)
     setIsGuestModalOpen(false)
     setIsDestinationOpen(true)
   }
 
   const handleDestinationInputClear = () => {
+    setDestinationQuery('')
     setDestinationInput('')
+    setHighlightedIndex(-1)
     setIsDestinationOpen(true)
   }
 
   const handleDestinationSelect = (destinationTitle) => {
+    setDestinationQuery(destinationTitle)
     setDestinationInput(destinationTitle)
+    setHighlightedIndex(-1)
     setIsDestinationOpen(false)
   }
 
@@ -126,15 +140,49 @@ function SearchBar({ guestCounts, setGuestCounts }) {
     setIsGuestModalOpen((prev) => !prev)
   }
 
+  const handleDestinationInputKeyDown = (event) => {
+    if (!isDestinationOpen && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+      setIsDestinationOpen(true)
+    }
+
+    if (filteredDestinations.length === 0) {
+      return
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
+      const nextIndex = (highlightedIndex + 1 + filteredDestinations.length) % filteredDestinations.length
+      setHighlightedIndex(nextIndex)
+      setDestinationInput(filteredDestinations[nextIndex].title)
+      return
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault()
+      const nextIndex = (highlightedIndex - 1 + filteredDestinations.length) % filteredDestinations.length
+      setHighlightedIndex(nextIndex)
+      setDestinationInput(filteredDestinations[nextIndex].title)
+      return
+    }
+
+    if (event.key === 'Enter' && highlightedIndex >= 0) {
+      event.preventDefault()
+      const destination = filteredDestinations[highlightedIndex]
+      handleDestinationSelect(destination.title)
+    }
+  }
+
   return (
     <section className={styles.searchSection}>
       <div className={styles.searchContainer} ref={containerRef}>
         <SearchFields
           isDestinationOpen={isDestinationOpen}
           destinationInput={destinationInput}
+          activeOptionId={activeOptionId}
           onDestinationFieldActivate={handleDestinationFieldActivate}
           onDestinationInputChange={handleDestinationInputChange}
           onDestinationInputClear={handleDestinationInputClear}
+          onDestinationInputKeyDown={handleDestinationInputKeyDown}
           guestSummary={guestSummary}
           isGuestModalOpen={isGuestModalOpen}
           onGuestFieldToggle={handleGuestFieldToggle}
@@ -144,6 +192,8 @@ function SearchBar({ guestCounts, setGuestCounts }) {
           <DestinationDropdown
             mode={destinationMode}
             destinations={filteredDestinations}
+            highlightedIndex={highlightedIndex}
+            onHighlight={setHighlightedIndex}
             onSelectDestination={handleDestinationSelect}
           />
         )}

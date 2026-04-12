@@ -6,9 +6,11 @@ import styles from './SearchBar.module.css'
 function SearchFields({
   isDestinationOpen,
   destinationInput,
+  activeOptionId,
   onDestinationFieldActivate,
   onDestinationInputChange,
   onDestinationInputClear,
+  onDestinationInputKeyDown,
   guestSummary,
   isGuestModalOpen,
   onGuestFieldToggle,
@@ -18,9 +20,11 @@ function SearchFields({
       <DestinationField
         isActive={isDestinationOpen}
         value={destinationInput}
+        activeOptionId={activeOptionId}
         onActivate={onDestinationFieldActivate}
         onChange={onDestinationInputChange}
         onClear={onDestinationInputClear}
+        onKeyDown={onDestinationInputKeyDown}
       />
       <DateField />
       <GuestField

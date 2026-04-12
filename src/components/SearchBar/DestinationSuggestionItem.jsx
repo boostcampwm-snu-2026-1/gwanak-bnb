@@ -1,9 +1,17 @@
 import styles from './SearchBar.module.css'
 
-function DestinationSuggestionItem({ destination, mode, onSelect }) {
+function DestinationSuggestionItem({ destination, mode, isHighlighted, optionId, onMouseEnter, onSelect }) {
   return (
     <li>
-      <button type="button" className={styles.suggestionItem} onClick={() => onSelect(destination.title)}>
+      <button
+        type="button"
+        id={optionId}
+        role="option"
+        aria-selected={isHighlighted}
+        className={`${styles.suggestionItem} ${isHighlighted ? styles.suggestionItemHighlighted : ''}`}
+        onMouseEnter={onMouseEnter}
+        onClick={() => onSelect(destination.title)}
+      >
         <span
           className={`${styles.suggestionIcon} ${
             mode === 'recommended' ? styles[`tone${destination.tone}`] : styles.toneNeutral
