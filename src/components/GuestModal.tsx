@@ -4,10 +4,10 @@ import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 
 
-type GuestCounterProps = {
+interface GuestCounterProps {
     name: string;
     description: string;
-};
+}
 
 function GuestCounter({name, description}:GuestCounterProps) {
     const [count, setCount] = useState(0);
