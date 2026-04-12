@@ -17,23 +17,10 @@ function DestinationField({
     inputRef.current?.focus()
   }
 
-  const handleContainerKeyDown = (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      handleContainerClick()
-    }
-  }
-
   return (
     <div
       className={`${styles.field} ${isActive ? styles.destinationFieldActive : ''}`}
       onClick={handleContainerClick}
-      onKeyDown={handleContainerKeyDown}
-      role="button"
-      tabIndex={0}
-      aria-expanded={isActive}
-      aria-controls="destination-dropdown"
-      aria-haspopup="listbox"
     >
       <span className={styles.label}>여행지</span>
       <div className={styles.destinationInputRow}>

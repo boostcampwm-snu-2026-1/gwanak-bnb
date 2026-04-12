@@ -171,6 +171,15 @@
   overflow-y: auto;
 }
 
+.suggestionList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.suggestionList::-webkit-scrollbar-thumb {
+  background: #d2d2d2;
+  border-radius: 999px;
+}
+
 .suggestionItem {
   display: flex;
   align-items: center;
@@ -266,6 +275,7 @@
   padding: 16px 12px;
   font-size: 15px;
   color: #6a6a6a;
+  line-height: 1.5;
 }
 
 @media (max-width: 1024px) {

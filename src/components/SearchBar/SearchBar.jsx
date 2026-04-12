@@ -75,6 +75,7 @@ function SearchBar({ guestCounts, setGuestCounts }) {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
         setIsGuestModalOpen(false)
         setIsDestinationOpen(false)
+        setHighlightedIndex(-1)
       }
     }
 
@@ -82,6 +83,7 @@ function SearchBar({ guestCounts, setGuestCounts }) {
       if (event.key === 'Escape') {
         setIsGuestModalOpen(false)
         setIsDestinationOpen(false)
+        setHighlightedIndex(-1)
       }
     }
 
@@ -133,6 +135,11 @@ function SearchBar({ guestCounts, setGuestCounts }) {
     setDestinationInput(destinationTitle)
     setHighlightedIndex(-1)
     setIsDestinationOpen(false)
+  }
+
+  const handleDestinationHighlight = (index) => {
+    setHighlightedIndex(index)
+    setDestinationInput(filteredDestinations[index].title)
   }
 
   const handleGuestFieldToggle = () => {
@@ -193,7 +200,7 @@ function SearchBar({ guestCounts, setGuestCounts }) {
             mode={destinationMode}
             destinations={filteredDestinations}
             highlightedIndex={highlightedIndex}
-            onHighlight={setHighlightedIndex}
+            onHighlight={handleDestinationHighlight}
             onSelectDestination={handleDestinationSelect}
           />
         )}
