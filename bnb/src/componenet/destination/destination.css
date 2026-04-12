@@ -57,3 +57,18 @@
     margin-left: 10px;
     margin-bottom: 10px;
 }
+
+.input-dest {
+    margin-left: 30px;
+    border: none;
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.search:hover .onhover {
+    background-color: #eee;
+}
+
+.onhover::placeholder {
+    font-size: 14px;
+}

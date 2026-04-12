@@ -6,6 +6,11 @@ button:hover {
     cursor: pointer;
 }
 
+input {
+  border: none;
+  outline: none;
+}
+
 .search {
   width: 300px;
   height: 70px;
