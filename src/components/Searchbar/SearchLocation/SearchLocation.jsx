@@ -28,13 +28,8 @@ function SearchLocation() {
   }
 
   return (
-    <div ref={containerRef} className="relative">
-      <button
-        className="text-sm font-semibold px-4 border-r"
-        onClick={() => setIsOpen(true)}
-      >
-        여행지
-      </button>
+    <div ref={containerRef} className="relative flex flex-col px-6 py-2 rounded-full hover:bg-gray-100 cursor-pointer">
+      <span className="text-xs font-semibold">여행지</span>
       <input
         type="text"
         value={keyword}
@@ -45,7 +40,7 @@ function SearchLocation() {
         onKeyDown={handleKeyDown}
         onFocus={() => setIsOpen(true)}
         placeholder="여행지 검색"
-        className="text-sm text-gray-400 outline-none"
+        className="text-sm text-gray-400 outline-none bg-transparent cursor-pointer"
       />
       {isOpen && (
         <LocationDropdown

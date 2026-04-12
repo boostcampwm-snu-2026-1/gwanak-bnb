@@ -33,9 +33,12 @@ function SearchGuest() {
     <div ref={modalRef} className="relative">
       <button
         onClick={() => setIsModalOpen(!isModalOpen)}
-        className="text-sm font-semibold px-4 text-gray-400 cursor-pointer"
+        className="flex flex-col px-6 py-2 rounded-full hover:bg-gray-100 text-left"
       >
-        {totalGuests > 0 ? `여행자 ${totalGuests}명` : "여행자 추가"}
+        <span className="text-xs font-semibold">여행자</span>
+        <span className="text-sm text-gray-400">
+          {totalGuests > 0 ? `게스트 ${totalGuests}명` : "게스트 추가"}
+        </span>
       </button>
       {isModalOpen && (
         <GuestModal
