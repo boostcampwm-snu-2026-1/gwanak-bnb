@@ -15,7 +15,7 @@ export default function LocationModal({ locations, selectedIndex }: LocationModa
                 {locations.slice(0, 5).map((item, index) => (
                     <li
                         key={item.id}
-                        className={`px-4 py-3 cursor-pointer hover:bg-gray-100 ${index === selectedIndex ? "bg-gray-100" : ""}`}
+                        className={`flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-100 ${index === selectedIndex ? "bg-gray-100" : ""}`}
                     >
                         <div className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full flex-shrink-0">
                             <MapPin size={18} className="text-gray-600" />

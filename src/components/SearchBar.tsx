@@ -62,8 +62,9 @@ export default function SearchBar() {
                 }}>게스트 추가</button>
                 {openModal === "guest" && <GuestModal />}
             </div>
-            <button type="button" className="bg-pink-500 hover:bg-pink-600 text-white rounded-full p-3 ml-2">
+            <button type="button" className="bg-pink-500 hover:bg-pink-600 text-white rounded-full p-3 ml-2 flex items-center gap-2">
                 <Search size={20} />
+                {openModal && <span className="text-white text-sm font-semibold pr-2">검색</span>}
             </button>
         </div>
     )
