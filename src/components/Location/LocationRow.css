@@ -1,0 +1,46 @@
+.location-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.15s;
+}
+
+.location-row:hover {
+  background-color: #f7f7f7;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.location-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  flex-shrink: 0;
+  color: #555;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.location-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+.location-description {
+  font-size: 13px;
+  color: #717171;
+}
