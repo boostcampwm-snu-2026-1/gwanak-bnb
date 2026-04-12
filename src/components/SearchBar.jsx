@@ -1,26 +1,46 @@
+import { useMemo } from 'react'
 import DestinationSelector from './DestinationSelector.jsx'
+import DestinationModal from './DestinationModal.jsx'
 import DateSelector from './DateSelector.jsx'
+import DateModal from './DateModal.jsx'
 import GuestSelector from './GuestSelector.jsx'
 import GuestModal from './GuestModal.jsx'
+import destinations from '../data/destinations.js'
+import { filterDestinations } from '../utils/filterDestinations.js'
+import { SearchIcon } from './icons'
 
 function SearchBar({
   activeTab,
-  summaryText,
+  destinationSelection,
+  destinationActions,
+  dateSelection,
+  dateActions,
+  guestSelection,
+  onOpenTab,
   onSelectTab,
-  guests,
-  onChangeGuestCount,
 }) {
+  const filteredDestinations = useMemo(
+    () => filterDestinations(destinationSelection.query, destinations),
+    [destinationSelection.query],
+  )
+
   return (
-    <section className="rounded-full border border-zinc-200/80 bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+    <section className="relative rounded-full border border-zinc-200/80 bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
       <div className="grid grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto_minmax(0,1fr)_auto] items-center">
         <DestinationSelector
+          query={destinationSelection.query}
+          hasValue={destinationSelection.hasValue}
           isSelected={activeTab === 'destination'}
-          onSelect={() => onSelectTab('destination')}
+          onChangeQuery={destinationActions.onChangeDestinationQuery}
+          onClear={destinationActions.onClearDestinationQuery}
+          onOpen={() => onOpenTab('destination')}
         />
 
         <div className="h-8 w-px bg-zinc-200" />
 
         <DateSelector
+          summaryText={dateSelection.summaryText}
+          hasValue={dateSelection.hasValue}
           isSelected={activeTab === 'date'}
           onSelect={() => onSelectTab('date')}
         />
@@ -29,7 +49,8 @@ function SearchBar({
 
         <div className="relative">
           <GuestSelector
-            summaryText={summaryText}
+            summaryText={guestSelection.summaryText}
+            hasValue={guestSelection.hasValue}
             isSelected={activeTab === 'guests'}
             onSelect={() => onSelectTab('guests')}
           />
@@ -37,8 +58,8 @@ function SearchBar({
           {activeTab === 'guests' ? (
             <div className="absolute right-0 top-full z-30 mt-3">
               <GuestModal
-                guests={guests}
-                onChangeGuestCount={onChangeGuestCount}
+                guests={guestSelection.guests}
+                onChangeGuestCount={guestSelection.onChangeCount}
               />
             </div>
           ) : null}
@@ -49,20 +70,24 @@ function SearchBar({
           aria-label="검색"
           className="ml-2 inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rose-500 to-pink-500 text-white shadow-[0_8px_18px_rgba(255,56,92,0.35)] transition duration-200 hover:scale-105 hover:shadow-[0_10px_22px_rgba(255,56,92,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
         >
-          <svg
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-          </svg>
+          <SearchIcon />
         </button>
       </div>
+
+      {activeTab === 'destination' && filteredDestinations.length > 0 ? (
+        <div className="absolute left-0 top-full z-30 mt-4 w-[460px] max-w-[calc(100vw-2rem)]">
+          <DestinationModal
+            destinations={filteredDestinations}
+            onSelectDestination={destinationActions.onSelectDestination}
+          />
+        </div>
+      ) : null}
+
+      {activeTab === 'date' ? (
+        <div className="absolute left-1/2 top-full z-30 mt-4 w-[880px] max-w-[calc(100vw-2rem)] -translate-x-1/2">
+          <DateModal {...dateSelection} {...dateActions} />
+        </div>
+      ) : null}
     </section>
   )
 }

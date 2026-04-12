@@ -1,4 +1,4 @@
-function GuestSelector({ summaryText, isSelected, onSelect }) {
+function GuestSelector({ summaryText, hasValue = false, isSelected, onSelect }) {
   return (
     <button
       type="button"
@@ -11,12 +11,12 @@ function GuestSelector({ summaryText, isSelected, onSelect }) {
           : 'hover:bg-zinc-100',
       ].join(' ')}
     >
-      <p className="text-[11px] font-semibold tracking-[0.02em] text-zinc-900">
+      <p className="text-[13px] font-semibold tracking-[0.02em] text-zinc-900">
         여행자
       </p>
       <p
-        className={`mt-1 truncate text-sm ${
-          isSelected ? 'text-zinc-900' : 'text-zinc-500'
+        className={`mt-1 truncate text-[13px] ${
+          isSelected || hasValue ? 'text-zinc-900' : 'text-zinc-500'
         }`}
       >
         {summaryText}
