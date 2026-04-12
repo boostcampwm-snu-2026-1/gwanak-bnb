@@ -1,21 +1,7 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import SpotPopup from './SpotPopup';
 import './SpotSearch.css';
-
-const TEMP_RECOMMEND = [
-	{ id: 1, name: "근처 체험 찾기", desc: "가까운 곳에서 즐길 수 있는 체험"},
-	{ id: 2, name: "광안리", desc: "해변으로 인기 있는 곳"},
-	{ id: 3, name: "제주", desc: "자연을 만끽하기 좋은 곳"}
-];
-
-const TEMP = [ // 임시..
-    { id: 1, name: "서울", desc: "대한민국"},
-	{ id: 2, name: "부산", desc: "대한민국·도시"},
-	{ id: 3, name: "강릉", desc: "대한민국·강원도·도시"},
-	{ id: 4, name: "오사카", desc: "일본·오사카부·도시"},
-	{ id: 5, name: "제주도", desc: "대한민국·제주·도시"},
-	{ id: 6, name: "광안리해수욕장", desc: "해변으로 인기 있는 곳"}
-];
+import { Recommend, SpotList } from '../../constants/spotData';
 
 export default function SpotSearch() {
   
@@ -24,8 +10,8 @@ export default function SpotSearch() {
     const [selectedSpot, setSelectedSpot] = useState(-1); // 선택된 여행지 인덱스
 
     const keywordList = keyword === ""
-        ? TEMP_RECOMMEND
-        : TEMP.filter(item => item.name.includes(keyword));
+        ? Recommend
+        : SpotList.filter(item => item.name.includes(keyword));
 
     const tempDisplay = (selectedSpot >= 0 && keywordList[selectedSpot])
 		? keywordList[selectedSpot].name
