@@ -88,6 +88,11 @@
   color: #757575;
 }
 
+.summaryNote {
+  margin: 8px 0 0;
+  color: #6b7280;
+}
+
 @media (max-width: 640px) {
   .header {
     padding-top: 20px;
