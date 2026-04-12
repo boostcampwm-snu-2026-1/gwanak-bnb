@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import DestinationInput from '../search/DestinationInput';
 import SearchDropdown from '../search/SearchDropdown';
 
@@ -6,6 +6,7 @@ function SearchBar({
   adults, children, infants, isModalOpen, setIsModalOpen,
   searchState, updateSearchState 
 }) {
+  const searchBarRef = useRef(null);
   const totalGuests = adults + children;
   
   const getDisplayText = () => {
@@ -24,7 +25,22 @@ function SearchBar({
   };
 
   const handleNavigate = (delta) => {
-    updateSearchState({selectedIndex: searchState.selectedIndex + delta});
+    const cleanQuery = searchState.query.trim();
+    const isQueryEmpty = cleanQuery === '';
+    const RECOMMENDED_DESTINATIONS = ['서울', '부산', '제주도'];
+    const ALL_DESTINATIONS = ['서울', '부산', '제주도'];
+    
+    const filteredData = isQueryEmpty 
+      ? RECOMMENDED_DESTINATIONS 
+      : ALL_DESTINATIONS.filter(dest => dest.includes(cleanQuery));
+
+    const maxIndex = filteredData.length;
+    if (maxIndex === 0) return;
+
+    updateSearchState(prev => {
+      let nextIndex = (prev.selectedIndex + delta + maxIndex) % maxIndex;
+      return { selectedIndex: nextIndex };
+    });
   };
 
   const handleOpenDropdown = () => {
@@ -32,8 +48,19 @@ function SearchBar({
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+        updateSearchState({isOpen: false});
+        setIsModalOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {document.removeEventListener('mousedown', handleClickOutside);};
+  }, [updateSearchState, setIsModalOpen]);
+
   return (
-    <div className="search-bar-container">
+    <div className="search-bar-container" ref={searchBarRef}>
       <div className="search-item destination-selection">
         <DestinationInput 
           query={searchState.query}
