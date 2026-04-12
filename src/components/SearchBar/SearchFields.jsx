@@ -5,14 +5,23 @@ import styles from './SearchBar.module.css'
 
 function SearchFields({
   isDestinationOpen,
-  onDestinationFieldClick,
+  destinationInput,
+  onDestinationFieldActivate,
+  onDestinationInputChange,
+  onDestinationInputClear,
   guestSummary,
   isGuestModalOpen,
   onGuestFieldToggle,
 }) {
   return (
     <div className={styles.searchBar}>
-      <DestinationField isActive={isDestinationOpen} onClick={onDestinationFieldClick} />
+      <DestinationField
+        isActive={isDestinationOpen}
+        value={destinationInput}
+        onActivate={onDestinationFieldActivate}
+        onChange={onDestinationInputChange}
+        onClear={onDestinationInputClear}
+      />
       <DateField />
       <GuestField
         guestSummary={guestSummary}

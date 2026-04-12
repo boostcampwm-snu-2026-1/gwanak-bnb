@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import GuestModal from '../GuestModal/GuestModal'
-import { recommendedDestinations } from '../../mocks/destinations'
+import { recommendedDestinations, searchableDestinations } from '../../mocks/destinations'
 import DestinationDropdown from './DestinationDropdown'
 import SearchFields from './SearchFields'
 import styles from './SearchBar.module.css'
@@ -31,8 +31,23 @@ function getGuestSummary({ adults, children, infants, pets }) {
 function SearchBar({ guestCounts, setGuestCounts }) {
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
   const [isDestinationOpen, setIsDestinationOpen] = useState(false)
+  const [destinationInput, setDestinationInput] = useState('')
   const containerRef = useRef(null)
   const guestSummary = getGuestSummary(guestCounts)
+  const trimmedInput = destinationInput.trim()
+  const destinationMode = trimmedInput ? 'search' : 'recommended'
+
+  const filteredDestinations = useMemo(() => {
+    if (destinationMode === 'recommended') {
+      return recommendedDestinations
+    }
+
+    const normalizedQuery = trimmedInput.toLowerCase()
+    return searchableDestinations.filter((destination) => {
+      const haystack = `${destination.title} ${destination.subtitle}`.toLowerCase()
+      return haystack.includes(normalizedQuery)
+    })
+  }, [destinationMode, trimmedInput])
 
   const adjustCount = (key, delta) => {
     setGuestCounts((prev) => {
@@ -85,9 +100,25 @@ function SearchBar({ guestCounts, setGuestCounts }) {
     }
   }, [isGuestModalOpen])
 
-  const handleDestinationFieldClick = () => {
+  const handleDestinationFieldActivate = () => {
     setIsGuestModalOpen(false)
-    setIsDestinationOpen((prev) => !prev)
+    setIsDestinationOpen(true)
+  }
+
+  const handleDestinationInputChange = (nextInput) => {
+    setDestinationInput(nextInput)
+    setIsGuestModalOpen(false)
+    setIsDestinationOpen(true)
+  }
+
+  const handleDestinationInputClear = () => {
+    setDestinationInput('')
+    setIsDestinationOpen(true)
+  }
+
+  const handleDestinationSelect = (destinationTitle) => {
+    setDestinationInput(destinationTitle)
+    setIsDestinationOpen(false)
   }
 
   const handleGuestFieldToggle = () => {
@@ -100,13 +131,22 @@ function SearchBar({ guestCounts, setGuestCounts }) {
       <div className={styles.searchContainer} ref={containerRef}>
         <SearchFields
           isDestinationOpen={isDestinationOpen}
-          onDestinationFieldClick={handleDestinationFieldClick}
+          destinationInput={destinationInput}
+          onDestinationFieldActivate={handleDestinationFieldActivate}
+          onDestinationInputChange={handleDestinationInputChange}
+          onDestinationInputClear={handleDestinationInputClear}
           guestSummary={guestSummary}
           isGuestModalOpen={isGuestModalOpen}
           onGuestFieldToggle={handleGuestFieldToggle}
         />
 
-        {isDestinationOpen && <DestinationDropdown destinations={recommendedDestinations} />}
+        {isDestinationOpen && (
+          <DestinationDropdown
+            mode={destinationMode}
+            destinations={filteredDestinations}
+            onSelectDestination={handleDestinationSelect}
+          />
+        )}
 
         {isGuestModalOpen && (
           <GuestModal

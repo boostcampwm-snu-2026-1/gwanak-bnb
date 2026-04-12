@@ -49,3 +49,48 @@ export const recommendedDestinations = [
     tone: 'gold',
   },
 ]
+
+export const searchableDestinations = [
+  {
+    id: 'search-busan-city',
+    icon: '📍',
+    title: '부산',
+    subtitle: '대한민국 · 도시',
+  },
+  {
+    id: 'search-gwangalli',
+    icon: '📍',
+    title: '광안리해수욕장',
+    subtitle: '대한민국 · 부산 · 자연 명소',
+  },
+  {
+    id: 'search-busan-station',
+    icon: '📍',
+    title: '부산역',
+    subtitle: '대한민국 · 지하철역',
+  },
+  {
+    id: 'search-haeundae',
+    icon: '📍',
+    title: '해운대구',
+    subtitle: '대한민국 · 지역',
+  },
+  {
+    id: 'search-gijang',
+    icon: '📍',
+    title: '기장군',
+    subtitle: '대한민국 · 지역',
+  },
+  {
+    id: 'search-jeju',
+    icon: '📍',
+    title: '제주시',
+    subtitle: '대한민국 · 도시',
+  },
+  {
+    id: 'search-osaka',
+    icon: '📍',
+    title: '오사카시',
+    subtitle: '일본 · 도시',
+  },
+]

@@ -70,6 +70,51 @@
   margin: 6px;
 }
 
+.destinationInputRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.destinationInput {
+  border: 0;
+  background: transparent;
+  min-width: 0;
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  font-size: 30px;
+  font-size: clamp(14px, 1.2vw, 30px);
+  color: #222;
+}
+
+.destinationInput::placeholder {
+  color: #6a6a6a;
+}
+
+.destinationInput:focus {
+  outline: none;
+}
+
+.clearButton {
+  border: 0;
+  background: transparent;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #3e3e3e;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.clearButton:hover {
+  background: #ececec;
+}
+
 .guestField {
   background: #fff;
   border-radius: 999px;
@@ -130,8 +175,13 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  width: 100%;
+  border: 0;
+  background: transparent;
   padding: 10px;
   border-radius: 18px;
+  text-align: left;
+  cursor: pointer;
 }
 
 .suggestionItem:hover {
@@ -176,6 +226,10 @@
   background: #f7f2e7;
 }
 
+.toneNeutral {
+  background: #efefef;
+}
+
 .suggestionText {
   min-width: 0;
   display: flex;
@@ -197,6 +251,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.emptyResult {
+  padding: 16px 12px;
+  font-size: 15px;
+  color: #6a6a6a;
 }
 
 @media (max-width: 1024px) {
@@ -230,6 +290,10 @@
 
   .destinationFieldActive {
     margin: 0;
+  }
+
+  .destinationInput {
+    font-size: 16px;
   }
 
   .destinationDropdown {
