@@ -3,13 +3,6 @@ import GuestPopup from './GuestPopup'
 import DestinationPopup from './DestinationPopup'
 import './SearchBar.css'
 
-const recommendedDestinations = [
-  { id: 1, label: '여수', description: '전라남도 · 대한민국' },
-  { id: 2, label: '부산', description: '대한민국의 대표 해안 도시' },
-  { id: 3, label: '도쿄', description: '일본 · 대도시 여행지' },
-  { id: 4, label: '강릉', description: '강원도 · 바다 여행지' },
-  { id: 5, label: '속초', description: '강원도 · 해변과 산' },
-]
 
 export default function SearchBar() {
   const [openPanel, setOpenPanel] = useState(null)
@@ -17,8 +10,10 @@ export default function SearchBar() {
 
   const [searchKeyword, setSearchKeyword] = useState('')
   const [destinationInput, setDestinationInput] = useState('')
+  const [recommendedDestinations, setRecommendedDestinations] = useState([])
   const [destinationResults, setDestinationResults] = useState([])
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
+  const [hoveredIndex, setHoveredIndex] = useState(-1)
   const [selectedDestination, setSelectedDestination] = useState(null)
 
   const [isLoading, setIsLoading] = useState(false)
@@ -65,6 +60,38 @@ export default function SearchBar() {
   }, [])
 
   useEffect(() => {
+    if (openPanel !== 'destination') {
+      return
+    }
+
+    if (searchKeyword.trim() !== '') {
+      return
+    }
+
+    const fetchRecommendedDestinations = async () => {
+      try {
+        setError(null)
+
+        const response = await fetch(
+          'http://localhost:3001/destinations?recommended=true'
+        )
+
+        if (!response.ok) {
+          throw new Error('추천 여행지를 불러오지 못했습니다.')
+        }
+
+        const data = await response.json()
+        setRecommendedDestinations(data)
+      } catch (err) {
+        setRecommendedDestinations([])
+        setError(err.message)
+      }
+    }
+
+    fetchRecommendedDestinations()
+  }, [openPanel, searchKeyword])
+
+  useEffect(() => {
     const trimmedKeyword = searchKeyword.trim()
 
     if (trimmedKeyword === '') {
@@ -74,47 +101,58 @@ export default function SearchBar() {
       return
     }
 
-    const fetchDestinations = async () => {
-      try {
-        setIsLoading(true)
-        setError(null)
+    const controller = new AbortController()
 
+    setIsLoading(true)
+    setError(null)
+
+    const timerId = setTimeout(async () => {
+      try {
         const response = await fetch(
-          `http://localhost:3001/destinations?label:contains=${encodeURIComponent(trimmedKeyword)}`
+          `http://localhost:3001/destinations?label:contains=${encodeURIComponent(trimmedKeyword)}`,
+          { signal: controller.signal }
         )
 
         if (!response.ok) {
-          throw new Error('Failed to fetch destinations')
+          throw new Error('여행지 데이터를 불러오지 못했습니다.')
         }
 
         const data = await response.json()
         setDestinationResults(data)
       } catch (err) {
+        if (err.name === 'AbortError') {
+          return
+        }
+
         setDestinationResults([])
         setError(err.message)
       } finally {
-        setIsLoading(false)
+        if (!controller.signal.aborted) {
+          setIsLoading(false)
+        }
       }
-    }
+    }, 150)
 
-    fetchDestinations()
+    return () => {
+      clearTimeout(timerId)
+      controller.abort()
+    }
   }, [searchKeyword])
 
   const guestCount = guests.adults + guests.children
   const guestSummary = guestCount === 0 ? '게스트 추가' : `게스트 ${guestCount}명`
 
-  const filteredDestinations = recommendedDestinations.filter((item) =>
-    item.label.toLowerCase().includes(searchKeyword.trim().toLowerCase())
-  )
-
   const destinationItems =
     searchKeyword.trim() === '' ? recommendedDestinations : destinationResults
+  
+  const activeIndex = hoveredIndex >= 0 ? hoveredIndex : highlightedIndex
 
   const handleSelectDestination = (item) => {
     setSelectedDestination(item)
     setDestinationInput(item.label)
     setSearchKeyword(item.label)
     setHighlightedIndex(-1)
+    setHoveredIndex(-1)
     setOpenPanel(null)
   }
 
@@ -123,26 +161,34 @@ export default function SearchBar() {
     setSearchKeyword('')
     setSelectedDestination(null)
     setHighlightedIndex(-1)
+    setHoveredIndex(-1)
     setOpenPanel('destination')
   }
 
-  const handleDestinationKeyDown = (e) => {
-    if (e.key === 'Escape') {
-      setOpenPanel(null)
+  const handleDestinationNavigation = (e) => {
+    if (openPanel !== 'destination') {
       return
     }
 
-    if (destinationItems.length === 0) {
+    if (destinationItems.length === 0 && e.key !== 'Escape') {
+      return
+    }
+
+    const currentIndex = activeIndex
+
+    if (e.key === 'Escape') {
+      e.preventDefault()
+      setHoveredIndex(-1)
+      setOpenPanel(null)
       return
     }
 
     if (e.key === 'ArrowDown') {
       e.preventDefault()
+      setHoveredIndex(-1)
 
       const nextIndex =
-        highlightedIndex === destinationItems.length - 1
-          ? 0
-          : highlightedIndex + 1
+        currentIndex >= destinationItems.length - 1 ? 0 : currentIndex + 1
 
       setHighlightedIndex(nextIndex)
       setDestinationInput(destinationItems[nextIndex].label)
@@ -151,24 +197,44 @@ export default function SearchBar() {
 
     if (e.key === 'ArrowUp') {
       e.preventDefault()
+      setHoveredIndex(-1)
 
       const nextIndex =
-        highlightedIndex <= 0
-          ? destinationItems.length - 1
-          : highlightedIndex - 1
+        currentIndex <= 0 ? destinationItems.length - 1 : currentIndex - 1
 
       setHighlightedIndex(nextIndex)
       setDestinationInput(destinationItems[nextIndex].label)
       return
     }
 
-    if (e.key === 'Enter') {
-      if (highlightedIndex >= 0) {
-        e.preventDefault()
-        handleSelectDestination(destinationItems[highlightedIndex])
-      }
+    if (e.key === 'Enter' && activeIndex >= 0) {
+      e.preventDefault()
+      setHoveredIndex(-1)
+      handleSelectDestination(destinationItems[activeIndex])
     }
   }
+
+  useEffect(() => {
+    if (openPanel !== 'destination') {
+      return
+    }
+
+    const handleKeyDown = (e) => {
+      const navigationKeys = ['ArrowDown', 'ArrowUp', 'Enter', 'Escape']
+
+      if (!navigationKeys.includes(e.key)) {
+        return
+      }
+
+      handleDestinationNavigation(e)
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [openPanel, destinationItems, activeIndex])
 
   return (
     <section className="search-bar" ref={searchBarRef}>
@@ -191,9 +257,9 @@ export default function SearchBar() {
                 setSearchKeyword(value)
                 setSelectedDestination(null)
                 setHighlightedIndex(-1)
+                setHoveredIndex(-1)
                 setOpenPanel('destination')
               }}
-              onKeyDown={handleDestinationKeyDown}
             />
           </div>
 
@@ -215,11 +281,13 @@ export default function SearchBar() {
         {openPanel === 'destination' && (
           <DestinationPopup
             items={destinationItems}
-            query={destinationInput}
-            highlightedIndex={highlightedIndex}
+            query={searchKeyword}
+            activeIndex={activeIndex}
             isLoading={isLoading}
             error={error}
             onSelect={handleSelectDestination}
+            onItemHover={setHoveredIndex}
+            onListLeave={() => setHoveredIndex(-1)}
           />
         )}
       </div>

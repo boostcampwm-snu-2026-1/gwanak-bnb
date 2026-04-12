@@ -3,10 +3,12 @@ import './DestinationPopup.css'
 export default function DestinationPopup({
   items,
   query,
-  highlightedIndex,
+  activeIndex,
   isLoading,
   error,
   onSelect,
+  onItemHover,
+  onListLeave,
 }) {
   const title = query.trim() === '' ? '추천 여행지' : '검색 결과'
 
@@ -27,14 +29,15 @@ export default function DestinationPopup({
       )}
 
       {!isLoading && !error && items.length > 0 && (
-        <div className="destination-popup__list">
+        <div className="destination-popup__list" onMouseLeave={onListLeave}>
           {items.map((item, index) => (
             <button
               key={item.id}
               type="button"
               className={`destination-popup__item ${
-                highlightedIndex === index ? 'destination-popup__item--active' : ''
+                activeIndex === index ? 'destination-popup__item--active' : ''
               }`}
+              onMouseEnter={() => onItemHover(index)}
               onClick={() => onSelect(item)}
             >
               <div className="destination-popup__icon">📍</div>

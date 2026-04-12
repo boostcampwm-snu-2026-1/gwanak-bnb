@@ -44,7 +44,6 @@
   cursor: pointer;
 }
 
-.destination-popup__item:hover,
 .destination-popup__item--active {
   background: #f7f7f7;
 }
