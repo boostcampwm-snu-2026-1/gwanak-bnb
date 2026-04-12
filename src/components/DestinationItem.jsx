@@ -17,3 +17,5 @@ function DestinationItem({ destination, isHighlighted, onClick }) {
     </li>
   );
 }
+
+export default DestinationItem;
