@@ -18,7 +18,6 @@ function SearchBar({
   guestSelection,
   onOpenTab,
   onSelectTab,
-  onChangeGuestCount,
 }) {
   const filteredDestinations = useMemo(
     () => filterDestinations(destinationSelection.query, destinations),
@@ -60,7 +59,7 @@ function SearchBar({
             <div className="absolute right-0 top-full z-30 mt-3">
               <GuestModal
                 guests={guestSelection.guests}
-                onChangeGuestCount={onChangeGuestCount}
+                onChangeGuestCount={guestSelection.onChangeCount}
               />
             </div>
           ) : null}
