@@ -29,6 +29,7 @@
   font-size: 12px;
   font-weight: 600;
   color: #222;
+  line-height: 16px;
 }
 
 .fieldInput {
@@ -39,6 +40,7 @@
   background: transparent;
   cursor: pointer;
   width: 100%;
+  line-height: 18px;
 }
 
 .divider {
@@ -68,4 +70,5 @@
 .fieldValue {
   font-size: 14px;
   color: #717171;
+  line-height: 18px;
 }

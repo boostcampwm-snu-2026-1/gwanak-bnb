@@ -6,20 +6,23 @@
 .field {
   display: flex;
   flex-direction: column;
-  padding: 14px 32px;
-  border-radius: 32px;
+  padding: 12px 24px;
+  border-radius: 40px;
   cursor: pointer;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 160px;
 }
 
 .field:hover {
-  background-color: #ebebeb;
+  background-color: #f0f0f0;
 }
 
 .fieldLabel {
   font-size: 12px;
   font-weight: 600;
   color: #222;
-  margin-bottom: 2px;
+  line-height: 16px;
 }
 
 .fieldInput {
@@ -30,6 +33,7 @@
   color: #222;
   padding: 0;
   width: 100%;
+  line-height: 18px;
 }
 
 .fieldInput::placeholder {
