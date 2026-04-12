@@ -85,3 +85,29 @@
   align-items: center;
   justify-content: center;
 }
+
+.destination-wrapper {
+  min-width: 0;
+  position: relative;
+  height: 100%;
+}
+
+.destination-wrapper .search-bar__section {
+  width: 100%;
+  height: 100%;
+}
+
+.search-bar__input {
+  margin: 4px 0 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #717171;
+  width: 100%;
+}
+
+.search-bar__input::placeholder {
+  color: #717171;
+}

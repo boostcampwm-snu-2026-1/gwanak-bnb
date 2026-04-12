@@ -1,6 +1,15 @@
 import { useState } from 'react'
 import GuestPopup from './GuestPopup'
+import DestinationPopup from './DestinationPopup'
 import './SearchBar.css'
+
+const recommendedDestinations = [
+  { id: 1, label: '여수', description: '전라남도 · 대한민국' },
+  { id: 2, label: '부산', description: '대한민국의 대표 해안 도시' },
+  { id: 3, label: '도쿄', description: '일본 · 대도시 여행지' },
+]
+
+
 
 export default function SearchBar() {
   const [openPanel, setOpenPanel] = useState(null)
@@ -21,6 +30,8 @@ export default function SearchBar() {
     pets: 0,
   })
 
+  const destinationItems = destinationInput.trim() === '' ? recommendedDestinations : destinationResults
+
   const handleIncrease = (type) => {
     setGuests((prev) => ({
       ...prev,
@@ -40,9 +51,42 @@ export default function SearchBar() {
 
   return (
     <section className="search-bar">
-      <div className="search-bar__section">
-        <p className="search-bar__label">여행지</p>
-        <p className="search-bar__value">여행지 검색</p>
+      <div className="destination-wrapper">
+        <div
+          className="search-bar__section"
+          onClick={() =>
+            setOpenPanel((prev) => (prev === 'destination' ? null : 'destination'))
+          }
+        >
+          <p className="search-bar__label">여행지</p>
+          <input
+            className="search-bar__input"
+            type="text"
+            placeholder="여행지 검색"
+            value={destinationInput}
+            onClick={() => setOpenPanel('destination')}
+            onChange={(e) => {
+              setDestinationInput(e.target.value)
+              setOpenPanel('destination')
+              setHighlightedIndex(-1)
+            }}
+          />
+        </div>
+
+        {openPanel === 'destination' && (
+          <DestinationPopup
+            items={destinationItems}
+            query={destinationInput}
+            highlightedIndex={highlightedIndex}
+            isLoading={isLoading}
+            error={error}
+            onSelect={(item) => {
+              setSelectedDestination(item)
+              setDestinationInput(item.label)
+              setOpenPanel(null)
+            }}
+          />
+        )}
       </div>
 
       <div className="search-bar__divider" />
