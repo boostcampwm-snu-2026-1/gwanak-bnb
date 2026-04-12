@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './styles/App.css'
-import TravelerModal from './containers/TravelerModal'
-import SearchBar from './containers/SearchBar'
+import TravelerModal from './components/traveler/TravelerModal'
+import SearchBar from './components/layout/SearchBar'
 
 function App() {
   const [adults, setAdults] = useState(0)
