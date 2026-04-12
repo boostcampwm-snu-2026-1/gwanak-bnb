@@ -1,0 +1,12 @@
+{
+  "locations": [
+    { "id": "1", "title": "부산, 부산", "description": "해변으로 인기 있는 곳" },
+    { "id": "2", "title": "광안리해수욕장", "description": "해변의 매력을 느낄 수 있는 곳" },
+    { "id": "3", "title": "오사카시, 일본", "description": "관광 명소: 오사카성" },
+    { "id": "4", "title": "제주", "description": "자연을 만끽하기 좋은 곳" },
+    { "id": "5", "title": "도쿄, 일본", "description": "화려한 나이트라이프로 유명한 곳" },
+    { "id": "6", "title": "속초시, 강원도", "description": "흥스로 인기 있는 곳" },
+    { "id": "7", "title": "서울", "description": "다양한 문화와 음식을 즐길 수 있는 곳" },
+    { "id": "8", "title": "경주, 경상북도", "description": "역사 유적지로 유명한 곳" }
+  ]
+}
