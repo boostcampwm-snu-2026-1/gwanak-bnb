@@ -79,20 +79,22 @@ function Divider({ hidden }) {
 // SearchBar: 루트 검색 바 컴포넌트
 // ────────────────────────────────────────────────────────────
 export default function SearchBar() {
+  // 여행지 드롭다운이 열려 있는지 여부
+  const [destinationOpen, setDestinationOpen] = useState(false)
   // 여행자 모달이 열려 있는지 여부
   const [guestOpen, setGuestOpen] = useState(false)
   // 현재 마우스가 올라간 탭 이름 ('destination' | 'date' | 'guest' | null)
   const [hovered, setHovered] = useState(null)
 
   // 구분선 숨김 여부: 인접한 두 탭 중 하나라도 호버/활성이면 숨김
-  const divider1Hidden = hovered === 'destination' || hovered === 'date'
+  const divider1Hidden = hovered === 'destination' || hovered === 'date' || destinationOpen
   const divider2Hidden = hovered === 'date' || hovered === 'guest' || guestOpen
 
   // 탭 공통 스타일: 세 탭 모두 동일한 flex-1 래퍼로 감싸 대칭 레이아웃 보장
-  // 호버 시 회색 pill 배경 적용 (모달 열린 상태에서는 여행자 탭에 배경 미적용)
+  // 호버 시 회색 pill 배경 적용 (드롭다운/모달이 열린 탭에는 배경 미적용)
   const tabClass = (name) =>
     `flex-1 flex items-center rounded-full h-full transition-colors cursor-pointer ${
-      hovered === name && !(name === 'guest' && guestOpen) ? 'bg-gray-100' : ''
+      hovered === name && !(name === 'destination' && destinationOpen) && !(name === 'guest' && guestOpen) ? 'bg-gray-100' : ''
     }`
 
   return (
@@ -104,7 +106,7 @@ export default function SearchBar() {
         onMouseEnter={() => setHovered('destination')}
         onMouseLeave={() => setHovered(null)}
       >
-        <DestinationField />
+        <DestinationField isOpen={destinationOpen} onToggle={setDestinationOpen} />
       </div>
 
       {/* 탭 구분선 1: 여행지-날짜 사이 */}
