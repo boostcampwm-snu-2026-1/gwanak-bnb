@@ -38,38 +38,35 @@ export default function SearchBar() {
     }, [openModal, modalRefs]);
 
     return (
-    <div className="bg-white rounded-full shadow-md flex items-center px-4 py-2 gap-4 w-full max-w-3xl mx-auto">
-        <LocationSearch 
-            openModal = {openModal}
-            setOpenModal={setOpenModal}
-            modalRefs = {modalRefs.location}
-        
-        />
-        <div className="w-px h-8 bg-gray-300" /> {/* 구분선 */}
-        <div ref={modalRefs.date} className="relative flex flex-col px-4 py-2 hover:bg-gray-100 rounded-full cursor-pointer flex-1">
-            <span className="text-xs font-semibold">날짜</span>
-            <button type="button" className="text-sm text-gray-500 text-left" onClick={(e) => {
-                e.stopPropagation();
-                setOpenModal("date");
-            }}>날짜 추가</button>
-            {openModal === "date" && <DateModal />}
+        <div className="bg-white rounded-full shadow-md flex items-center px-4 py-2 gap-4 w-full max-w-3xl mx-auto">
+            <LocationSearch 
+                openModal = {openModal}
+                setOpenModal={setOpenModal}
+                modalRef = {modalRefs.location}
+            />
+            <div className="w-px h-8 bg-gray-300" /> {/* 구분선 */}
+            <div ref={modalRefs.date} className="relative flex flex-col px-4 py-2 hover:bg-gray-100 rounded-full cursor-pointer flex-1">
+                <span className="text-xs font-semibold">날짜</span>
+                <button type="button" className="text-sm text-gray-500 text-left" onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenModal("date");
+                }}>날짜 추가</button>
+                {openModal === "date" && <DateModal />}
+            </div>
+            <div className="w-px h-8 bg-gray-300" /> {/* 구분선 */}
+            <div ref={modalRefs.guest} className="relative flex flex-col px-4 py-2 hover:bg-gray-100 rounded-full cursor-pointer flex-1">
+                <span className="text-xs font-semibold">여행자</span>
+                <button type="button" className="text-sm text-gray-500 text-left" onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenModal("guest");
+                }}>게스트 추가</button>
+                {openModal === "guest" && <GuestModal />}
+            </div>
+            <button type="button" className="bg-pink-500 hover:bg-pink-600 text-white rounded-full p-3 ml-2">
+                <Search size={20} />
+            </button>
         </div>
-        <div className="w-px h-8 bg-gray-300" /> {/* 구분선 */}
-        <button type="button" className="bg-pink-500 hover:bg-pink-600 text-white rounded-full p-3 ml-2">
-            <Search size={20} />
-        </button>
-        <div ref={modalRefs.guest} className="relative flex flex-col px-4 py-2 hover:bg-gray-100 rounded-full cursor-pointer flex-1">
-            <span className="text-xs font-semibold">여행자</span>
-            <button type="button" className="text-sm text-gray-500 text-left" onClick={(e) => {
-                e.stopPropagation();
-                setOpenModal("guest");
-            }}>게스트 추가</button>
-            {openModal === "guest" && <GuestModal />}
-        </div>
-    </div>
-)
-
-
+    )
 }
 
 

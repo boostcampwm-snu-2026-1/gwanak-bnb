@@ -15,5 +15,19 @@ export default function useLocation() {
         setLocations(result);
     }
 
-    return { searchQuery, locations, selectedIndex, handleSearch }
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "ArrowDown") {
+            setSelectedIndex(prev => (prev + 1) % locations.length);
+        }
+        if (e.key === "ArrowUp") {
+            setSelectedIndex(prev => (prev - 1) % locations.length);
+        }
+        if (e.key === "Enter" && selectedIndex >= 0) {
+            setSearchQuery(locations[selectedIndex].display_name);
+        }
+    }
+
+
+
+    return { searchQuery, locations, selectedIndex, handleSearch, handleKeyDown}
 };

@@ -7,7 +7,6 @@ export type LocationItem = {
     id: string;
 }
 
-
 export async function fetchLocations(search: string): Promise<LocationItem[]> {
     const response = await fetch(`${API_URL}/locations?search=${search}`);
     const data = await response.json()
