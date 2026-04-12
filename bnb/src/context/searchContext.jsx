@@ -42,7 +42,8 @@ export const SearchProvider = ({ children }) => {
         onToggleGuest: toggleGuest,
         onToggleDestination: toggleDestination,
         guest,
-        destination
+        destination,
+        closeModal
     };
 
     return (

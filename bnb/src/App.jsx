@@ -1,5 +1,6 @@
 import './App.css'
 import './componenet/common/global.css'
+import ModalBackdrop from './componenet/common/modalBackdrop'
 
 import GuestSearch from './componenet/guest/guestSearch'
 import GuestCounter from './componenet/guest/guestCounter'
@@ -12,9 +13,11 @@ import DestinationModal from './componenet/destination/DestinationModal'
 import { SearchProvider } from './context/searchContext'
 
 function App() {
+
     return (
         <>
             <SearchProvider>
+                <ModalBackdrop />
                 <div style={{background: "#eee"}}>
                     <div className='main-container'>
                         <DestinationSearch />

@@ -6,7 +6,8 @@ function DestinationModal() {
     const { isOpenDestination, destination } = useSearch();
 
     return (
-        isOpenDestination && (<div className='modal-destination'>
+        isOpenDestination && destination.displayList.length > 0 && (
+        <div className='modal-destination'>
             {destination.displayList.map((item => (
                 <DestinationRow 
                     key={item.id}
