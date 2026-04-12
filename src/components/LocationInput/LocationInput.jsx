@@ -5,6 +5,7 @@ import styles from './LocationInput.module.css';
 function LocationInput() {
   const [isOpen, setIsOpen] = useState(false);
   const [locations, setLocations] = useState([]);
+  const [inputValue, setInputValue] = useState('');
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -23,13 +24,23 @@ function LocationInput() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const filteredLocations = inputValue
+    ? locations.filter((loc) => loc.title.includes(inputValue))
+    : locations;
+
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
       <div className={styles.field} onClick={() => setIsOpen(true)}>
         <span className={styles.label}>여행지</span>
-        <span className={styles.value}>여행지 검색</span>
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="여행지 검색"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
       </div>
-      {isOpen && <LocationDropdown locations={locations} />}
+      {isOpen && <LocationDropdown locations={filteredLocations} />}
     </div>
   );
 }

@@ -25,3 +25,16 @@
   color: #717171;
   white-space: nowrap;
 }
+
+.input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #222;
+  background: transparent;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: #717171;
+}
