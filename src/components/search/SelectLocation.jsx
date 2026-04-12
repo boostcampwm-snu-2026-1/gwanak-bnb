@@ -11,15 +11,19 @@ function isPrefixMatch(candidate, query) {
   const normalizedQuery = query.toLowerCase();
   const tokens = normalizedCandidate.split(/[\s,/-]+/).filter(Boolean);
 
-  return tokens.some((token) => token.startsWith(normalizedQuery));
+  return (
+    normalizedCandidate.startsWith(normalizedQuery) ||
+    tokens.some((token) => token.startsWith(normalizedQuery))
+  );
 }
 
 function SelectLocation() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const suggestionListRef = useRef(null);
-  const displayText = query || "Search destinations";
+  const displayText = inputValue || "Search destinations";
   const normalizedQuery = query.trim().toLowerCase();
   const filteredSuggestions = normalizedQuery
     ? LOCATION_SUGGESTIONS.filter((item) => isPrefixMatch(item, normalizedQuery))
@@ -28,6 +32,7 @@ function SelectLocation() {
   useEffect(() => {
     if (filteredSuggestions.length === 0) {
       setHighlightIndex(-1);
+      setInputValue(query);
       return;
     }
 
@@ -53,6 +58,18 @@ function SelectLocation() {
     }
   }, [highlightIndex]);
 
+  useEffect(() => {
+    if (highlightIndex < 0) {
+      setInputValue(query);
+      return;
+    }
+
+    const highlightedSuggestion = filteredSuggestions[highlightIndex];
+    if (highlightedSuggestion) {
+      setInputValue(highlightedSuggestion);
+    }
+  }, [highlightIndex, filteredSuggestions, query]);
+
   const handleKeyDown = (event) => {
     if (filteredSuggestions.length === 0) {
       return;
@@ -73,6 +90,16 @@ function SelectLocation() {
         return (prev - 1 + filteredSuggestions.length) % filteredSuggestions.length;
       });
     }
+
+    if (event.key === "Enter" && highlightIndex >= 0) {
+      event.preventDefault();
+      const selectedSuggestion = filteredSuggestions[highlightIndex];
+      if (selectedSuggestion) {
+        setQuery(selectedSuggestion);
+        setInputValue(selectedSuggestion);
+        setIsOpen(false);
+      }
+    }
   };
 
   return (
@@ -87,8 +114,12 @@ function SelectLocation() {
           <input
             className="location-input"
             type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={inputValue}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setInputValue(e.target.value);
+              setHighlightIndex(-1);
+            }}
             onKeyDown={handleKeyDown}
             placeholder="Search destinations"
           />
