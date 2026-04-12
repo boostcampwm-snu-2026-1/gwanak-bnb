@@ -1,0 +1,87 @@
+// 여행지 정적 데이터
+// RECOMMENDED_DESTINATIONS: 검색어 없을 때 노출할 추천 목적지 7개
+// ALL_DESTINATIONS: 검색 필터링에 사용할 전체 목적지 목록
+
+export const RECOMMENDED_DESTINATIONS = [
+  {
+    id: 'nearby',
+    name: '근처 체험 찾기',
+    subtitle: '가까운 곳에서 즐길 수 있는 체험을 찾아보세요.',
+    color: 'from-purple-400 to-blue-400',
+    icon: 'arrow',
+  },
+  {
+    id: 'gwangalli',
+    name: '광안리해수욕장',
+    subtitle: '해변으로 인기 있는 곳',
+    color: 'from-blue-400 to-cyan-300',
+    icon: 'building',
+  },
+  {
+    id: 'osaka',
+    name: '오사카시, 일본',
+    subtitle: '관광 명소: 오사카성',
+    color: 'from-orange-300 to-amber-400',
+    icon: 'building',
+  },
+  {
+    id: 'busan',
+    name: '부산, 부산',
+    subtitle: '화려한 나이트라이프로 유명한 곳',
+    color: 'from-pink-400 to-rose-400',
+    icon: 'building',
+  },
+  {
+    id: 'jeju',
+    name: '제주',
+    subtitle: '자연을 만끽하기 좋은 곳',
+    color: 'from-green-400 to-emerald-400',
+    icon: 'building',
+  },
+  {
+    id: 'sokcho',
+    name: '속초시, 강원도',
+    subtitle: '호수로 인기 있는 곳',
+    color: 'from-sky-400 to-blue-300',
+    icon: 'building',
+  },
+  {
+    id: 'gangneung',
+    name: '강릉시, 강원도',
+    subtitle: '해변의 매력을 느낄 수 있는 곳',
+    color: 'from-teal-400 to-cyan-400',
+    icon: 'building',
+  },
+]
+
+export const ALL_DESTINATIONS = [
+  { id: 'seoul', name: '서울', subtitle: '대한민국 · 서울특별시 · 도시' },
+  { id: 'seoul-gangnam', name: '강남구', subtitle: '대한민국 · 서울특별시 · 강남구 · 지역' },
+  { id: 'busan-city', name: '부산', subtitle: '대한민국 · 부산광역시 · 도시' },
+  { id: 'busan-gwangalli', name: '광안리해수욕장', subtitle: '대한민국 · 부산광역시 · 수영구 · 해변' },
+  { id: 'busan-haeundae', name: '해운대', subtitle: '대한민국 · 부산광역시 · 해운대구 · 해변' },
+  { id: 'jeju-city', name: '제주시', subtitle: '대한민국 · 제주특별자치도 · 도시' },
+  { id: 'jeju-island', name: '제주도', subtitle: '대한민국 · 제주특별자치도 · 섬' },
+  { id: 'jeju-seongsan', name: '성산일출봉', subtitle: '대한민국 · 제주특별자치도 · 서귀포시 · 명소' },
+  { id: 'yeosu-city', name: '여수시', subtitle: '대한민국 · 전라남도 · 도시' },
+  { id: 'yeosu-admiral', name: '이순신광장', subtitle: '대한민국 · 전라남도 · 여수시 · 공원' },
+  { id: 'yeosu-venetia', name: '여수 베네치아호텔 앤 스위트', subtitle: '대한민국 · 전라남도 · 여수시 · 숙박시설' },
+  { id: 'yeosu-cityhall', name: '여수시청', subtitle: '대한민국 · 전라남도 · 여수시' },
+  { id: 'yeosu-uncheon', name: '운천동', subtitle: '대한민국 · 전라남도 · 지역' },
+  { id: 'sokcho-city', name: '속초시', subtitle: '대한민국 · 강원도 · 도시' },
+  { id: 'sokcho-seorak', name: '설악산국립공원', subtitle: '대한민국 · 강원도 · 속초시 · 국립공원' },
+  { id: 'gangneung-city', name: '강릉시', subtitle: '대한민국 · 강원도 · 도시' },
+  { id: 'gangneung-gyeongpo', name: '경포해변', subtitle: '대한민국 · 강원도 · 강릉시 · 해변' },
+  { id: 'gyeongju-city', name: '경주시', subtitle: '대한민국 · 경상북도 · 도시' },
+  { id: 'gyeongju-bulguksa', name: '불국사', subtitle: '대한민국 · 경상북도 · 경주시 · 명소' },
+  { id: 'incheon-city', name: '인천', subtitle: '대한민국 · 인천광역시 · 도시' },
+  { id: 'daejeon-city', name: '대전', subtitle: '대한민국 · 대전광역시 · 도시' },
+  { id: 'gwangju-city', name: '광주', subtitle: '대한민국 · 광주광역시 · 도시' },
+  { id: 'daegu-city', name: '대구', subtitle: '대한민국 · 대구광역시 · 도시' },
+  { id: 'jeonju-city', name: '전주시', subtitle: '대한민국 · 전라북도 · 도시' },
+  { id: 'jeonju-hanok', name: '전주 한옥마을', subtitle: '대한민국 · 전라북도 · 전주시 · 명소' },
+  { id: 'tongyeong-city', name: '통영시', subtitle: '대한민국 · 경상남도 · 도시' },
+  { id: 'osaka-city', name: '오사카시', subtitle: '일본 · 오사카부 · 도시' },
+  { id: 'osaka-castle', name: '오사카성', subtitle: '일본 · 오사카부 · 오사카시 · 명소' },
+  { id: 'tokyo-city', name: '도쿄', subtitle: '일본 · 도쿄도 · 도시' },
+]
