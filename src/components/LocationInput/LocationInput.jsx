@@ -67,6 +67,12 @@ function LocationInput() {
         <LocationDropdown
           locations={filteredLocations}
           activeIndex={activeIndex}
+          onSelect={(title) => {
+            setInputValue(title);
+            setSearchQuery('');
+            setActiveIndex(-1);
+            setIsOpen(false);
+          }}
         />
       )}
     </div>

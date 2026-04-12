@@ -1,9 +1,9 @@
 import LocationPinIcon from '../../assets/icons/LocationPinIcon';
 import styles from './LocationItem.module.css';
 
-function LocationItem({ title, description, isActive }) {
+function LocationItem({ title, description, isActive, onSelect }) {
   return (
-    <div className={`${styles.item} ${isActive ? styles.active : ''}`}>
+    <div className={`${styles.item} ${isActive ? styles.active : ''}`} onClick={() => onSelect(title)}>
       <div className={styles.icon}>
         <LocationPinIcon />
       </div>
