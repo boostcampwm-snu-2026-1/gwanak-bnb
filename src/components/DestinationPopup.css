@@ -1,0 +1,77 @@
+.destination-popup {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  width: 420px;
+  background: white;
+  border-radius: 32px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+  padding: 20px 16px;
+  z-index: 20;
+}
+
+.destination-popup__title {
+  margin: 0 0 12px;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #222222;
+}
+
+.destination-popup__message {
+  margin: 0;
+  padding: 12px 8px;
+  font-size: 14px;
+  color: #717171;
+}
+
+.destination-popup__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.destination-popup__item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  border-radius: 16px;
+  padding: 12px 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.destination-popup__item--active {
+  background: #f7f7f7;
+}
+
+.destination-popup__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.destination-popup__text {
+  min-width: 0;
+}
+
+.destination-popup__label {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.destination-popup__description {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #717171;
+}

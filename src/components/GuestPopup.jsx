@@ -1,18 +1,15 @@
 import "./GuestPopup.css";
 
 export default function GuestPopup({ 
-    adults, 
-    children, 
-    infants, 
-    pets, 
+    guests,
     onIncrease, 
     onDecrease 
 }) {
     const guestItems = [
-    { key: "adults", label: "성인", description: "13세 이상", count: adults },
-    { key: "children", label: "어린이", description: "2~12세", count: children },
-    { key: "infants", label: "유아", description: "2세 미만", count: infants },
-    { key: "pets", label: "반려동물", description: "보조동물을 동반하시나요?", count: pets },
+    { key: "adults", label: "성인", description: "13세 이상" },
+    { key: "children", label: "어린이", description: "2~12세" },
+    { key: "infants", label: "유아", description: "2세 미만" },
+    { key: "pets", label: "반려동물", description: "보조동물을 동반하시나요?" },
   ];
 
   return (<div className="guest-popup">
@@ -33,7 +30,7 @@ export default function GuestPopup({
               -
             </button>
 
-            <span className="guest-popup__count">{item.count}</span>
+            <span className="guest-popup__count">{guests[item.key]}</span>
 
             <button
               type="button"

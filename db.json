@@ -1,0 +1,94 @@
+{
+  "destinations": [
+    {
+      "id": "1",
+      "label": "중앙도서관 관정관",
+      "description": "시간과 정신의 방",
+      "recommended": true
+    },
+    {
+      "id": "2",
+      "label": "신공학관",
+      "description": "관악산지박령 관람장소",
+      "recommended": true
+    },
+    {
+      "id": "3",
+      "label": "자하연",
+      "description": "캠퍼스 속 낭만",
+      "recommended": true
+    },
+    {
+      "id": "4",
+      "label": "샤로수길",
+      "description": "돈이 증발하는 거리",
+      "recommended": true
+    },
+    {
+      "id": "5",
+      "label": "관악산",
+      "description": "올해 기운이 좋다",
+      "recommended": true
+    },
+    {
+      "id": "6",
+      "label": "중앙도서관",
+      "description": "시험기간 실종지",
+      "recommended": false
+    },
+    {
+      "id": "7",
+      "label": "서울대입구역",
+      "description": "관악의 출발점",
+      "recommended": false
+    },
+    {
+      "id": "8",
+      "label": "낙성대공원",
+      "description": "산책과 현실도피",
+      "recommended": false
+    },
+    {
+      "id": "9",
+      "label": "낙성대역",
+      "description": "강감찬 장군 만세",
+      "recommended": false
+    },
+    {
+      "id": "10",
+      "label": "버들골",
+      "description": "밥 먹고 멍때리기",
+      "recommended": false
+    },
+    {
+      "id": "11",
+      "label": "기숙사 삼거리",
+      "description": "귀가의 갈림길",
+      "recommended": false
+    },
+    {
+      "id": "12",
+      "label": "공대간이식당",
+      "description": "생존형 한 끼",
+      "recommended": false
+    },
+    {
+      "id": "13",
+      "label": "서울대학교 미술관",
+      "description": "교양 있는 척 가능",
+      "recommended": false
+    },
+    {
+      "id": "14",
+      "label": "서울대학교 박물관",
+      "description": "의외로 꽤 재밌음",
+      "recommended": false
+    },
+    {
+      "id": "15",
+      "label": "규장각한국학연구원",
+      "description": "캠퍼스 속 고전미",
+      "recommended": false
+    }
+  ]
+}
