@@ -26,7 +26,7 @@ return (
       {/* 트리거 버튼 */}
       <div 
         onClick={() => setIsOpen(prev => !prev)} // 함수형 업데이트(prev는 이전 호출 결과를 정확히 받음) - 이전 상태를 기반으로 할 때
-        className="group relative border border-gray-300 rounded-3xl px-6 py-4 cursor-pointer hover:bg-gray-50 transition-all shadow-sm"
+        className={`group relative flex flex-col gap-1 border border-gray-300 rounded-3xl px-6 py-4 cursor-pointer hover:bg-gray-50 transition-all shadow-sm ${isOpen ? 'bg-white shadow-md border-transparent' : ''}`}
       >
         <div className="text-xs font-bold uppercase tracking-wider">여행자</div>
         <div className={isDefault ? "text-gray-500" : "font-semibold"}>
@@ -45,8 +45,7 @@ return (
       
       {/* 모달 창 */}
       {isOpen && (
-        <div className="absolute top-full mt-3 w-[400px] bg-white border border-gray-200 rounded-3xl p-8 shadow-xl z-50 animate-in fade-in zoom-in duration-200">
-          
+        <div className="absolute top-full mt-3 w-[400px] bg-white border border-gray-200 rounded-3xl p-4 shadow-xl z-50">
           <GuestRow 
             title="성인" 
             description="13세 이상" 
