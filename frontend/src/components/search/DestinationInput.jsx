@@ -9,14 +9,8 @@ export default function DestinationInput({
   
   const handleKeyDown = (e) => {
     if (e.nativeEvent.isComposing) return;
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      onNavigate(1)
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      onNavigate(-1);
-    }
+    if (e.key === 'ArrowDown') {e.preventDefault(); onNavigate(1);} 
+    else if (e.key === 'ArrowUp') {e.preventDefault(); onNavigate(-1);}
   };
 
   return (
@@ -24,6 +18,7 @@ export default function DestinationInput({
       <label htmlFor="destination" className="input-label">여행지</label>
       <input
         id="destination"
+        className="search-input"
         type="text"
         placeholder="어디로 여행가시나요?"
         value={query}

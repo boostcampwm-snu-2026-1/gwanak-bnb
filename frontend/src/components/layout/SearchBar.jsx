@@ -1,9 +1,14 @@
 import React, { useRef, useEffect } from 'react';
 import DestinationInput from '../search/DestinationInput';
 import SearchDropdown from '../search/SearchDropdown';
+import TravelerModal from '../traveler/TravelerModal';
+import '../../styles/Search.css';
 
 function SearchBar({ 
-  adults, children, infants, isModalOpen, setIsModalOpen,
+
+  adults, children, infants, 
+  setAdults, setChildren, setInfants,
+  isModalOpen, setIsModalOpen,
   searchState, updateSearchState 
 }) {
   const searchBarRef = useRef(null);
@@ -88,6 +93,14 @@ function SearchBar({
         >
           {getDisplayText()}
         </button>
+
+        {isModalOpen && (
+          <TravelerModal
+            adults={adults} setAdults={setAdults}
+            children={children} setChildren={setChildren}
+            infants={infants} setInfants={setInfants}
+          />
+        )}
       </div>
 
       <button className="search-icon-button">
