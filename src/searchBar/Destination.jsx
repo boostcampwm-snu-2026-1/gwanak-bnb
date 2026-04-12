@@ -1,22 +1,26 @@
 import { useState, useEffect } from "react";
 
-function Destination ({ setQueryDestination, destination, setIsOpen }) {
+function Destination ({ destination, setQueryDestination, setIsOpen }) {
 
   const [query, setQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const trimmed = query.trim();
 
-    if (!trimmed) {
-      setQueryDestination([]);
-      return;
-    }
-
     const timer = setTimeout(async () => {
       try {
-        const res = await fetch(
-          `/api/destinations/autocomplete?q=${encodeURIComponent(trimmed)}`
-        );
+        setIsLoading(true);
+
+        let url = "";
+
+        if (!trimmed) {
+          url = "/api/destinations";
+        } else {
+          url = `/api/destinations/autocomplete?q=${encodeURIComponent(trimmed)}`;
+        }
+
+        const res = await fetch(url);
 
         if (!res.ok) {
           throw new Error("검색 요청 실패");
@@ -24,6 +28,7 @@ function Destination ({ setQueryDestination, destination, setIsOpen }) {
 
         const data = await res.json();
         setQueryDestination(data);
+
       } catch (err) {
         console.error(err);
         setQueryDestination([]);
@@ -45,6 +50,7 @@ function Destination ({ setQueryDestination, destination, setIsOpen }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
+          {isLoading && <div>검색 중...</div>}
       </div>
   )
 }

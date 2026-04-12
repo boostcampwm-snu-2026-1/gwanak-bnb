@@ -64,9 +64,9 @@ router.get("/autocomplete", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const results = await Destination.find()
-      .sort({ popularity: -1 })
-      .limit(10);
+    const results = await Destination.find({
+      popularity: { $gt: 85 }
+    }).limit(10);
 
     res.json(results);
   } catch (err) {
