@@ -76,7 +76,9 @@
 }
 
 .popular-item:hover,
-.search-result-item:hover {
+.search-result-item:hover,
+.popular-item.highlighted,
+.search-result-item.highlighted {
   background: #f5f5f5;
 }
 
