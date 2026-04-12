@@ -5,15 +5,16 @@ import DestinationRow from './DestinationRow';
 
 function DestinationSelector() {
   const [keyword, setKeyword] = useState("");
+  const [previewValue, setPreviewValue] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef(null);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
-      const input = inputRef.current;
-      input.focus();
-      const length = input.value.length;
-      input.setSelectionRange(length, length);
+      inputRef.current.focus();
+      const length = inputRef.current.value.length;
+      inputRef.current.setSelectionRange(length, length);
     }
   }, [isOpen]);
 
@@ -25,10 +26,43 @@ function DestinationSelector() {
     : RECOMMENDATIONS;
 
   const listLabel = keyword.trim() ? '검색 결과' : '추천 여행지';
+  const displayValue = previewValue !== null ? previewValue : keyword;
+
+  useEffect(() => {
+    if (isOpen && filteredResults.length > 0) {
+      setActiveIndex(0);
+      setPreviewValue(null);
+    }
+  }, [isOpen, filteredResults.length]);
 
   const handleSelect = (title) => {
     setKeyword(title);
+    setPreviewValue(null);
     setIsOpen(false);
+  };
+
+  const handleInputChange = (event) => {
+    setKeyword(event.target.value);
+    setPreviewValue(null);
+  };
+
+  const handleKeyDown = (event) => {
+    if (!isOpen || filteredResults.length === 0) return;
+
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      const nextIndex = event.key === 'ArrowDown'
+        ? (activeIndex + 1) % filteredResults.length
+        : (activeIndex - 1 + filteredResults.length) % filteredResults.length;
+
+      setActiveIndex(nextIndex);
+      setPreviewValue(filteredResults[nextIndex].title);
+    }
+
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSelect(filteredResults[activeIndex].title);
+    }
   };
 
   return (
@@ -43,12 +77,13 @@ function DestinationSelector() {
           ref={inputRef}
           type="text"
           placeholder="여행지 검색"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+          value={displayValue}
+          onChange={handleInputChange}
           onClick={(e) => {
             e.stopPropagation();
             if (!isOpen) setIsOpen(true);
           }}
+          onKeyDown={handleKeyDown}
           className="bg-transparent outline-none text-sm font-semibold placeholder-gray-500 w-full"
         />
       </div>
@@ -58,11 +93,12 @@ function DestinationSelector() {
           <p className="text-xs font-bold p-4">{listLabel}</p>
           <div className="max-h-[400px] overflow-y-auto">
             {filteredResults.length > 0 ? (
-              filteredResults.map((item) => (
+              filteredResults.map((item, index) => (
                 <DestinationRow
                   key={item.id}
                   title={item.title}
                   description={item.description}
+                  isActive={index === activeIndex}
                   onClick={() => handleSelect(item.title)}
                 />
               ))
