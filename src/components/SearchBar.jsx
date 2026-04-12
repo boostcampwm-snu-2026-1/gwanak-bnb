@@ -7,6 +7,7 @@ import { SearchIcon } from './icons'
 
 function SearchBar({
   activeTab,
+  destinationSelection,
   dateSelection,
   dateActions,
   guestSelection,
@@ -17,8 +18,8 @@ function SearchBar({
     <section className="relative rounded-full border border-zinc-200/80 bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
       <div className="grid grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto_minmax(0,1fr)_auto] items-center">
         <DestinationSelector
-          summaryText="여행지 검색"
-          hasValue={false}
+          summaryText={destinationSelection.summaryText}
+          hasValue={destinationSelection.hasValue}
           isSelected={activeTab === 'destination'}
           onSelect={() => onSelectTab('destination')}
         />

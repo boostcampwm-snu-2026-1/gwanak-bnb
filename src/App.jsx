@@ -13,6 +13,7 @@ import {
 
 function App() {
   const [activeTab, setActiveTab] = useState(null)
+  const [selectedDestination, setSelectedDestination] = useState(null)
   const [dateModalTab, setDateModalTab] = useState('exact')
   const [checkInDate, setCheckInDate] = useState(null)
   const [checkOutDate, setCheckOutDate] = useState(null)
@@ -30,6 +31,7 @@ function App() {
 
   const searchAreaRef = useRef(null)
 
+  const hasDestinationValue = selectedDestination !== null
   const totalGuests = guests.adults + guests.children
   const hasGuestValue =
     guests.adults > 0 ||
@@ -63,6 +65,13 @@ function App() {
 
     return `${guestLabel} · ${extraLabels.join(' · ')}`
   }, [guests.infants, guests.pets, totalGuests])
+  const destinationSummaryText = useMemo(() => {
+    if (!selectedDestination) {
+      return '여행지 검색'
+    }
+
+    return selectedDestination.title
+  }, [selectedDestination])
   const dateSummaryText = useMemo(() => {
     const formatDateSummary = (date, flexibility) => {
       const formattedDate = formatDayLabel(date)
@@ -118,6 +127,11 @@ function App() {
 
   const handleSelectTab = (tab) => {
     setActiveTab((prev) => (prev === tab ? null : tab))
+  }
+
+  const handleSelectDestination = (destination) => {
+    setSelectedDestination(destination)
+    setActiveTab(null)
   }
 
   const handleSelectExactDate = (date) => {
@@ -256,6 +270,14 @@ function App() {
     }
   }, [])
 
+  const destinationSelection = {
+    selectedDestination,
+    hasValue: hasDestinationValue,
+    summaryText: destinationSummaryText,
+  }
+  const destinationActions = {
+    onSelectDestination: handleSelectDestination,
+  }
   const dateSelection = {
     modalTab: dateModalTab,
     hasValue: hasDateValue,
@@ -297,6 +319,8 @@ function App() {
             <div ref={searchAreaRef} className="min-w-[720px]">
               <SearchBar
                 activeTab={activeTab}
+                destinationSelection={destinationSelection}
+                destinationActions={destinationActions}
                 dateSelection={dateSelection}
                 dateActions={dateActions}
                 guestSelection={guestSelection}
