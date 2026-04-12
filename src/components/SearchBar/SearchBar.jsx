@@ -1,13 +1,11 @@
 import GuestSelector from '../GuestSelector/GuestSelector';
+import LocationInput from '../LocationInput/LocationInput';
 import styles from './SearchBar.module.css';
 
 function SearchBar() {
   return (
     <div className={styles.searchBar}>
-      <div className={styles.field}>
-        <span className={styles.label}>여행지</span>
-        <span className={styles.value}>여행지 검색</span>
-      </div>
+      <LocationInput />
       <div className={styles.divider} />
       <div className={styles.field}>
         <span className={styles.label}>날짜</span>
