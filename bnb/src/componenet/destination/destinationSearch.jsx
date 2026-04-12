@@ -2,7 +2,7 @@ import './destination.css'
 import { useSearch } from '../../context/searchContext'
 
 function DestinationSearch() {
-    const { isOpenDestination, onToggleDestination, searchTerm, setSearchTerm } = useSearch();
+    const { isOpenDestination, onToggleDestination, destination } = useSearch();
     return (
         <div 
             className={`search ${isOpenDestination ? 'active-left' : ''}`}
@@ -10,11 +10,13 @@ function DestinationSearch() {
         >
             <div>
                 <h6>여행지</h6>
-                <form 
-                    className='input-dest'
-                    onChange={(e) => setSearchTerm(e.target.value)}    
-                >
-                    <input className='onhover' placeholder='여행지 검색'/>
+                <form className='input-dest'>
+                    <input 
+                        className='onhover' 
+                        placeholder='여행지 검색'
+                        value={destination.searchTerm}
+                        onChange={(e) => destination.onSearchChange(e.target.value)}    
+                    />
                 </form>
             </div>
             <div className='divider-right'></div>

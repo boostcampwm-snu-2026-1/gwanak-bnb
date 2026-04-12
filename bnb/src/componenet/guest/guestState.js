@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
 const useGuestState = () => {
-    const [isOpenGuest, setisOpenGuest] = useState(false);
-    const onToggle = () => setisOpenGuest(!isOpenGuest);
-
     const [counts, setCounts] = useState({
         adults: 0,
         children: 0,
@@ -28,9 +25,7 @@ const useGuestState = () => {
             pets: 0
         });
     };
-
-    const showReset = isOpenGuest && guestCount > 0;
-
+ 
     return {
         guestMessage,
         onReset,

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import useGuestState from "../componenet/guest/guestState";
+import useDestinationState from "../componenet/destination/destinationState";
 
 const SearchContext = createContext();
 
@@ -28,7 +29,7 @@ export const SearchProvider = ({ children }) => {
     const showResetGuest = isOpenGuest && hasGuest;
 
     // 여행지 관리 변수
-    const [searchTerm, setSearchTerm] = useState("");
+    const destination = useDestinationState();
 
     const value = {
         activeModal,
@@ -41,8 +42,7 @@ export const SearchProvider = ({ children }) => {
         onToggleGuest: toggleGuest,
         onToggleDestination: toggleDestination,
         guest,
-        searchTerm,
-        setSearchTerm
+        destination
     };
 
     return (
