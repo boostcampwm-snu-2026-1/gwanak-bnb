@@ -1,0 +1,17 @@
+export const LOCATION_SUGGESTIONS = [
+  "Seoul, South Korea",
+  "Busan, South Korea",
+  "Jeju, South Korea",
+  "Tokyo, Japan",
+  "Osaka, Japan",
+  "Kyoto, Japan",
+  "Bangkok, Thailand",
+  "Singapore",
+  "Bali, Indonesia",
+  "Paris, France",
+  "London, United Kingdom",
+  "New York, United States",
+  "San Francisco, United States",
+  "Sydney, Australia",
+  "Vancouver, Canada",
+];

@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import SuggestionItem from "./SuggestionItem";
-
-const EXAMPLE_SUGGESTIONS = [
-  "Seoul, Korea",
-  "Tokyo, Japan",
-  "Pittsburgh, US",
-  "Budapest, Hungary"
-];
+import { LOCATION_SUGGESTIONS } from "./data/locationSuggestions";
 
 function SelectLocation() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [highlightIndex, setHighlightIndex] = useState(-1);
-  const [suggestions] = useState(EXAMPLE_SUGGESTIONS);
   const displayText = query || "Search destinations";
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredSuggestions = normalizedQuery
+    ? LOCATION_SUGGESTIONS.filter((item) => item.toLowerCase().includes(normalizedQuery))
+    : LOCATION_SUGGESTIONS;
 
   return (
     <div className="location-wrapper">
@@ -32,9 +28,11 @@ function SelectLocation() {
             placeholder="Search destinations"
           />
           <ul className="suggestion-list">
-            {suggestions.map((item, index) => (
-              <SuggestionItem key={item} label={item} isActive={index === highlightIndex} />
-            ))}
+            {filteredSuggestions.length > 0 ? (
+              filteredSuggestions.map((item) => <SuggestionItem key={item} label={item} />)
+            ) : (
+              <li className="suggestion-item">No destinations found</li>
+            )}
           </ul>
         </div>
       )}
