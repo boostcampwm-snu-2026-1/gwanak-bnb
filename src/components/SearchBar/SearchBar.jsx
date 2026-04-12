@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import GuestSelector from '../GuestSelector/GuestSelector'
+import LocationSearch from '../LocationSearch/LocationSearch'
 import './SearchBar.css'
 
 function SearchBar() {
   const [isGuestOpen, setIsGuestOpen] = useState(false)
+  const [isLocationOpen, setIsLocationOpen] = useState(false)
+  const [selectedLocation, setSelectedLocation] = useState('')
   const [guests, setGuests] = useState({
     adults: 0,
     children: 0,
@@ -17,12 +20,32 @@ function SearchBar() {
       ? `게스트 ${totalGuests}명${guests.infants > 0 ? `, 유아 ${guests.infants}명` : ''}${guests.pets > 0 ? `, 반려동물 ${guests.pets}마리` : ''}`
       : '게스트 추가'
 
+  const handleLocationClick = () => {
+    setIsLocationOpen(!isLocationOpen)
+    setIsGuestOpen(false)
+  }
+
+  const handleGuestClick = () => {
+    setIsGuestOpen(!isGuestOpen)
+    setIsLocationOpen(false)
+  }
+
+  const handleLocationSelect = (name) => {
+    setSelectedLocation(name)
+    setIsLocationOpen(false)
+  }
+
   return (
     <div className="search-bar-wrapper">
       <div className="search-bar">
-        <button className="search-field">
+        <button
+          className={`search-field ${isLocationOpen ? 'active' : ''}`}
+          onClick={handleLocationClick}
+        >
           <span className="field-label">여행지</span>
-          <span className="field-value placeholder">여행지 검색</span>
+          <span className={`field-value ${selectedLocation ? '' : 'placeholder'}`}>
+            {selectedLocation || '여행지 검색'}
+          </span>
         </button>
         <span className="divider" />
         <button className="search-field">
@@ -37,7 +60,7 @@ function SearchBar() {
         <span className="divider" />
         <button
           className={`search-field guest-field ${isGuestOpen ? 'active' : ''}`}
-          onClick={() => setIsGuestOpen(!isGuestOpen)}
+          onClick={handleGuestClick}
         >
           <div className="guest-field-text">
             <span className="field-label">여행자</span>
@@ -48,6 +71,13 @@ function SearchBar() {
           <span className="search-icon">🔍</span>
         </button>
       </div>
+
+      {isLocationOpen && (
+        <LocationSearch
+          onSelect={handleLocationSelect}
+          onClose={() => setIsLocationOpen(false)}
+        />
+      )}
 
       {isGuestOpen && (
         <GuestSelector
