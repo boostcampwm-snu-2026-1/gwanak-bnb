@@ -84,3 +84,7 @@
 .color-green {
     color: green;
 }
+
+.active {
+    background-color: #eee;
+}

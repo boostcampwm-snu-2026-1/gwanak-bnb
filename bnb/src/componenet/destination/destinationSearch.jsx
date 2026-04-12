@@ -28,7 +28,8 @@ function DestinationSearch() {
                         onClick={(e) => {
                             e.stopPropagation();
                             if (!isOpenDestination) onToggleDestination();
-                        }}   
+                        }}
+                        onKeyDown={destination.handleKeyDown}
                     />
                 </form>
             </div>

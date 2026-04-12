@@ -39,12 +39,40 @@ const useDestinationState = () => {
     };
 
     const displayList = getFilteredList();
+
+    //
+    const [selectedIndex, setSelectedIndex] = useState(-1);
+
+    useEffect(() => {
+        setSelectedIndex(-1);
+    }, [searchTerm]);
+
+    const handleKeyDown = (e) => {
+        const listLength = displayList.length;
+        if (listLength === 0) return;
+
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setSelectedIndex(prev => (prev < listLength - 1 ? prev + 1 : -1));
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setSelectedIndex(prev => (prev > -1 ? prev - 1 : displayList.length - 1));
+        } else if (e.key === "Enter") {
+            if (selectedIndex >= 0) {
+                e.preventDefault();
+                onSearchChange(displayList[selectedIndex].title);
+                setSelectedIndex(-1);
+            }
+        }
+    };
     
     return {
         searchTerm,
         setSearchTerm,
         onSearchChange,
-        displayList
+        displayList,
+        selectedIndex,
+        handleKeyDown
     };
 };
 

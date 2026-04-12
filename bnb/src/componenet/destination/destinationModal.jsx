@@ -8,12 +8,13 @@ function DestinationModal() {
     return (
         isOpenDestination && destination.displayList.length > 0 && (
         <div className='modal-destination'>
-            {destination.displayList.map((item => (
+            {destination.displayList.map(((item, index) => (
                 <DestinationRow 
                     key={item.id}
                     iconClass={item.icon}
                     destination={item.title}
                     desc={item.desc}
+                    isActive={index === destination.selectedIndex}
                 />
             )))}
         </div>)
