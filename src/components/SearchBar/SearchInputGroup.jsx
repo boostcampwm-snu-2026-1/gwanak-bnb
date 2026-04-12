@@ -5,8 +5,9 @@ import LocationModal from '../Location/LocationModal';
 import './SearchInputGroup.css';
 
 
-function SearchInputGroup({ guests, setGuests, activeField, setActiveField }) {
+function SearchInputGroup({ activeField, setActiveField }) {
     const [locationQuery, setLocationQuery] = useState('');
+    const [guests, setGuests] = useState({ adult: 0, child: 0, infant: 0, dogs: 0 });
 
     const getGuestSummary = () =>{
         const total = guests.adult + guests.child;
