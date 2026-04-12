@@ -52,3 +52,7 @@ color: #222;
 	font-weight: 800;
 	color: #222;
 }
+
+.spot-item.focused {
+	background-color: #f7f7f7;
+}
