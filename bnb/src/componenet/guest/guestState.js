@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 const useGuestState = () => {
+    // 여행자 수
     const [counts, setCounts] = useState({
         adults: 0,
         children: 0,
@@ -10,6 +11,7 @@ const useGuestState = () => {
 
     const guestCount = counts.adults + counts.children + counts.infants + counts.pets;
 
+    // 여행자 수에 따른 표시 메시지
     const getGuestMessage = () => {
         if (guestCount === 0) return '게스트 추가';
 
@@ -17,6 +19,7 @@ const useGuestState = () => {
     }
     const guestMessage = getGuestMessage();
 
+    // 여행자 초기화 버튼
     const onReset = () => {
         setCounts({
             adults: 0,

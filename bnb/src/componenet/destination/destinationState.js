@@ -3,10 +3,12 @@ import { LOCATIONS } from "../../data/location";
 import { RECOMMENDATIONS } from "../../data/recommendation";
 
 const useDestinationState = () => {
+    // 여행지 입력 창에 입력된 검색어
     const [searchTerm, setSearchTerm] = useState("");
     
     const onSearchChange = (value) => setSearchTerm(value);
 
+    // location에서 각 요소의 부모들을 추출
     const getParentDesc = (location) => {
         let parents = [];
         let currentParentId = location.parentId;
@@ -22,6 +24,7 @@ const useDestinationState = () => {
         return parents.reverse().join(" ");
     };
 
+    // 검색어에 따른 리스트
     const getFilteredList = () => {
         if (!searchTerm) return RECOMMENDATIONS;
 
