@@ -1,13 +1,7 @@
-import { useState } from 'react';
 import GuestCounter from './GuestCounter';
 import styles from './GuestModal.module.css';
 
-function GuestModal() {
-  const [adults, setAdults] = useState(0);
-  const [children, setChildren] = useState(0);
-  const [infants, setInfants] = useState(0);
-  const [pets, setPets] = useState(0);
-
+function GuestModal({ adults, setAdults, children, setChildren, infants, setInfants, pets, setPets }) {
   return (
     <div className={styles.modal}>
       <GuestCounter
