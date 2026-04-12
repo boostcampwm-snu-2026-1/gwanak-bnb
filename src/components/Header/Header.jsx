@@ -1,5 +1,5 @@
 import './Header.css';
-import pic1 from '../assets/img/snubnb.png'
+import pic1 from '../../assets/img/snubnb.png'
 
 // 좌상단 아이콘
 function Header() {

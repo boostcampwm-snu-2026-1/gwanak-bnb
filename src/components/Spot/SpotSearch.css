@@ -1,0 +1,42 @@
+.spot-search {
+flex: 1;
+padding: 12px 24px;
+border-radius: 32px;
+cursor: pointer;
+transition: background-color 0.2s ease;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.spot-search:hover {
+background-color: #ebebeb;
+}
+
+.spot-text {
+display: flex;
+flex-direction: column;
+}
+
+.label {
+font-size: 12px;
+font-weight: 800;
+color: #222;
+margin-bottom: 2px;
+}
+
+.spot-input {
+border: none;
+outline: none;
+background: transparent;
+font-size: 14px;
+font-weight: 400;
+color: #222;
+width: 100%;
+padding: 0;
+}
+
+.spot-input::placeholder {
+color: #717171;
+font-weight: 400;
+}

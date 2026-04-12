@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import TravelerPopup from './TravelerPopup' // 여행자 팝업 컴포넌트
+import TravelerPopup from '../Traveler/TravelerPopup' // 여행자 팝업 컴포넌트
+import SpotSearch from '../Spot/SpotSearch'; // 여행지 검색 컴포넌트
 import './SearchBar.css'
 
 function SearchBar() {
@@ -11,10 +12,7 @@ function SearchBar() {
 
   return (
     <div className="search-bar">
-      <div className="spot">
-        <h2>여행지</h2>
-        <span className="placeholder">여행지 검색</span>
-      </div>
+      <SpotSearch />
       
       <div className="divider"></div>
 
