@@ -70,13 +70,13 @@ function FlexibleDatePanel({
     flexibleMonthStart < availableFlexibleMonths.length - VISIBLE_FLEXIBLE_MONTHS
 
   return (
-    <div className="mt-6">
+    <div className="mt-5">
       <div>
         <p className="text-center text-base font-semibold text-zinc-900">
           숙박 기간을 선택하세요.
         </p>
 
-        <div className="mt-4 flex flex-wrap justify-center gap-3">
+        <div className="mt-3 flex flex-wrap justify-center gap-3">
           {FLEXIBLE_STAY_OPTIONS.map((option) => (
             <OptionChip
               key={option}
@@ -88,12 +88,12 @@ function FlexibleDatePanel({
         </div>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-6">
         <p className="text-center text-base font-semibold text-zinc-900">
           여행 날짜를 선택하세요.
         </p>
 
-        <div className="mt-4 flex items-center gap-3">
+        <div className="mt-3 flex items-center gap-3">
           <NavigationButton
             direction="left"
             disabled={!canGoToPreviousFlexibleMonth}
@@ -118,7 +118,7 @@ function FlexibleDatePanel({
                   onClick={() => onChangeFlexibleMonth(monthDate)}
                   aria-pressed={isSelected}
                   className={[
-                    'flex min-h-[110px] flex-col items-center justify-center rounded-[24px] border px-4 py-5 text-center transition',
+                    'flex min-h-[96px] flex-col items-center justify-center rounded-[24px] border px-4 py-4 text-center transition',
                     isSelected
                       ? 'border-zinc-900 bg-white text-zinc-900 shadow-[0_10px_24px_rgba(24,24,27,0.08)]'
                       : 'border-zinc-200 bg-zinc-50 text-zinc-900 hover:border-zinc-400 hover:bg-white',

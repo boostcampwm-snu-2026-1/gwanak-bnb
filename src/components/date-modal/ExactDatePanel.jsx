@@ -40,7 +40,7 @@ function ExactDatePanel({
   }
 
   return (
-    <div className="mt-6">
+    <div className="mt-5">
       <div className="grid grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)_auto] items-start gap-x-4">
         <div className="pt-1">
           <NavigationButton
@@ -57,7 +57,7 @@ function ExactDatePanel({
               {formatMonthYear(monthDate)}
             </h3>
 
-            <div className="mt-4">
+            <div className="mt-3">
               <CalendarMonth
                 monthDate={monthDate}
                 today={today}
@@ -80,7 +80,7 @@ function ExactDatePanel({
         </div>
       </div>
 
-      <div className="mt-4 border-t border-zinc-100 pt-4">
+      <div className="mt-3 border-t border-zinc-100 pt-3">
         <div
           role="group"
           aria-label="유연한 일정"

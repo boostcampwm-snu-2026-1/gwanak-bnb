@@ -1,27 +1,40 @@
+import { useMemo } from 'react'
 import DestinationSelector from './DestinationSelector.jsx'
+import DestinationModal from './DestinationModal.jsx'
 import DateSelector from './DateSelector.jsx'
 import DateModal from './DateModal.jsx'
 import GuestSelector from './GuestSelector.jsx'
 import GuestModal from './GuestModal.jsx'
+import destinations from '../data/destinations.js'
+import { filterDestinations } from '../utils/filterDestinations.js'
 import { SearchIcon } from './icons'
 
 function SearchBar({
   activeTab,
   destinationSelection,
+  destinationActions,
   dateSelection,
   dateActions,
   guestSelection,
+  onOpenTab,
   onSelectTab,
   onChangeGuestCount,
 }) {
+  const filteredDestinations = useMemo(
+    () => filterDestinations(destinationSelection.query, destinations),
+    [destinationSelection.query],
+  )
+
   return (
     <section className="relative rounded-full border border-zinc-200/80 bg-white p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
       <div className="grid grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto_minmax(0,1fr)_auto] items-center">
         <DestinationSelector
-          summaryText={destinationSelection.summaryText}
+          query={destinationSelection.query}
           hasValue={destinationSelection.hasValue}
           isSelected={activeTab === 'destination'}
-          onSelect={() => onSelectTab('destination')}
+          onChangeQuery={destinationActions.onChangeDestinationQuery}
+          onClear={destinationActions.onClearDestinationQuery}
+          onOpen={() => onOpenTab('destination')}
         />
 
         <div className="h-8 w-px bg-zinc-200" />
@@ -61,6 +74,15 @@ function SearchBar({
           <SearchIcon />
         </button>
       </div>
+
+      {activeTab === 'destination' && filteredDestinations.length > 0 ? (
+        <div className="absolute left-0 top-full z-30 mt-4 w-[460px] max-w-[calc(100vw-2rem)]">
+          <DestinationModal
+            destinations={filteredDestinations}
+            onSelectDestination={destinationActions.onSelectDestination}
+          />
+        </div>
+      ) : null}
 
       {activeTab === 'date' ? (
         <div className="absolute left-1/2 top-full z-30 mt-4 w-[880px] max-w-[calc(100vw-2rem)] -translate-x-1/2">

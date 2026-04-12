@@ -14,6 +14,7 @@ import {
 function App() {
   const [activeTab, setActiveTab] = useState(null)
   const [selectedDestination, setSelectedDestination] = useState(null)
+  const [destinationQuery, setDestinationQuery] = useState('')
   const [dateModalTab, setDateModalTab] = useState('exact')
   const [checkInDate, setCheckInDate] = useState(null)
   const [checkOutDate, setCheckOutDate] = useState(null)
@@ -31,7 +32,7 @@ function App() {
 
   const searchAreaRef = useRef(null)
 
-  const hasDestinationValue = selectedDestination !== null
+  const hasDestinationValue = destinationQuery.trim().length > 0
   const totalGuests = guests.adults + guests.children
   const hasGuestValue =
     guests.adults > 0 ||
@@ -65,13 +66,6 @@ function App() {
 
     return `${guestLabel} · ${extraLabels.join(' · ')}`
   }, [guests.infants, guests.pets, totalGuests])
-  const destinationSummaryText = useMemo(() => {
-    if (!selectedDestination) {
-      return '여행지 검색'
-    }
-
-    return selectedDestination.title
-  }, [selectedDestination])
   const dateSummaryText = useMemo(() => {
     const formatDateSummary = (date, flexibility) => {
       const formattedDate = formatDayLabel(date)
@@ -129,9 +123,34 @@ function App() {
     setActiveTab((prev) => (prev === tab ? null : tab))
   }
 
+  const handleOpenTab = (tab) => {
+    if (tab === 'destination' && selectedDestination && !destinationQuery.trim()) {
+      setDestinationQuery(selectedDestination.title)
+    }
+
+    setActiveTab(tab)
+  }
+
   const handleSelectDestination = (destination) => {
     setSelectedDestination(destination)
+    setDestinationQuery(destination.title)
     setActiveTab(null)
+  }
+
+  const handleDestinationQueryChange = (value) => {
+    setDestinationQuery(value)
+
+    if (selectedDestination && value !== selectedDestination.title) {
+      setSelectedDestination(null)
+    }
+
+    setActiveTab('destination')
+  }
+
+  const handleClearDestinationQuery = () => {
+    setSelectedDestination(null)
+    setDestinationQuery('')
+    setActiveTab('destination')
   }
 
   const handleSelectExactDate = (date) => {
@@ -272,10 +291,12 @@ function App() {
 
   const destinationSelection = {
     selectedDestination,
+    query: destinationQuery,
     hasValue: hasDestinationValue,
-    summaryText: destinationSummaryText,
   }
   const destinationActions = {
+    onChangeDestinationQuery: handleDestinationQueryChange,
+    onClearDestinationQuery: handleClearDestinationQuery,
     onSelectDestination: handleSelectDestination,
   }
   const dateSelection = {
@@ -324,6 +345,7 @@ function App() {
                 dateSelection={dateSelection}
                 dateActions={dateActions}
                 guestSelection={guestSelection}
+                onOpenTab={handleOpenTab}
                 onSelectTab={handleSelectTab}
                 onChangeGuestCount={handleGuestCountChange}
               />
