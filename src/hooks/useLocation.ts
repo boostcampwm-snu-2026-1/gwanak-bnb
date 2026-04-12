@@ -1,9 +1,10 @@
 // hooks/useLocation.ts
 import { useState } from "react";
 import { fetchLocations } from "../api/location";
-import type { LocationItem } from "..//api/location.ts"
+import type { LocationItem } from "../api/location";
+import type { ModalType } from "../components/SearchBar";
 
-export default function useLocation() {
+export default function useLocation(setOpenModal: (modal: ModalType) => void) {
     const [searchQuery, setSearchQuery] = useState("");
     const [locations, setLocations]  = useState<LocationItem[]>([]);
     const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -12,6 +13,9 @@ export default function useLocation() {
     const handleSearch = async (query: string) => {
         setSearchQuery(query);
         const result = await fetchLocations(query);
+        if (result.length === 0) {
+            setOpenModal(null); // 결과 없으면 모달 닫기
+        }
         setLocations(result);
     }
 
@@ -26,8 +30,5 @@ export default function useLocation() {
             setSearchQuery(locations[selectedIndex].display_name);
         }
     }
-
-
-
     return { searchQuery, locations, selectedIndex, handleSearch, handleKeyDown}
 };

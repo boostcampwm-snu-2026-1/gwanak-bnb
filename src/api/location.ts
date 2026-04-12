@@ -9,6 +9,8 @@ export type LocationItem = {
 
 export async function fetchLocations(search: string): Promise<LocationItem[]> {
     const response = await fetch(`${API_URL}/locations?search=${search}`);
-    const data = await response.json()
-    return data;
+
+    if (response.status === 404) return [];
+
+    return await response.json()
 };

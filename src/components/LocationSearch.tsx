@@ -11,7 +11,7 @@ interface LocationSearchProps{
 };
 
 export default function LocationSearch({openModal, setOpenModal, modalRef}:LocationSearchProps) {
-    const { searchQuery, locations, selectedIndex, handleSearch, handleKeyDown} = useLocation();
+    const { searchQuery, locations, selectedIndex, handleSearch, handleKeyDown} = useLocation(setOpenModal);
     return (
         <div ref={modalRef} className="relative flex flex-col px-4 py-2 hover:bg-gray-100 rounded-full cursor-pointer flex-1">
             <span className="text-xs font-semibold">여행지</span>
