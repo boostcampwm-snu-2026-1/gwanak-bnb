@@ -64,6 +64,42 @@ export default function SearchBar() {
     }
   }, [])
 
+  useEffect(() => {
+    const trimmedKeyword = searchKeyword.trim()
+
+    if (trimmedKeyword === '') {
+      setDestinationResults([])
+      setIsLoading(false)
+      setError(null)
+      return
+    }
+
+    const fetchDestinations = async () => {
+      try {
+        setIsLoading(true)
+        setError(null)
+
+        const response = await fetch(
+          `http://localhost:3001/destinations?label:contains=${encodeURIComponent(trimmedKeyword)}`
+        )
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch destinations')
+        }
+
+        const data = await response.json()
+        setDestinationResults(data)
+      } catch (err) {
+        setDestinationResults([])
+        setError(err.message)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchDestinations()
+  }, [searchKeyword])
+
   const guestCount = guests.adults + guests.children
   const guestSummary = guestCount === 0 ? '게스트 추가' : `게스트 ${guestCount}명`
 
@@ -72,7 +108,7 @@ export default function SearchBar() {
   )
 
   const destinationItems =
-    searchKeyword.trim() === '' ? recommendedDestinations : filteredDestinations
+    searchKeyword.trim() === '' ? recommendedDestinations : destinationResults
 
   const handleSelectDestination = (item) => {
     setSelectedDestination(item)
@@ -80,6 +116,14 @@ export default function SearchBar() {
     setSearchKeyword(item.label)
     setHighlightedIndex(-1)
     setOpenPanel(null)
+  }
+
+  const handleClearDestination = () => {
+    setDestinationInput('')
+    setSearchKeyword('')
+    setSelectedDestination(null)
+    setHighlightedIndex(-1)
+    setOpenPanel('destination')
   }
 
   const handleDestinationKeyDown = (e) => {
@@ -130,26 +174,42 @@ export default function SearchBar() {
     <section className="search-bar" ref={searchBarRef}>
       <div className="destination-wrapper">
         <div
-          className="search-bar__section"
+          className="search-bar__section search-bar__section--destination"
           onClick={() => setOpenPanel('destination')}
         >
-          <p className="search-bar__label">여행지</p>
-          <input
-            className="search-bar__input"
-            type="text"
-            placeholder="여행지 검색"
-            value={destinationInput}
-            onClick={() => setOpenPanel('destination')}
-            onChange={(e) => {
-              const value = e.target.value
-              setDestinationInput(value)
-              setSearchKeyword(value)
-              setSelectedDestination(null)
-              setHighlightedIndex(-1)
-              setOpenPanel('destination')
-            }}
-            onKeyDown={handleDestinationKeyDown}
-          />
+          <div className="search-bar__text">
+            <p className="search-bar__label">여행지</p>
+            <input
+              className="search-bar__input"
+              type="text"
+              placeholder="여행지 검색"
+              value={destinationInput}
+              onClick={() => setOpenPanel('destination')}
+              onChange={(e) => {
+                const value = e.target.value
+                setDestinationInput(value)
+                setSearchKeyword(value)
+                setSelectedDestination(null)
+                setHighlightedIndex(-1)
+                setOpenPanel('destination')
+              }}
+              onKeyDown={handleDestinationKeyDown}
+            />
+          </div>
+
+          {destinationInput.trim() !== '' && (
+            <button
+              type="button"
+              className="search-bar__clear-button"
+              onClick={(e) => {
+                e.stopPropagation()
+                handleClearDestination()
+              }}
+              aria-label="여행지 입력 지우기"
+            >
+              ×
+            </button>
+          )}
         </div>
 
         {openPanel === 'destination' && (
@@ -157,8 +217,8 @@ export default function SearchBar() {
             items={destinationItems}
             query={destinationInput}
             highlightedIndex={highlightedIndex}
-            isLoading={false}
-            error={null}
+            isLoading={isLoading}
+            error={error}
             onSelect={handleSelectDestination}
           />
         )}

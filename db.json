@@ -1,0 +1,9 @@
+{
+  "destinations": [
+    { "id": "1", "label": "여수", "description": "전라남도 · 대한민국" },
+    { "id": "2", "label": "부산", "description": "대한민국의 대표 해안 도시" },
+    { "id": "3", "label": "도쿄", "description": "일본 · 대도시 여행지" },
+    { "id": "4", "label": "강릉", "description": "강원도 · 바다 여행지" },
+    { "id": "5", "label": "속초", "description": "강원도 · 해변과 산" }
+  ]
+}
