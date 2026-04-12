@@ -1,12 +1,13 @@
 .container {
-  padding: 8px;
+  padding: 8px 4px;
 }
 
 .title {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: #222;
-  margin: 8px 12px 12px;
+  color: #717171;
+  margin: 4px 12px 8px;
+  letter-spacing: 0.02em;
 }
 
 .list {
@@ -15,7 +16,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0;
 }
 
 .empty {

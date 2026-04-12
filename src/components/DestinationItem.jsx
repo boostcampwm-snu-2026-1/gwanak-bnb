@@ -7,12 +7,10 @@ function DestinationItem({ destination, isHighlighted, onClick }) {
       onClick={onClick}
       onMouseDown={(e) => e.preventDefault()}
     >
-      <div>
-        <div className={styles.iconBox}>📍</div>
-        <div className={styles.text}>
-          <div className={styles.name}>{destination.name}</div>
-          <div className={styles.description}>{destination.description}</div>
-        </div>
+      <div className={styles.iconBox}>📍</div>
+      <div className={styles.text}>
+        <div className={styles.name}>{destination.name}</div>
+        <div className={styles.description}>{destination.description}</div>
       </div>
     </li>
   );

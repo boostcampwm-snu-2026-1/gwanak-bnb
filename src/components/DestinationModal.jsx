@@ -9,12 +9,14 @@ function DestinationModal({
 }) {
   return (
     <div className={styles.modal}>
-      <DestinationList
-        title={isSearching ? null : "추천 여행지"}
-        destinations={destinations}
-        highlightedIndex={highlightedIndex}
-        onSelect={onSelect}
-      />
+      <div className={styles.scrollArea}>
+        <DestinationList
+          title={isSearching ? null : "추천 여행지"}
+          destinations={destinations}
+          highlightedIndex={highlightedIndex}
+          onSelect={onSelect}
+        />
+      </div>
     </div>
   );
 }
