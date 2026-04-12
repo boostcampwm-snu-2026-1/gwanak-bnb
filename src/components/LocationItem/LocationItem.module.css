@@ -1,0 +1,44 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.item:hover {
+  background-color: #f7f7f7;
+}
+
+.active {
+  background-color: #f0f0f0;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+}
+
+.description {
+  font-size: 13px;
+  color: #717171;
+}

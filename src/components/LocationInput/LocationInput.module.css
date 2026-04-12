@@ -1,0 +1,40 @@
+.wrapper {
+  position: relative;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 40px;
+  min-width: 180px;
+}
+
+.field:hover {
+  background-color: #f7f7f7;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.value {
+  font-size: 14px;
+  color: #717171;
+  white-space: nowrap;
+}
+
+.input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #222;
+  background: transparent;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: #717171;
+}

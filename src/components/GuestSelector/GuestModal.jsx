@@ -1,42 +1,40 @@
-import { useState } from 'react';
 import GuestCounter from './GuestCounter';
 import styles from './GuestModal.module.css';
 
-function GuestModal() {
-  const [adults, setAdults] = useState(0);
-  const [children, setChildren] = useState(0);
-  const [infants, setInfants] = useState(0);
-  const [pets, setPets] = useState(0);
+function GuestModal({ guests, setGuests }) {
+  function handleChange(key, delta) {
+    setGuests({ ...guests, [key]: guests[key] + delta });
+  }
 
   return (
     <div className={styles.modal}>
       <GuestCounter
         label="성인"
         description="13세 이상"
-        count={adults}
-        onIncrease={() => setAdults(adults + 1)}
-        onDecrease={() => setAdults(adults - 1)}
+        count={guests.adults}
+        onIncrease={() => handleChange('adults', 1)}
+        onDecrease={() => handleChange('adults', -1)}
       />
       <GuestCounter
         label="어린이"
         description="2~12세"
-        count={children}
-        onIncrease={() => setChildren(children + 1)}
-        onDecrease={() => setChildren(children - 1)}
+        count={guests.children}
+        onIncrease={() => handleChange('children', 1)}
+        onDecrease={() => handleChange('children', -1)}
       />
       <GuestCounter
         label="유아"
         description="2세 미만"
-        count={infants}
-        onIncrease={() => setInfants(infants + 1)}
-        onDecrease={() => setInfants(infants - 1)}
+        count={guests.infants}
+        onIncrease={() => handleChange('infants', 1)}
+        onDecrease={() => handleChange('infants', -1)}
       />
       <GuestCounter
         label="반려동물"
         description="보조동물을 동반하시나요?"
-        count={pets}
-        onIncrease={() => setPets(pets + 1)}
-        onDecrease={() => setPets(pets - 1)}
+        count={guests.pets}
+        onIncrease={() => handleChange('pets', 1)}
+        onDecrease={() => handleChange('pets', -1)}
       />
     </div>
   );

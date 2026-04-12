@@ -1,13 +1,12 @@
 import GuestSelector from '../GuestSelector/GuestSelector';
+import LocationInput from '../LocationInput/LocationInput';
+import SearchIcon from '../../assets/icons/SearchIcon';
 import styles from './SearchBar.module.css';
 
 function SearchBar() {
   return (
     <div className={styles.searchBar}>
-      <div className={styles.field}>
-        <span className={styles.label}>여행지</span>
-        <span className={styles.value}>여행지 검색</span>
-      </div>
+      <LocationInput />
       <div className={styles.divider} />
       <div className={styles.field}>
         <span className={styles.label}>날짜</span>
@@ -16,9 +15,7 @@ function SearchBar() {
       <div className={styles.divider} />
       <GuestSelector />
       <button className={styles.searchButton}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 24 24">
-          <path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-        </svg>
+        <SearchIcon />
         검색
       </button>
     </div>
