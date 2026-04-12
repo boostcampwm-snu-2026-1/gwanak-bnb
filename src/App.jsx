@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import GuestRow from './components/GuestRow'
 import GuestSelector from './components/GuestSelector'
 
 function App() {

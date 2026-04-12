@@ -1,79 +1,31 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import GuestRow from './GuestRow';
+import { guestReducer, INITIAL_GUESTS, GUEST_LIMITS } from './GuestReducer';
 
 function GuestSelector() {
   const [isOpen, setIsOpen] = useState(false); // 처음에는 닫혀있음(false)
-  const [adults, setAdults] = useState(0);
-  const [children, setChildren] = useState(0);
-  const [infants, setInfants] = useState(0);
-  const [pets, setPets] = useState(0);
+  const [guests, dispatch] = useReducer(guestReducer, INITIAL_GUESTS);
+  const { adults, children, infants, pets } = guests;
   
   const totalGuests = adults + children; // 성인 + 어린이 합계
-  const isMaxGuestsReached = totalGuests >= 16;
-  const needsAdult = children > 0 || infants > 0 || pets > 0;
   const isDefault = totalGuests <= 0 && infants <= 0 && pets <= 0;
 
   const guestSummary = isDefault 
     ? "게스트 추가" 
     : `게스트 ${totalGuests}명${infants > 0 ? `, 유아 ${infants}명` : ""}${pets > 0 ? `, 반려동물 ${pets}마리` : ""}`;
 
-  const handleIncreaseAdult = () => {
-    if (totalGuests < 16) {
-      setAdults(prev => prev + 1);
-    }
-  };
-
-  const handleDecreaseAdult = () => {
-    // 다른 게스트가 있는데 성인을 0으로 만들려고 하면 차단
-    if (needsAdult && adults <= 1) return;
-    if (adults > 0) setAdults(prev => prev - 1);
-  };
-
-  const handleIncreaseChildren = () => {
-    if (isMaxGuestsReached) return;
-
-    // 성인이 0명인데 어린이를 추가하면 성인도 자동으로 1명 추가
-    if (adults === 0) {
-        setAdults(1);
-        setChildren(prev => prev + 1);
-    } else{
-      setChildren(prev => prev + 1);
-    }
-  };
-
-  const handleIncreaseInfants = () => {
-    if (infants >= 5) return; // 유아 최대 5명 제한
-
-    if (adults === 0) {
-      setAdults(1);
-    }
-    setInfants(prev => prev + 1);
-  };
-
-  const handleIncreasePets = () => {
-    if (pets >= 5) return; // 반려동물 최대 5마리 제한
-
-    if (adults === 0) {
-      setAdults(1);
-    }
-    setPets(prev => prev + 1);
-  };
-
   const handleReset = (e) => {
     // 부모 요소로 클릭 이벤트가 퍼지는 것을 방지
     e.stopPropagation(); 
     
-    setAdults(0);
-    setChildren(0);
-    setInfants(0);
-    setPets(0);
+    dispatch({ type: 'RESET' });
   };
 
 return (
     <div className="relative w-full max-w-sm">
       {/* 트리거 버튼 */}
       <div 
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(prev => !prev)} // 함수형 업데이트(prev는 이전 호출 결과를 정확히 받음) - 이전 상태를 기반으로 할 때
         className="group relative border border-gray-300 rounded-3xl px-6 py-4 cursor-pointer hover:bg-gray-50 transition-all shadow-sm"
       >
         <div className="text-xs font-bold uppercase tracking-wider">여행자</div>
@@ -99,50 +51,40 @@ return (
             title="성인" 
             description="13세 이상" 
             count={adults} 
-            onIncrease={handleIncreaseAdult} 
-            onDecrease={handleDecreaseAdult} 
+            onIncrease={() => dispatch({ type: 'adults', delta: 1 })}
+            onDecrease={() => dispatch({ type: 'adults', delta: -1 })}
             isMin={adults === 0 || ((children > 0 || infants > 0 || pets > 0) && adults <= 1)} 
-            isMax={isMaxGuestsReached} 
+            isMax={totalGuests >= GUEST_LIMITS.guests.max}
           />
 
           <GuestRow 
             title="어린이" 
             description="2~12세" 
             count={children} 
-            onIncrease={handleIncreaseChildren} 
-            onDecrease={() => children > 0 && setChildren(p => p - 1)} 
+            onIncrease={() => dispatch({ type: 'children', delta: 1 })}
+            onDecrease={() => dispatch({ type: 'children', delta: -1 })}
             isMin={children === 0} 
-            isMax={isMaxGuestsReached} 
+            isMax={totalGuests >= GUEST_LIMITS.guests.max}
           />
 
           <GuestRow 
             title="유아" 
             description="2세 미만" 
             count={infants} 
-            onIncrease={() => {
-              if (infants < 5) {
-                if (adults === 0) setAdults(1);
-                setInfants(p => p + 1);
-              }
-            }} 
-            onDecrease={() => infants > 0 && setInfants(p => p - 1)} 
+            onIncrease={() => dispatch({ type: 'infants', delta: 1 })}
+            onDecrease={() => dispatch({ type: 'infants', delta: -1 })}
             isMin={infants === 0} 
-            isMax={infants >= 5} 
+            isMax={infants >= GUEST_LIMITS.infants.max}
           />
 
           <GuestRow 
             title="반려동물" 
             description="보조동물 동반" 
             count={pets} 
-            onIncrease={() => {
-              if (pets < 5) {
-                if (adults === 0) setAdults(1);
-                setPets(p => p + 1);
-              }
-            }} 
-            onDecrease={() => pets > 0 && setPets(p => p - 1)} 
+            onIncrease={() => dispatch({ type: 'pets', delta: 1 })}
+            onDecrease={() => dispatch({ type: 'pets', delta: -1 })}
             isMin={pets === 0} 
-            isMax={pets >= 5} 
+            isMax={pets >= GUEST_LIMITS.pets.max}
           />
 
         </div>
