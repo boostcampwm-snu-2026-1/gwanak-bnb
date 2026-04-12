@@ -6,6 +6,8 @@ function LocationInput() {
   const [isOpen, setIsOpen] = useState(false);
   const [locations, setLocations] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeIndex, setActiveIndex] = useState(-1);
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -24,9 +26,25 @@ function LocationInput() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filteredLocations = inputValue
-    ? locations.filter((loc) => loc.title.includes(inputValue))
+  const filteredLocations = searchQuery
+    ? locations.filter((loc) => loc.title.includes(searchQuery))
     : locations;
+
+  function handleKeyDown(e) {
+    if (!isOpen) return;
+
+    if (e.key === 'ArrowDown') {
+      const nextIndex = (activeIndex + 1) % filteredLocations.length;
+      setActiveIndex(nextIndex);
+      setInputValue(filteredLocations[nextIndex].title);
+    }
+
+    if (e.key === 'ArrowUp') {
+      const prevIndex = (activeIndex - 1 + filteredLocations.length) % filteredLocations.length;
+      setActiveIndex(prevIndex);
+      setInputValue(filteredLocations[prevIndex].title);
+    }
+  }
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
@@ -37,10 +55,20 @@ function LocationInput() {
           type="text"
           placeholder="여행지 검색"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+            setSearchQuery(e.target.value);
+            setActiveIndex(-1);
+          }}
+          onKeyDown={handleKeyDown}
         />
       </div>
-      {isOpen && <LocationDropdown locations={filteredLocations} />}
+      {isOpen && (
+        <LocationDropdown
+          locations={filteredLocations}
+          activeIndex={activeIndex}
+        />
+      )}
     </div>
   );
 }
