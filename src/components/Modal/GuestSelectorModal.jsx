@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Button from '../atoms/Button'
 
 function CounterRow({ label, description, count, onDecrement, onIncrement, min = 0 }) {
   return (
@@ -69,14 +70,11 @@ export function GuestSelectorModal({ isOpen, onClose, onConfirm }) {
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-800">여행자 선택</h2>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full hover:bg-gray-100 transition"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <Button variant="icon" onClick={onClose}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
-          </button>
+          </Button>
         </div>
 
         <CounterRow
@@ -109,18 +107,8 @@ export function GuestSelectorModal({ isOpen, onClose, onConfirm }) {
         />
 
         <div className="flex items-center justify-between mt-6 pt-4">
-          <button
-            onClick={handleClear}
-            className="text-sm font-medium text-gray-700 underline hover:text-gray-900 transition"
-          >
-            지우기
-          </button>
-          <button
-            onClick={handleConfirm}
-            className="bg-[#FF385C] hover:bg-[#E31C5F] text-white font-semibold px-8 py-3 rounded-xl transition"
-          >
-            완료
-          </button>
+          <Button variant="ghost" size="sm" onClick={handleClear}>지우기</Button>
+          <Button variant="primary" onClick={handleConfirm}>완료</Button>
         </div>
       </div>
     </div>

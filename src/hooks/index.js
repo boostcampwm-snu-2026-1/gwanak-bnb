@@ -1,0 +1,1 @@
+export { useSearchDestinations } from './useSearchDestinations'

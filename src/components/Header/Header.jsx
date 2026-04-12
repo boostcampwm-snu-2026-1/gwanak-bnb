@@ -1,3 +1,5 @@
+import SearchBar from '../Search/SearchBar'
+
 export default function Header({ onGuestClick, guestCount = 0 }) {
   const guestLabel = guestCount > 0 ? `게스트 ${guestCount}명` : '여행자 추가'
 
@@ -5,16 +7,16 @@ export default function Header({ onGuestClick, guestCount = 0 }) {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center h-20">
-          <div className="flex items-center border border-gray-300 rounded-full shadow-sm hover:shadow-md transition-shadow cursor-pointer divide-x divide-gray-300">
-            <button className="px-6 py-3 text-sm font-semibold text-gray-800 hover:bg-gray-50 rounded-l-full text-left">
-              어디로?
-            </button>
-            <button className="px-6 py-3 text-sm text-gray-500 hover:bg-gray-50 text-left">
+          <div className="flex items-center border border-gray-300 rounded-full shadow-sm hover:shadow-md transition-shadow divide-x divide-gray-300 w-full max-w-2xl">
+            <div className="px-6 py-3 flex-1 rounded-l-full hover:bg-gray-50 cursor-text min-w-0">
+              <SearchBar />
+            </div>
+            <button className="px-6 py-3 text-sm text-gray-500 hover:bg-gray-50 text-left whitespace-nowrap">
               날짜 추가
             </button>
             <button
               onClick={onGuestClick}
-              className="px-6 py-3 text-sm hover:bg-gray-50 rounded-r-full text-left flex items-center gap-3"
+              className="px-6 py-3 text-sm hover:bg-gray-50 rounded-r-full text-left flex items-center gap-3 whitespace-nowrap"
             >
               <span className={guestCount > 0 ? 'text-gray-800 font-medium' : 'text-gray-500'}>
                 {guestLabel}
