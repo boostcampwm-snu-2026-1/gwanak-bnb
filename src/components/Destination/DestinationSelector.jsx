@@ -70,22 +70,40 @@ function DestinationSelector() {
       {/* 입력부 */}
       <div 
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`group flex flex-col gap-1 border border-gray-300 rounded-3xl px-6 py-4 cursor-pointer hover:bg-gray-50 transition-all shadow-sm ${isOpen ? 'bg-white shadow-md border-transparent' : ''}`}
+        className={`group relative flex flex-col gap-1 border border-gray-300 rounded-3xl px-6 py-4 cursor-pointer hover:bg-gray-50 transition-all shadow-sm ${isOpen ? 'bg-white shadow-md border-transparent' : ''}`}
       >
         <label className="text-xs font-bold uppercase tracking-wider cursor-pointer">여행지</label>
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="여행지 검색"
-          value={displayValue}
-          onChange={handleInputChange}
-          onClick={(e) => {
-            e.stopPropagation();
-            if (!isOpen) setIsOpen(true);
-          }}
-          onKeyDown={handleKeyDown}
-          className="bg-transparent outline-none text-sm font-semibold placeholder-gray-500 w-full"
-        />
+        <div className="relative">
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="여행지 검색"
+            value={displayValue}
+            onChange={handleInputChange}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (!isOpen) setIsOpen(true);
+            }}
+            onKeyDown={handleKeyDown}
+            className="bg-transparent outline-none text-sm font-semibold placeholder-gray-500 w-full pr-8"
+          />
+          {displayValue && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                setKeyword('');
+                setPreviewValue(null);
+                setIsOpen(true);
+                inputRef.current?.focus();
+              }}
+              className="absolute right-0 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full bg-gray-100 border border-gray-200 text-sm font-bold text-gray-500 hover:bg-gray-200"
+            >
+              ×
+            </button>
+          )}
+        </div>
       </div>
 
       {isOpen && (
