@@ -1,4 +1,4 @@
-import './dateSearch.css'
+import './date.css'
 import '../common/global.css'
 
 function DateSearch() {

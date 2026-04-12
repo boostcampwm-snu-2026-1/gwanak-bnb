@@ -1,5 +1,5 @@
-import '../global.css'
-import './destinationSearch.css'
+import '../common/global.css'
+import './destination.css'
 
 function DestinationSearch() {
     return (
