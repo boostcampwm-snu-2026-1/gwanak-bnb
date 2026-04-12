@@ -1,17 +1,11 @@
 import GuestSelector from "./GuestSelector";
+import DestinationSelector from "./DestinationSelector";
 import styles from "./SearchBar.module.css";
 
 function SearchBar() {
   return (
     <div className={styles.searchBar}>
-      <div className={styles.field}>
-        <span className={styles.fieldLabel}>Where</span>
-        <input
-          className={styles.fieldInput}
-          type="text"
-          placeholder="Search destinations"
-        />
-      </div>
+      <DestinationSelector />
 
       <div className={styles.divider} />
 

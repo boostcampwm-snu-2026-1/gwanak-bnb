@@ -1,12 +1,17 @@
+.container {
+  position: relative;
+  flex: 1;
+}
+
 .field {
   display: flex;
   flex-direction: column;
   padding: 12px 24px;
-  cursor: pointer;
   border-radius: 40px;
-  min-width: 160px;
-  gap: 2px;
+  cursor: pointer;
   align-items: flex-start;
+  gap: 2px;
+  min-width: 160px;
 }
 
 .field:hover {
@@ -20,8 +25,17 @@
   line-height: 16px;
 }
 
-.fieldValue {
+.fieldInput {
+  border: none;
+  background: transparent;
+  outline: none;
   font-size: 14px;
-  color: #717171;
+  color: #222;
+  padding: 0;
+  width: 100%;
   line-height: 18px;
+}
+
+.fieldInput::placeholder {
+  color: #717171;
 }
