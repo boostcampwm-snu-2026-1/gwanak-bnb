@@ -1,11 +1,57 @@
-function Destination() {
+import { useState, useEffect } from "react";
+
+function Destination ({ destination, setQueryDestination, setIsOpen }) {
+
+  const [query, setQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const trimmed = query.trim();
+
+    const timer = setTimeout(async () => {
+      try {
+        setIsLoading(true);
+
+        let url = "";
+
+        if (!trimmed) {
+          url = "/api/destinations";
+        } else {
+          url = `/api/destinations/autocomplete?q=${encodeURIComponent(trimmed)}`;
+        }
+
+        const res = await fetch(url);
+
+        if (!res.ok) {
+          throw new Error("검색 요청 실패");
+        }
+
+        const data = await res.json();
+        setQueryDestination(data);
+
+      } catch (err) {
+        console.error(err);
+        setQueryDestination([]);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 250);
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
+
   return(
-    <>
-        <div>
-            <div>여행지</div>
-            <div>여행지 검색</div>
-        </div>
-    </>
+      <div onClick={() => setIsOpen(prev => !prev)}>
+          <div>여행지</div>
+          <input 
+            type="text"
+            placeholder="여행지를 입력하세요"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          {isLoading && <div>검색 중...</div>}
+      </div>
   )
 }
 
