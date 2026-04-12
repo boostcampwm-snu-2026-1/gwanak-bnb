@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import GuestModal from '../GuestModal/GuestModal'
+import { recommendedDestinations } from '../../mocks/destinations'
+import DestinationDropdown from './DestinationDropdown'
 import SearchFields from './SearchFields'
 import styles from './SearchBar.module.css'
 
@@ -28,6 +30,7 @@ function getGuestSummary({ adults, children, infants, pets }) {
 
 function SearchBar({ guestCounts, setGuestCounts }) {
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
+  const [isDestinationOpen, setIsDestinationOpen] = useState(false)
   const containerRef = useRef(null)
   const guestSummary = getGuestSummary(guestCounts)
 
@@ -42,43 +45,68 @@ function SearchBar({ guestCounts, setGuestCounts }) {
   }
 
   useEffect(() => {
-    if (!isGuestModalOpen) {
+    if (!isGuestModalOpen && !isDestinationOpen) {
       return undefined
     }
 
     const handleOutsideClick = (event) => {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
         setIsGuestModalOpen(false)
+        setIsDestinationOpen(false)
       }
     }
 
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         setIsGuestModalOpen(false)
+        setIsDestinationOpen(false)
       }
     }
-
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
 
     document.addEventListener('mousedown', handleOutsideClick)
     document.addEventListener('keydown', handleEscape)
 
     return () => {
-      document.body.style.overflow = previousOverflow
       document.removeEventListener('mousedown', handleOutsideClick)
       document.removeEventListener('keydown', handleEscape)
     }
+  }, [isGuestModalOpen, isDestinationOpen])
+
+  useEffect(() => {
+    if (!isGuestModalOpen) {
+      return undefined
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
   }, [isGuestModalOpen])
+
+  const handleDestinationFieldClick = () => {
+    setIsGuestModalOpen(false)
+    setIsDestinationOpen((prev) => !prev)
+  }
+
+  const handleGuestFieldToggle = () => {
+    setIsDestinationOpen(false)
+    setIsGuestModalOpen((prev) => !prev)
+  }
 
   return (
     <section className={styles.searchSection}>
       <div className={styles.searchContainer} ref={containerRef}>
         <SearchFields
+          isDestinationOpen={isDestinationOpen}
+          onDestinationFieldClick={handleDestinationFieldClick}
           guestSummary={guestSummary}
           isGuestModalOpen={isGuestModalOpen}
-          onGuestFieldToggle={() => setIsGuestModalOpen((prev) => !prev)}
+          onGuestFieldToggle={handleGuestFieldToggle}
         />
+
+        {isDestinationOpen && <DestinationDropdown destinations={recommendedDestinations} />}
 
         {isGuestModalOpen && (
           <GuestModal
