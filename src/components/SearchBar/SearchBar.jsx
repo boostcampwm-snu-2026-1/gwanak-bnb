@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import GuestModal from '../GuestModal/GuestModal'
+import SearchFields from './SearchFields'
 import styles from './SearchBar.module.css'
 
 function getGuestSummary({ adults, children, infants, pets }) {
@@ -73,30 +74,11 @@ function SearchBar({ guestCounts, setGuestCounts }) {
   return (
     <section className={styles.searchSection}>
       <div className={styles.searchContainer} ref={containerRef}>
-        <div className={styles.searchBar}>
-          <button className={styles.field} type="button">
-            <span className={styles.label}>여행지</span>
-            <span className={styles.placeholder}>여행지 검색</span>
-          </button>
-
-          <button className={styles.field} type="button">
-            <span className={styles.label}>날짜</span>
-            <span className={styles.placeholder}>날짜 추가</span>
-          </button>
-
-          <button
-            className={`${styles.field} ${styles.guestField}`}
-            type="button"
-            onClick={() => setIsGuestModalOpen((prev) => !prev)}
-            aria-expanded={isGuestModalOpen}
-            aria-controls="guest-modal"
-            aria-haspopup="dialog"
-          >
-            <span className={styles.label}>여행자</span>
-            <span className={styles.placeholder}>{guestSummary}</span>
-            <span className={styles.searchButton}>검색</span>
-          </button>
-        </div>
+        <SearchFields
+          guestSummary={guestSummary}
+          isGuestModalOpen={isGuestModalOpen}
+          onGuestFieldToggle={() => setIsGuestModalOpen((prev) => !prev)}
+        />
 
         {isGuestModalOpen && (
           <GuestModal
