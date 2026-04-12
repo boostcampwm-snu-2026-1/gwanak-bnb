@@ -1,19 +1,19 @@
-import '../global.css'
-import './guestSearch.css'
-import { useGuest } from './guestContext';
+import '../common/global.css'
+import './guest.css'
+import { useSearch } from '../../context/searchContext';
 
 function GuestSearch() {
-    const { onToggle, isOpenGuest, guestMessage, onReset, showReset } = useGuest();
+    const { isOpen, onToggleGuest, isOpenGuest, showReset, guest } = useSearch();
     
     return (
         <>
             <div 
                 className={`search ${isOpenGuest ? 'active' : ''}`}
-                onClick={onToggle}
+                onClick={onToggleGuest}
             >
                 <div>
                     <h6>여행자</h6>
-                    <p>{guestMessage}</p>
+                    <p>{guest.guestMessage}</p>
                 </div>
                 <form className='form-actions'>
                     {showReset && (
@@ -22,19 +22,19 @@ function GuestSearch() {
                             className='delete-btn'
                             onClick={(e) => {
                                 e.stopPropagation();
-                                onReset();
+                                guest.onReset();
                             }}
                         >X</button>
                     )}
                     <button 
                         type='button' 
-                        className={`search-btn ${isOpenGuest ? 'search-btn_active' : ''}`}
+                        className={`search-btn ${isOpen ? 'search-btn_active' : ''}`}
                         onClick={(e) => {
                             e.stopPropagation();
                         }}
                     >
                         <i className="fa-solid fa-magnifying-glass fa-lg"></i>
-                        {isOpenGuest && <span style={{ fontSize: '16px', marginLeft: '5px' }}>검색</span>}
+                        {isOpen && <span style={{ fontSize: '16px', marginLeft: '5px' }}>검색</span>}
                     </button>
                 </form>
             </div>

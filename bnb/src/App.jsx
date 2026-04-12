@@ -1,18 +1,18 @@
 import './App.css'
 
-import { GuestProvider } from './componenet/guest/guestContext'
 import GuestSearch from './componenet/guest/guestSearch'
 import GuestCounter from './componenet/guest/guestCounter'
-import { useGuest } from './componenet/guest/guestContext'
 
 import DateSearch from './componenet/date/dateSearch'
 
 import DestinationSearch from './componenet/destination/destinationSearch'
 
+import { SearchProvider } from './context/searchContext'
+
 function App() {
     return (
         <>
-            <GuestProvider>
+            <SearchProvider>
                 <div style={{background: "#eee"}}>
                     <div className='main-container'>
                         <DateSearch />
@@ -21,7 +21,7 @@ function App() {
                     </div>
                 </div>
                 <GuestCounter />
-            </GuestProvider>
+            </SearchProvider>
         </>
     )
 }

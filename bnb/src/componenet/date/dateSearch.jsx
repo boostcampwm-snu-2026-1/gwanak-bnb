@@ -1,5 +1,5 @@
 import './dateSearch.css'
-import '../global.css'
+import '../common/global.css'
 
 function DateSearch() {
     return (

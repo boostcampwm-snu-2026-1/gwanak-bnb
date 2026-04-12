@@ -32,11 +32,8 @@ const useGuestState = () => {
     const showReset = isOpenGuest && guestCount > 0;
 
     return {
-        onToggle,
-        isOpenGuest,
         guestMessage,
         onReset,
-        showReset,
         counts,
         setCounts
     }
