@@ -29,8 +29,21 @@ function SearchInputGroup({ activeField, setActiveField }) {
             >
                 {activeField === 'location' && <LocationModal query={locationQuery} />}
             </SearchField>
-            <SearchField label = "날짜"   placeholder = "날짜 추가" isActive={activeField === 'date'} onClick={() => setActiveField('date')} />
-            <SearchField label = "여행자" placeholder = "게스트 추가" value={getGuestSummary()} isActive={activeField === 'guests'} onClick={() => setActiveField('guests')}>
+            
+            <SearchField 
+                label = "날짜"   
+                placeholder = "날짜 추가" 
+                isActive={activeField === 'date'} 
+                onClick={() => setActiveField('date')} 
+            />
+
+            <SearchField 
+                label = "여행자" 
+                placeholder = "게스트 추가" 
+                value={getGuestSummary()} 
+                isActive={activeField === 'guests'} 
+                onClick={() => setActiveField('guests')}
+            >
                 {activeField === 'guests' && <GuestPickerModal guests={guests} setGuests={setGuests} />}
             </SearchField>
         </div>
