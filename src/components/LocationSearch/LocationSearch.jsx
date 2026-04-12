@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import { popularDestinations } from '../../data/destinations'
+import { useState, useMemo, useEffect, useRef } from 'react'
+import { popularDestinations, allDestinations } from '../../data/destinations'
 import './LocationSearch.css'
 
 function LocationSearch({ onSelect, onClose }) {
@@ -8,6 +8,18 @@ function LocationSearch({ onSelect, onClose }) {
   const panelRef = useRef(null)
 
   const showRecommendations = query.trim() === ''
+
+  const filteredResults = useMemo(() => {
+    if (query.trim() === '') return []
+    const keyword = query.trim().toLowerCase()
+    return allDestinations.filter(
+      (dest) =>
+        dest.name.toLowerCase().includes(keyword) ||
+        dest.description.toLowerCase().includes(keyword)
+    )
+  }, [query])
+
+  const results = showRecommendations ? [] : filteredResults
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -63,6 +75,26 @@ function LocationSearch({ onSelect, onClose }) {
               </button>
             ))}
           </>
+        )}
+
+        {!showRecommendations && results.length > 0 && (
+          results.map((dest) => (
+            <button
+              key={dest.id}
+              className="search-result-item"
+              onClick={() => onSelect(dest.name)}
+            >
+              <span className="result-icon">📍</span>
+              <div className="result-info">
+                <span className="result-name">{dest.name}</span>
+                <span className="result-description">{dest.description}</span>
+              </div>
+            </button>
+          ))
+        )}
+
+        {!showRecommendations && results.length === 0 && (
+          <p className="no-results">검색 결과가 없습니다</p>
         )}
       </div>
     </div>
