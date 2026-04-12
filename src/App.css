@@ -1,6 +1,79 @@
+.app-shell {
+  width: 100%;
+  min-height: 100vh;
+  padding: 32px 16px;
+  box-sizing: border-box;
+}
+
+.searchbar-wrapper {
+  width: 720px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+
+.location-wrapper {
+  position: relative;
+}
+
+.location-pop {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #d0d0d0;
+  border-radius: 999px;
+  background: #fff;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.location-pop:hover {
+  border-color: #222;
+}
+
+.location-panel {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #e7e7e7;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.location-input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.location-input:focus {
+  outline: none;
+  border-color: #222;
+}
+
+.suggestion-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+.suggestion-item {
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.suggestion-item.active {
+  background: #f3f4f6;
+}
+
 .guest-wrapper {
 width: 360px;
-margin: 48px auto;
 position: relative;
 }
 
