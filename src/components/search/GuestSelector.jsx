@@ -1,4 +1,4 @@
-import './GuestSelector.css';
+import styles from './GuestSelector.module.css';
 
 const GUEST_TYPES = [
   { key: 'adults', label: '성인', desc: '13세 이상' },
@@ -22,22 +22,22 @@ export default function GuestSelector({ guests, setGuests }) {
   };
 
   return (
-    <div className="guest-selector">
+    <div className={styles.selector}>
       {GUEST_TYPES.map(({ key, label, desc }) => (
-        <div key={key} className="guest-row">
-          <div className="guest-info">
-            <span className="guest-type">{label}</span>
-            <span className="guest-desc">{desc}</span>
+        <div key={key} className={styles.row}>
+          <div className={styles.info}>
+            <span className={styles.type}>{label}</span>
+            <span className={styles.desc}>{desc}</span>
           </div>
-          <div className="guest-controls">
+          <div className={styles.controls}>
             <button
-              className="guest-btn"
+              className={styles.btn}
               disabled={guests[key] === 0}
               onClick={() => update(key, -1)}
             >-</button>
-            <span className="guest-count">{guests[key]}</span>
+            <span className={styles.count}>{guests[key]}</span>
             <button
-              className="guest-btn"
+              className={styles.btn}
               onClick={() => update(key, 1)}
             >+</button>
           </div>

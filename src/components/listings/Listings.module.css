@@ -1,23 +1,23 @@
-.listings {
+.wrapper {
   padding: 24px;
-  max-width: 1280px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
-.listings-grid {
+.grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
 @media (max-width: 1024px) {
-  .listings-grid {
+  .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  .listings-grid {
+  .grid {
     grid-template-columns: 1fr;
   }
 }
