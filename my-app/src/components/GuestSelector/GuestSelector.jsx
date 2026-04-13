@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import GuestCounter from '../GuestCounter/GuestCounter';
-import styles from './GuestSelector.module.css';
+import overlayStyles from '../../styles/overlay.module.css';
 
 function GuestSelector({ isOpen, onClose }) {
   const [guests, setGuests] = useState({
@@ -21,8 +21,8 @@ function GuestSelector({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+    <div className={overlayStyles.overlay} onClick={onClose}>
+      <div className={overlayStyles.modal} onClick={(e) => e.stopPropagation()}>
         <GuestCounter
           label="성인"
           description="13세 이상"
