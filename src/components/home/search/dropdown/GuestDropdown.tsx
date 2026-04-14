@@ -12,6 +12,7 @@ type GuestDropdownProps = {
   decreaseCount: (guestCategory: GuestCategory) => void;
   increaseCount: (guestCategory: GuestCategory) => void;
   disabledStates: GuestDisabledStates;
+  className?: string;
 };
 
 export const GuestDropdown = ({
@@ -19,9 +20,10 @@ export const GuestDropdown = ({
   decreaseCount,
   increaseCount,
   disabledStates,
+  className,
 }: GuestDropdownProps) => {
   return (
-    <Dropdown>
+    <Dropdown className={className}>
       <div className="flex flex-col">
         {GUEST_TYPES.map((item) => (
           <GuestCounter

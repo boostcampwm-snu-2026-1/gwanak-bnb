@@ -2,7 +2,7 @@ import type { CountButtonDisabledState } from "../../../../hooks/useGuestCount";
 import { IconButton } from "../../../common/IconButton";
 import { Plus, Minus } from "lucide-react";
 
-type GuestCounterProp = {
+type GuestCounterProps = {
   title: string;
   description: string;
   count: number;
@@ -18,7 +18,7 @@ export const GuestCounter = ({
   buttonDisabledStates,
   onDecrease,
   onIncrease,
-}: GuestCounterProp) => {
+}: GuestCounterProps) => {
   return (
     <div className="flex min-w-[330px] flex-row flex-nowrap items-center justify-between gap-2.5 border-b border-b-[#ebebeb] py-6 last:border-none">
       <div className="flex-row">

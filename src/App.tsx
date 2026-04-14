@@ -1,8 +1,8 @@
-import { SearchBar } from "./components/home/search/SearchBar";
+import { SearchBar } from "./components/home/search/searchBar/SearchBar";
 
 function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-screen justify-center pt-10">
       <SearchBar />
     </div>
   );
