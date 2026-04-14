@@ -1,0 +1,220 @@
+.destination-search-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 50%;
+  min-width: min(100%, 300px);
+  max-width: min(560px, calc(100vw - 48px));
+  height: min(540px, 72vh);
+  z-index: 300;
+  background: var(--search-bar-surface, #fff);
+  border: 1px solid var(--search-bar-border, #dddddd);
+  border-radius: 24px;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.destination-search-panel-inner {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 8px 16px 16px;
+  box-sizing: border-box;
+}
+
+.destination-suggestions-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.destination-suggestions-section-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--search-bar-text, #222);
+  padding: 8px 8px 4px;
+  line-height: 1.2;
+}
+
+.destination-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #b0b0b0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--search-bar-text, #222);
+}
+
+.destination-search-input--bar {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-top: 2px;
+  width: 100%;
+  min-height: 22px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--search-bar-text, #222);
+  border-radius: 0;
+}
+
+.destination-search-input--bar::placeholder {
+  color: var(--search-bar-muted, #717171);
+  font-weight: 400;
+}
+
+.destination-search-input--bar:focus {
+  outline: none;
+}
+
+.destination-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-right: 8px;
+}
+
+.destination-suggestion-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.destination-suggestion-item:hover {
+  background: var(--search-bar-hover, #f7f7f7);
+}
+
+.destination-suggestion-item--active {
+  background: var(--search-bar-hover, #ebebeb);
+}
+
+.destination-suggestion-item-thumb-wrap {
+  flex-shrink: 0;
+}
+
+.destination-suggestion-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.destination-suggestion-icon svg {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.destination-suggestion-icon[data-icon='nearby'] {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.destination-suggestion-icon[data-icon='hanok'] {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.destination-suggestion-icon[data-icon='lighthouse'] {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.destination-suggestion-icon[data-icon='seaside'] {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.destination-suggestion-icon[data-icon='seasideWarm'] {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+.destination-suggestion-icon[data-icon='cityNight'] {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.destination-suggestion-icon[data-icon='nature'] {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.destination-suggestion-icon[data-icon='lake'] {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.destination-suggestion-icon[data-icon='metro'] {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.destination-suggestion-icon[data-icon='heritage'] {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.destination-suggestion-icon[data-icon='island'] {
+  background: #cffafe;
+  color: #0e7490;
+}
+
+.destination-suggestion-icon[data-icon='default'] {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.destination-suggestion-item-text {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.destination-suggestion-item-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--search-bar-text, #222);
+  line-height: 1.25;
+}
+
+.destination-suggestion-item-sub {
+  font-size: 12px;
+  color: var(--search-bar-muted, #717171);
+  line-height: 1.3;
+}
+
+.destination-suggestions-empty {
+  padding: 16px 12px;
+  font-size: 14px;
+  color: var(--search-bar-muted, #717171);
+}
+
+@media (max-width: 720px) {
+  .destination-search-panel {
+    width: 100%;
+    max-width: none;
+    left: 0;
+    right: auto;
+    height: min(520px, 62vh);
+  }
+
+  .destination-search-panel-inner {
+    padding-inline: 12px;
+  }
+}

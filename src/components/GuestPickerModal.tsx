@@ -1,12 +1,6 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
+import { formatGuestSummary, type GuestCounts } from './guestPickerUtils'
 import './GuestPickerModal.css'
-
-export type GuestCounts = {
-  adults: number
-  children: number
-  infants: number
-  pets: number
-}
 
 const MAX_TOTAL_GUESTS = 16
 const MIN_ADULTS = 0
@@ -18,28 +12,6 @@ type GuestPickerModalProps = {
   onClose: () => void
   value: GuestCounts
   onChange: (next: GuestCounts) => void
-}
-
-function formatGuestSummary(g: GuestCounts): string {
-  const isDefault =
-    g.adults === 0 && g.children === 0 && g.infants === 0 && g.pets === 0
-  if (isDefault) return '게스트 추가'
-
-  const parts: string[] = []
-  const totalPeople = g.adults + g.children
-  if (totalPeople > 0) {
-    parts.push(`게스트 ${totalPeople}명`)
-  }
-  if (g.infants > 0) {
-    parts.push(`유아 ${g.infants}명`)
-  }
-  if (g.pets > 0) {
-    parts.push(
-      g.pets === 1 ? '반려동물 1마리' : `반려동물 ${g.pets}마리`,
-    )
-  }
-  if (parts.length === 0) return '게스트 추가'
-  return parts.join(', ')
 }
 
 export function GuestPickerModal({
@@ -71,6 +43,11 @@ export function GuestPickerModal({
     [onChange, value],
   )
 
+  const handleClose = useCallback(() => {
+    setServiceAnimalModalOpen(false)
+    onClose()
+  }, [onClose])
+
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
@@ -78,7 +55,7 @@ export function GuestPickerModal({
       if (serviceAnimalModalOpen) {
         setServiceAnimalModalOpen(false)
       } else {
-        onClose()
+        handleClose()
       }
     }
     document.addEventListener('keydown', onKey)
@@ -88,11 +65,7 @@ export function GuestPickerModal({
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prev
     }
-  }, [open, onClose, serviceAnimalModalOpen])
-
-  useEffect(() => {
-    if (!open) setServiceAnimalModalOpen(false)
-  }, [open])
+  }, [open, handleClose, serviceAnimalModalOpen])
 
   useEffect(() => {
     if (!open) return
@@ -107,7 +80,7 @@ export function GuestPickerModal({
       className="guest-modal-root"
       role="presentation"
       onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose()
+        if (e.target === e.currentTarget) handleClose()
       }}
     >
       <div
@@ -122,7 +95,7 @@ export function GuestPickerModal({
           <button
             type="button"
             className="guest-modal-close"
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="닫기"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
@@ -201,7 +174,7 @@ export function GuestPickerModal({
           <span className="guest-modal-summary" aria-live="polite">
             {formatGuestSummary(value)}
           </span>
-          <button type="button" className="guest-modal-done" onClick={onClose}>
+          <button type="button" className="guest-modal-done" onClick={handleClose}>
             닫기
           </button>
         </div>
@@ -353,4 +326,3 @@ function GuestRow({
   )
 }
 
-export { formatGuestSummary }
