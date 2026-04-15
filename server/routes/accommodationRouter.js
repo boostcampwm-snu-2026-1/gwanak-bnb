@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Accommodation from '../models/Accommodation.js';
+import { search } from '../controllers/accommodationController.js';
 
 const router = Router();
 
@@ -23,8 +24,6 @@ router.get('/locations', async (req, res) => {
   res.json(locations);
 });
 
-router.get('/search', (req, res) => {
-  res.json({ message: 'search endpoint ready' });
-});
+router.get('/search', search);
 
 export default router;

@@ -2,10 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import LocationDropdown from '../LocationDropdown/LocationDropdown';
 import styles from './LocationInput.module.css';
 
-function LocationInput() {
+function LocationInput({ inputValue, onInputChange }) {
   const [isOpen, setIsOpen] = useState(false);
   const [locations, setLocations] = useState([]);
-  const [inputValue, setInputValue] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(-1);
   const wrapperRef = useRef(null);
@@ -36,13 +35,13 @@ function LocationInput() {
     if (e.key === 'ArrowDown') {
       const nextIndex = (activeIndex + 1) % filteredLocations.length;
       setActiveIndex(nextIndex);
-      setInputValue(filteredLocations[nextIndex].title);
+      onInputChange(filteredLocations[nextIndex].title);
     }
 
     if (e.key === 'ArrowUp') {
       const prevIndex = (activeIndex - 1 + filteredLocations.length) % filteredLocations.length;
       setActiveIndex(prevIndex);
-      setInputValue(filteredLocations[prevIndex].title);
+      onInputChange(filteredLocations[prevIndex].title);
     }
   }
 
@@ -56,7 +55,7 @@ function LocationInput() {
           placeholder="여행지 검색"
           value={inputValue}
           onChange={(e) => {
-            setInputValue(e.target.value);
+            onInputChange(e.target.value);
             setSearchQuery(e.target.value);
             setActiveIndex(-1);
           }}
@@ -68,7 +67,7 @@ function LocationInput() {
           locations={filteredLocations}
           activeIndex={activeIndex}
           onSelect={(title) => {
-            setInputValue(title);
+            onInputChange(title);
             setSearchQuery('');
             setActiveIndex(-1);
             setIsOpen(false);
