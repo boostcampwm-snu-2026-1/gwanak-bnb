@@ -11,7 +11,7 @@ function LocationInput() {
   const wrapperRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:3001/locations')
+    fetch('http://localhost:3001/api/accommodations/locations')
       .then((res) => res.json())
       .then((data) => setLocations(data));
   }, []);
