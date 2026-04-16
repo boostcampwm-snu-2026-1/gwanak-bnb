@@ -1,20 +1,74 @@
-# Airbnb
+# Gwanak-BnB
 
-An Airbnb-style guest selector UI built with Next.js, focused on practicing React component design and state management.
+An Airbnb-style guest selector UI built with Next.js, focused on practicing React component design, state management, and full-stack integration.
 
-## Tech Stack
+## 🚀 Tech Stack
 
+### Frontend
 - [Next.js](https://nextjs.org/) 16.2.2 (App Router)
 - React 19.2.4 with React Compiler
 - TypeScript
 - Tailwind CSS v4
 
-## Getting Started
+### Backend
+- Express.js (Layered Architecture: Router → Controller → Service → Repository)
+- MongoDB Atlas (Database) & Render (Deployment)
+
+***
+
+## 🏗 Project Architecture & Design
+
+### 1. Backend Architecture
+The backend is structured using a **Layered Architecture** for better maintainability and scalability:
+- **Router**: Defines API endpoints (e.g., `GET /api/accommodations`).
+- **Controller**: Handles HTTP requests, validations, and responses.
+- **Service**: Contains business logic (e.g., filtering accommodations by location and guests).
+- **Repository**: Manages direct database interactions (MongoDB/Mongoose).
+
+### 2. Database Schema (Accommodations Collection)
+Designed as a MongoDB document to support dynamic search results:
+- `_id` (ObjectId, Auto-generated)
+- `name` (String): Accommodation title
+- `location` (String): City/Region (e.g., 서귀포시)
+- `max_guests` (Number): Maximum capacity
+- `price_per_night` (Number): Price calculation
+- `rating` (Number): Average user rating
+- `review_count` (Number): Number of reviews
+- `image_url` (String): Thumbnail image
+
+### 3. Component Structure
+Added search result components while maintaining existing directory patterns:
+```text
+src/
+└── app/
+    ├── components/
+    │   ├── GuestSelector.tsx      # Existing: Reusable guest counter component
+    │   ├── LocationSearch.tsx     # Existing: Location search dropdown
+    │   ├── SearchResult.tsx       # New: Container for fetched accommodations
+    │   └── AccommodationCard.tsx  # New: Individual accommodation UI
+    ├── globals.css
+    ├── layout.tsx
+    └── page.tsx                   # Main page orchestrating Search & Results
+```
+
+***
+
+## ✨ Features
+
+- **Airbnb-style search bar** (destination, date, guests).
+- **Guest selector dropdown** with independent counters for adults, children, and infants.
+- Min/max constraints per guest category (infants capped at 5, others at 16).
+- **Real-time Search**: Fetches accommodations from the Express backend based on Location and Guest count.
+- **Seamless UI**: Results are rendered instantly at the bottom of the page without reloading.
+
+***
+
+## 🛠 Getting Started
 
 ### Prerequisites
-
 - Node.js 18.x or later
 - npm
+- MongoDB (Atlas Cluster URI or Local MongoDB)
 
 ### Installation
 
@@ -26,8 +80,14 @@ npm install
 
 ### Development
 
+To start both the Next.js frontend and Express backend:
+
 ```bash
+# Start Frontend
 npm run dev
+
+# Start Backend (Navigate to server directory if separated)
+npm run server
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -39,27 +99,9 @@ npm run build
 npm run start
 ```
 
-## Project Structure
+***
 
-```
-src/
-└── app/
-    ├── components/
-    │   └── GuestSelector.tsx   # Reusable guest counter component
-    ├── globals.css             # Global styles and Tailwind theme tokens
-    ├── layout.tsx              # Root layout with metadata and font config
-    └── page.tsx                # Main page with search bar and dropdown logic
-```
-
-## Features
-
-- Airbnb-style search bar (destination, date, guests)
-- Guest selector dropdown with independent counters for adults, children, and infants
-- Min/max constraints per guest category (infants capped at 5, others at 16)
-- Dynamic guest summary text derived from state
-- Toggle open/close behavior for the dropdown panel
-
-## Scripts
+## 📜 Scripts
 
 | Command         | Description              |
 |-----------------|--------------------------|
@@ -68,12 +110,4 @@ src/
 | `npm run start` | Start production server  |
 | `npm run lint`  | Run ESLint               |
 
-## Notes
-
-This project is a learning exercise exploring the following React and Next.js concepts:
-
-- Component composition and props interface design
-- Lifting state up to a shared parent
-- Conditional rendering with boolean state
-- `"use client"` directive and client/server component boundaries
-- Tailwind CSS v4 `@theme inline` for custom design tokens
+***
