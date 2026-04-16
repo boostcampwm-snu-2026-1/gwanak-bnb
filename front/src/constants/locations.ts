@@ -20,4 +20,8 @@ export const ALL_LOCATIONS: Location[] = [
   { id: "seoul", name: "서울", region: "대한민국 · 수도", type: "city" },
   { id: "tokyo", name: "도쿄", region: "일본 · 수도", type: "city" },
   { id: "bangkok", name: "방콕", region: "태국 · 수도", type: "city" },
+  { id: "seogwipo", name: "서귀포시", region: "대한민국 · 제주특별자치도", type: "city" },
+  { id: "jeju-city", name: "제주시", region: "대한민국 · 제주특별자치도", type: "city" },
+  { id: "aewol", name: "애월읍", region: "대한민국 · 제주시", type: "area" },
+  { id: "jocheon", name: "조천읍", region: "대한민국 · 제주시", type: "area" },
 ];
