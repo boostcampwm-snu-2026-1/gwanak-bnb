@@ -1,0 +1,31 @@
+export const recommendedDestinations = [
+  { id: 1, name: '서울', region: '한국', icon: '🏙️' },
+  { id: 2, name: '부산', region: '한국', icon: '🏖️' },
+  { id: 3, name: '제주도', region: '한국', icon: '🌴' },
+  { id: 4, name: '강릉', region: '한국', icon: '🌊' },
+  { id: 5, name: '경주', region: '한국', icon: '🏛️' },
+  { id: 6, name: '여수', region: '한국', icon: '⛵' },
+];
+
+export const searchKeywords = [
+  '서울 강남',
+  '서울 홍대',
+  '서울 명동',
+  '서울 이태원',
+  '부산 해운대',
+  '부산 광안리',
+  '부산 서면',
+  '제주도 서귀포',
+  '제주도 애월',
+  '제주도 성산',
+  '강릉 경포대',
+  '강릉 주문진',
+  '경주 불국사',
+  '경주 보문',
+  '여수 돌산',
+  '여수 오동도',
+  '속초',
+  '전주 한옥마을',
+  '담양',
+  '통영',
+];
