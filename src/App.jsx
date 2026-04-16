@@ -32,9 +32,15 @@ function App() {
     setResults(data);
   }
 
+  function handleReset() {
+    setLocation('');
+    setGuests({ adults: 0, children: 0, infants: 0, pets: 0 });
+    setResults(null);
+  }
+
   return (
     <div>
-      <Header />
+      <Header onLogoClick={handleReset} />
       <main className={styles.main}>
         <div className={styles.searchBarWrapper}>
           <SearchBar

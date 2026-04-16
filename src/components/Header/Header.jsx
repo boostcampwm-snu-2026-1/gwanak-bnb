@@ -4,13 +4,13 @@ import styles from './Header.module.css';
 
 const TABS = ['숙소', '체험', '서비스'];
 
-function Header() {
+function Header({ onLogoClick }) {
   const [activeTab, setActiveTab] = useState('숙소');
 
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <div className={styles.logoWrapper}>
+        <div className={styles.logoWrapper} onClick={onLogoClick}>
           <LogoIcon />
           <span className={styles.logoText}>gwanakbnb</span>
         </div>
