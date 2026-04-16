@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import Header from './components/Header/Header';
 import SearchBar from './components/SearchBar/SearchBar';
 import SearchResults from './components/SearchResults/SearchResults';
+import styles from './App.module.css';
 
 function App() {
   const [location, setLocation] = useState('');
@@ -32,15 +34,19 @@ function App() {
 
   return (
     <div>
-      <h1>gwanakbnb</h1>
-      <SearchBar
-        location={location}
-        onLocationChange={setLocation}
-        guests={guests}
-        onGuestsChange={setGuests}
-        onSearch={handleSearch}
-      />
-      <SearchResults results={results} />
+      <Header />
+      <main className={styles.main}>
+        <div className={styles.searchBarWrapper}>
+          <SearchBar
+            location={location}
+            onLocationChange={setLocation}
+            guests={guests}
+            onGuestsChange={setGuests}
+            onSearch={handleSearch}
+          />
+        </div>
+        <SearchResults results={results} />
+      </main>
     </div>
   );
 }
