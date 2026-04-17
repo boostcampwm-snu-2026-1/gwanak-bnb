@@ -5,6 +5,7 @@ import {
   TreePalm,
   Waves,
 } from "lucide-react";
+import heroImage from "@/assets/hero.png";
 
 export const DEFAULT_RECOMMENDATIONS = [
   {
@@ -74,5 +75,56 @@ export const DUMMY_AUTOCOMPLETE_RECOMMENDATIONS = [
     icon: Building2,
     title: "난바, 오사카",
     subtitle: "도톤보리와 가까워 먹거리 중심 여행에 잘 어울려요.",
+  },
+] as const;
+
+export const STAY_SEARCH_RESULTS = [
+  {
+    id: "stay-1",
+    image: heroImage,
+    location: "해운대, 부산",
+    price: 185000,
+    rating: 4.91,
+    maximumGuest: {
+      adult: 4,
+      children: 2,
+    },
+    isPetAvailable: true,
+  },
+  {
+    id: "stay-2",
+    image: heroImage,
+    location: "성수동, 서울",
+    price: 143000,
+    rating: 4.82,
+    maximumGuest: {
+      adult: 2,
+      children: 1,
+    },
+    isPetAvailable: false,
+  },
+  {
+    id: "stay-3",
+    image: heroImage,
+    location: "애월, 제주",
+    price: 212000,
+    rating: 4.97,
+    maximumGuest: {
+      adult: 6,
+      children: 3,
+    },
+    isPetAvailable: true,
+  },
+  {
+    id: "stay-4",
+    image: heroImage,
+    location: "난바, 오사카",
+    price: 168000,
+    rating: 4.76,
+    maximumGuest: {
+      adult: 3,
+      children: 2,
+    },
+    isPetAvailable: false,
   },
 ] as const;

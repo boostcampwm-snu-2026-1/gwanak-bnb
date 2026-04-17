@@ -8,13 +8,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import SearchBar from "./LocationSearchBar/SearchBar";
-
-interface GuestFilter {
-  adult: number;
-  kids: number;
-  infant: number;
-  pets: number;
-}
+import type { GuestFilter } from "@/types";
 
 const FILTER_LABELS: Record<
   keyof GuestFilter,
@@ -27,18 +21,23 @@ const FILTER_LABELS: Record<
 };
 
 interface GuestFilterSelectPopoverProps {
+  onGuestFilterChange?: (guestFilter: GuestFilter) => void;
+  value?: GuestFilter;
   triggerClassName?: ComponentProps<typeof SearchBar>["className"];
 }
 
 export default function GuestFilterSelectPopover({
+  onGuestFilterChange,
   triggerClassName,
+  value,
 }: GuestFilterSelectPopoverProps) {
-  const [guestFilter, setGuestFilter] = useState<GuestFilter>({
+  const [internalGuestFilter, setInternalGuestFilter] = useState<GuestFilter>({
     adult: 0,
     kids: 0,
     infant: 0,
     pets: 0,
   });
+  const guestFilter = value ?? internalGuestFilter;
   const triggerLabelParts = [
     guestFilter.adult > 0 ? `성인 ${guestFilter.adult}명` : null,
     guestFilter.kids > 0 ? `어린이 ${guestFilter.kids}명` : null,
@@ -49,6 +48,16 @@ export default function GuestFilterSelectPopover({
     triggerLabelParts.length > 0
       ? triggerLabelParts.join(", ")
       : "게스트 추가";
+
+  const updateGuestFilter = (updater: (prev: GuestFilter) => GuestFilter) => {
+    const nextGuestFilter = updater(guestFilter);
+
+    if (value === undefined) {
+      setInternalGuestFilter(nextGuestFilter);
+    }
+
+    onGuestFilterChange?.(nextGuestFilter);
+  };
 
   return (
     <Popover>
@@ -75,7 +84,7 @@ export default function GuestFilterSelectPopover({
                 value={guestFilter[key as keyof GuestFilter]}
                 hasBorder={index < Object.keys(FILTER_LABELS).length - 1}
                 onChange={(value) =>
-                  setGuestFilter((prev) => ({
+                  updateGuestFilter((prev) => ({
                     ...prev,
                     [key]: value,
                   }))

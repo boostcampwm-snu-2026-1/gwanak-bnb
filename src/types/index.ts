@@ -27,3 +27,23 @@ export interface LocationSearchResponse {
     count: number;
   };
 }
+
+export interface GuestFilter {
+  adult: number;
+  kids: number;
+  infant: number;
+  pets: number;
+}
+
+export interface StaySearchResult {
+  id: string;
+  image: string;
+  location: string;
+  price: number;
+  rating: number;
+  maximumGuest: {
+    adult: number;
+    children: number;
+  };
+  isPetAvailable: boolean;
+}
