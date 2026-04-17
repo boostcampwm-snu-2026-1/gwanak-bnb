@@ -20,6 +20,7 @@ function App() {
             location={searchState.location}
             count={searchState.count}
             results={searchState.results}
+            error={searchState.error}
           />
         ) : (
           <section className="accommodation-list">

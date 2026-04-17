@@ -14,7 +14,33 @@ function normalize(result) {
   }
 }
 
-function SearchResults({ location, count, results }) {
+function SearchResults({ location, count, results, error }) {
+  if (error) {
+    return (
+      <section className="search-results">
+        <div className="search-results-empty">
+          <p className="search-results-empty-title">검색에 실패했습니다</p>
+          <p className="search-results-empty-description">
+            잠시 후 다시 시도해주세요.
+          </p>
+        </div>
+      </section>
+    )
+  }
+
+  if (count === 0) {
+    return (
+      <section className="search-results">
+        <div className="search-results-empty">
+          <p className="search-results-empty-title">검색 결과가 없습니다</p>
+          <p className="search-results-empty-description">
+            &apos;{location}&apos;에 해당하는 숙소를 찾지 못했어요. 다른 조건으로 검색해보세요.
+          </p>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className="search-results">
       <h2 className="search-results-title">
