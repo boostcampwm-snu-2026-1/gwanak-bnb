@@ -16,7 +16,7 @@ function App() {
     infant: 0,
     pets: 0,
   });
-  const { hasSearched, results, search } = useStaySearch();
+  const { hasSearched, isFetching, results, search } = useStaySearch();
 
   return (
     <section id="center">
@@ -44,7 +44,11 @@ function App() {
       </div>
       {hasSearched ? (
         <div className="grid w-full grid-cols-1 gap-6 pt-2 md:grid-cols-2 xl:grid-cols-3">
-          {results.length > 0 ? (
+          {isFetching ? (
+            <div className="w-full rounded-[1.75rem] border border-dashed border-border/80 bg-background px-6 py-12 text-center text-sm text-muted-foreground md:col-span-2 xl:col-span-3">
+              검색 결과를 불러오는 중입니다.
+            </div>
+          ) : results.length > 0 ? (
             results.map((result) => (
               <StaySearchResultCard key={result.id} result={result} />
             ))

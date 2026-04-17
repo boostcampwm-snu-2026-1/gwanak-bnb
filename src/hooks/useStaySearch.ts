@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import { STAY_SEARCH_RESULTS } from "@/fixtures/data";
 import type { GuestFilter, StaySearchResult } from "@/types";
@@ -34,24 +35,26 @@ const matchesGuestFilter = (
   return true;
 };
 
+const getStaySearchResults = ({ location, guestFilter }: SearchParams) =>
+  STAY_SEARCH_RESULTS.filter(
+    (result) =>
+      matchesLocation(result, location) &&
+      matchesGuestFilter(result, guestFilter)
+  );
+
 export const useStaySearch = () => {
-  const [results, setResults] = useState<StaySearchResult[]>([]);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [searchParams, setSearchParams] = useState<SearchParams | null>(null);
 
-  const search = ({ location, guestFilter }: SearchParams) => {
-    const nextResults = STAY_SEARCH_RESULTS.filter(
-      (result) =>
-        matchesLocation(result, location) &&
-        matchesGuestFilter(result, guestFilter)
-    );
-
-    setResults(nextResults);
-    setHasSearched(true);
-  };
+  const { data = [], isFetching } = useQuery({
+    queryKey: ["stay-search-results", searchParams],
+    queryFn: () => getStaySearchResults(searchParams as SearchParams),
+    enabled: searchParams !== null,
+  });
 
   return {
-    hasSearched,
-    results,
-    search,
+    hasSearched: searchParams !== null,
+    isFetching,
+    results: data,
+    search: setSearchParams,
   };
 };
