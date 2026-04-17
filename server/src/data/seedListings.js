@@ -19,6 +19,9 @@ export const seedListings = [
     imageUrl: 'https://picsum.photos/seed/gwanak-hanok/640/480',
     hostLanguage: 'ko',
     amenities: ['와이파이', '주방', '셀프 체크인', '세탁기'],
+    instantBook: true,
+    selfCheckIn: true,
+    freeCancellation: true,
     availableFrom: '2026-04-20',
     availableTo: '2026-12-31'
   },
@@ -42,6 +45,9 @@ export const seedListings = [
     imageUrl: 'https://picsum.photos/seed/gwanak-view/640/480',
     hostLanguage: 'ko',
     amenities: ['와이파이', '에어컨', '주차', '넷플릭스'],
+    instantBook: true,
+    selfCheckIn: false,
+    freeCancellation: true,
     availableFrom: '2026-04-18',
     availableTo: '2026-11-30'
   },
@@ -65,6 +71,9 @@ export const seedListings = [
     imageUrl: 'https://picsum.photos/seed/gwanak-design/640/480',
     hostLanguage: 'ko',
     amenities: ['와이파이', '업무공간', '전자레인지', '암막커튼'],
+    instantBook: false,
+    selfCheckIn: true,
+    freeCancellation: false,
     availableFrom: '2026-04-19',
     availableTo: '2026-10-31'
   },
@@ -88,6 +97,9 @@ export const seedListings = [
     imageUrl: 'https://picsum.photos/seed/gwanak-quiet/640/480',
     hostLanguage: 'ko',
     amenities: ['와이파이', '세탁기', '주방', '장기숙박 할인'],
+    instantBook: false,
+    selfCheckIn: true,
+    freeCancellation: true,
     availableFrom: '2026-04-22',
     availableTo: '2026-09-30'
   },
@@ -111,6 +123,9 @@ export const seedListings = [
     imageUrl: 'https://picsum.photos/seed/gwanak-loft/640/480',
     hostLanguage: 'ko',
     amenities: ['와이파이', '에어컨', '주방', '건조기', '셀프 체크인'],
+    instantBook: true,
+    selfCheckIn: true,
+    freeCancellation: false,
     availableFrom: '2026-04-21',
     availableTo: '2026-12-20'
   },
@@ -134,6 +149,9 @@ export const seedListings = [
     imageUrl: 'https://picsum.photos/seed/gwanak-nature/640/480',
     hostLanguage: 'ko',
     amenities: ['와이파이', '주차', '반려동물 가능', '주방'],
+    instantBook: false,
+    selfCheckIn: false,
+    freeCancellation: true,
     availableFrom: '2026-04-25',
     availableTo: '2026-12-31'
   },
@@ -157,6 +175,9 @@ export const seedListings = [
     imageUrl: 'https://picsum.photos/seed/gwanak-family/640/480',
     hostLanguage: 'ko',
     amenities: ['와이파이', '주차', '아기침대', '주방', '엘리베이터'],
+    instantBook: true,
+    selfCheckIn: false,
+    freeCancellation: true,
     availableFrom: '2026-04-23',
     availableTo: '2026-11-15'
   },
@@ -180,6 +201,9 @@ export const seedListings = [
     imageUrl: 'https://picsum.photos/seed/gwanak-rooftop/640/480',
     hostLanguage: 'ko',
     amenities: ['와이파이', '루프탑', '바비큐', '주차', '주방'],
+    instantBook: false,
+    selfCheckIn: true,
+    freeCancellation: false,
     availableFrom: '2026-04-28',
     availableTo: '2026-10-31'
   }

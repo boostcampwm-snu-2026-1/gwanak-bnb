@@ -1,5 +1,9 @@
 import { getDatabase } from '../config/database.js';
 
+function escapeLike(value) {
+  return value.replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_');
+}
+
 function buildWhereClause(filters) {
   const conditions = [];
   const params = {};
@@ -39,6 +43,26 @@ function buildWhereClause(filters) {
     params.checkOut = filters.checkOut;
   }
 
+  if (filters.instantBook) {
+    conditions.push('instant_book = 1');
+  }
+
+  if (filters.selfCheckIn) {
+    conditions.push('self_check_in = 1');
+  }
+
+  if (filters.freeCancellation) {
+    conditions.push('free_cancellation = 1');
+  }
+
+  if (filters.amenities?.length) {
+    filters.amenities.forEach((amenity, index) => {
+      const key = `amenity${index}`;
+      conditions.push(`amenities LIKE @${key} ESCAPE '\\'`);
+      params[key] = `%"${escapeLike(amenity)}"%`;
+    });
+  }
+
   const whereClause = conditions.length > 0
     ? `WHERE ${conditions.join(' AND ')}`
     : '';
@@ -67,6 +91,9 @@ export function findListings(filters) {
       image_url AS imageUrl,
       host_language AS hostLanguage,
       amenities,
+      instant_book AS instantBook,
+      self_check_in AS selfCheckIn,
+      free_cancellation AS freeCancellation,
       available_from AS availableFrom,
       available_to AS availableTo
     FROM listings
@@ -78,5 +105,8 @@ export function findListings(filters) {
   return rows.map((row) => ({
     ...row,
     amenities: JSON.parse(row.amenities),
+    instantBook: Boolean(row.instantBook),
+    selfCheckIn: Boolean(row.selfCheckIn),
+    freeCancellation: Boolean(row.freeCancellation),
   }));
 }

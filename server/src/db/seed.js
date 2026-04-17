@@ -11,12 +11,12 @@ function seedDatabase() {
       slug, title, summary, district, neighborhood, category,
       max_guests, bedrooms, beds, baths, price_per_night, cleaning_fee,
       rating, review_count, latitude, longitude, image_url, host_language,
-      amenities, available_from, available_to
+      amenities, instant_book, self_check_in, free_cancellation, available_from, available_to
     ) VALUES (
       @slug, @title, @summary, @district, @neighborhood, @category,
       @maxGuests, @bedrooms, @beds, @baths, @pricePerNight, @cleaningFee,
       @rating, @reviewCount, @latitude, @longitude, @imageUrl, @hostLanguage,
-      @amenities, @availableFrom, @availableTo
+      @amenities, @instantBook, @selfCheckIn, @freeCancellation, @availableFrom, @availableTo
     )
     ON CONFLICT(slug) DO UPDATE SET
       title = excluded.title,
@@ -37,6 +37,9 @@ function seedDatabase() {
       image_url = excluded.image_url,
       host_language = excluded.host_language,
       amenities = excluded.amenities,
+      instant_book = excluded.instant_book,
+      self_check_in = excluded.self_check_in,
+      free_cancellation = excluded.free_cancellation,
       available_from = excluded.available_from,
       available_to = excluded.available_to,
       updated_at = CURRENT_TIMESTAMP
@@ -44,10 +47,13 @@ function seedDatabase() {
 
   const seedTransaction = db.transaction(() => {
     for (const listing of seedListings) {
-      insertListing.run({
-        ...listing,
-        amenities: JSON.stringify(listing.amenities),
-      });
+        insertListing.run({
+          ...listing,
+          amenities: JSON.stringify(listing.amenities),
+          instantBook: listing.instantBook ? 1 : 0,
+          selfCheckIn: listing.selfCheckIn ? 1 : 0,
+          freeCancellation: listing.freeCancellation ? 1 : 0,
+        });
     }
   });
 
