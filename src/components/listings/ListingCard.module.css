@@ -49,6 +49,7 @@
 }
 
 .distance,
+.location,
 .date {
   font-size: 14px;
   color: var(--color-muted);

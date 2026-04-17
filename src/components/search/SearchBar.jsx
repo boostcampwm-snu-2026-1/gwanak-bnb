@@ -3,11 +3,35 @@ import GuestSelector from './GuestSelector';
 import SearchDropdown from './SearchDropdown';
 import styles from './SearchBar.module.css';
 
-export default function SearchBar() {
+function formatDateRange(checkIn, checkOut) {
+  if (!checkIn && !checkOut) {
+    return '언제든 일주일';
+  }
+
+  if (checkIn && !checkOut) {
+    return `${checkIn} 체크인`;
+  }
+
+  if (!checkIn && checkOut) {
+    return `${checkOut} 체크아웃`;
+  }
+
+  return `${checkIn} - ${checkOut}`;
+}
+
+export default function SearchBar({ searchFilters, onSearch }) {
   const [showGuests, setShowGuests] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [guests, setGuests] = useState({ adults: 0, children: 0, infants: 0 });
+  const [searchQuery, setSearchQuery] = useState(searchFilters.location);
+  const [guests, setGuests] = useState({
+    adults: searchFilters.guests,
+    children: 0,
+    infants: searchFilters.infants,
+  });
+  const [dates, setDates] = useState({
+    checkIn: searchFilters.checkIn,
+    checkOut: searchFilters.checkOut,
+  });
   const guestRef = useRef(null);
   const searchRef = useRef(null);
   const inputRef = useRef(null);
@@ -47,6 +71,34 @@ export default function SearchBar() {
     setShowSearch(false);
   }, []);
 
+  const handleDateChange = (field, value) => {
+    setDates((prev) => {
+      const next = { ...prev, [field]: value };
+
+      if (field === 'checkIn' && next.checkOut && value && next.checkOut < value) {
+        next.checkOut = value;
+      }
+
+      if (field === 'checkOut' && next.checkIn && value && value < next.checkIn) {
+        next.checkIn = value;
+      }
+
+      return next;
+    });
+  };
+
+  const handleSubmitSearch = () => {
+    onSearch({
+      location: searchQuery.trim(),
+      guests: totalGuests,
+      infants: guests.infants,
+      checkIn: dates.checkIn,
+      checkOut: dates.checkOut,
+    });
+    setShowGuests(false);
+    setShowSearch(false);
+  };
+
   return (
     <div className={styles.bar}>
       <div className={styles.fieldWrapper} ref={searchRef}>
@@ -68,6 +120,7 @@ export default function SearchBar() {
         )}
         {showSearch && (
           <SearchDropdown
+            key={searchQuery}
             query={searchQuery}
             onQueryChange={handleQueryChange}
             onClose={handleCloseSearch}
@@ -75,9 +128,30 @@ export default function SearchBar() {
         )}
       </div>
       <span className={styles.divider} />
-      <button className={styles.field}>
-        <span className={styles.label}>언제든 일주일</span>
-      </button>
+      <div className={`${styles.field} ${styles.dateField}`}>
+        <div className={styles.dateSummary}>{formatDateRange(dates.checkIn, dates.checkOut)}</div>
+        <div className={styles.dateInputs}>
+          <label className={styles.dateInputGroup}>
+            <span>체크인</span>
+            <input
+              className={styles.dateInput}
+              type="date"
+              value={dates.checkIn}
+              onChange={(e) => handleDateChange('checkIn', e.target.value)}
+            />
+          </label>
+          <label className={styles.dateInputGroup}>
+            <span>체크아웃</span>
+            <input
+              className={styles.dateInput}
+              type="date"
+              min={dates.checkIn || undefined}
+              value={dates.checkOut}
+              onChange={(e) => handleDateChange('checkOut', e.target.value)}
+            />
+          </label>
+        </div>
+      </div>
       <span className={styles.divider} />
       <div className={styles.fieldWrapper} ref={guestRef}>
         <button
@@ -92,7 +166,7 @@ export default function SearchBar() {
           <GuestSelector guests={guests} setGuests={setGuests} />
         )}
       </div>
-      <button className={styles.searchBtn}>
+      <button className={styles.searchBtn} onClick={handleSubmitSearch}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />

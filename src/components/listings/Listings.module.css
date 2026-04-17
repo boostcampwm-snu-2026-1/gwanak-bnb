@@ -4,10 +4,35 @@
   margin: 0 auto;
 }
 
+.summary {
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+}
+
+.emptyState {
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 48px 24px;
+  text-align: center;
+  background: linear-gradient(180deg, #fff 0%, #faf7f2 100%);
+}
+
+.emptyState h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.emptyState p {
+  color: var(--color-muted);
+  font-size: 15px;
 }
 
 @media (max-width: 1024px) {

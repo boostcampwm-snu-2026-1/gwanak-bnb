@@ -16,6 +16,7 @@ export default function ListingCard({ listing }) {
           <h3>{listing.title}</h3>
           <span className={styles.rating}>★ {listing.rating}</span>
         </div>
+        <p className={styles.location}>{listing.location}</p>
         <p className={styles.distance}>{listing.distance}</p>
         <p className={styles.date}>{listing.date}</p>
         <p className={styles.price}><strong>₩{listing.price.toLocaleString()}</strong> /박</p>
