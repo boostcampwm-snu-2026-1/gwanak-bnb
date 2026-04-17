@@ -16,7 +16,7 @@ function App() {
     infant: 0,
     pets: 0,
   });
-  const { hasSearched, isFetching, results, search } = useStaySearch();
+  const { error, hasSearched, isFetching, results, search } = useStaySearch();
 
   return (
     <section id="center">
@@ -47,6 +47,11 @@ function App() {
           {isFetching ? (
             <div className="w-full rounded-[1.75rem] border border-dashed border-border/80 bg-background px-6 py-12 text-center text-sm text-muted-foreground md:col-span-2 xl:col-span-3">
               검색 결과를 불러오는 중입니다.
+            </div>
+          ) : error ? (
+            <div className="w-full rounded-[1.75rem] border border-dashed border-border/80 bg-background px-6 py-12 text-center text-sm text-muted-foreground md:col-span-2 xl:col-span-3">
+              Render 서버에서 숙소 검색 API를 찾지 못했습니다. 현재 배포된
+              서버에는 `/api/stays/search` 가 필요합니다.
             </div>
           ) : results.length > 0 ? (
             results.map((result) => (

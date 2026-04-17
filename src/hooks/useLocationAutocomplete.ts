@@ -1,6 +1,7 @@
 import { useEffect, useState, type ChangeEvent, type KeyboardEvent } from "react";
 
 import { DEFAULT_RECOMMENDATIONS } from "@/fixtures/data";
+import { createApiUrl } from "@/lib/api";
 import { getLocationIcon } from "@/lib/location-icons";
 import type { LocationSearchResponse, RecommendedLocationItem } from "@/types";
 
@@ -33,9 +34,12 @@ export const useLocationAutocomplete = () => {
           searchParams.set("q", typedQuery);
         }
 
-        const response = await fetch(`/api/locations/search?${searchParams.toString()}`, {
-          signal: controller.signal,
-        });
+        const response = await fetch(
+          createApiUrl(`/api/locations/search?${searchParams.toString()}`),
+          {
+            signal: controller.signal,
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch location recommendations");

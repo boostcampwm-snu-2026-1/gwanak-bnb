@@ -47,3 +47,11 @@ export interface StaySearchResult {
   };
   isPetAvailable: boolean;
 }
+
+export interface StaySearchResponse {
+  data: StaySearchResult[];
+  meta: {
+    location: string;
+    count: number;
+  };
+}

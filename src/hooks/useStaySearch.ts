@@ -1,57 +1,57 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { STAY_SEARCH_RESULTS } from "@/fixtures/data";
-import type { GuestFilter, StaySearchResult } from "@/types";
+import { createApiUrl } from "@/lib/api";
+import type {
+  GuestFilter,
+  StaySearchResponse,
+  StaySearchResult,
+} from "@/types";
 
 interface SearchParams {
   location: string;
   guestFilter: GuestFilter;
 }
 
-const matchesLocation = (result: StaySearchResult, location: string) =>
-  location.trim() === "" ||
-  result.location.toLowerCase().includes(location.trim().toLowerCase());
+const getStaySearchResults = async ({
+  location,
+  guestFilter,
+}: SearchParams): Promise<StaySearchResult[]> => {
+  const searchParams = new URLSearchParams();
 
-const matchesGuestFilter = (
-  result: StaySearchResult,
-  guestFilter: GuestFilter
-) => {
-  const adultsRequested = guestFilter.adult;
-  const childrenRequested = guestFilter.kids;
-
-  if (adultsRequested > result.maximumGuest.adult) {
-    return false;
+  if (location.trim() !== "") {
+    searchParams.set("location", location.trim());
   }
 
-  if (childrenRequested > result.maximumGuest.children) {
-    return false;
-  }
+  searchParams.set("adult", String(guestFilter.adult));
+  searchParams.set("children", String(guestFilter.kids));
+  searchParams.set("infant", String(guestFilter.infant));
+  searchParams.set("pets", String(guestFilter.pets));
 
-  if (guestFilter.pets > 0 && !result.isPetAvailable) {
-    return false;
-  }
-
-  return true;
-};
-
-const getStaySearchResults = ({ location, guestFilter }: SearchParams) =>
-  STAY_SEARCH_RESULTS.filter(
-    (result) =>
-      matchesLocation(result, location) &&
-      matchesGuestFilter(result, guestFilter)
+  const response = await fetch(
+    createApiUrl(`/api/stays/search?${searchParams.toString()}`)
   );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch stay search results");
+  }
+
+  const payload = (await response.json()) as StaySearchResponse;
+
+  return payload.data;
+};
 
 export const useStaySearch = () => {
   const [searchParams, setSearchParams] = useState<SearchParams | null>(null);
 
-  const { data = [], isFetching } = useQuery({
+  const { data = [], error, isFetching } = useQuery({
     queryKey: ["stay-search-results", searchParams],
     queryFn: () => getStaySearchResults(searchParams as SearchParams),
     enabled: searchParams !== null,
   });
 
   return {
+    error,
     hasSearched: searchParams !== null,
     isFetching,
     results: data,
