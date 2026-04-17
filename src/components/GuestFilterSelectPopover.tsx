@@ -39,12 +39,15 @@ export default function GuestFilterSelectPopover({
     infant: 0,
     pets: 0,
   });
-  const totalGuests = guestFilter.adult + guestFilter.kids;
+  const triggerLabelParts = [
+    guestFilter.adult > 0 ? `성인 ${guestFilter.adult}명` : null,
+    guestFilter.kids > 0 ? `어린이 ${guestFilter.kids}명` : null,
+    guestFilter.infant > 0 ? `유아 ${guestFilter.infant}명` : null,
+    guestFilter.pets > 0 ? `반려동물 ${guestFilter.pets}마리` : null,
+  ].filter(Boolean);
   const triggerLabel =
-    totalGuests > 0
-      ? `게스트 ${totalGuests}명${
-          guestFilter.infant > 0 ? `, 유아 ${guestFilter.infant}명` : ""
-        }${guestFilter.pets > 0 ? `, 반려동물 ${guestFilter.pets}마리` : ""}`
+    triggerLabelParts.length > 0
+      ? triggerLabelParts.join(", ")
       : "게스트 추가";
 
   return (
