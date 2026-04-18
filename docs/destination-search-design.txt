@@ -1,102 +1,88 @@
-여행지 검색 설계 문서
+관악bnb 검색 설계 요약
 
 1. 목표
 
-- 여행지 입력 시 추천 여행 검색어를 즉시 노출한다.
-- 키보드 ArrowUp, ArrowDown 으로 추천 검색어를 순환 이동할 수 있다.
-- 선택 중인 추천 검색어가 입력창에 바로 보이도록 한다.
-- 입력값 변화에 따라 숙소 목록도 즉시 갱신되도록 한다.
-- 기존 여행자 선택 기능과 충돌하지 않도록 검색 바 상태를 분리한다.
+- React에서 fetch API로 Express 검색 서버를 호출한다.
+- MongoDB stays collection에 저장된 데이터를 조건에 맞게 조회한다.
+- 검색 결과를 같은 페이지 하단에서 즉시 다시 렌더링한다.
 
-2. 컴포넌트 구조
+2. 필수 검색 조건
+
+- 여행지
+- 여행 인원
+
+3. 선택 검색 조건
+
+- 체크인
+- 체크아웃
+- 반려동물
+
+4. 프론트 구조
 
 App
 |- SearchBar
 |  |- DestinationField
-|  |  |- SuggestionList
+|  |- DateRangeField
 |  |- GuestSelector
+|  |- SuggestionList
 |- StayGrid
 
-설계 의도
-- App은 검색 조건과 숙소 데이터처럼 여러 컴포넌트가 함께 쓰는 상태를 관리한다.
-- SearchBar는 검색 바의 레이아웃과 패널 열림/닫힘 연결 역할을 담당한다.
-- DestinationField는 여행지 입력, 추천어 필터링, 키보드 이동을 담당한다.
-- SuggestionList는 추천 검색어 목록 표시만 담당한다.
-- StayGrid는 현재 선택된 여행지 기준으로 숙소 목록을 보여준다.
+5. 백엔드 구조
 
-3. 상태 설계
+server
+|- config
+|- routes
+|- controllers
+|- services
+|- repositories
+|- models
+|- seeds
+|- scripts
 
-3-1. App이 관리하는 상태
+6. 검색 흐름
 
-- destination: 현재 선택된 여행지 검색어. 검색 요약과 숙소 필터링에 함께 사용한다.
-- activePanel: 어떤 레이어를 열지 관리한다. 값은 destination, guests, null 중 하나다.
-- guests: 성인, 어린이, 유아, 반려동물 수를 저장한다.
-- stays: 불러온 숙소 원본 데이터다.
-- isLoading: 숙소 데이터를 불러오는 중인지 표시한다.
-- errorMessage: 데이터 로딩 실패 시 보여줄 메시지다.
+1) 사용자가 여행지와 인원을 입력한다.
+2) SearchBar submit 시 fetch로 /api/stays/search 요청을 보낸다.
+3) Controller가 query를 받아 Service로 넘긴다.
+4) Service가 검색 규칙을 검증하고 Repository용 query를 만든다.
+5) Repository가 MongoDB stays collection을 조회한다.
+6) 결과 JSON을 받아 StayGrid가 같은 화면 아래에 다시 렌더링된다.
 
-3-2. DestinationField가 관리하는 상태
+7. 데이터 모델 핵심 필드
 
-- typedValue: 사용자가 마지막으로 직접 입력한 값이다.
-- activeIndex: 추천 검색어 목록에서 현재 강조된 항목의 인덱스다.
+- slug
+- title
+- summary
+- location
+- city
+- district
+- category
+- keywords
+- maxGuests
+- petFriendly
+- pricePerNight
+- rating
+- reviewCount
+- availability.startDate
+- availability.endDate
 
-typedValue와 destination을 나눈 이유
-- 화살표 키로 추천 검색어를 이동할 때 입력창에는 선택된 추천어가 보여야 한다.
-- 하지만 추천 목록을 필터링하는 기준은 마지막 직접 입력값을 유지해야 탐색 중 목록이 갑자기 바뀌지 않는다.
+8. 실행 순서
 
-4. React Hooks 사용 이유
+- npm install
+- cp .env.example .env
+- MONGO_URI 입력
+- npm run seed
+- npm run dev
 
-- useState
-  화면에 바로 반영되는 검색어, 열린 패널, 여행자 수, 추천 목록 선택 상태를 저장한다.
+9. 배포
 
-- useEffect
-  첫 렌더 이후 fetch로 숙소 데이터를 불러온다.
-  여행지 레이어가 열릴 때 입력창 포커스를 이동한다.
-  바깥 클릭이나 Escape 입력 시 레이어를 닫는 후속 처리를 담당한다.
+- Render용 render.yaml 포함
+- Web Service 타입으로 배포한다
+- 원격 MongoDB URI를 Render 환경변수에 등록하면 된다
 
-- useRef
-  검색 바 바깥 클릭을 감지하기 위한 루트 DOM 참조에 사용한다.
-  자동완성 입력창 포커스 이동과 활성 추천어 스크롤 위치 제어에 사용한다.
+10. 검증
 
-5. 동작 흐름
-
-1) 사용자가 여행지 영역을 클릭하면 activePanel이 destination으로 바뀐다.
-2) DestinationField가 추천 여행 검색어 레이어를 연다.
-3) 사용자가 입력하면 typedValue와 destination이 갱신된다.
-4) 입력값을 기준으로 추천 검색어 목록이 즉시 필터링된다.
-5) ArrowDown, ArrowUp 입력 시 activeIndex가 순환 이동한다.
-6) 현재 강조된 추천 검색어가 입력창에 바로 반영된다.
-7) 같은 검색어를 기준으로 StayGrid의 숙소 목록도 즉시 다시 계산된다.
-8) Enter 또는 마우스 클릭으로 추천어를 확정하면 레이어를 닫는다.
-
-6. 파일 구조
-
-src
-|- App.jsx
-|- components
-|  |- SearchBar.jsx
-|  |- GuestSelector.jsx
-|  |- StayGrid.jsx
-|  |- search
-|     |- DestinationField.jsx
-|     |- DestinationField.module.css
-|     |- SuggestionList.jsx
-|     |- SuggestionList.module.css
-|- data
-   |- destinationSuggestions.js
-
-docs
-|- destination-search-design.md
-|- destination-search-design.txt
-
-7. 스타일 원칙
-
-- 검색 바의 공통 레이아웃은 SearchBar.module.css에서 관리한다.
-- 자동완성 전용 스타일은 search 폴더 아래 CSS Module로 분리한다.
-- 공통 영역과 전용 영역을 분리해 중복 스타일을 줄이고, 파일 이름도 역할 중심으로 맞춘다.
-
-8. 이번 설계에서 제외한 것
-
-- 캘린더 기능은 이번 요구사항의 핵심이 아니므로 정적 텍스트 영역으로 유지했다.
-- 전역 상태 라이브러리는 필요하지 않아 useState 중심으로 구현했다.
-- 자동완성 데이터는 학습 목적에 맞게 로컬 데이터로 관리했다.
+- npm run seed 성공
+- npm run build 성공
+- /api/health 응답 확인
+- /api/stays/search?destination=서울&guests=2 응답 확인
