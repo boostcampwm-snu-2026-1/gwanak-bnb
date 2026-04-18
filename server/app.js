@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config(); // .env 파일의 환경변수 불러오기
 
+const accommodationsRouter = require('./routes/accommodations');
+
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -15,6 +17,8 @@ app.use(express.json()); // JSON 데이터 파싱 허용
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB 연결 성공!'))
   .catch((err) => console.error('❌ MongoDB 연결 실패:', err));
+
+app.use('/api/accommodations', accommodationsRouter);
 
 // 기본 라우트 (서버가 잘 떴는지 확인용)
 app.get('/', (req, res) => {

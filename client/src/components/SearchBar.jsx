@@ -6,7 +6,7 @@ import DestinationInput from './DestinationInput';
 import RecommendBox from './RecommendBox';
 import { destinationData } from '../data/destinations'; // mock 데이터 불러오기
 
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // isModalOpen: 모달 창이 열려있는지 닫혀있는지 기억하는 스위치 (처음에는 false로 시작)
   // setIsModalOpen: isModalOpen 상태 수정할 수 있는 리모컨
@@ -142,7 +142,7 @@ export default function SearchBar() {
       />
 
       {/* 4. 핑크색 검색 버튼 */}
-      <button className="search-submit-btn">
+      <button className="search-submit-btn" onClick={() => onSearch(keyword, totalGuests)}>
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style={{display: 'block', fill: 'none', height: '16px', width: '16px', stroke: 'currentColor', strokeWidth: '4', overflow: 'visible'}}>
           <g fill="none"><path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path></g>
         </svg>
