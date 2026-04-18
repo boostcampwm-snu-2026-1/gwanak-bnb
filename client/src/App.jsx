@@ -12,7 +12,7 @@ function App() {
       console.log(`검색 요청: 여행지=${keyword}, 인원=${totalGuests}`);
       
       // 1. 백엔드 API로 fetch 요청 보내기
-      const response = await fetch(`http://localhost:8080/api/accommodations?location=${keyword}&guests=${totalGuests}`);
+      const response = await fetch(`https://gwanak-bnb-server.onrender.com/api/accommodations?location=${keyword}&guests=${totalGuests}`);
       
       // 2. 응답받은 JSON 데이터 꺼내기
       const data = await response.json();
