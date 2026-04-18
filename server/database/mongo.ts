@@ -4,14 +4,30 @@ import type { LocationRecord } from "../types/location.js";
 import type { StayRecord } from "../types/stay.js";
 
 const mongoUri = process.env.MONGODB_URI?.trim();
-const databaseName = process.env.MONGODB_DB_NAME?.trim();
+const databaseNameFromEnv = process.env.MONGODB_DB_NAME?.trim();
 
 if (!mongoUri) {
   throw new Error("MONGODB_URI is required.");
 }
 
+const getDatabaseNameFromUri = (uri: string) => {
+  const trimmedUri = uri.trim();
+  const pathStartIndex = trimmedUri.lastIndexOf("/");
+
+  if (pathStartIndex === -1) {
+    return undefined;
+  }
+
+  const pathWithQuery = trimmedUri.slice(pathStartIndex + 1);
+  const [databaseName] = pathWithQuery.split("?");
+
+  return databaseName || undefined;
+};
+
+const databaseName = databaseNameFromEnv ?? getDatabaseNameFromUri(mongoUri);
+
 if (!databaseName) {
-  throw new Error("MONGODB_DB_NAME is required.");
+  throw new Error("Set MONGODB_URI with a database name or provide MONGODB_DB_NAME.");
 }
 
 const client = new MongoClient(mongoUri);

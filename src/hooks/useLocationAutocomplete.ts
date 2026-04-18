@@ -1,48 +1,17 @@
-import { disassemble } from "es-hangul";
-import { useState, type ChangeEvent, type KeyboardEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type KeyboardEvent } from "react";
 
-import {
-  DEFAULT_RECOMMENDATIONS,
-  DUMMY_AUTOCOMPLETE_RECOMMENDATIONS,
-} from "@/fixtures/data";
-import type { RecommendedLocationItem } from "@/types";
+import { createApiUrl } from "@/lib/api";
+import { getLocationIcon } from "@/lib/location-icons";
+import type { LocationSearchResponse, RecommendedLocationItem } from "@/types";
 
-const ALL_RECOMMENDATIONS: readonly RecommendedLocationItem[] = [
-  ...DEFAULT_RECOMMENDATIONS,
-  ...DUMMY_AUTOCOMPLETE_RECOMMENDATIONS,
-];
-
-const normalizeText = (value: string) => value.trim().toLowerCase();
-const disassembleText = (value: string) => disassemble(normalizeText(value));
-
-const includesQuery = (source: string, query: string) => {
-  const normalizedQuery = normalizeText(query);
-
-  if (!normalizedQuery) {
-    return true;
-  }
-
-  const normalizedSource = normalizeText(source);
-
-  return (
-    normalizedSource.includes(normalizedQuery) ||
-    disassembleText(source).includes(disassembleText(query))
-  );
-};
-
-const filterRecommendations = (query: string) => {
-  const normalizedQuery = query.trim();
-
-  if (!normalizedQuery) {
-    return DEFAULT_RECOMMENDATIONS;
-  }
-
-  return ALL_RECOMMENDATIONS.filter(
-    ({ title, subtitle }) =>
-      includesQuery(title, normalizedQuery) ||
-      includesQuery(subtitle, normalizedQuery)
-  );
-};
+const mapRecommendations = (
+  items: LocationSearchResponse["data"]
+): RecommendedLocationItem[] =>
+  items.map((item) => ({
+    icon: getLocationIcon(item.iconKey),
+    title: item.title,
+    subtitle: item.subtitle,
+  }));
 
 export const useLocationAutocomplete = () => {
   const [query, setQuery] = useState("");
@@ -51,19 +20,57 @@ export const useLocationAutocomplete = () => {
   >(null);
   const [recommendations, setRecommendations] = useState<
     readonly RecommendedLocationItem[]
-  >(DEFAULT_RECOMMENDATIONS);
+  >([]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(async () => {
+      try {
+        const searchParams = new URLSearchParams();
+        const trimmedQuery = query.trim();
+
+        if (trimmedQuery !== "") {
+          searchParams.set("q", trimmedQuery);
+        }
+
+        const response = await fetch(
+          createApiUrl(`/api/locations/search?${searchParams.toString()}`),
+          {
+            signal: controller.signal,
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch location recommendations");
+        }
+
+        const payload = (await response.json()) as LocationSearchResponse;
+
+        setRecommendations(mapRecommendations(payload.data));
+        setActiveRecommendationIndex(null);
+      } catch (error) {
+        if (!(error instanceof DOMException && error.name === "AbortError")) {
+          setRecommendations([]);
+          setActiveRecommendationIndex(null);
+        }
+      }
+    }, 180);
+
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeoutId);
+    };
+  }, [query]);
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     const nextQuery = event.target.value;
 
     setQuery(nextQuery);
-    setRecommendations(filterRecommendations(nextQuery));
     setActiveRecommendationIndex(null);
   };
 
   const handleRecommendationSelect = (title: string) => {
     setQuery(title);
-    setRecommendations(filterRecommendations(title));
     setActiveRecommendationIndex(null);
   };
 

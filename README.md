@@ -2,6 +2,22 @@
 
 Express 기반 검색 API 서버를 `Layered Architecture`로 추가한 예제입니다.
 
+## MongoDB Setup
+
+환경 변수는 `.env` 로 관리합니다.
+
+- `MONGODB_URI`: 필수
+- `MONGODB_DB_NAME`: 선택
+- `PORT`: 선택, 기본값 `3000`
+
+`MONGODB_URI` 에 DB 이름이 들어 있으면 `MONGODB_DB_NAME` 은 생략해도 됩니다.
+
+```bash
+npm run seed:server
+npm run dev:server
+npm run dev
+```
+
 ## Architecture
 
 - `routes`: HTTP endpoint 정의
