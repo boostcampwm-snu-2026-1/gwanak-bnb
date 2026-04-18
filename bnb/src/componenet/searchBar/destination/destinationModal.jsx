@@ -1,5 +1,5 @@
 import './destination.css'
-import { useSearch } from '../../context/searchContext';
+import { useSearch } from '../../../context/searchContext';
 import DestinationRow from './createDestinationRow';
 
 function DestinationModal() {
@@ -15,6 +15,8 @@ function DestinationModal() {
                     destination={item.title}
                     desc={item.desc}
                     isActive={index === destination.selectedIndex}
+                    update={destination.onSearchChange}
+                    close={destination.closeModal}
                 />
             )))}
         </div>)

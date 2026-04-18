@@ -1,8 +1,8 @@
 import './guest.css'
-import { useSearch } from '../../context/searchContext';
+import { useSearch } from '../../../context/searchContext';
 
 function GuestSearch() {
-    const { isOpen, onToggleGuest, isOpenGuest, showResetGuest, guest } = useSearch();
+    const { isOpen, onToggleGuest, isOpenGuest, showResetGuest, guest, search } = useSearch();
     
     return (
         <>
@@ -30,6 +30,7 @@ function GuestSearch() {
                         className={`search-btn ${isOpen ? 'search-btn_active' : ''}`}
                         onClick={(e) => {
                             e.stopPropagation();
+                            search();
                         }}
                     >
                         <i className="fa-solid fa-magnifying-glass fa-lg"></i>

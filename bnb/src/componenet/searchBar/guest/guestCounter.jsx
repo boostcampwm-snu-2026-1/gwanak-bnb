@@ -1,6 +1,6 @@
 import './guest.css'
 import CounterRow from './createCounterRow';
-import { useSearch } from '../../context/searchContext';
+import { useSearch } from '../../../context/searchContext';
 
 function GuestCounter() {
     const { isOpenGuest, guest } = useSearch();

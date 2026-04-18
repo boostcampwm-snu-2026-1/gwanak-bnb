@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { LOCATIONS } from "../../data/location";
-import { RECOMMENDATIONS } from "../../data/recommendation";
+import { LOCATIONS } from "../../../data/location";
+import { RECOMMENDATIONS } from "../../../data/recommendation";
 
 const useDestinationState = () => {
     // 여행지 입력 창에 입력된 검색어
@@ -40,7 +40,7 @@ const useDestinationState = () => {
 
     const displayList = getFilteredList();
 
-    //
+    // 화살표
     const [selectedIndex, setSelectedIndex] = useState(-1);
 
     useEffect(() => {

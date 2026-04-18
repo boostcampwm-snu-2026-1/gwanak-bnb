@@ -1,5 +1,5 @@
 import './destination.css'
-import { useSearch } from '../../context/searchContext'
+import { useSearch } from '../../../context/searchContext'
 import { useRef } from 'react';
 
 function DestinationSearch() {
