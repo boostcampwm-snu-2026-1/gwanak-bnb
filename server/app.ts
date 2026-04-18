@@ -14,6 +14,25 @@ app.get("/api/health", (_request, response) => {
   response.status(200).json({ status: "ok" });
 });
 
+app.get("/api/ping", (_request, response) => {
+  response.status(200).json({
+    message: "pong",
+    routes: {
+      health: true,
+      locations: true,
+      stays: true,
+    },
+  });
+});
+
+app.get("/api/pingpong", (_request, response) => {
+  response.status(200).json({
+    ping: "pong",
+    service: "gwanak-bnb-api",
+    hasStaySearchRoute: true,
+  });
+});
+
 app.use("/api/locations", locationRouter);
 app.use("/api/stays", stayRouter);
 
