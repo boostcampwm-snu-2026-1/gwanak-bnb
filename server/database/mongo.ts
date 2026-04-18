@@ -1,6 +1,5 @@
 import { MongoClient, type Collection } from "mongodb";
 
-import type { LocationRecord } from "../types/location.js";
 import type { StayRecord } from "../types/stay.js";
 
 const mongoUri = process.env.MONGODB_URI?.trim();
@@ -33,7 +32,6 @@ if (!databaseName) {
 const client = new MongoClient(mongoUri);
 
 export interface DatabaseCollections {
-  locations: Collection<LocationRecord>;
   stays: Collection<StayRecord>;
 }
 
@@ -43,7 +41,6 @@ export const connectToMongo = async (): Promise<DatabaseCollections> => {
   const database = client.db(databaseName);
 
   return {
-    locations: database.collection<LocationRecord>("locations"),
     stays: database.collection<StayRecord>("stays"),
   };
 };

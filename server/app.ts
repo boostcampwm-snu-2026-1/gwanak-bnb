@@ -35,7 +35,7 @@ export const createApp = (collections: DatabaseCollections) => {
     });
   });
 
-  app.use("/api/locations", createLocationRouter(collections));
+  app.use("/api/locations", createLocationRouter());
   app.use("/api/stays", createStayRouter(collections));
 
   app.use(errorHandler);
