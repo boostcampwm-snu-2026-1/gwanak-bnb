@@ -1,15 +1,23 @@
 import { useEffect, useRef } from "react";
+import DateRangeField from "./search/DateRangeField";
 import DestinationField from "./search/DestinationField";
 import styles from "./SearchBar.module.css";
 
 function SearchBar({
   destinationValue,
   suggestions,
+  checkIn,
+  checkOut,
   guestSummary,
   activePanel,
+  feedbackMessage,
+  isSearching,
   onOpenPanel,
   onClosePanels,
   onDestinationChange,
+  onCheckInChange,
+  onCheckOutChange,
+  onSubmit,
   children,
 }) {
   const searchBarRef = useRef(null);
@@ -47,7 +55,7 @@ function SearchBar({
 
   return (
     <div className={styles.wrapper} ref={searchBarRef}>
-      <div className={styles.searchBar}>
+      <form className={styles.searchBar} onSubmit={onSubmit}>
         <DestinationField
           value={destinationValue}
           suggestions={suggestions}
@@ -59,19 +67,19 @@ function SearchBar({
 
         <div className={styles.divider} />
 
-        <button type="button" className={styles.segment}>
-          <span className={styles.segmentLabel}>여행 기간</span>
-          <strong className={styles.segmentValue}>5월 1일 - 5월 15일</strong>
-        </button>
+        <DateRangeField
+          checkIn={checkIn}
+          checkOut={checkOut}
+          onCheckInChange={onCheckInChange}
+          onCheckOutChange={onCheckOutChange}
+        />
 
         <div className={styles.divider} />
 
         <button
           type="button"
           className={`${styles.segment} ${styles.guestSegment}`}
-          onClick={() =>
-            onOpenPanel(isGuestSelectorOpen ? null : "guests")
-          }
+          onClick={() => onOpenPanel(isGuestSelectorOpen ? null : "guests")}
           aria-expanded={isGuestSelectorOpen}
           aria-haspopup="dialog"
         >
@@ -79,10 +87,12 @@ function SearchBar({
           <strong className={styles.segmentValue}>{guestSummary}</strong>
         </button>
 
-        <button type="button" className={styles.searchButton}>
-          검색
+        <button type="submit" className={styles.searchButton} disabled={isSearching}>
+          {isSearching ? "검색 중..." : "검색"}
         </button>
-      </div>
+      </form>
+
+      {feedbackMessage ? <p className={styles.feedback}>{feedbackMessage}</p> : null}
 
       {isGuestSelectorOpen ? (
         <div className={styles.dropdown} role="dialog" aria-label="여행자 선택">
