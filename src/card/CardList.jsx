@@ -1,14 +1,15 @@
 import Card from "./Card";
+import styles from "../css/CardList.module.css";
 
 function CardList({ cards }) {
   return (
-    <div className="card-list">
+    <div className={styles.cardList}>
       {cards.map((card, index) => (
         <Card
           key={index}
-          title={card.title}
+          title={card.name}
           description={card.description}
-          imageUrl={card.imageUrl}
+          imageUrl={card.images?.[0]}
         />
       ))}
     </div>
