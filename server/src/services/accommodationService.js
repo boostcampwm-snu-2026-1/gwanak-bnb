@@ -64,13 +64,9 @@ function buildAccommodationFilter(query) {
 
 export async function getAccommodations(query = {}) {
   const trimmedDestination = query.destination?.trim()
-  const primaryGuestCount = parsePositiveInteger(query.primaryGuests, null)
 
-  if (!trimmedDestination || primaryGuestCount === null) {
-    throw new AppError(
-      'destination and primaryGuests are required',
-      400,
-    )
+  if (!trimmedDestination) {
+    throw new AppError('destination is required', 400)
   }
 
   const page = parsePositiveInteger(query.page, DEFAULT_PAGE)

@@ -289,7 +289,7 @@ function SearchBarContainer() {
   const handleSearch = async () => {
     const trimmedDestination = destinationQuery.trim()
 
-    if (!trimmedDestination || primaryGuestCount === 0) {
+    if (!trimmedDestination) {
       setHasSearched(true)
       setSearchResults([])
       setSearchMeta({
@@ -297,7 +297,7 @@ function SearchBarContainer() {
         totalPages: 1,
         totalCount: 0,
       })
-      setSearchErrorMessage('여행지와 여행인원은 필수 선택 항목입니다.')
+      setSearchErrorMessage('여행지는 필수 선택 항목입니다.')
       return
     }
 
