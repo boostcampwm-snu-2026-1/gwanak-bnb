@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { fetchDestinations } from "../api/destination";
 
 function Destination ({ destination, setQueryDestination, setIsOpen }) {
 
@@ -11,22 +12,7 @@ function Destination ({ destination, setQueryDestination, setIsOpen }) {
     const timer = setTimeout(async () => {
       try {
         setIsLoading(true);
-
-        let url = "";
-
-        if (!trimmed) {
-          url = "/api/destinations";
-        } else {
-          url = `/api/destinations/autocomplete?q=${encodeURIComponent(trimmed)}`;
-        }
-
-        const res = await fetch(url);
-
-        if (!res.ok) {
-          throw new Error("검색 요청 실패");
-        }
-
-        const data = await res.json();
+        const data = await fetchDestinations(query);
         setQueryDestination(data);
 
       } catch (err) {
