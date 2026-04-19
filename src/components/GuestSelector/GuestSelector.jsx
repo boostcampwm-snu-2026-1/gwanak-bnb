@@ -2,14 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import GuestModal from './GuestModal';
 import styles from './GuestSelector.module.css';
 
-function GuestSelector() {
+function GuestSelector({ guests, onGuestsChange }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [guests, setGuests] = useState({
-    adults: 0,
-    children: 0,
-    infants: 0,
-    pets: 0,
-  });
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -40,7 +34,7 @@ function GuestSelector() {
         <span className={styles.value}>{guestLabel}</span>
       </div>
       {isOpen && (
-        <GuestModal guests={guests} setGuests={setGuests} />
+        <GuestModal guests={guests} setGuests={onGuestsChange} />
       )}
     </div>
   );
