@@ -1,7 +1,7 @@
 import SearchBar from '../search/SearchBar';
 import styles from './Header.module.css';
 
-export default function Header() {
+export default function Header({ searchFilters, onSearch }) {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
@@ -12,7 +12,7 @@ export default function Header() {
           <span>gwanak-bnb</span>
         </div>
 
-        <SearchBar />
+        <SearchBar searchFilters={searchFilters} onSearch={onSearch} />
 
         <div className={styles.right}>
           <button className={styles.hostBtn}>당신의 공간을 에어비앤비하세요</button>

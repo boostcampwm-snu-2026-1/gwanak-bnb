@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import styles from './SearchDropdown.module.css';
 
 const RECOMMENDED_DESTINATIONS = [
@@ -26,13 +26,11 @@ export default function SearchDropdown({ query, onQueryChange, onClose }) {
 
   const isSearching = query.length > 0;
 
-  const filteredResults = isSearching
-    ? SEARCH_DATA.filter(item => item.includes(query))
-    : [];
-
-  useEffect(() => {
-    setSelectedIndex(-1);
-  }, [query]);
+  const filteredResults = useMemo(() => (
+    isSearching
+      ? SEARCH_DATA.filter((item) => item.includes(query))
+      : []
+  ), [isSearching, query]);
 
   useEffect(() => {
     function handleKeyDown(e) {

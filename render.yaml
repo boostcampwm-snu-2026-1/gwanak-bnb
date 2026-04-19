@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: gwanak-bnb-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm run db:seed && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_ORIGIN
+        sync: false
+      - key: DISK_MOUNT_PATH
+        value: /var/data
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
