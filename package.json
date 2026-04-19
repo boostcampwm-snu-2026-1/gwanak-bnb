@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node backend/src/server.js",
+    "render:start": "node backend/src/server.js",
     "seed": "node backend/src/scripts/seedAccommodations.js"
   },
   "dependencies": {
