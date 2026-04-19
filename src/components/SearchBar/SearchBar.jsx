@@ -5,17 +5,22 @@ import './SearchBar.css'
 
 function SearchBar() {
   const [keyword, setKeyword] = useState("");
-
-
-  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [travelerCounts, setTravelerCounts] = useState({
+    adult: 0,
+    child: 0,
+    infant: 0,
+    pet: 0
+  });
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen)
   }
 
   const handleSearchSubmit = () => {
-    console.log("백엔드용", {
-      destination: keyword
+    console.log({
+      destination: keyword,
+      travelers: travelerCounts
     });
   }
 
@@ -39,7 +44,11 @@ function SearchBar() {
           <span className="placeholder">게스트 추가</span>
         </div>
 
-        {isPopupOpen && <TravelerPopup />}
+        {isPopupOpen && (<TravelerPopup 
+            counts={travelerCounts} 
+            setCounts={setTravelerCounts} 
+          />
+        )}
       </div>
 
       <button className="search-btn" onClick={handleSearchSubmit}>🔍</button>
