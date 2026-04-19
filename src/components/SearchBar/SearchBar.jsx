@@ -17,12 +17,32 @@ function SearchBar() {
     setIsPopupOpen(!isPopupOpen)
   }
 
-  const handleSearchSubmit = () => {
-    console.log({
+  const handleSearchSubmit = async () => {
+    const searchData = {
       destination: keyword,
       travelers: travelerCounts
-    });
-  }
+    };
+
+    try {
+      const response = await fetch('http://localhost:3000/api/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(searchData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log('Response:', result);
+
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
 
   return (
     <div className="search-bar">
