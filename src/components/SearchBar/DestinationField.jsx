@@ -23,7 +23,8 @@ function getItems(query) {
 // Props:
 //   isOpen   - 드롭다운이 열려 있는지 (SearchBar에서 관리)
 //   onToggle - 드롭다운 열림/닫힘 토글 (SearchBar로부터 전달)
-export default function DestinationField({ isOpen, onToggle }) {
+//   onSelect - 목적지 선택 시 호출 (선택된 이름 전달)
+export default function DestinationField({ isOpen, onToggle, onSelect }) {
   // 사용자가 타이핑한 검색어 (필터링 기준)
   const [query, setQuery] = useState('')
   // 키보드 네비게이션으로 강조된 항목 인덱스 (-1이면 없음)
@@ -67,6 +68,7 @@ export default function DestinationField({ isOpen, onToggle }) {
     setQuery(item.name)
     setHighlightedIndex(-1)
     onToggle(false)
+    onSelect?.(item.name)
   }
 
   const handleKeyDown = (e) => {
@@ -110,7 +112,7 @@ export default function DestinationField({ isOpen, onToggle }) {
   }
 
   const handleFieldClick = () => {
-    onToggle(true)
+    onToggle(prev => !prev)
   }
 
   return (

@@ -11,4 +11,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      // 개발 시 /api 요청을 로컬 BE 서버로 프록시
+      '/api': 'http://localhost:3000',
+    },
+  },
 })
