@@ -1,0 +1,115 @@
+.dp-wrapper { width: 100%; padding: 20px 0 0; }
+
+.dp-tabs-wrap { display: flex; justify-content: center; margin-bottom: 24px; }
+.dp-tabs { display: flex; background: #ebebeb; border-radius: 100px; padding: 4px; }
+.dp-tab {
+  border: none; background: transparent; border-radius: 100px;
+  padding: 9px 28px; font-size: 14px; font-weight: 500; color: #717171;
+  cursor: pointer; font-family: inherit; transition: background 0.15s;
+}
+.dp-tab.active { background: #fff; color: #222; font-weight: 600; box-shadow: 0 1px 6px rgba(0,0,0,0.14); }
+
+.dp-calendars { display: flex; justify-content: center; gap: 48px; padding: 0 32px; }
+.dp-calendar { flex: 1; max-width: 300px; }
+.dp-cal-header { display: flex; align-items: center; margin-bottom: 16px; height: 36px; }
+.dp-cal-title { font-size: 15px; font-weight: 700; color: #222; flex: 1; text-align: center; }
+.dp-nav {
+  border: none; background: transparent; font-size: 22px; cursor: pointer;
+  color: #222; width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-family: inherit;
+}
+.dp-nav:hover:not(:disabled) { background: #f0f0f0; }
+.dp-nav:disabled { color: #ddd; cursor: default; }
+
+.dp-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+.dp-weekday { font-size: 12px; color: #717171; text-align: center; padding: 4px 0 12px; font-weight: 500; }
+.dp-day-empty { height: 52px; }
+
+/* 날짜 셀 */
+.dp-day-cell {
+  position: relative;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* 배경 div — JS 인라인 스타일로 정확히 제어 */
+.dp-day-bg {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 숫자 원 */
+.dp-day-num {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; font-size: 14px; color: #222;
+  position: relative; z-index: 1;
+  transition: background 0.1s;
+}
+.dp-day-cell:hover .dp-day-num { background: #e0e0e0; }
+.dp-day-num.past { color: #C8C8C8; cursor: not-allowed; }
+.dp-day-num.check-in,
+.dp-day-num.check-out { background: #222 !important; color: #fff !important; }
+.dp-day-cell:has(.check-in):hover .dp-day-num,
+.dp-day-cell:has(.check-out):hover .dp-day-num { background: #222; }
+
+/* 하단 바 */
+.dp-bottom-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid #ebebeb; margin-top: 12px; padding: 16px 32px;
+}
+.dp-checkinout { display: flex; gap: 12px; flex: 1; }
+.dp-checkinout-wrap { flex: 1; position: relative; }
+.dp-checkinout-box {
+  border: 1px solid #b0b0b0; border-radius: 8px; padding: 10px 36px 10px 14px;
+  display: flex; flex-direction: column; gap: 2px;
+  cursor: pointer; position: relative; background: #fff; transition: border-color 0.1s;
+}
+.dp-checkinout-box.open, .dp-checkinout-box:hover { border-color: #222; }
+.dp-checkinout-label { font-size: 10px; font-weight: 700; color: #717171; text-transform: uppercase; letter-spacing: 0.05em; }
+.dp-checkinout-value { font-size: 13px; color: #222; font-weight: 500; }
+.dp-checkinout-arrow { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #717171; font-size: 11px; }
+
+.dp-dropdown {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+  background: #fff; border: 1px solid #ddd; border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 200; overflow: hidden;
+}
+.dp-dropdown-item { padding: 12px 16px; font-size: 14px; color: #222; cursor: pointer; transition: background 0.1s; }
+.dp-dropdown-item:hover { background: #f7f7f7; }
+.dp-dropdown-item.selected { font-weight: 700; background: #f7f7f7; }
+
+.dp-clear {
+  border: none; background: transparent; font-size: 13px; color: #222;
+  cursor: pointer; text-decoration: underline; font-weight: 600;
+  margin-left: 24px; white-space: nowrap; font-family: inherit;
+}
+
+/* 유연한 일정 */
+.dp-flexible { padding: 8px 32px 24px; }
+.dp-flex-title { font-size: 16px; font-weight: 600; color: #222; text-align: center; margin-bottom: 16px; }
+.dp-duration-row { display: flex; justify-content: center; gap: 10px; }
+.dp-duration-btn {
+  border: 1px solid #b0b0b0; background: #fff; border-radius: 100px;
+  padding: 8px 20px; font-size: 14px; color: #222; cursor: pointer; font-family: inherit;
+}
+.dp-duration-btn.active, .dp-duration-btn:hover { border-color: #222; font-weight: 600; }
+.dp-month-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; padding-right: 10px; scrollbar-width: none; }
+.dp-month-scroll::-webkit-scrollbar { display: none; }
+.dp-month-card {
+  flex-shrink: 0; width: 110px; height: 110px; border: 1.5px solid #ddd; border-radius: 14px;
+  background: #fff; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 6px; cursor: pointer; color: #717171; font-family: inherit;
+}
+.dp-month-card:hover { border-color: #222; color: #222; }
+.dp-month-card.active { border: 2px solid #222; color: #222; }
+.dp-month-name { font-size: 16px; font-weight: 700; color: inherit; }
+.dp-month-year { font-size: 12px; color: #717171; }

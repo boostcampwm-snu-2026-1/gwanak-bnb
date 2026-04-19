@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import SearchResults from './components/SearchResults/SearchResults';
+import DatePicker from './components/DatePicker/DatePicker.jsx';
 
 const RECOMMENDATIONS = [
   {
@@ -204,12 +206,57 @@ function GuestRow({ title, desc, count, onMinus, onPlus, minusDisabled, isLink }
   );
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
 export default function App() {
   const [activeTab, setActiveTab]   = useState(null);
   const [hoverTab, setHoverTab]     = useState(null);
   const [location, setLocation]     = useState('');
   const [focusIndex, setFocusIndex] = useState(-1);
   const [guests, setGuests]         = useState({ adult: 0, child: 0, infant: 0, pet: 0 });
+  const [checkIn, setCheckIn]   = useState(null);
+  const [checkOut, setCheckOut] = useState(null);
+
+  const handleDateChange = (inDate, outDate) => {
+    setCheckIn(inDate);
+    setCheckOut(outDate);
+  };
+
+  const [flexInfo, setFlexInfo] = useState({ duration: null, months: [] });
+
+  const getDateText = () => {
+    if (flexInfo && (flexInfo.months.length > 0 || flexInfo.duration)) {
+      const hasDuration = !!flexInfo.duration;
+      const hasMonths   = flexInfo.months.length > 0;
+
+      const sorted = [...(flexInfo.months || [])].sort((a, b) => {
+        const [ay, am] = a.split('-').map(Number);
+        const [by, bm] = b.split('-').map(Number);
+        return ay !== by ? ay - by : am - bm;
+      });
+      const monthLabels = sorted.map(k => {
+        const [, m] = k.split('-').map(Number);
+        return `${m + 1}월`;
+      }).join(', ');
+
+      if (hasDuration && hasMonths) return `${monthLabels}의 ${flexInfo.duration}`;
+      if (hasDuration && !hasMonths) return `언제든 ${flexInfo.duration}`;
+      if (!hasDuration && hasMonths) return `언제든지`;
+    }
+    if (checkIn) {
+      return `${formatShortDate(checkIn)}${checkOut ? ` - ${formatShortDate(checkOut)}` : ''}`;
+    }
+    return '날짜 추가';
+  };
+
+  const formatShortDate = (dt) => {
+    if (!dt) return null;
+    return `${dt.getMonth() + 1}월 ${dt.getDate()}일`;
+  };
+
+  const [listings, setListings]     = useState(null);
+  const [isLoading, setIsLoading]   = useState(false);
+  const [searchError, setSearchError] = useState(null);
 
   const inputRef      = useRef(null);
   const isKeyboardNav = useRef(false);
@@ -218,46 +265,39 @@ export default function App() {
     ? SEARCH_DB.filter(item => item.name.includes(location) || item.sub.includes(location))
     : RECOMMENDATIONS;
 
-    const getSectionBg = (tabName) => {
-      // 하나 active
-      if (activeTab === tabName) return '#fff';
+  const getSectionBg = (tabName) => {
+    if (activeTab === tabName) return '#fff';
+    if (activeTab) {
+      if (hoverTab === tabName) return '#dcdcdc';
+      return '#f7f7f7';
+    }
+    if (hoverTab === tabName) return '#ebebeb';
+    return 'transparent';
+  };
 
-      // 하나라도 active 있을 때
-      if (activeTab) {
-        if (hoverTab === tabName) return '#dcdcdc'; // 다른 섹션 hover 진한 회색
-        return '#f7f7f7'; // 나머지 옅은 회색
-      }
-
-      // 아무것도 active 없을 때
-      if (hoverTab === tabName) return '#ebebeb'; // hover 옅은 회색
-
-      return 'transparent';
-    };
-
-    const handleKeyDown = (e) => {
-      if (activeTab !== 'location') return;
-      const len = filteredResults.length;
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        isKeyboardNav.current = true;
-        setFocusIndex(prev => (prev + 1) % len);
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        isKeyboardNav.current = true;
-        setFocusIndex(prev => (prev - 1 + len) % len);
-      } else if (e.key === 'Enter' && focusIndex >= 0) {
-        selectLocation(filteredResults[focusIndex].name);
-      } else if (e.key === 'Escape') {
-        setActiveTab(null);
-      }
-    };
+  const handleKeyDown = (e) => {
+    if (activeTab !== 'location') return;
+    const len = filteredResults.length;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      isKeyboardNav.current = true;
+      setFocusIndex(prev => (prev + 1) % len);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      isKeyboardNav.current = true;
+      setFocusIndex(prev => (prev - 1 + len) % len);
+    } else if (e.key === 'Enter' && focusIndex >= 0) {
+      selectLocation(filteredResults[focusIndex].name);
+    } else if (e.key === 'Escape') {
+      setActiveTab(null);
+    }
+  };
 
   useEffect(() => {
     if (isKeyboardNav.current && focusIndex >= 0 && filteredResults[focusIndex]) {
       setLocation(filteredResults[focusIndex].name);
     }
   }, [focusIndex]);
-
 
   const selectLocation = (name) => {
     setLocation(name);
@@ -292,6 +332,44 @@ export default function App() {
   };
 
   const hasGuests = guests.adult > 0;
+
+  const handleSearch = async () => {
+    if (!location.trim()) {
+      alert('여행지를 입력해주세요.');
+      openLocation();
+      return;
+    }
+    const totalGuests = guests.adult + guests.child;
+    if (totalGuests === 0) {
+      alert('여행인원을 선택해주세요.');
+      setActiveTab('guests');
+      return;
+    }
+
+    setActiveTab(null);
+    setIsLoading(true);
+    setSearchError(null);
+
+    try {
+      const params = new URLSearchParams({
+        location: location.trim(),
+        guests: totalGuests,
+        ...(checkIn  && { checkIn:  checkIn.toISOString().split('T')[0] }),
+        ...(checkOut && { checkOut: checkOut.toISOString().split('T')[0] }),
+      });
+      const res = await fetch(`${API_BASE_URL}/api/listings?${params}`);
+      if (!res.ok) throw new Error('서버 오류가 발생했습니다.');
+      const data = await res.json();
+      setListings(data);
+    } catch (err) {
+      setSearchError(err.message);
+      setListings([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const totalGuests = guests.adult + guests.child;
 
   return (
     <div style={{
@@ -364,7 +442,6 @@ export default function App() {
                   fontFamily: 'inherit',
                 }}
               />
-              {/* X 버튼 */}
               {location && (
                 <button
                   onClick={e => { e.stopPropagation(); setLocation(''); inputRef.current?.focus(); }}
@@ -380,14 +457,9 @@ export default function App() {
           </div>
 
           <div style={{
-            width: 1,
-            height: 32,
-            background:
-              activeTab === 'location' || activeTab === 'date'
-                ? 'transparent'
-                : '#ddd',
-            flexShrink: 0,
-            transition: 'background 0.15s',
+            width: 1, height: 32,
+            background: activeTab === 'location' || activeTab === 'date' ? 'transparent' : '#ddd',
+            flexShrink: 0, transition: 'background 0.15s',
           }} />
 
           {/* 날짜 */}
@@ -399,28 +471,17 @@ export default function App() {
             transition: 'background 0.15s, box-shadow 0.15s',
             position: 'relative',
             zIndex: activeTab === 'date' ? 2 : 1,
-            boxShadow: activeTab === 'date'
-              ? '0 6px 20px rgba(0,0,0,0.18)'
-              : 'none',
+            boxShadow: activeTab === 'date' ? '0 6px 20px rgba(0,0,0,0.18)' : 'none',
           }}
-            onClick={() => setActiveTab(null)}
+            onClick={(e) => { e.stopPropagation(); setActiveTab(activeTab === 'date' ? null : 'date'); }}
             onMouseEnter={() => setHoverTab('date')}
             onMouseLeave={() => setHoverTab(null)}
           >
             <div style={{ fontSize: 12, fontWeight: 800, color: '#222', marginBottom: 2 }}>날짜</div>
-            <div style={{ fontSize: 14, color: '#717171' }}>날짜 추가</div>
+            <div style={{ fontSize: 14, color: checkIn ? '#222' : '#717171', fontWeight: (checkIn || flexInfo) ? 600 : 400 }}>
+              {getDateText()}
+            </div>
           </div>
-
-          <div style={{
-            width: 1,
-            height: 32,
-            background:
-              activeTab === 'date' || activeTab === 'guests'
-                ? 'transparent'
-                : '#ddd',
-            flexShrink: 0,
-            transition: 'background 0.15s',
-          }} />
 
           {/* 여행자 + 검색 버튼 */}
           <div
@@ -438,9 +499,7 @@ export default function App() {
               transition: 'background 0.15s, box-shadow 0.15s',
               position: 'relative',
               zIndex: activeTab === 'guests' ? 2 : 1,
-              boxShadow: activeTab === 'guests'
-                ? '0 6px 20px rgba(0,0,0,0.18)'
-                : 'none',
+              boxShadow: activeTab === 'guests' ? '0 6px 20px rgba(0,0,0,0.18)' : 'none',
             }}
           >
             <div style={{
@@ -449,15 +508,10 @@ export default function App() {
             }}>
               <div style={{ fontSize: 12, fontWeight: 800, color: '#222', marginBottom: 2 }}>여행자</div>
               {hasGuests ? (
-                <div style={{
-                  display: 'flex', flexDirection: 'row', alignItems: 'center',
-                  width: '100%', gap: 8,
-                }}>
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', gap: 8 }}>
                   <div style={{
-                    flex: 1, minWidth: 0, fontSize: 14,
-                    color: '#222', fontWeight: 600,
-                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                    textAlign: 'left',
+                    flex: 1, minWidth: 0, fontSize: 14, color: '#222', fontWeight: 600,
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'left',
                   }}>
                     {getGuestText()}
                   </div>
@@ -480,12 +534,16 @@ export default function App() {
                 <div style={{ fontSize: 14, color: '#717171' }}>{getGuestText()}</div>
               )}
             </div>
-            <button type="button" style={{
-              display: 'flex', alignItems: 'center',
-              background: '#FF385C', color: '#fff', border: 'none',
-              borderRadius: 100, padding: activeTab ? '12px 16px' : '12px',
-              cursor: 'pointer', transition: 'all 0.25s ease', whiteSpace: 'nowrap',
-            }}>
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); handleSearch(); }}
+              style={{
+                display: 'flex', alignItems: 'center',
+                background: '#FF385C', color: '#fff', border: 'none',
+                borderRadius: 100, padding: activeTab ? '12px 16px' : '12px',
+                cursor: 'pointer', transition: 'all 0.25s ease', whiteSpace: 'nowrap',
+              }}
+            >
               <svg viewBox="0 0 32 32" style={{ width: 16, height: 16, fill: 'currentColor' }}>
                 <path d="M29.71 28.29l-6.5-6.5a12 12 0 1 0-1.42 1.42l6.5 6.5a1 1 0 0 0 1.42-1.42zM4 14a10 10 0 1 1 10 10A10 10 0 0 1 4 14z" />
               </svg>
@@ -504,29 +562,17 @@ export default function App() {
             boxShadow: '0 8px 28px rgba(0,0,0,0.12)', zIndex: 100,
             overflow: 'hidden',
           }}>
-
-            {/* 타이틀 고정 영역 */}
             {location.trim().length === 0 && (
-              <div style={{
-                padding: '16px 32px 8px',
-                fontSize: 12, fontWeight: 800, color: '#222',
-                textAlign: 'left',
-              }}>
+              <div style={{ padding: '16px 32px 8px', fontSize: 12, fontWeight: 800, color: '#222', textAlign: 'left' }}>
                 추천 여행지
               </div>
             )}
-
-            {/* 스크롤 영역 */}
-            <div
-              className="modal-list"
-              style={{ maxHeight: 360, overflowY: 'auto', paddingBottom: 16 }}
-            >
+            <div className="modal-list" style={{ maxHeight: 360, overflowY: 'auto', paddingBottom: 16 }}>
               {filteredResults.length === 0 && (
                 <div style={{ padding: '24px 32px', fontSize: 14, color: '#717171' }}>
                   검색 결과가 없습니다.
                 </div>
               )}
-
               {filteredResults.map((item, index) => (
                 <div
                   key={item.id}
@@ -560,6 +606,23 @@ export default function App() {
           </div>
         )}
 
+        {/* 날짜 모달 */}
+        {activeTab === 'date' && (
+          <div style={{
+            position: 'absolute', top: 75, left: '50%', transform: 'translateX(-50%)',
+            background: '#fff', borderRadius: 32,
+            boxShadow: '0 8px 28px rgba(0,0,0,0.12)', zIndex: 100,
+            width: 760,
+          }}>
+            <DatePicker
+              checkIn={checkIn}
+              checkOut={checkOut}
+              onChange={handleDateChange}
+              onFlexChange={(info) => setFlexInfo(info)}
+            />
+          </div>
+        )}
+
         {/* 여행자 모달 */}
         {activeTab === 'guests' && (
           <div style={{
@@ -567,7 +630,6 @@ export default function App() {
             background: '#fff', borderRadius: 32, padding: '8px 32px',
             boxShadow: '0 6px 20px rgba(0,0,0,0.15)', zIndex: 100,
           }}>
-            
             <GuestRow
               title="성인" desc="13세 이상"
               count={guests.adult} onMinus={() => updateCount('adult', 'minus')} onPlus={() => updateCount('adult', 'plus')}
@@ -589,6 +651,25 @@ export default function App() {
               minusDisabled={guests.pet === 0}
             />
           </div>
+        )}
+
+        {/* 검색 결과 영역 */}
+        {isLoading && (
+          <div style={{ textAlign: 'center', padding: '48px 0', fontSize: 16, color: '#717171' }}>
+            검색 중...
+          </div>
+        )}
+        {searchError && (
+          <div style={{ textAlign: 'center', padding: '48px 0', fontSize: 14, color: '#e00' }}>
+            {searchError}
+          </div>
+        )}
+        {!isLoading && (
+          <SearchResults
+            listings={listings}
+            location={location}
+            totalGuests={totalGuests}
+          />
         )}
       </div>
     </div>
