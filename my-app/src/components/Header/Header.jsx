@@ -1,7 +1,7 @@
 import SearchBar from '../SearchBar/SearchBar';
 import styles from './Header.module.css';
 
-function Header() {
+function Header({ onSearch }) {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
@@ -9,7 +9,7 @@ function Header() {
           airbnb
         </a>
 
-        <SearchBar />
+        <SearchBar onSearch={onSearch} />
 
         <button className={styles.menuButton}>
           ☰
