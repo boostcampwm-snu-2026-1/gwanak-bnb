@@ -16,7 +16,9 @@ function SearchBar({
   dateSelection,
   dateActions,
   guestSelection,
+  isSearching = false,
   onOpenTab,
+  onSearch,
   onSelectTab,
 }) {
   const filteredDestinations = useMemo(
@@ -67,10 +69,14 @@ function SearchBar({
 
         <button
           type="button"
+          onClick={onSearch}
+          disabled={isSearching}
           aria-label="검색"
-          className="ml-2 inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rose-500 to-pink-500 text-white shadow-[0_8px_18px_rgba(255,56,92,0.35)] transition duration-200 hover:scale-105 hover:shadow-[0_10px_22px_rgba(255,56,92,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
+          className="ml-2 inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rose-500 to-pink-500 text-white shadow-[0_8px_18px_rgba(255,56,92,0.35)] transition duration-200 hover:scale-105 hover:shadow-[0_10px_22px_rgba(255,56,92,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300 disabled:cursor-wait disabled:opacity-80 disabled:hover:scale-100"
         >
-          <SearchIcon />
+          <span className={isSearching ? 'animate-pulse' : undefined}>
+            <SearchIcon />
+          </span>
         </button>
       </div>
 
