@@ -8,19 +8,46 @@ import styles from "../css/BarContainer.module.css"
 
 function BarContainer() {
   const [isTravelModalOpen, setIsTravelModalOpen] = useState(false);
+
+  // Destination 관련 상태
   const [isDestinationModalOpen, setIsDestinationModalOpen] = useState(false);
   const [travelerCount, setTravelerCount] = useState({ adults: 0, children: 0, infants: 0, pets: 0 });
   const [destination, setDestination] = useState("");
   const [queryDestination, setQueryDestination] = useState([{name: "", country: "", description: "", tags: [], popularity: 0}]); 
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+
   return ( 
     <div>
       <div className={styles.container}>
-          <Destination destination={destination} setQueryDestination={setQueryDestination} setIsOpen={setIsDestinationModalOpen} />
+          <Destination 
+            destination={destination} 
+            setDestination={setDestination} 
+            queryDestination={queryDestination}
+            setQueryDestination={setQueryDestination} 
+            setIsOpen={setIsDestinationModalOpen} 
+            highlightedIndex={highlightedIndex}
+            setHighlightedIndex={setHighlightedIndex}
+          />
           <Date />
-          <Traveler travelerCount={travelerCount} setIsOpen={setIsTravelModalOpen}/>
+          <Traveler 
+            travelerCount={travelerCount} 
+            setIsOpen={setIsTravelModalOpen}
+          />
       </div>
-      {isDestinationModalOpen && <DestinationSetModal queryDestination={queryDestination} setDestination={setDestination} />}
-      {isTravelModalOpen && <TravelerSetModal travelerCount={travelerCount} setTravelerCount={setTravelerCount} />}
+      {isDestinationModalOpen 
+        && <DestinationSetModal 
+          queryDestination={queryDestination} 
+          setDestination={setDestination} 
+          highlightedIndex={highlightedIndex}
+          setIsOpen={setIsDestinationModalOpen}
+        />
+      }
+      {isTravelModalOpen 
+        && <TravelerSetModal 
+          travelerCount={travelerCount} 
+          setTravelerCount={setTravelerCount}
+        />
+      }
     </div>
   )
 }
