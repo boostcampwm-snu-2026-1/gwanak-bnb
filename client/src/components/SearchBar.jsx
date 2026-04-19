@@ -1,11 +1,24 @@
+import { useState } from "react";
 import GuestSelector from "./GuestSelector";
 import DestinationSelector from "./DestinationSelector";
 import styles from "./SearchBar.module.css";
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
+  const [destination, setDestination] = useState(null);
+  const [totalGuests, setTotalGuests] = useState(0);
+
+  const handleSearch = () => {
+    if (onSearch && destination) {
+      onSearch({
+        location: destination.name,
+        guests: totalGuests,
+      });
+    }
+  };
+
   return (
     <div className={styles.searchBar}>
-      <DestinationSelector />
+      <DestinationSelector onDestinationChange={setDestination} />
 
       <div className={styles.divider} />
 
@@ -16,9 +29,11 @@ function SearchBar() {
 
       <div className={styles.divider} />
 
-      <GuestSelector />
+      <GuestSelector onGuestsChange={setTotalGuests} />
 
-      <button className={styles.searchButton}>🔍</button>
+      <button className={styles.searchButton} onClick={handleSearch}>
+        🔍
+      </button>
     </div>
   );
 }

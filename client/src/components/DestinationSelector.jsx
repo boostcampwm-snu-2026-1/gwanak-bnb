@@ -3,7 +3,7 @@ import { RECOMMENDED, ALL_DESTINATIONS } from "../data/destinations";
 import DestinationModal from "./DestinationModal";
 import styles from "./DestinationSelector.module.css";
 
-function DestinationSelector() {
+function DestinationSelector({ onDestinationChange }) {
   const [destination, setDestination] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -31,6 +31,9 @@ function DestinationSelector() {
     setQuery(dest.name);
     setIsOpen(false);
     setHighlightedIndex(-1);
+    if (onDestinationChange) {
+      onDestinationChange(dest);
+    }
   };
 
   const handleChange = (e) => {
