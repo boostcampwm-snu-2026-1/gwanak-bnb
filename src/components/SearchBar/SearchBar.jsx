@@ -28,15 +28,21 @@ function getGuestSummary({ adults, children, infants, pets }) {
   return parts.join(', ')
 }
 
-function SearchBar({ guestCounts, setGuestCounts }) {
+function getSearchGuestCount({ adults, children }) {
+  return adults + children
+}
+
+function SearchBar({ guestCounts, setGuestCounts, onSearch, isLoading }) {
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
   const [isDestinationOpen, setIsDestinationOpen] = useState(false)
   const [destinationQuery, setDestinationQuery] = useState('')
   const [destinationInput, setDestinationInput] = useState('')
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
+  const [validationMessage, setValidationMessage] = useState('')
   const containerRef = useRef(null)
   const guestSummary = getGuestSummary(guestCounts)
   const trimmedInput = destinationQuery.trim()
+  const guestCount = getSearchGuestCount(guestCounts)
   const destinationMode = trimmedInput ? 'search' : 'recommended'
 
   const filteredDestinations = useMemo(() => {
@@ -110,12 +116,14 @@ function SearchBar({ guestCounts, setGuestCounts }) {
   }, [isGuestModalOpen])
 
   const handleDestinationFieldActivate = () => {
+    setValidationMessage('')
     setIsGuestModalOpen(false)
     setHighlightedIndex(-1)
     setIsDestinationOpen(true)
   }
 
   const handleDestinationInputChange = (nextInput) => {
+    setValidationMessage('')
     setDestinationQuery(nextInput)
     setDestinationInput(nextInput)
     setHighlightedIndex(-1)
@@ -124,6 +132,7 @@ function SearchBar({ guestCounts, setGuestCounts }) {
   }
 
   const handleDestinationInputClear = () => {
+    setValidationMessage('')
     setDestinationQuery('')
     setDestinationInput('')
     setHighlightedIndex(-1)
@@ -131,6 +140,7 @@ function SearchBar({ guestCounts, setGuestCounts }) {
   }
 
   const handleDestinationSelect = (destinationTitle) => {
+    setValidationMessage('')
     setDestinationQuery(destinationTitle)
     setDestinationInput(destinationTitle)
     setHighlightedIndex(-1)
@@ -143,8 +153,36 @@ function SearchBar({ guestCounts, setGuestCounts }) {
   }
 
   const handleGuestFieldToggle = () => {
+    setValidationMessage('')
     setIsDestinationOpen(false)
     setIsGuestModalOpen((prev) => !prev)
+  }
+
+  const handleSearchSubmit = async (event) => {
+    event?.preventDefault()
+
+    if (!trimmedInput) {
+      setValidationMessage('여행지를 먼저 입력해주세요.')
+      setIsDestinationOpen(true)
+      setIsGuestModalOpen(false)
+      return
+    }
+
+    if (guestCount < 1) {
+      setValidationMessage('여행 인원은 최소 1명 이상 선택해주세요.')
+      setIsGuestModalOpen(true)
+      setIsDestinationOpen(false)
+      return
+    }
+
+    setValidationMessage('')
+    setIsDestinationOpen(false)
+    setIsGuestModalOpen(false)
+
+    await onSearch({
+      destination: trimmedInput,
+      guestCount,
+    })
   }
 
   const handleDestinationInputKeyDown = (event) => {
@@ -176,6 +214,11 @@ function SearchBar({ guestCounts, setGuestCounts }) {
       event.preventDefault()
       const destination = filteredDestinations[highlightedIndex]
       handleDestinationSelect(destination.title)
+      return
+    }
+
+    if (event.key === 'Enter') {
+      handleSearchSubmit(event)
     }
   }
 
@@ -193,7 +236,11 @@ function SearchBar({ guestCounts, setGuestCounts }) {
           guestSummary={guestSummary}
           isGuestModalOpen={isGuestModalOpen}
           onGuestFieldToggle={handleGuestFieldToggle}
+          onSearchSubmit={handleSearchSubmit}
+          isLoading={isLoading}
         />
+
+        {validationMessage && <p className={styles.feedbackMessage}>{validationMessage}</p>}
 
         {isDestinationOpen && (
           <DestinationDropdown

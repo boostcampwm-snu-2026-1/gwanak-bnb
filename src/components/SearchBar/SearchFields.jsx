@@ -14,6 +14,8 @@ function SearchFields({
   guestSummary,
   isGuestModalOpen,
   onGuestFieldToggle,
+  onSearchSubmit,
+  isLoading,
 }) {
   return (
     <div className={styles.searchBar}>
@@ -31,6 +33,8 @@ function SearchFields({
         guestSummary={guestSummary}
         isGuestModalOpen={isGuestModalOpen}
         onToggle={onGuestFieldToggle}
+        onSearchSubmit={onSearchSubmit}
+        isLoading={isLoading}
       />
     </div>
   )
