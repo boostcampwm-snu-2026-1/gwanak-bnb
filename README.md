@@ -1,73 +1,44 @@
-# React + TypeScript + Vite
+# Gwanak BnB Search API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Express 기반 검색 API 서버를 `Layered Architecture`로 추가한 예제입니다.
 
-Currently, two official plugins are available:
+## MongoDB Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+환경 변수는 `.env` 로 관리합니다.
 
-## React Compiler
+- `MONGODB_URI`: 필수
+- `MONGODB_DB_NAME`: 선택
+- `PORT`: 선택, 기본값 `3000`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+`MONGODB_URI` 에 DB 이름이 들어 있으면 `MONGODB_DB_NAME` 은 생략해도 됩니다.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev:server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Architecture
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `routes`: HTTP endpoint 정의
+- `controllers`: request parsing, response shaping
+- `services`: 검색 정책과 비즈니스 로직
+- `repositories`: 데이터 조회
+- `data`: 임시 seed 데이터
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+요청 흐름은 `route -> controller -> service -> repository` 입니다.
+
+## API
+
+`GET /api/locations/search?q=부산&limit=5`
+
+- `q`: 검색어. 비워두면 추천 여행지 반환
+- `limit`: 최대 반환 개수. 기본값 `7`
+
+## Run
+
+```bash
+npm run dev:server
+npm run dev
 ```
+
+프론트엔드 개발 서버는 `/api` 요청을 `http://localhost:3000` 으로 프록시합니다.

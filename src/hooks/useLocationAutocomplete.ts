@@ -1,5 +1,5 @@
-import { useEffect, useState, type ChangeEvent, type KeyboardEvent } from "react";
 import { disassemble } from "es-hangul";
+import { useState, type ChangeEvent, type KeyboardEvent } from "react";
 
 import {
   DEFAULT_RECOMMENDATIONS,
@@ -7,33 +7,45 @@ import {
 } from "@/fixtures/data";
 import type { RecommendedLocationItem } from "@/types";
 
+const ALL_RECOMMENDATIONS: readonly RecommendedLocationItem[] = [
+  ...DEFAULT_RECOMMENDATIONS,
+  ...DUMMY_AUTOCOMPLETE_RECOMMENDATIONS,
+];
+
 const normalizeText = (value: string) => value.trim().toLowerCase();
 const disassembleText = (value: string) => disassemble(normalizeText(value));
 
-const includesAutocompleteQuery = (
-  sourceText: string,
-  normalizedQuery: string,
-  disassembledQuery: string
-) => {
-  const normalizedSourceText = normalizeText(sourceText);
+const includesQuery = (source: string, query: string) => {
+  const normalizedQuery = normalizeText(query);
+
+  if (!normalizedQuery) {
+    return true;
+  }
+
+  const normalizedSource = normalizeText(source);
 
   return (
-    normalizedSourceText.includes(normalizedQuery) ||
-    disassembleText(sourceText).includes(disassembledQuery)
+    normalizedSource.includes(normalizedQuery) ||
+    disassembleText(source).includes(disassembleText(query))
   );
 };
 
-const matchesRecommendation = (
-  item: RecommendedLocationItem,
-  normalizedQuery: string,
-  disassembledQuery: string
-) =>
-  includesAutocompleteQuery(item.title, normalizedQuery, disassembledQuery) ||
-  includesAutocompleteQuery(item.subtitle, normalizedQuery, disassembledQuery);
+const filterRecommendations = (query: string) => {
+  const normalizedQuery = query.trim();
+
+  if (!normalizedQuery) {
+    return DEFAULT_RECOMMENDATIONS;
+  }
+
+  return ALL_RECOMMENDATIONS.filter(
+    ({ title, subtitle }) =>
+      includesQuery(title, normalizedQuery) ||
+      includesQuery(subtitle, normalizedQuery)
+  );
+};
 
 export const useLocationAutocomplete = () => {
   const [query, setQuery] = useState("");
-  const [typedQuery, setTypedQuery] = useState("");
   const [activeRecommendationIndex, setActiveRecommendationIndex] = useState<
     number | null
   >(null);
@@ -41,35 +53,17 @@ export const useLocationAutocomplete = () => {
     readonly RecommendedLocationItem[]
   >(DEFAULT_RECOMMENDATIONS);
 
-  useEffect(() => {
-    const normalizedQuery = normalizeText(typedQuery);
-
-    if (normalizedQuery === "") {
-      setRecommendations(DEFAULT_RECOMMENDATIONS);
-      setActiveRecommendationIndex(null);
-      return;
-    }
-
-    const disassembledQuery = disassembleText(typedQuery);
-
-    const newRecommendations = DUMMY_AUTOCOMPLETE_RECOMMENDATIONS.filter(
-      (item) => matchesRecommendation(item, normalizedQuery, disassembledQuery)
-    );
-
-    setRecommendations(newRecommendations);
-    setActiveRecommendationIndex(null);
-  }, [typedQuery]);
-
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     const nextQuery = event.target.value;
 
     setQuery(nextQuery);
-    setTypedQuery(nextQuery);
+    setRecommendations(filterRecommendations(nextQuery));
+    setActiveRecommendationIndex(null);
   };
 
   const handleRecommendationSelect = (title: string) => {
     setQuery(title);
-    setTypedQuery(title);
+    setRecommendations(filterRecommendations(title));
     setActiveRecommendationIndex(null);
   };
 

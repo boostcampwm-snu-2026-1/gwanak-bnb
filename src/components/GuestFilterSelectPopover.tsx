@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { ComponentProps } from "react";
 import { Minus, Plus } from "lucide-react";
 import {
   Popover,
@@ -6,13 +7,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-
-interface GuestFilter {
-  adult: number;
-  kids: number;
-  infant: number;
-  pets: number;
-}
+import SearchBar from "./LocationSearchBar/SearchBar";
+import type { GuestFilter } from "@/types";
 
 const FILTER_LABELS: Record<
   keyof GuestFilter,
@@ -24,23 +20,58 @@ const FILTER_LABELS: Record<
   pets: { label: "반려동물", description: "보조동물을 동반하시나요?" },
 };
 
-export default function GuestFilterSelectPopover() {
-  const [guestFilter, setGuestFilter] = useState<GuestFilter>({
+interface GuestFilterSelectPopoverProps {
+  onGuestFilterChange?: (guestFilter: GuestFilter) => void;
+  value?: GuestFilter;
+  triggerClassName?: ComponentProps<typeof SearchBar>["className"];
+}
+
+export default function GuestFilterSelectPopover({
+  onGuestFilterChange,
+  triggerClassName,
+  value,
+}: GuestFilterSelectPopoverProps) {
+  const [internalGuestFilter, setInternalGuestFilter] = useState<GuestFilter>({
     adult: 0,
     kids: 0,
     infant: 0,
     pets: 0,
   });
+  const guestFilter = value ?? internalGuestFilter;
+  const triggerLabelParts = [
+    guestFilter.adult > 0 ? `성인 ${guestFilter.adult}명` : null,
+    guestFilter.kids > 0 ? `어린이 ${guestFilter.kids}명` : null,
+    guestFilter.infant > 0 ? `유아 ${guestFilter.infant}명` : null,
+    guestFilter.pets > 0 ? `반려동물 ${guestFilter.pets}마리` : null,
+  ].filter(Boolean);
+  const triggerLabel =
+    triggerLabelParts.length > 0
+      ? triggerLabelParts.join(", ")
+      : "게스트 추가";
+
+  const updateGuestFilter = (updater: (prev: GuestFilter) => GuestFilter) => {
+    const nextGuestFilter = updater(guestFilter);
+
+    if (value === undefined) {
+      setInternalGuestFilter(nextGuestFilter);
+    }
+
+    onGuestFilterChange?.(nextGuestFilter);
+  };
 
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className="h-auto  justify-between rounded-full px-4 py-3 text-left shadow-sm"
-        >
-          <span>검색</span>
-        </Button>
+        <SearchBar
+          as="div"
+          heading="게스트"
+          className={triggerClassName}
+          inputSlot={
+            <div className="w-full text-sm font-medium text-foreground">
+              {triggerLabel}
+            </div>
+          }
+        />
       </PopoverTrigger>
       <PopoverContent align="end" className="w-96 rounded-3xl p-4">
         <section className="overflow-hidden rounded-2xl bg-background">
@@ -53,7 +84,7 @@ export default function GuestFilterSelectPopover() {
                 value={guestFilter[key as keyof GuestFilter]}
                 hasBorder={index < Object.keys(FILTER_LABELS).length - 1}
                 onChange={(value) =>
-                  setGuestFilter((prev) => ({
+                  updateGuestFilter((prev) => ({
                     ...prev,
                     [key]: value,
                   }))
