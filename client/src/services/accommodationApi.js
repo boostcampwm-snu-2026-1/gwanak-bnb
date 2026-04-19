@@ -1,4 +1,6 @@
-const apiBaseUrl = import.meta.env.SERVER_URL || 'http://localhost:3000'
+const apiBaseUrl = (
+  import.meta.env.SERVER_URL || 'http://localhost:3000'
+).replace(/\/$/, '')
 
 export async function fetchAccommodations(params) {
   const searchParams = new URLSearchParams()
