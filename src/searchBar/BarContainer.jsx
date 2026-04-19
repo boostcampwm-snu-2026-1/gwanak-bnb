@@ -60,6 +60,12 @@ function BarContainer({ setSearchResults }) {
           <button className={styles.searchButton} onClick={() => {
             setFinalDestination(destination);
             setFinalTravelerCount(travelerCount);
+            fetchDestinations({ query: destination, capacity: Object.values(travelerCount).reduce((a, b) => a + b, 0) })
+              .then(data => setSearchResults(data))
+              .catch(err => {
+                console.error("검색 결과 불러오기 실패:", err);
+                setSearchResults([]);
+              });
           }}>
             검색
           </button>
