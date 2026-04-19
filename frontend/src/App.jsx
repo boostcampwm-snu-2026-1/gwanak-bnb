@@ -24,7 +24,7 @@ function App() {
       setError(null);
       const totalGuests = adults + children;
       const region = searchState.query || '전체';
-      const response = await fetch(`http://localhost:8080/api/accommodations?region=${region}&guests=${totalGuests}`);
+      const response = await fetch(`https://gwanak-bnb-server-gtca.onrender.com/api/accommodations?region=${region}&guests=${totalGuests}`);
       
       if (!response.ok) throw new Error('서버 응답에 문제가 있습니다.');
 
