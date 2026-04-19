@@ -5,11 +5,11 @@ import TravelerModal from '../traveler/TravelerModal';
 import '../../styles/Search.css';
 
 function SearchBar({ 
-
   adults, children, infants, 
   setAdults, setChildren, setInfants,
   isModalOpen, setIsModalOpen,
-  searchState, updateSearchState 
+  searchState, updateSearchState,
+  onSearch
 }) {
   const searchBarRef = useRef(null);
   const totalGuests = adults + children;
@@ -103,7 +103,7 @@ function SearchBar({
         )}
       </div>
 
-      <button className="search-icon-button">
+      <button className="search-icon-button" onClick={onSearch}>
         <span className="search-icon">🔍</span>
       </button>
     </div>
