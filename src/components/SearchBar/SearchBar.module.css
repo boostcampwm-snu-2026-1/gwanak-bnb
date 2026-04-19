@@ -119,14 +119,29 @@
   background: #fff;
   border-radius: 999px;
   margin: 6px;
-  padding-right: 124px;
+  padding: 0;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+}
+
+.guestFieldButton {
+  border: 0;
+  background: transparent;
+  padding: 14px 24px;
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
 }
 
 .searchButton {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
+  border: 0;
+  margin: 8px;
   height: 50px;
   min-width: 100px;
   padding: 0 20px;
@@ -138,6 +153,20 @@
   font-size: clamp(16px, 1vw, 28px);
   line-height: 50px;
   text-align: center;
+  cursor: pointer;
+}
+
+.searchButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.feedbackMessage {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: #d93025;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .destinationDropdown {
@@ -304,7 +333,6 @@
 
   .guestField {
     margin: 0;
-    padding-right: 118px;
   }
 
   .destinationFieldActive {
@@ -313,6 +341,10 @@
 
   .destinationInput {
     font-size: 16px;
+  }
+
+  .guestFieldButton {
+    padding: 12px 16px;
   }
 
   .destinationDropdown {
