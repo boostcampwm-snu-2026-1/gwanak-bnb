@@ -7,3 +7,21 @@
   max-width: 900px;
   margin: 0 auto;
 }
+
+.search-submit-btn {
+  margin-right: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 24px;
+  background: #FF385C;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.search-submit-btn:hover {
+  background: #e0314f;
+}

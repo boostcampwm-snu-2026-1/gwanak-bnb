@@ -1,7 +1,7 @@
 import SearchBarContainer from '../SearchBar/SearchBarContainer';
 import './Header.css';
 
-function Header(){
+function Header({ onSearch }){
     return(
         <header className='header'>
             <div className='header-top'>
@@ -10,7 +10,7 @@ function Header(){
                 </div>
 
             </div>
-            <SearchBarContainer/>
+            <SearchBarContainer onSearch={onSearch} />
         </header>
     );
 }

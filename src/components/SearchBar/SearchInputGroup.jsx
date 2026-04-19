@@ -5,7 +5,7 @@ import LocationModal from '../Location/LocationModal';
 import './SearchInputGroup.css';
 
 
-function SearchInputGroup({ activeField, setActiveField }) {
+function SearchInputGroup({ activeField, setActiveField, onSearch }) {
     const [locationQuery, setLocationQuery] = useState('');
     const [guests, setGuests] = useState({ adult: 0, child: 0, infant: 0, dogs: 0 });
 
@@ -27,7 +27,12 @@ function SearchInputGroup({ activeField, setActiveField }) {
                 inputValue={locationQuery}
                 onInputChange={e => setLocationQuery(e.target.value)}
             >
-                {activeField === 'location' && <LocationModal query={locationQuery} />}
+                {activeField === 'location' && (
+                    <LocationModal
+                        query={locationQuery}
+                        onSelect={(name) => { setLocationQuery(name); setActiveField(null); }}
+                    />
+                )}
             </SearchField>
             
             <SearchField 
@@ -37,15 +42,23 @@ function SearchInputGroup({ activeField, setActiveField }) {
                 onClick={() => setActiveField('date')} 
             />
 
-            <SearchField 
-                label = "여행자" 
-                placeholder = "게스트 추가" 
-                value={getGuestSummary()} 
-                isActive={activeField === 'guests'} 
+            <SearchField
+                label = "여행자"
+                placeholder = "게스트 추가"
+                value={getGuestSummary()}
+                isActive={activeField === 'guests'}
                 onClick={() => setActiveField('guests')}
             >
                 {activeField === 'guests' && <GuestPickerModal guests={guests} setGuests={setGuests} />}
             </SearchField>
+
+            <button
+                className='search-submit-btn'
+                onClick={() => onSearch?.({ city: locationQuery, guests: guests.adult + guests.child })}
+                disabled={!locationQuery.trim() || (guests.adult + guests.child) === 0}
+            >
+                검색
+            </button>
         </div>
     );
 }
