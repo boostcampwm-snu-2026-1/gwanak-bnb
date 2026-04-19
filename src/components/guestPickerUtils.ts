@@ -5,6 +5,10 @@ export type GuestCounts = {
   pets: number
 }
 
+export function totalStayingGuests(g: GuestCounts): number {
+  return g.adults + g.children
+}
+
 export function formatGuestSummary(g: GuestCounts): string {
   const isDefault =
     g.adults === 0 && g.children === 0 && g.infants === 0 && g.pets === 0
