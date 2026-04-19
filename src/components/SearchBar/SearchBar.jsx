@@ -3,7 +3,7 @@ import TravelerPopup from '../Traveler/TravelerPopup' // 여행자 팝업 컴포
 import SpotSearch from '../Spot/SpotSearch'; // 여행지 검색 컴포넌트
 import './SearchBar.css'
 
-function SearchBar() {
+function SearchBar({ setRooms }) {
   const [keyword, setKeyword] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [travelerCounts, setTravelerCounts] = useState({
@@ -39,6 +39,9 @@ function SearchBar() {
       const result = await response.json();
       console.log('Response:', result);
 
+      if (result.status === 'success') {
+        setRooms(result.data); 
+      }
     } catch (error) {
       console.error('Fetch error:', error);
     }

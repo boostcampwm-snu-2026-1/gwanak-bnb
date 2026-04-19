@@ -1,44 +1,34 @@
-import express from 'express';
-import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import Accommodate from './Accommodate.js';
-import 'dotenv/config';
+import app from './app.js';
 
-const URI = process.env.URI;
-const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const envPath = path.resolve(__dirname, '.env');
+
+if (fs.existsSync(envPath)) {
+    console.log(`✅ .env 파일 발견: ${envPath}`);
+    dotenv.config({ path: envPath });
+} else {
+    console.error(`❌ .env 파일이 이 경로에 없음: ${envPath}`);
+    process.exit(1);
+}
 const PORT = 3000;
-
-app.use(cors());
-app.use(express.json());
+const URI = process.env.URI;
 
 mongoose.connect(URI)
-  .then(async () => {
+  .then(() => {
     console.log('✅ MongoDB 연결 성공!');
-
+    
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running at http://localhost:${PORT}`);
+    });
   })
-  .catch(err => console.error('❌ DB 연결 에러:', err));
-
-app.post('/api/search', async (req, res) => {
-    try {
-        const { destination } = req.body;
-        
-        console.log(`검색 요청: ${destination}`);
-
-        const results = await Accommodate.find({
-            destination: new RegExp(destination, 'i') 
-        });
-
-        res.json({ 
-            status: 'success', 
-            count: results.length,
-            data: results 
-        });
-    } catch (error) {
-        console.error("검색 중 에러 발생:", error);
-        res.status(500).json({ status: 'error', message: 'Internal Server Error' });
-    }
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+  .catch(err => {
+    console.error('❌ DB 연결 에러:', err);
+    process.exit(1);
+  });
