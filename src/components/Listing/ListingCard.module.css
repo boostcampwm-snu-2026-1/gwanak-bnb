@@ -4,12 +4,12 @@
 
 .imageWrap {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .image {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1.04 / 1;
   object-fit: cover;
   border-radius: 20px;
   display: block;
@@ -39,15 +39,45 @@
   cursor: pointer;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .title {
   display: block;
   color: #222;
-  margin-bottom: 4px;
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.rating {
+  flex-shrink: 0;
+  color: #222;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .meta {
   margin: 0;
   color: #6a6a6a;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.price {
+  margin: 4px 0 0;
+  color: #222;
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 700;
 }

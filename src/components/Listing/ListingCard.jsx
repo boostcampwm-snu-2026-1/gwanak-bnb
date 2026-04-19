@@ -2,13 +2,6 @@ import styles from './ListingCard.module.css'
 
 function ListingCard({ listing }) {
   const badgeText = listing.isSuperhost ? '슈퍼호스트' : listing.isGuestFavorite ? '게스트 선호' : ''
-  const metaLines = [
-    listing.subtitle || null,
-    listing.roomLabel || listing.date || null,
-    listing.date && listing.roomLabel ? listing.date : null,
-    listing.ratingLabel || listing.price || null,
-    listing.priceLabel || null,
-  ].filter(Boolean)
 
   return (
     <article className={styles.card}>
@@ -20,12 +13,16 @@ function ListingCard({ listing }) {
         </button>
       </div>
 
-      <strong className={styles.title}>{listing.title}</strong>
-      {metaLines.map((line) => (
-        <p className={styles.meta} key={line}>
-          {line}
-        </p>
-      ))}
+      <div className={styles.content}>
+        <div className={styles.titleRow}>
+          <strong className={styles.title}>{listing.title}</strong>
+          {listing.ratingLabel && <span className={styles.rating}>{listing.ratingLabel}</span>}
+        </div>
+        {listing.subtitle && <p className={styles.meta}>{listing.subtitle}</p>}
+        {listing.roomLabel && <p className={styles.meta}>{listing.roomLabel}</p>}
+        {listing.date && <p className={styles.meta}>{listing.date}</p>}
+        {listing.priceLabel && <p className={styles.price}>{listing.priceLabel}</p>}
+      </div>
     </article>
   )
 }
