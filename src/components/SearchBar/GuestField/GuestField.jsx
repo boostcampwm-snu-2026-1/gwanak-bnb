@@ -2,7 +2,7 @@
 // 인원(guests) 상태를 보유하고, 모달 열림/닫힘 및 초기화를 처리한다
 // 모달 외부 클릭 감지는 useEffect + document 이벤트 리스너로 구현한다
 
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import GuestModal from './GuestModal'
 
 // 인원 초기값: 모든 카테고리 0명
@@ -23,11 +23,12 @@ function getSummary(guests) {
 }
 
 // Props:
-//   isOpen  - 모달이 현재 열려 있는지 (SearchBar에서 관리)
-//   onToggle - 모달 열림/닫힘 토글 함수 (SearchBar로부터 전달)
-export default function GuestField({ isOpen, onToggle }) {
-  // 인원 선택 상태: { adults, children, infants, pets }
-  const [guests, setGuests] = useState(initialGuests)
+//   isOpen       - 모달이 현재 열려 있는지 (SearchBar에서 관리)
+//   onToggle     - 모달 열림/닫힘 토글 함수 (SearchBar로부터 전달)
+//   guests       - 인원 상태 (SearchBar에서 관리)
+//   onGuestsChange - 인원 변경 함수 (SearchBar로부터 전달)
+export default function GuestField({ isOpen, onToggle, guests, onGuestsChange }) {
+  const setGuests = onGuestsChange
 
   // 모달 외부 클릭을 감지하기 위한 컨테이너 ref
   const containerRef = useRef(null)
