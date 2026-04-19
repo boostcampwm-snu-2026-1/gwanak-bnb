@@ -41,6 +41,20 @@ const destinationSuggestions = [
     description: "해변까지 걸어갈 수 있는 바다 앞 스테이",
     keywords: ["강릉", "바다", "강원도", "해변", "테라스"],
   },
+  {
+    id: "sokcho-lake",
+    label: "속초 호수",
+    region: "속초시, 강원도",
+    description: "호수 산책과 가족 여행에 어울리는 숙소",
+    keywords: ["속초", "호수", "강원도", "가족", "영랑호"],
+  },
+  {
+    id: "busan-ocean-view",
+    label: "부산 오션뷰",
+    region: "부산, 기장군",
+    description: "자쿠지와 전망 데크가 있는 남해안 숙소",
+    keywords: ["부산", "기장", "오션뷰", "바다", "전망"],
+  },
 ];
 
 export default destinationSuggestions;

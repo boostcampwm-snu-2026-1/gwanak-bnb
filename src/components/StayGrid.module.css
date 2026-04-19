@@ -23,6 +23,12 @@
   letter-spacing: -0.04em;
 }
 
+.resultCount {
+  flex-shrink: 0;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -80,11 +86,16 @@
   color: #707070;
 }
 
+.summary {
+  min-height: 42px;
+}
+
 .cardBody strong {
   display: inline-block;
   margin-top: 12px;
 }
 
+.emptyState,
 .message {
   margin: 0;
   padding: 28px;
@@ -92,4 +103,17 @@
   border-radius: 20px;
   background: #ffffff;
   color: #666666;
+}
+
+.emptyState h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: #111827;
+  letter-spacing: -0.04em;
+}
+
+.emptyDescription {
+  margin: 12px 0 0;
+  max-width: 560px;
+  color: #6b7280;
 }

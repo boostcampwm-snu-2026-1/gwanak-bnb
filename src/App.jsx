@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import GuestSelector from "./components/GuestSelector";
 import SearchBar from "./components/SearchBar";
 import StayGrid from "./components/StayGrid";
@@ -35,76 +35,48 @@ const initialGuests = {
   pets: 0,
 };
 
+const initialSearchForm = {
+  destination: "",
+  checkIn: "",
+  checkOut: "",
+};
+
 const categoryLabels = ["한옥", "호수 근처", "인기 급상승", "오두막", "전망 좋은 숙소"];
 
-function matchesDestination(stay, query) {
-  const normalizedTokens = query
-    .toLowerCase()
-    .split(/\s+/)
-    .map((token) => token.trim())
-    .filter(Boolean);
-
-  if (normalizedTokens.length === 0) {
-    return true;
+function formatDateSummary(checkIn, checkOut) {
+  if (!checkIn || !checkOut) {
+    return "날짜 미지정";
   }
 
-  const searchableText = `${stay.title} ${stay.location}`.toLowerCase();
-
-  return normalizedTokens.every((token) => searchableText.includes(token));
+  return new Intl.DateTimeFormat("ko-KR", {
+    month: "long",
+    day: "numeric",
+    timeZone: "Asia/Seoul",
+  })
+    .formatRange(new Date(checkIn), new Date(checkOut))
+    .replace(" ~ ", " - ");
 }
 
 function App() {
   const [guests, setGuests] = useState(initialGuests);
   const [activePanel, setActivePanel] = useState(null);
-  const [destination, setDestination] = useState("");
+  const [searchForm, setSearchForm] = useState(initialSearchForm);
   const [stays, setStays] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    let isMounted = true;
-
-    async function loadStays() {
-      try {
-        setIsLoading(true);
-        const response = await fetch("/data/stays.json");
-
-        if (!response.ok) {
-          throw new Error("숙소 목록을 불러오지 못했습니다.");
-        }
-
-        const data = await response.json();
-
-        if (isMounted) {
-          setStays(data.stays);
-          setErrorMessage("");
-        }
-      } catch (error) {
-        if (isMounted) {
-          setErrorMessage(error.message);
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      }
-    }
-
-    loadStays();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const [searchMeta, setSearchMeta] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [formErrorMessage, setFormErrorMessage] = useState("");
+  const [searchErrorMessage, setSearchErrorMessage] = useState("");
+  const requestIdRef = useRef(0);
 
   const totalTravelers = guests.adults + guests.children;
   const guestSummary =
     totalTravelers > 0 ? `게스트 ${totalTravelers}명` : "여행자 추가";
   const petSummary = guests.pets > 0 ? ` · 반려동물 ${guests.pets}마리` : "";
   const travelerSummary = `${guestSummary}${petSummary}`;
-  const hasDestination = destination.trim().length > 0;
-  const destinationSummary = hasDestination ? destination : "어디든지";
-  const filteredStays = stays.filter((stay) => matchesDestination(stay, destination));
+  const destinationSummary = searchMeta?.destination || "검색 전";
+  const dateSummary = formatDateSummary(searchMeta?.checkIn, searchMeta?.checkOut);
+  const searchFeedbackMessage = formErrorMessage || searchErrorMessage;
 
   function updateGuestCount(type, delta) {
     setGuests((currentGuests) => {
@@ -119,10 +91,124 @@ function App() {
         [type]: nextValue,
       };
     });
+
+    setFormErrorMessage("");
+    setSearchErrorMessage("");
   }
 
   function closePanels() {
     setActivePanel(null);
+  }
+
+  function handleDestinationChange(nextDestination) {
+    setSearchForm((currentSearchForm) => ({
+      ...currentSearchForm,
+      destination: nextDestination,
+    }));
+    setFormErrorMessage("");
+    setSearchErrorMessage("");
+  }
+
+  function handleDateChange(field, value) {
+    setSearchForm((currentSearchForm) => ({
+      ...currentSearchForm,
+      [field]: value,
+    }));
+    setFormErrorMessage("");
+    setSearchErrorMessage("");
+  }
+
+  function handleCategoryClick(label) {
+    setSearchForm((currentSearchForm) => ({
+      ...currentSearchForm,
+      destination: label,
+    }));
+    setFormErrorMessage("");
+    setSearchErrorMessage("");
+  }
+
+  async function handleSearchSubmit(event) {
+    event.preventDefault();
+
+    const destination = searchForm.destination.trim();
+
+    if (!destination) {
+      setFormErrorMessage("여행지를 입력해 주세요.");
+      return;
+    }
+
+    if (totalTravelers === 0) {
+      setFormErrorMessage("여행 인원을 1명 이상 선택해 주세요.");
+      setActivePanel("guests");
+      return;
+    }
+
+    if (
+      (searchForm.checkIn && !searchForm.checkOut) ||
+      (!searchForm.checkIn && searchForm.checkOut)
+    ) {
+      setFormErrorMessage("날짜 검색은 체크인과 체크아웃을 함께 선택해 주세요.");
+      return;
+    }
+
+    closePanels();
+    setFormErrorMessage("");
+    setSearchErrorMessage("");
+    setIsSearching(true);
+
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+
+    const searchParams = new URLSearchParams({
+      destination,
+      guests: String(totalTravelers),
+    });
+
+    if (guests.pets > 0) {
+      searchParams.set("pets", String(guests.pets));
+    }
+
+    if (searchForm.checkIn && searchForm.checkOut) {
+      searchParams.set("checkIn", searchForm.checkIn);
+      searchParams.set("checkOut", searchForm.checkOut);
+    }
+
+    try {
+      const response = await fetch(`/api/stays/search?${searchParams.toString()}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "숙소 검색에 실패했습니다.");
+      }
+
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
+      setStays(data.stays);
+      setSearchMeta(data.meta);
+      setHasSearched(true);
+    } catch (error) {
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
+      setStays([]);
+      setSearchMeta({
+        checkIn: searchForm.checkIn || null,
+        checkOut: searchForm.checkOut || null,
+        destination,
+        guests: totalTravelers,
+        pets: guests.pets,
+        total: 0,
+      });
+      setHasSearched(true);
+      setSearchErrorMessage(error.message);
+    } finally {
+      if (requestId === requestIdRef.current) {
+        setIsSearching(false);
+      }
+    }
   }
 
   return (
@@ -148,13 +234,20 @@ function App() {
         </div>
 
         <SearchBar
-          destinationValue={destination}
+          destinationValue={searchForm.destination}
           suggestions={destinationSuggestions}
+          checkIn={searchForm.checkIn}
+          checkOut={searchForm.checkOut}
           guestSummary={travelerSummary}
           activePanel={activePanel}
+          feedbackMessage={searchFeedbackMessage}
+          isSearching={isSearching}
           onOpenPanel={setActivePanel}
           onClosePanels={closePanels}
-          onDestinationChange={setDestination}
+          onDestinationChange={handleDestinationChange}
+          onCheckInChange={(value) => handleDateChange("checkIn", value)}
+          onCheckOutChange={(value) => handleDateChange("checkOut", value)}
+          onSubmit={handleSearchSubmit}
         >
           <GuestSelector
             guests={guests}
@@ -166,7 +259,12 @@ function App() {
 
         <div className={styles.filterRow}>
           {categoryLabels.map((label) => (
-            <button key={label} type="button" className={styles.filterChip}>
+            <button
+              key={label}
+              type="button"
+              className={styles.filterChip}
+              onClick={() => handleCategoryClick(label)}
+            >
               {label}
             </button>
           ))}
@@ -176,23 +274,32 @@ function App() {
       <main className={styles.content}>
         <section className={styles.summaryCard}>
           <div>
-            <p className={styles.summaryLabel}>현재 검색 조건</p>
+            <p className={styles.summaryLabel}>
+              {hasSearched ? "검색 결과 후" : "검색 결과 전"}
+            </p>
             <strong>
-              {destinationSummary} · 5월 1일 - 5월 15일 · {travelerSummary}
+              {hasSearched
+                ? `${destinationSummary} · ${dateSummary} · 게스트 ${searchMeta?.guests ?? 0}명${
+                    searchMeta?.pets ? ` · 반려동물 ${searchMeta.pets}마리` : ""
+                  }`
+                : "여행지와 여행 인원을 선택하고 검색을 시작해보세요."}
             </strong>
             <p className={styles.summaryNote}>
-              {hasDestination
-                ? `${filteredStays.length}개의 추천 숙소가 즉시 반영되고 있어요.`
-                : "여행지를 입력하면 추천 검색어와 숙소 목록이 바로 바뀝니다."}
+              {isSearching
+                ? "원격 백엔드 API로 검색 요청을 보내는 중입니다."
+                : hasSearched
+                  ? `${searchMeta?.total ?? 0}개의 검색 결과가 같은 화면 아래에 즉시 반영됩니다.`
+                  : "날짜는 선택 사항이며, 검색 결과는 새로고침 없이 바로 렌더링됩니다."}
             </p>
           </div>
         </section>
 
         <StayGrid
-          stays={filteredStays}
-          isLoading={isLoading}
-          errorMessage={errorMessage}
-          destinationValue={destination}
+          stays={stays}
+          hasSearched={hasSearched}
+          isLoading={isSearching}
+          errorMessage={searchErrorMessage}
+          destinationValue={searchMeta?.destination || searchForm.destination}
         />
       </main>
     </div>

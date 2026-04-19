@@ -1,11 +1,26 @@
-# 여행지 검색 설계 문서
+# 관악bnb 검색 설계 문서
 
 ## 목표
 
-- `여행지` 입력 즉시 추천 여행 검색어를 노출한다.
-- 키보드 `ArrowUp`, `ArrowDown` 으로 추천 검색어를 순환 탐색한다.
-- 선택 중인 검색어를 입력창과 숙소 목록에 바로 반영한다.
-- 기존 `여행자` 선택 기능과 충돌하지 않도록 검색 바 상태를 분리한다.
+- 프론트에서 `fetch` API로 원격 Express 서버에 검색 요청을 보낸다.
+- MongoDB에 저장된 숙소 데이터를 조건에 맞게 조회한다.
+- 검색 결과를 페이지 이동 없이 같은 화면 하단에 렌더링한다.
+- `여행지`, `여행 인원`을 1차 필수 검색 조건으로 사용한다.
+- `체크인`, `체크아웃`은 선택 조건으로 함께 보낼 수 있다.
+
+## 화면 흐름
+
+```mermaid
+flowchart TD
+  A["SearchBar 입력"] --> B["fetch('/api/stays/search')"]
+  B --> C["Express Route"]
+  C --> D["Controller"]
+  D --> E["Service"]
+  E --> F["Repository"]
+  F --> G["MongoDB stays collection"]
+  G --> H["검색 결과 JSON 응답"]
+  H --> I["StayGrid 즉시 렌더링"]
+```
 
 ## 컴포넌트 구조
 
@@ -13,76 +28,161 @@
 graph TD
   App --> SearchBar
   SearchBar --> DestinationField
-  DestinationField --> SuggestionList
+  SearchBar --> DateRangeField
   SearchBar --> GuestSelector
+  DestinationField --> SuggestionList
   App --> StayGrid
 ```
 
-## 상태 설계
+## 프론트 상태 설계
 
-### 1. App이 관리하는 상태
-
-| 상태 | 타입 | 이유 |
+| 상태 | 타입 | 설명 |
 | --- | --- | --- |
-| `destination` | `string` | 현재 검색 조건과 숙소 필터링에 공통으로 사용 |
-| `activePanel` | `"destination" \| "guests" \| null` | 검색 바에서 어떤 레이어를 열지 한 곳에서 제어 |
-| `guests` | `object` | 여행자 선택 결과를 요약 카드와 검색 바에서 재사용 |
-| `stays`, `isLoading`, `errorMessage` | `array`, `boolean`, `string` | 서버 데이터 로딩 상태 관리 |
+| `searchForm.destination` | `string` | 현재 입력 중인 여행지 |
+| `searchForm.checkIn` | `string` | 체크인 날짜 |
+| `searchForm.checkOut` | `string` | 체크아웃 날짜 |
+| `guests` | `object` | 성인, 어린이, 유아, 반려동물 수 |
+| `activePanel` | `"destination" \| "guests" \| null` | 열린 레이어 상태 |
+| `stays` | `array` | 백엔드 검색 결과 |
+| `searchMeta` | `object \| null` | 마지막 검색 조건과 결과 개수 |
+| `hasSearched` | `boolean` | 검색 전/후 화면 분기 |
+| `isSearching` | `boolean` | 요청 진행 상태 |
+| `formErrorMessage` | `string` | 클라이언트 입력 검증 메시지 |
+| `searchErrorMessage` | `string` | 서버 응답 오류 메시지 |
 
-### 2. DestinationField가 관리하는 상태
-
-| 상태 | 타입 | 이유 |
-| --- | --- | --- |
-| `typedValue` | `string` | 사용자가 마지막으로 직접 입력한 검색어 보존 |
-| `activeIndex` | `number` | 키보드 이동 중 현재 강조된 추천 검색어 추적 |
-
-`typedValue`와 `destination`을 분리한 이유는, 화살표 이동 시 입력창 값은 추천 검색어로 바뀌어도 추천 목록 필터 기준은 마지막 직접 입력값을 유지해야 하기 때문이다.
-
-## 훅 사용 이유
-
-- `useState`
-  - 검색어, 열린 패널, 여행자 수처럼 UI에 직접 반영되는 값을 저장한다.
-- `useEffect`
-  - 첫 렌더 이후 숙소 데이터를 불러온다.
-  - 여행지 레이어가 열릴 때 입력창에 포커스를 옮기고, 바깥 클릭/`Escape` 시 레이어를 닫는다.
-- `useRef`
-  - 검색 바 바깥 클릭 감지용 루트 DOM 참조에 사용한다.
-  - 자동완성 입력창 포커스와 활성 옵션 스크롤 이동에 사용한다.
-
-## 동작 흐름
-
-1. 사용자가 `여행지` 필드를 클릭하면 `activePanel`이 `"destination"`으로 바뀐다.
-2. `DestinationField`는 추천 여행지를 레이어로 보여준다.
-3. 사용자가 입력하면 `typedValue`와 `destination`이 함께 갱신되고, 추천 목록이 즉시 필터링된다.
-4. `ArrowDown` / `ArrowUp` 입력 시 `activeIndex`가 순환 이동한다.
-5. 이동한 추천 검색어는 입력창에 즉시 반영되고, `StayGrid`도 같은 검색어로 다시 필터링된다.
-6. `Enter` 또는 마우스 클릭으로 선택하면 추천 레이어를 닫는다.
-
-## 파일 구조
+## 백엔드 구조
 
 ```text
-src
-├─ components
-│  ├─ SearchBar.jsx
-│  ├─ GuestSelector.jsx
-│  ├─ StayGrid.jsx
-│  └─ search
-│     ├─ DestinationField.jsx
-│     ├─ DestinationField.module.css
-│     ├─ SuggestionList.jsx
-│     └─ SuggestionList.module.css
-├─ data
-│  └─ destinationSuggestions.js
-└─ App.jsx
+server
+├─ app.js
+├─ index.js
+├─ config
+│  ├─ database.js
+│  └─ env.js
+├─ controllers
+│  └─ stayController.js
+├─ middleware
+│  └─ errorHandler.js
+├─ models
+│  └─ Stay.js
+├─ repositories
+│  └─ stayRepository.js
+├─ routes
+│  └─ stayRoutes.js
+├─ scripts
+│  └─ seedStays.js
+├─ seeds
+│  └─ stays.js
+└─ services
+   └─ stayService.js
 ```
 
-## 스타일 원칙
+### 선택한 구조
 
-- 검색 바 공통 레이아웃은 `SearchBar.module.css`에서 유지한다.
-- 여행지 자동완성 레이어와 옵션 스타일은 `search/` 하위 CSS Module로 분리한다.
-- 중복 스타일을 줄이기 위해 검색 바 공통 영역과 자동완성 전용 영역을 분리했다.
+- Layered Architecture
+- 라우팅, 입력 검증, 비즈니스 규칙, DB 접근을 분리해 역할을 나눴다.
+- 검색 조건이 늘어나도 `service`와 `repository`를 중심으로 확장할 수 있다.
 
-## 선택하지 않은 것
+## 데이터 모델
 
-- 캘린더는 이번 요구사항 핵심이 아니므로 정적 영역으로 유지한다.
-- 전역 상태 라이브러리는 아직 필요하지 않아 `useState` 중심으로 설계했다.
+| 필드 | 타입 | 설명 |
+| --- | --- | --- |
+| `slug` | `string` | 숙소 식별자 |
+| `title` | `string` | 숙소 제목 |
+| `summary` | `string` | 카드 설명 |
+| `location` | `string` | 노출용 위치 |
+| `city` | `string` | 도시 검색용 |
+| `district` | `string` | 지역 검색용 |
+| `category` | `string` | 카테고리 검색용 |
+| `keywords` | `string[]` | 텍스트 검색용 키워드 |
+| `maxGuests` | `number` | 최대 인원 |
+| `petFriendly` | `boolean` | 반려동물 가능 여부 |
+| `pricePerNight` | `number` | 1박 가격 |
+| `rating` | `number` | 평점 |
+| `reviewCount` | `number` | 리뷰 수 |
+| `availability.startDate` | `Date` | 예약 가능 시작일 |
+| `availability.endDate` | `Date` | 예약 가능 종료일 |
+
+MongoDB에서는 `stays` collection이 시딩 시점에 생성된다.
+
+## 검색 규칙
+
+1. `destination`이 비어 있으면 요청을 거절한다.
+2. `guests`가 1보다 작으면 요청을 거절한다.
+3. 날짜는 둘 다 있어야만 검색 조건에 포함한다.
+4. 검색어는 `title`, `location`, `city`, `district`, `category`, `keywords`를 기준으로 찾는다.
+5. `maxGuests >= guests` 조건을 만족하는 숙소만 반환한다.
+6. 반려동물이 포함되면 `petFriendly=true` 숙소만 반환한다.
+7. 날짜가 포함되면 예약 가능 기간 안에 들어오는 숙소만 반환한다.
+
+## API 명세
+
+### `GET /api/stays/search`
+
+#### Query
+
+| 이름 | 필수 | 예시 |
+| --- | --- | --- |
+| `destination` | 예 | `서울` |
+| `guests` | 예 | `2` |
+| `pets` | 아니오 | `1` |
+| `checkIn` | 아니오 | `2026-05-10` |
+| `checkOut` | 아니오 | `2026-05-12` |
+
+#### Response
+
+```json
+{
+  "meta": {
+    "destination": "서울",
+    "guests": 2,
+    "pets": 0,
+    "checkIn": null,
+    "checkOut": null,
+    "total": 2
+  },
+  "stays": [
+    {
+      "id": "661f...",
+      "title": "북촌 감성 한옥 스테이",
+      "summary": "마당과 다도를 즐길 수 있는 조용한 도심 한옥",
+      "location": "서울, 종로구",
+      "distance": "경복궁까지 도보 11분",
+      "stayInfo": "최대 4명 · 침실 2개 · 침대 2개 · 욕실 1개",
+      "dates": "예약 가능 4월 20일 - 6월 30일",
+      "price": "₩128,000 /박",
+      "rating": 4.93,
+      "badge": "게스트 선호",
+      "gradient": "linear-gradient(...)"
+    }
+  ]
+}
+```
+
+## DB 준비 방식
+
+1. Mongoose 스키마로 `Stay` 모델을 정의한다.
+2. `npm run seed` 실행 시 collection과 index를 생성한다.
+3. 기존 데이터를 비우고 더미 숙소 데이터를 다시 넣는다.
+
+## Render 배포 준비
+
+- [render.yaml](/Users/donghyun/Documents/gwanak-bnb/render.yaml) 추가
+- `npm run build` 후 `npm run start`로 서비스 실행
+- `MONGO_URI`, `CLIENT_ORIGIN`, `NODE_ENV` 환경변수 사용
+- Render에서는 `Web Service` 타입으로 배포한다.
+- 하나의 Node 서비스가 API와 정적 프론트 번들을 함께 서빙한다.
+
+## 검증
+
+- `npm run seed`로 Atlas에 더미 숙소 데이터를 적재했다.
+- `npm run build`로 프론트 프로덕션 번들 생성을 확인했다.
+- `GET /api/health` 응답으로 서버 기동을 확인했다.
+- `GET /api/stays/search?destination=서울&guests=2` 응답으로 검색 API 동작을 확인했다.
+
+## 제출 포인트
+
+- 프론트에서 `fetch`로 서버와 통신한다.
+- 검색 결과는 새로고침 없이 즉시 렌더링된다.
+- MongoDB 스키마와 더미 데이터 시딩이 포함되어 있다.
+- Express 백엔드는 Layered Architecture로 구성되어 있다.
