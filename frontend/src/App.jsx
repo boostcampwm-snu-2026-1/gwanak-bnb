@@ -222,6 +222,33 @@ export default function App() {
     setCheckOut(outDate);
   };
 
+  const [flexInfo, setFlexInfo] = useState({ duration: null, months: [] });
+
+  const getDateText = () => {
+    if (flexInfo && (flexInfo.months.length > 0 || flexInfo.duration)) {
+      const hasDuration = !!flexInfo.duration;
+      const hasMonths   = flexInfo.months.length > 0;
+
+      const sorted = [...(flexInfo.months || [])].sort((a, b) => {
+        const [ay, am] = a.split('-').map(Number);
+        const [by, bm] = b.split('-').map(Number);
+        return ay !== by ? ay - by : am - bm;
+      });
+      const monthLabels = sorted.map(k => {
+        const [, m] = k.split('-').map(Number);
+        return `${m + 1}월`;
+      }).join(', ');
+
+      if (hasDuration && hasMonths) return `${monthLabels}의 ${flexInfo.duration}`;
+      if (hasDuration && !hasMonths) return `언제든 ${flexInfo.duration}`;
+      if (!hasDuration && hasMonths) return `언제든지`;
+    }
+    if (checkIn) {
+      return `${formatShortDate(checkIn)}${checkOut ? ` - ${formatShortDate(checkOut)}` : ''}`;
+    }
+    return '날짜 추가';
+  };
+
   const formatShortDate = (dt) => {
     if (!dt) return null;
     return `${dt.getMonth() + 1}월 ${dt.getDate()}일`;
@@ -451,10 +478,8 @@ export default function App() {
             onMouseLeave={() => setHoverTab(null)}
           >
             <div style={{ fontSize: 12, fontWeight: 800, color: '#222', marginBottom: 2 }}>날짜</div>
-            <div style={{ fontSize: 14, color: checkIn ? '#222' : '#717171', fontWeight: checkIn ? 600 : 400 }}>
-              {checkIn
-                ? `${formatShortDate(checkIn)}${checkOut ? ` - ${formatShortDate(checkOut)}` : ''}`
-                : '날짜 추가'}
+            <div style={{ fontSize: 14, color: checkIn ? '#222' : '#717171', fontWeight: (checkIn || flexInfo) ? 600 : 400 }}>
+              {getDateText()}
             </div>
           </div>
 
@@ -593,6 +618,7 @@ export default function App() {
               checkIn={checkIn}
               checkOut={checkOut}
               onChange={handleDateChange}
+              onFlexChange={(info) => setFlexInfo(info)}
             />
           </div>
         )}

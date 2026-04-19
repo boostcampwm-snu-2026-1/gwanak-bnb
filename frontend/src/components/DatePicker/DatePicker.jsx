@@ -24,7 +24,7 @@ function getCalendarDays(year, month) {
   return days;
 }
 
-export default function DatePicker({ checkIn, checkOut, onChange }) {
+export default function DatePicker({ checkIn, checkOut, onChange, onFlexChange }) {
   const today = new Date(); today.setHours(0,0,0,0);
 
   const [leftYear,  setLeftYear]  = useState(today.getFullYear());
@@ -35,7 +35,7 @@ export default function DatePicker({ checkIn, checkOut, onChange }) {
   const [checkOutFlex, setCheckOutFlex] = useState('정확한 날짜');
   const [openDropdown, setOpenDropdown] = useState(null);
   const [selectedDuration,  setSelectedDuration]  = useState(null);
-  const [selectedFlexMonth, setSelectedFlexMonth] = useState(null);
+  const [selectedFlexMonth, setSelectedFlexMonth] = useState([]);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -239,7 +239,7 @@ export default function DatePicker({ checkIn, checkOut, onChange }) {
     ? `${dt.getFullYear()}. ${String(dt.getMonth()+1).padStart(2,'0')}. ${String(dt.getDate()).padStart(2,'0')}.`
     : '정확한 날짜';
 
-  const flexMonths = Array.from({ length: 8 }, (_, i) => {
+  const flexMonths = Array.from({ length: 12 }, (_, i) => {
     const d = new Date(today.getFullYear(), today.getMonth() + i, 1);
     return { year: d.getFullYear(), month: d.getMonth() };
   });
@@ -249,7 +249,15 @@ export default function DatePicker({ checkIn, checkOut, onChange }) {
       <div className="dp-tabs-wrap">
         <div className="dp-tabs">
           {['날짜 지정', '유연한 일정'].map(t => (
-            <button key={t} className={`dp-tab${mode === t ? ' active' : ''}`} onClick={() => setMode(t)}>{t}</button>
+            <button key={t} className={`dp-tab${mode === t ? ' active' : ''}`} onClick={() => {
+              setMode(t);
+              if (t === '날짜 지정') {
+                onFlexChange?.({ duration: null, months: [] });
+              } else {
+                // 유연한 일정 탭으로 전환 시 현재 선택 상태 전달 (아무것도 없으면 빈 값으로)
+                onFlexChange?.({ duration: selectedDuration, months: selectedFlexMonth });
+              }
+            }}>{t}</button>
           ))}
         </div>
       </div>
@@ -304,17 +312,26 @@ export default function DatePicker({ checkIn, checkOut, onChange }) {
           <div className="dp-duration-row">
             {DURATION_OPTIONS.map(opt => (
               <button key={opt} className={`dp-duration-btn${selectedDuration === opt ? ' active' : ''}`}
-                onClick={() => setSelectedDuration(opt)}>{opt}</button>
+                onClick={() => {
+                  setSelectedDuration(opt);
+                  onFlexChange?.({ duration: opt, months: selectedFlexMonth });
+                }}>{opt}</button>
             ))}
           </div>
           <p className="dp-flex-title" style={{ marginTop: 32 }}>여행 날짜를 선택하세요.</p>
           <div className="dp-month-scroll">
             {flexMonths.map(({ year, month }) => {
               const key = `${year}-${month}`;
-              const sel = selectedFlexMonth === key;
+              const sel = selectedFlexMonth.includes(key);
               return (
                 <button key={key} className={`dp-month-card${sel ? ' active' : ''}`}
-                  onClick={() => setSelectedFlexMonth(sel ? null : key)}>
+                  onClick={() => {
+                    const next = sel
+                      ? selectedFlexMonth.filter(k => k !== key)
+                      : [...selectedFlexMonth, key];
+                    setSelectedFlexMonth(next);
+                    onFlexChange?.({ duration: selectedDuration, months: next });
+                  }}>
                   <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <rect x="3" y="4" width="18" height="18" rx="2"/>
                     <path d="M3 9h18M8 2v4M16 2v4"/>

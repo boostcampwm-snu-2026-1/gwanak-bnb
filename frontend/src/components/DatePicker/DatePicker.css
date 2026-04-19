@@ -102,7 +102,7 @@
   padding: 8px 20px; font-size: 14px; color: #222; cursor: pointer; font-family: inherit;
 }
 .dp-duration-btn.active, .dp-duration-btn:hover { border-color: #222; font-weight: 600; }
-.dp-month-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+.dp-month-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; padding-right: 10px; scrollbar-width: none; }
 .dp-month-scroll::-webkit-scrollbar { display: none; }
 .dp-month-card {
   flex-shrink: 0; width: 110px; height: 110px; border: 1.5px solid #ddd; border-radius: 14px;
