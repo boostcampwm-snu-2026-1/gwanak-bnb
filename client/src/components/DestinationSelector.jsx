@@ -3,8 +3,7 @@ import { RECOMMENDED, ALL_DESTINATIONS } from "../data/destinations";
 import DestinationModal from "./DestinationModal";
 import styles from "./DestinationSelector.module.css";
 
-function DestinationSelector() {
-  const [destination, setDestination] = useState(null);
+function DestinationSelector({ onDestinationChange, closeSignal }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -26,17 +25,27 @@ function DestinationSelector() {
     return () => document.removeEventListener("mousedown", handleMouseDown);
   }, [isOpen]);
 
+  useEffect(() => {
+    if (closeSignal) setIsOpen(false);
+  }, [closeSignal]);
+
   const handleSelect = (dest) => {
-    setDestination(dest);
     setQuery(dest.name);
     setIsOpen(false);
     setHighlightedIndex(-1);
+    if (onDestinationChange) {
+      onDestinationChange(dest);
+    }
   };
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    const value = e.target.value;
+    setQuery(value);
     setHighlightedIndex(-1);
     if (!isOpen) setIsOpen(true);
+    if (onDestinationChange) {
+      onDestinationChange(value ? { name: value } : null);
+    }
   };
 
   const handleKeyDown = (e) => {

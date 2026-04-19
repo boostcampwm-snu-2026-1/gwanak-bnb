@@ -1,0 +1,223 @@
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import Lodging from "./models/Lodging.js";
+
+dotenv.config();
+
+const seedData = [
+  {
+    title: "광안리 해변 근처 풀빌라",
+    location: "광안리해수욕장",
+    country: "대한민국",
+    address: "부산광역시 수영구 광안해변로 219",
+    description: "부산 해운대구 해변가すぐ 앞에 있는豪華 풀빌라",
+    price: 150000,
+    rating: 4.9,
+    reviewCount: 128,
+    maxGuests: 4,
+    beds: 2,
+    bedrooms: 2,
+    bathrooms: 1,
+    amenities: ["와이파이", "에어컨", "주차장", "세탁기"],
+    images: ["https://images.unsplash.com/photo-1566073771259-6a850613994a?w=800"],
+  },
+  {
+    title: "제주도 해변 근처度假村",
+    location: "제주",
+    country: "대한민국",
+    address: "제주특별자치도 서귀포시 중문관광로72번길 75",
+    description: "제주도 서귀포시 바다 전망 아파트",
+    price: 200000,
+    rating: 4.8,
+    reviewCount: 89,
+    maxGuests: 6,
+    beds: 3,
+    bedrooms: 2,
+    bathrooms: 2,
+    amenities: ["와이파이", "에어컨", "주차장", "바베큐"],
+    images: ["https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"],
+  },
+  {
+    title: "서울 강남地铁站附近公寓",
+    location: "서울",
+    country: "대한민국",
+    address: "서울특별시 강남구 테헤란로 152",
+    description: "강남 역세권豪华 아파트",
+    price: 120000,
+    rating: 4.7,
+    reviewCount: 215,
+    maxGuests: 2,
+    beds: 1,
+    bedrooms: 1,
+    bathrooms: 1,
+    amenities: ["와이파이", "에어컨", "세탁기"],
+    images: ["https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800"],
+  },
+  {
+    title: "부산 해운대 해변民宿",
+    location: "부산",
+    country: "대한민국",
+    address: "부산광역시 해운대구 해운대해변로 264",
+    description: "해운대 해변에서 도보 1분",
+    price: 180000,
+    rating: 4.9,
+    reviewCount: 156,
+    maxGuests: 4,
+    beds: 2,
+    bedrooms: 2,
+    bathrooms: 1,
+    amenities: ["와이파이", "에어컨", "주차장", "바다 전망"],
+    images: ["https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800"],
+  },
+  {
+    title: "속초 해변 근처 펜션",
+    location: "속초시",
+    country: "강원도",
+    address: "강원특별자치도 속초시 청호해안길 2",
+    description: "속초 해변과 가까운 힐링 펜션",
+    price: 90000,
+    rating: 4.6,
+    reviewCount: 67,
+    maxGuests: 6,
+    beds: 3,
+    bedrooms: 2,
+    bathrooms: 1,
+    amenities: ["와이파이", "주차장", "바베큐", "정원"],
+    images: ["https://images.unsplash.com/photo-1551882547-ff40c63fe5fa8?w=800"],
+  },
+  {
+    title: "강릉海岸度假村",
+    location: "강릉시",
+    country: "강원도",
+    address: "강원특별자치도 강릉시 창해로 514",
+    description: "강릉 바닷가 전망 좋은 숙소",
+    price: 130000,
+    rating: 4.8,
+    reviewCount: 98,
+    maxGuests: 4,
+    beds: 2,
+    bedrooms: 2,
+    bathrooms: 1,
+    amenities: ["와이파이", "에어컨", "바다 전망"],
+    images: ["https://images.unsplash.com/photo-1568084680786-a84f91d8153c?w=800"],
+  },
+  {
+    title: "여수 해변 근처 Guesthouse",
+    location: "여수시",
+    country: "전라남도",
+    address: "전라남도 여수시 돌산읍 돌산로 3600",
+    description: "여수 해변과 가까운 게스트하우스",
+    price: 45000,
+    rating: 4.5,
+    reviewCount: 43,
+    maxGuests: 2,
+    beds: 1,
+    bedrooms: 1,
+    bathrooms: 1,
+    amenities: ["와이파이", "주차장"],
+    images: ["https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"],
+  },
+  {
+    title: "인천 해변 근처公寓",
+    location: "인천",
+    country: "대한민국",
+    address: "인천광역시 중구 월미로 234",
+    description: "인천 해변과 가까운 아파트",
+    price: 110000,
+    rating: 4.7,
+    reviewCount: 78,
+    maxGuests: 4,
+    beds: 2,
+    bedrooms: 2,
+    bathrooms: 1,
+    amenities: ["와이파이", "에어컨", "주차장"],
+    images: ["https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800"],
+  },
+  {
+    title: "Osaka Castle nearby",
+    location: "오사카시",
+    country: "일본",
+    address: "1-1 Osakajo, Chuo Ward, Osaka, 540-0002, Japan",
+    description: "오사카성과 가까운市中心 숙소",
+    price: 80000,
+    rating: 4.8,
+    reviewCount: 312,
+    maxGuests: 4,
+    beds: 2,
+    bedrooms: 1,
+    bathrooms: 1,
+    amenities: ["와이파이", "에어컨", "주차장"],
+    images: ["https://images.unsplash.com/photo-1570127492380-11344b621556?w=800"],
+  },
+  {
+    title: " Tokyo Shibuya Apartment",
+    location: "도쿄",
+    country: "일본",
+    address: "1-chome-23-15 Shibuya, Shibuya City, Tokyo 150-0002, Japan",
+    description: "시부야 역세권 아파트",
+    price: 120000,
+    rating: 4.9,
+    reviewCount: 456,
+    maxGuests: 2,
+    beds: 1,
+    bedrooms: 1,
+    bathrooms: 1,
+    amenities: ["와이파이", "에어컨", "세탁기"],
+    images: ["https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800"],
+  },
+  {
+    title: "서울弘大附近 hostel",
+    location: "서울",
+    country: "대한민국",
+    address: "서울특별시 마포구 와우산로 94",
+    description: "홍대 인ovation 카페 거리 근처",
+    price: 35000,
+    rating: 4.4,
+    reviewCount: 189,
+    maxGuests: 1,
+    beds: 1,
+    bedrooms: 1,
+    bathrooms: 1,
+    amenities: ["와이파이"],
+    images: ["https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800"],
+  },
+  {
+    title: "부산 남포洞 Guesthouse",
+    location: "부산",
+    country: "대한민국",
+    address: "부산광역시 중구 자갈치해안로 52",
+    description: "남포동 번개시장 근처",
+    price: 55000,
+    rating: 4.6,
+    reviewCount: 112,
+    maxGuests: 2,
+    beds: 1,
+    bedrooms: 1,
+    bathrooms: 1,
+    amenities: ["와이파이", "주차장"],
+    images: ["https://images.unsplash.com/photo-1630699144867-2ace7fa2bc8e?w=800"],
+  },
+];
+
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/gwanakbnb";
+
+async function seed() {
+  try {
+    await mongoose.connect(MONGODB_URI);
+    console.log("Connected to MongoDB");
+
+    await Lodging.deleteMany({});
+    console.log("Cleared existing data");
+
+    await Lodging.insertMany(seedData);
+    console.log(`Inserted ${seedData.length} lodgings`);
+
+    console.log("Seeding completed!");
+    process.exit(0);
+  } catch (error) {
+    console.error("Seeding error:", error);
+    process.exit(1);
+  }
+}
+
+seed();
