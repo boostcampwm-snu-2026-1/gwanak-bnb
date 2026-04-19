@@ -8,7 +8,8 @@ import GuestCounter from './componenet/searchBar/guest/guestCounter'
 import DateSearch from './componenet/searchBar/date/dateSearch'
 
 import DestinationSearch from './componenet/searchBar/destination/destinationSearch'
-import DestinationModal from './componenet/searchBar/destination/DestinationModal'
+import DestinationModal from './componenet/searchBar/destination/destinationModal'
+import DateModal from './componenet/searchBar/date/dateModal'
 
 import { SearchProvider } from './context/searchContext'
 
@@ -32,6 +33,7 @@ function App() {
                         <div className='search-anchor'>
                             <GuestCounter />
                             <DestinationModal />
+                            <DateModal /> 
                         </div>
                     </>
                 } />

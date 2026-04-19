@@ -1,0 +1,89 @@
+.date-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 0 !important;
+}
+
+.date-section {
+    flex: 1;
+    padding: 12px 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.date-section h6 {
+    font-size: 12px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.date-section p {
+    font-size: 14px;
+    color: #717171;
+    margin: 2px 0 0 0;
+}
+
+.date-selected {
+    color: #222222 !important;
+    font-weight: 600;
+}
+
+.divider-center {
+    width: 1px;
+    height: 32px;
+    background-color: #dddddd;
+}
+
+.date-modal {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border-radius: 32px;
+    padding: 32px;
+    z-index: 1000;
+    min-width: 400px;
+    border: 1px solid #bbb;
+}
+
+.date-inputs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.date-inputs div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.date-inputs label {
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.date-inputs input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.reset-date-btn {
+    width: 100%;
+    padding: 12px;
+    background: #f7f7f7;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.reset-date-btn:hover {
+    background: #eee;
+}
