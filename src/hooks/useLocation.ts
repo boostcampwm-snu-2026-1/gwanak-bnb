@@ -14,8 +14,9 @@ export default function useLocation(setOpenModal: (modal: ModalType) => void) {
     const handleSearch = async (query: string) => {
         setSearchQuery(query);
         const result = await fetchLocations(query);
-        if (result.length === 0) {
+        if (!result || result.length === 0) {
             setOpenModal(null); // 결과 없으면 모달 닫기
+            return;
         }
         setLocations(result);
     }
