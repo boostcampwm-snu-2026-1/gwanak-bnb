@@ -9,10 +9,12 @@ function App() {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [searchedLocation, setSearchedLocation] = useState("");
 
   const handleSearch = async ({ location, guests }) => {
     setIsLoading(true);
     setHasSearched(true);
+    setSearchedLocation(location || "");
 
     try {
       const params = new URLSearchParams();
@@ -33,7 +35,13 @@ function App() {
   return (
     <div className="app">
       <SearchBar onSearch={handleSearch} />
-      {hasSearched && <SearchResults results={results} isLoading={isLoading} />}
+      {hasSearched && (
+        <SearchResults
+          results={results}
+          isLoading={isLoading}
+          searchedLocation={searchedLocation}
+        />
+      )}
     </div>
   );
 }
