@@ -4,7 +4,7 @@ import './SearchBarContainer.css';
 import {useState, useEffect, useRef} from 'react';
 
 
-function SearchBarContainer(){
+function SearchBarContainer({ onSearch }){
 
     const [activeField, setActiveField] = useState(null);
     const containerRef = useRef(null);
@@ -24,8 +24,9 @@ function SearchBarContainer(){
             <SearchTabMenu/>
             
             <SearchInputGroup
-                activeField = {activeField}
-                setActiveField = {setActiveField}
+                activeField={activeField}
+                setActiveField={setActiveField}
+                onSearch={onSearch}
             />
         </div>
     );
