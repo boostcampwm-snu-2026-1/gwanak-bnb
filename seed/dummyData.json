@@ -1,0 +1,182 @@
+[
+  {
+    "location": "서귀포시",
+    "max_guests": 2,
+    "name": "서귀포 귤밭 속 아늑한 감성 스테이",
+    "price_per_night": 85000,
+    "rating": 4.8,
+    "review_count": 124,
+    "image_url": "https://picsum.photos/seed/jeju1/800/600"
+  },
+  {
+    "location": "서귀포시",
+    "max_guests": 4,
+    "name": "푸른 남해바다가 한눈에 담기는 서귀포 독채",
+    "price_per_night": 150000,
+    "rating": 4.9,
+    "review_count": 89,
+    "image_url": "https://picsum.photos/seed/jeju2/800/600"
+  },
+  {
+    "location": "서귀포시",
+    "max_guests": 6,
+    "name": "가족 여행에 제격인 서귀포 힐링 하우스",
+    "price_per_night": 220000,
+    "rating": 4.7,
+    "review_count": 210,
+    "image_url": "https://picsum.photos/seed/jeju3/800/600"
+  },
+  {
+    "location": "서귀포시",
+    "max_guests": 2,
+    "name": "서귀포 밤하늘의 별을 세는 로맨틱 숙소",
+    "price_per_night": 95000,
+    "rating": 4.6,
+    "review_count": 45,
+    "image_url": "https://picsum.photos/seed/jeju4/800/600"
+  },
+  {
+    "location": "서귀포시",
+    "max_guests": 12,
+    "name": "서귀포 대가족 전용 프라이빗 풀빌라",
+    "price_per_night": 290000,
+    "rating": 4.5,
+    "review_count": 34,
+    "image_url": "https://picsum.photos/seed/jeju5/800/600"
+  },
+  {
+    "location": "제주시",
+    "max_guests": 2,
+    "name": "제주공항 인근 깔끔하고 모던한 스튜디오",
+    "price_per_night": 60000,
+    "rating": 4.4,
+    "review_count": 280,
+    "image_url": "https://picsum.photos/seed/jeju6/800/600"
+  },
+  {
+    "location": "제주시",
+    "max_guests": 4,
+    "name": "제주시내 맛집 투어하기 좋은 아늑한 집",
+    "price_per_night": 110000,
+    "rating": 4.8,
+    "review_count": 156,
+    "image_url": "https://picsum.photos/seed/jeju7/800/600"
+  },
+  {
+    "location": "제주시",
+    "max_guests": 3,
+    "name": "도심 속 작은 정원이 있는 제주시 펜션",
+    "price_per_night": 130000,
+    "rating": 4.9,
+    "review_count": 77,
+    "image_url": "https://picsum.photos/seed/jeju8/800/600"
+  },
+  {
+    "location": "제주시",
+    "max_guests": 6,
+    "name": "친구들과 파티하기 좋은 제주시 루프탑 숙소",
+    "price_per_night": 180000,
+    "rating": 4.7,
+    "review_count": 92,
+    "image_url": "https://picsum.photos/seed/jeju9/800/600"
+  },
+  {
+    "location": "제주시",
+    "max_guests": 2,
+    "name": "한적한 제주시 외곽의 감성 자쿠지 스테이",
+    "price_per_night": 160000,
+    "rating": 5.0,
+    "review_count": 25,
+    "image_url": "https://picsum.photos/seed/jeju10/800/600"
+  },
+  {
+    "location": "애월읍",
+    "max_guests": 2,
+    "name": "애월 바다의 노을을 품은 통창 오션뷰 숙소",
+    "price_per_night": 250000,
+    "rating": 4.9,
+    "review_count": 213,
+    "image_url": "https://picsum.photos/seed/jeju11/800/600"
+  },
+  {
+    "location": "애월읍",
+    "max_guests": 4,
+    "name": "해안도로 드라이브 후 쉬어가기 좋은 애월 펜션",
+    "price_per_night": 140000,
+    "rating": 4.6,
+    "review_count": 118,
+    "image_url": "https://picsum.photos/seed/jeju12/800/600"
+  },
+  {
+    "location": "애월읍",
+    "max_guests": 8,
+    "name": "애월 한담해변 도보 5분 거리 넓은 독채",
+    "price_per_night": 270000,
+    "rating": 4.8,
+    "review_count": 64,
+    "image_url": "https://picsum.photos/seed/jeju13/800/600"
+  },
+  {
+    "location": "애월읍",
+    "max_guests": 2,
+    "name": "숲과 바다가 만나는 애월의 조용한 오두막",
+    "price_per_night": 120000,
+    "rating": 4.7,
+    "review_count": 189,
+    "image_url": "https://picsum.photos/seed/jeju14/800/600"
+  },
+  {
+    "location": "애월읍",
+    "max_guests": 5,
+    "name": "반려견 동반 가능한 애월 잔디마당 주택",
+    "price_per_night": 170000,
+    "rating": 4.5,
+    "review_count": 52,
+    "image_url": "https://picsum.photos/seed/jeju15/800/600"
+  },
+  {
+    "location": "조천읍",
+    "max_guests": 2,
+    "name": "함덕 서우봉 해변이 보이는 조천읍 감성 숙소",
+    "price_per_night": 190000,
+    "rating": 4.9,
+    "review_count": 275,
+    "image_url": "https://picsum.photos/seed/jeju16/800/600"
+  },
+  {
+    "location": "조천읍",
+    "max_guests": 4,
+    "name": "새소리 들으며 눈뜨는 조천읍 숲속 스테이",
+    "price_per_night": 115000,
+    "rating": 4.8,
+    "review_count": 93,
+    "image_url": "https://picsum.photos/seed/jeju17/800/600"
+  },
+  {
+    "location": "조천읍",
+    "max_guests": 16,
+    "name": "워크샵 및 대가족 환영 조천읍 대형 리조트",
+    "price_per_night": 300000,
+    "rating": 4.3,
+    "review_count": 18,
+    "image_url": "https://picsum.photos/seed/jeju18/800/600"
+  },
+  {
+    "location": "조천읍",
+    "max_guests": 3,
+    "name": "조천읍 돌담길 끝에 자리한 전통 가옥",
+    "price_per_night": 135000,
+    "rating": 4.7,
+    "review_count": 140,
+    "image_url": "https://picsum.photos/seed/jeju19/800/600"
+  },
+  {
+    "location": "조천읍",
+    "max_guests": 6,
+    "name": "바베큐장이 완비된 조천읍 가족형 독채",
+    "price_per_night": 210000,
+    "rating": 4.6,
+    "review_count": 88,
+    "image_url": "https://picsum.photos/seed/jeju20/800/600"
+  }
+]
