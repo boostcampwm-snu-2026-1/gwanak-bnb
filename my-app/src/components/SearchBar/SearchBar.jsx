@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import DatePicker from '../DatePicker/DatePicker';
 import GuestSelector from '../GuestSelector/GuestSelector';
 import LocationSearch from '../LocationSearch/LocationSearch';
 import { searchKeywords } from '../../data/destinations';
@@ -11,6 +12,8 @@ function SearchBar() {
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [savedQuery, setSavedQuery] = useState('');
   const [guests, setGuests] = useState({ adults: 0, children: 0, infants: 0, pets: 0 });
+  const [checkIn, setCheckIn] = useState(null);
+  const [checkOut, setCheckOut] = useState(null);
 
   const inputRef = useRef(null);
 
@@ -51,6 +54,24 @@ function SearchBar() {
 
   const handleGuestDecrease = (type) => {
     setGuests((prev) => ({ ...prev, [type]: prev[type] - 1 }));
+  };
+
+  const handleDateSelect = (date) => {
+    if (!checkIn || (checkIn && checkOut)) {
+      setCheckIn(date);
+      setCheckOut(null);
+    } else if (date > checkIn) {
+      setCheckOut(date);
+      setActiveField(null);
+    } else {
+      setCheckIn(date);
+      setCheckOut(null);
+    }
+  };
+
+  const formatDate = (date) => {
+    if (!date) return null;
+    return `${date.getMonth() + 1}월 ${date.getDate()}일`;
   };
 
   const getGuestSummary = () => {
@@ -143,7 +164,13 @@ function SearchBar() {
         onClick={() => handleFieldClick('date')}
       >
         <span className={styles.label}>날짜</span>
-        <span className={styles.placeholder}>날짜 추가</span>
+        <span className={styles.placeholder}>
+          {checkIn && checkOut
+            ? `${formatDate(checkIn)} - ${formatDate(checkOut)}`
+            : checkIn
+              ? `${formatDate(checkIn)} - 체크아웃`
+              : '날짜 추가'}
+        </span>
       </div>
 
       <div className={styles.divider} />
@@ -169,6 +196,14 @@ function SearchBar() {
         suggestions={filteredSuggestions}
         highlightedIndex={highlightedIndex}
         onSelect={handleLocationSelect}
+        onClose={handleClose}
+      />
+
+      <DatePicker
+        isOpen={activeField === 'date'}
+        checkIn={checkIn}
+        checkOut={checkOut}
+        onDateSelect={handleDateSelect}
         onClose={handleClose}
       />
 
