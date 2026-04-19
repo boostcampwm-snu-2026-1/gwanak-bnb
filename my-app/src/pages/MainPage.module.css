@@ -1,7 +1,39 @@
-src/pages/MainPage.module.css
-
 .main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 24px;
+}
+
+.hero {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.heroText {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+}
+
+.heroTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.heroSubtitle {
+  font-size: 18px;
+  color: white;
+  margin: 8px 0 0 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
