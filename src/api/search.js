@@ -24,8 +24,9 @@ export async function searchAccommodations({ destination, guests }) {
     )
   }
 
+  const BASE_URL = 'https://gwanak-bnb-5ueh.onrender.com'
   const params = new URLSearchParams({ destination, guests })
-  const res = await fetch(`/api/accommodations?${params}`)
+  const res = await fetch(`${BASE_URL}/api/accommodations?${params}`)
   if (!res.ok) throw new Error('검색에 실패했습니다.')
   return res.json()
 }
