@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchDestinations } from "../api/destination";
+import { fetchDestinationSuggestions } from "../api/destination";
 
 function Destination ({ destination, setDestination, queryDestination, setQueryDestination, setIsOpen, highlightedIndex, setHighlightedIndex }) {
 
@@ -12,7 +12,7 @@ function Destination ({ destination, setDestination, queryDestination, setQueryD
     const timer = setTimeout(async () => {
       try {
         setIsLoading(true);
-        const data = await fetchDestinations(query);
+        const data = await fetchDestinationSuggestions(query);
         setQueryDestination(data);
 
       } catch (err) {
@@ -66,6 +66,7 @@ function Destination ({ destination, setDestination, queryDestination, setQueryD
                 setQuery(e.target.value);
                 setDestination("");
                 setHighlightedIndex(-1);
+                setIsOpen(true);
               }}
             onKeyDown={handleKeyDown}
           />
