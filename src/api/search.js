@@ -1,7 +1,7 @@
 // 숙소 검색 API
 // BE 미완성 시에는 MOCK_MODE=true로 더미 데이터를 반환한다
 
-const MOCK_MODE = true
+const MOCK_MODE = false
 
 const MOCK_DATA = [
   { id: 1, name: '서울 종로 한옥 스테이', location: '서울', price: 85000, rating: 4.9, capacity: 2, color: 'from-orange-200 to-amber-100' },
