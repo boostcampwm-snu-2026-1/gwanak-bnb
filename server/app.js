@@ -17,6 +17,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', database: 'connected' });
 });
 
+app.get('/', (req, res) => {
+  res.send('관악BNB 서버가 정상 동작 중입니다!');
+});
+
 app.listen(PORT, () => {
   console.log(`관악BNB 서버 실행 중: http://localhost:${PORT}`);
 });
