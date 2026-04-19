@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-// [추가] SearchResults 컴포넌트
 import SearchResults from './components/SearchResults/SearchResults';
+import DatePicker from './components/DatePicker/DatePicker.jsx';
 
 const RECOMMENDATIONS = [
   {
@@ -206,7 +206,6 @@ function GuestRow({ title, desc, count, onMinus, onPlus, minusDisabled, isLink }
   );
 }
 
-// [추가] 백엔드 서버 주소 (Render 배포 후 변경)
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
 export default function App() {
@@ -215,8 +214,19 @@ export default function App() {
   const [location, setLocation]     = useState('');
   const [focusIndex, setFocusIndex] = useState(-1);
   const [guests, setGuests]         = useState({ adult: 0, child: 0, infant: 0, pet: 0 });
+  const [checkIn, setCheckIn]   = useState(null);
+  const [checkOut, setCheckOut] = useState(null);
 
-  // [추가] 검색 결과 상태
+  const handleDateChange = (inDate, outDate) => {
+    setCheckIn(inDate);
+    setCheckOut(outDate);
+  };
+
+  const formatShortDate = (dt) => {
+    if (!dt) return null;
+    return `${dt.getMonth() + 1}월 ${dt.getDate()}일`;
+  };
+
   const [listings, setListings]     = useState(null);
   const [isLoading, setIsLoading]   = useState(false);
   const [searchError, setSearchError] = useState(null);
@@ -296,9 +306,7 @@ export default function App() {
 
   const hasGuests = guests.adult > 0;
 
-  // [추가] 검색 실행 함수
   const handleSearch = async () => {
-    // 필수 조건 검증
     if (!location.trim()) {
       alert('여행지를 입력해주세요.');
       openLocation();
@@ -319,6 +327,8 @@ export default function App() {
       const params = new URLSearchParams({
         location: location.trim(),
         guests: totalGuests,
+        ...(checkIn  && { checkIn:  checkIn.toISOString().split('T')[0] }),
+        ...(checkOut && { checkOut: checkOut.toISOString().split('T')[0] }),
       });
       const res = await fetch(`${API_BASE_URL}/api/listings?${params}`);
       if (!res.ok) throw new Error('서버 오류가 발생했습니다.');
@@ -436,19 +446,17 @@ export default function App() {
             zIndex: activeTab === 'date' ? 2 : 1,
             boxShadow: activeTab === 'date' ? '0 6px 20px rgba(0,0,0,0.18)' : 'none',
           }}
-            onClick={() => setActiveTab(null)}
+            onClick={(e) => { e.stopPropagation(); setActiveTab(activeTab === 'date' ? null : 'date'); }}
             onMouseEnter={() => setHoverTab('date')}
             onMouseLeave={() => setHoverTab(null)}
           >
             <div style={{ fontSize: 12, fontWeight: 800, color: '#222', marginBottom: 2 }}>날짜</div>
-            <div style={{ fontSize: 14, color: '#717171' }}>날짜 추가</div>
+            <div style={{ fontSize: 14, color: checkIn ? '#222' : '#717171', fontWeight: checkIn ? 600 : 400 }}>
+              {checkIn
+                ? `${formatShortDate(checkIn)}${checkOut ? ` - ${formatShortDate(checkOut)}` : ''}`
+                : '날짜 추가'}
+            </div>
           </div>
-
-          <div style={{
-            width: 1, height: 32,
-            background: activeTab === 'date' || activeTab === 'guests' ? 'transparent' : '#ddd',
-            flexShrink: 0, transition: 'background 0.15s',
-          }} />
 
           {/* 여행자 + 검색 버튼 */}
           <div
@@ -501,7 +509,6 @@ export default function App() {
                 <div style={{ fontSize: 14, color: '#717171' }}>{getGuestText()}</div>
               )}
             </div>
-            {/* [수정] onClick을 handleSearch로 변경 */}
             <button
               type="button"
               onClick={(e) => { e.stopPropagation(); handleSearch(); }}
@@ -574,6 +581,22 @@ export default function App() {
           </div>
         )}
 
+        {/* 날짜 모달 */}
+        {activeTab === 'date' && (
+          <div style={{
+            position: 'absolute', top: 75, left: '50%', transform: 'translateX(-50%)',
+            background: '#fff', borderRadius: 32,
+            boxShadow: '0 8px 28px rgba(0,0,0,0.12)', zIndex: 100,
+            width: 760,
+          }}>
+            <DatePicker
+              checkIn={checkIn}
+              checkOut={checkOut}
+              onChange={handleDateChange}
+            />
+          </div>
+        )}
+
         {/* 여행자 모달 */}
         {activeTab === 'guests' && (
           <div style={{
@@ -604,7 +627,7 @@ export default function App() {
           </div>
         )}
 
-        {/* [추가] 검색 결과 영역 */}
+        {/* 검색 결과 영역 */}
         {isLoading && (
           <div style={{ textAlign: 'center', padding: '48px 0', fontSize: 16, color: '#717171' }}>
             검색 중...
