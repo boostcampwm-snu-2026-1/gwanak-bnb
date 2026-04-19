@@ -3,7 +3,7 @@ import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import "./App.css";
 
-const API_URL = "http://localhost:3001/api/lodgings";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api/lodgings";
 
 function App() {
   const [results, setResults] = useState([]);
