@@ -1,9 +1,8 @@
-import BarContainer from "./searchBar/BarContainer"
-
+import Home from "./Home";
 function App() {
   return (
     <div className="App">
-      <BarContainer />
+      <Home />
     </div>
   );
 }
