@@ -46,10 +46,14 @@ router.get("/autocomplete", async (req, res) => {
         $project: {
           _id: 1,
           name: 1,
-          country: 1,
+          address: 1,
           description: 1,
           tags: 1,
           popularity: 1,
+          capacity: 1,
+          price: 1,
+          rating: 1,
+          images: 1,
           score: 1
         }
       }
@@ -64,12 +68,26 @@ router.get("/autocomplete", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const results = await Destination.find({
-      popularity: { $gt: 85 }
-    }).limit(10);
+    const q = String(req.query.q || "").trim();
+    const capacity = Number(req.query.capacity);
+
+    const filter = {};
+
+    if (q) {
+      filter.name = {$regex: q, $options: "i"};
+    }
+
+    if (!Number.isNaN(capacity) && capacity > 0){
+      filter.capacity = {$gte: capacity};
+    }
+
+    const results = await Destination.find(filter)
+      .sort({ popularity: -1, "rating.average": -1 })
+      .limit(50);
 
     res.json(results);
   } catch (err) {
+    console.error("Destination search error:", err);
     res.status(500).json({ message: "데이터 불러오기 실패" });
   }
 });
