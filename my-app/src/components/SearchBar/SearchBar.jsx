@@ -9,6 +9,7 @@ function SearchBar() {
   const [activeField, setActiveField] = useState(null);
   const [locationQuery, setLocationQuery] = useState('');
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [savedQuery, setSavedQuery] = useState('');
   const [guests, setGuests] = useState({ adults: 0, children: 0, infants: 0, pets: 0 });
 
   const inputRef = useRef(null);
@@ -74,19 +75,28 @@ function SearchBar() {
 
     if (e.key === 'ArrowDown') {
       e.preventDefault();
+      if (highlightedIndex === -1) setSavedQuery(locationQuery);
       const nextIndex = (highlightedIndex + 1) % list.length;
       setHighlightedIndex(nextIndex);
       setLocationQuery(list[nextIndex]);
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
+      if (highlightedIndex === -1) setSavedQuery(locationQuery);
       const nextIndex = (highlightedIndex - 1 + list.length) % list.length;
       setHighlightedIndex(nextIndex);
       setLocationQuery(list[nextIndex]);
     } else if (e.key === 'Enter' && highlightedIndex >= 0) {
       e.preventDefault();
       handleLocationSelect(list[highlightedIndex]);
+      setSavedQuery('');
     } else if (e.key === 'Escape') {
-      handleClose();
+      if (highlightedIndex >= 0) {
+        setLocationQuery(savedQuery);
+        setHighlightedIndex(-1);
+        setSavedQuery('');
+      } else {
+        handleClose();
+      }
     }
   };
 
