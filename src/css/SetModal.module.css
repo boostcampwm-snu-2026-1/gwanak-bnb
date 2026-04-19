@@ -1,7 +1,7 @@
 .container {
     background-color: white;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,8 @@
     width: 440px;
     max-height: 600px;
     overflow-y: scroll;
-    margin: auto;
+    margin: 0; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .unit {

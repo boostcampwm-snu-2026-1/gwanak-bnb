@@ -41,7 +41,7 @@ function BarContainer({ setSearchResults }) {
   }, [finalDestination, finalTravelerCount, setSearchResults]);
 
   return ( 
-    <div>
+    <div className={styles.searchWrapper}>
       <div className={styles.container}>
           <Destination 
             destination={destination} 
@@ -72,20 +72,22 @@ function BarContainer({ setSearchResults }) {
             검색
           </button>
       </div>
-      {isDestinationModalOpen 
-        && <DestinationSetModal 
-          queryDestination={queryDestination} 
-          setDestination={setDestination} 
-          highlightedIndex={highlightedIndex}
-          setIsOpen={setIsDestinationModalOpen}
-        />
-      }
-      {isTravelModalOpen 
-        && <TravelerSetModal 
-          travelerCount={travelerCount} 
-          setTravelerCount={setTravelerCount}
-        />
-      }
+      <div className={styles.modals}>
+        {isDestinationModalOpen 
+          && <DestinationSetModal 
+            queryDestination={queryDestination} 
+            setDestination={setDestination} 
+            highlightedIndex={highlightedIndex}
+            setIsOpen={setIsDestinationModalOpen}
+          />
+        }
+        {isTravelModalOpen 
+          && <TravelerSetModal 
+            travelerCount={travelerCount} 
+            setTravelerCount={setTravelerCount}
+          />
+        }
+      </div>
     </div>
   )
 }
