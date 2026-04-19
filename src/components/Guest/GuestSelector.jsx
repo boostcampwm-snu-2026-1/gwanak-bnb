@@ -1,11 +1,21 @@
-import { useState, useReducer } from 'react';
+import { useState, useReducer, useEffect } from 'react';
 import GuestRow from './GuestRow';
 import { guestReducer, INITIAL_GUESTS, GUEST_LIMITS } from './GuestReducer';
 
-function GuestSelector() {
-  const [isOpen, setIsOpen] = useState(false); // 처음에는 닫혀있음(false)
-  const [guests, dispatch] = useReducer(guestReducer, INITIAL_GUESTS);
+function GuestSelector({ value = INITIAL_GUESTS, onChange }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [guests, dispatch] = useReducer(guestReducer, value);
   const { adults, children, infants, pets } = guests;
+
+  useEffect(() => {
+    if (value) {
+      dispatch({ type: 'REPLACE', payload: value });
+    }
+  }, [value]);
+
+  useEffect(() => {
+    onChange?.(guests);
+  }, [guests, onChange]);
   
   const totalGuests = adults + children; // 성인 + 어린이 합계
   const isDefault = totalGuests <= 0 && infants <= 0 && pets <= 0;

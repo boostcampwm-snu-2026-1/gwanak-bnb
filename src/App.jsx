@@ -1,8 +1,57 @@
-import GuestSelector from './components/Guest/GuestSelector'
+import { useState } from 'react';
+import GuestSelector from './components/Guest/GuestSelector';
 import DestinationSelector from './components/Destination/DestinationSelector';
+import SearchResults from './components/SearchResults/SearchResults';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
 
 function App() {
+  const [destination, setDestination] = useState('');
+  const [guests, setGuests] = useState({ adults: 0, children: 0, infants: 0, pets: 0 });
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const totalGuests = guests.adults + guests.children;
+
+  const handleSearch = async () => {
+    setError('');
+
+    if (!destination.trim()) {
+      setError('여행지를 입력해주세요.');
+      return;
+    }
+
+    if (totalGuests <= 0) {
+      setError('성인 또는 어린이 수를 선택해주세요.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({
+        destination: destination.trim(),
+        adults: String(guests.adults),
+        children: String(guests.children)
+      });
+
+      const response = await fetch(`${API_BASE_URL}/api/search?${params.toString()}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || '검색 중 문제가 발생했습니다.');
+        setResults([]);
+      } else {
+        setResults(data.results || []);
+      }
+    } catch (fetchError) {
+      setError('서버에 연결할 수 없습니다. 서버가 실행 중인지 확인하세요.');
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
       <header className="mb-16 text-center">
@@ -10,34 +59,36 @@ function App() {
       </header>
       
       <main className="w-full max-w-5xl">
-        <div className="flex items-center bg-white border border-gray-200 rounded-full shadow-md p-2 hover:shadow-lg transition-shadow mx-auto w-full max-w-[850px]">
-          {/* 목적지 선택 */}
-          <div className="flex-[1.5]"> 
-            <DestinationSelector />
+        <div className="flex flex-col gap-6 rounded-3xl bg-white border border-gray-200 p-4 shadow-sm sm:p-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+            <div className="flex-1">
+              <DestinationSelector value={destination} onChange={setDestination} />
+            </div>
+
+            <div className="h-8 w-full bg-transparent lg:w-px lg:h-12 lg:bg-gray-200" />
+
+            <div className="flex-1">
+              <GuestSelector value={guests} onChange={setGuests} />
+            </div>
+
+            <button
+              type="button"
+              onClick={handleSearch}
+              className="mt-2 inline-flex h-14 w-full items-center justify-center rounded-full bg-rose-500 px-6 text-white transition hover:bg-rose-600 sm:mt-0 sm:w-auto"
+              disabled={loading}
+            >
+              {loading ? '검색 중...' : '검색'}
+            </button>
           </div>
 
-          <div className="h-8 w-[1px] bg-gray-200" /> {/* 구분선 */}
-
-          {/* 날짜 선택 */}
-          <div className="flex-1 px-8 py-3 cursor-pointer hover:bg-gray-100 rounded-full transition-colors whitespace-nowrap">
-            <div className="text-[10px] font-extrabold uppercase">날짜</div>
-            <div className="text-sm text-gray-500 font-medium">날짜 추가</div>
-          </div>
-
-          <div className="h-8 w-[1px] bg-gray-200" /> {/* 구분선 */}
-
-          {/* 인원 선택 */}
-          <div className="flex-1">
-            <GuestSelector />
-          </div>
-
-          {/* 검색 버튼 */}
-          <button className="bg-rose-500 text-white p-4 rounded-full ml-2 shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
+          {error && (
+            <div className="px-4 py-3 rounded-3xl bg-red-50 text-sm text-red-600 font-medium">
+              {error}
+            </div>
+          )}
         </div>
+
+        <SearchResults results={results} />
       </main>
     </div>
   );

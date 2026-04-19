@@ -3,12 +3,16 @@ import { RECOMMENDATIONS, SEARCH_RESULTS } from '../../data/DestinationData';
 import { matchesKoreanSearch } from '../../utils/koreanSearch';
 import DestinationRow from './DestinationRow';
 
-function DestinationSelector() {
-  const [keyword, setKeyword] = useState("");
+function DestinationSelector({ value = '', onChange }) {
+  const [keyword, setKeyword] = useState(value);
   const [previewValue, setPreviewValue] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    setKeyword(value || '');
+  }, [value]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -39,11 +43,14 @@ function DestinationSelector() {
     setKeyword(title);
     setPreviewValue(null);
     setIsOpen(false);
+    onChange?.(title);
   };
 
   const handleInputChange = (event) => {
-    setKeyword(event.target.value);
+    const nextValue = event.target.value;
+    setKeyword(nextValue);
     setPreviewValue(null);
+    onChange?.(nextValue);
   };
 
   const handleKeyDown = (event) => {
@@ -97,6 +104,7 @@ function DestinationSelector() {
                 setPreviewValue(null);
                 setIsOpen(true);
                 inputRef.current?.focus();
+                onChange?.('');
               }}
               className="absolute right-0 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full bg-gray-100 border border-gray-200 text-sm font-bold text-gray-500 hover:bg-gray-200"
             >
