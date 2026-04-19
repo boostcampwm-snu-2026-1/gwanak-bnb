@@ -11,6 +11,8 @@ function App() {
   const [results, setResults] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isDestinationOpen, setIsDestinationOpen] = useState(false);
+  const [isGuestOpen, setIsGuestOpen] = useState(false);
 
   const totalGuests = guests.adults + guests.children;
 
@@ -45,6 +47,9 @@ function App() {
         setResults([]);
       } else {
         setResults(data.results || []);
+        // 검색 성공 시 드롭다운 닫기
+        setIsDestinationOpen(false);
+        setIsGuestOpen(false);
       }
     } catch (fetchError) {
       setError('서버에 연결할 수 없습니다. 서버가 실행 중인지 확인하세요.');
@@ -64,13 +69,23 @@ function App() {
         <div className="flex flex-col gap-6 rounded-3xl bg-white border border-gray-200 p-4 shadow-sm sm:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
             <div className="flex-1">
-              <DestinationSelector value={destination} onChange={setDestination} />
+              <DestinationSelector 
+                value={destination} 
+                onChange={setDestination}
+                isOpen={isDestinationOpen}
+                setIsOpen={setIsDestinationOpen}
+              />
             </div>
 
             <div className="h-8 w-full bg-transparent lg:w-px lg:h-12 lg:bg-gray-200" />
 
             <div className="flex-1">
-              <GuestSelector value={guests} onChange={setGuests} />
+              <GuestSelector 
+                value={guests} 
+                onChange={setGuests}
+                isOpen={isGuestOpen}
+                setIsOpen={setIsGuestOpen}
+              />
             </div>
 
             <button

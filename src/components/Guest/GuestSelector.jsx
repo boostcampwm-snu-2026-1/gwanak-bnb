@@ -2,10 +2,14 @@ import { useState, useReducer, useEffect } from 'react';
 import GuestRow from './GuestRow';
 import { guestReducer, INITIAL_GUESTS, GUEST_LIMITS } from './GuestReducer';
 
-function GuestSelector({ value = INITIAL_GUESTS, onChange }) {
-  const [isOpen, setIsOpen] = useState(false);
+function GuestSelector({ value = INITIAL_GUESTS, onChange, isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }) {
+  const [localIsOpen, setLocalIsOpen] = useState(false);
   const [guests, dispatch] = useReducer(guestReducer, value);
   const { adults, children, infants, pets } = guests;
+
+  // 외부에서 전달받은 isOpen이 있으면 사용, 없으면 내부 상태 사용
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : localIsOpen;
+  const setIsOpen = externalSetIsOpen || setLocalIsOpen;
 
   useEffect(() => {
     if (value) {

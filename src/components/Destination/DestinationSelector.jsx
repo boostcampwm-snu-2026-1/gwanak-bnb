@@ -3,12 +3,16 @@ import { RECOMMENDATIONS, SEARCH_RESULTS } from '../../data/DestinationData';
 import { matchesKoreanSearch } from '../../utils/koreanSearch';
 import DestinationRow from './DestinationRow';
 
-function DestinationSelector({ value = '', onChange }) {
+function DestinationSelector({ value = '', onChange, isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }) {
   const [keyword, setKeyword] = useState(value);
   const [previewValue, setPreviewValue] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [localIsOpen, setLocalIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef(null);
+
+  // 외부에서 전달받은 isOpen이 있으면 사용, 없으면 내부 상태 사용
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : localIsOpen;
+  const setIsOpen = externalSetIsOpen || setLocalIsOpen;
 
   useEffect(() => {
     setKeyword(value || '');

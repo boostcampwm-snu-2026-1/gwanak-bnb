@@ -58,7 +58,11 @@ export async function searchPlaces(req, res) {
       reviews: place.ratings.reviewCount,
       images: place.images.map(img => img.url),
       amenities: place.amenities,
-      host: place.host
+      host: place.host,
+      availability: {
+        availableFrom: place.availability?.availableFrom,
+        availableTo: place.availability?.availableTo
+      }
     }));
 
     res.json({
