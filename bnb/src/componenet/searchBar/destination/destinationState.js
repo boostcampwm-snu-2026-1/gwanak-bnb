@@ -41,7 +41,7 @@ const useDestinationState = () => {
         return LOCATIONS
             .filter(item => item.title.includes(searchTerm))
             .map(item => ({
-                id: `loc-${item.id}`,
+                id: item.id,
                 title: item.title,
                 desc: getParentDesc(item),
                 icon: "fa-solid fa-location-dot fa-lg"
@@ -70,7 +70,7 @@ const useDestinationState = () => {
         } else if (e.key === "Enter") {
             if (selectedIndex >= 0) {
                 e.preventDefault();
-                onSearchChange(displayList[selectedIndex].title);
+                onSelectLocation(displayList[selectedIndex]);
                 setSelectedIndex(-1);
             }
         }
