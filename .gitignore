@@ -8,10 +8,19 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Node
-node_modules
+**/node_modules/
 dist
 dist-ssr
 *.local
+
+# 환경 변수 파일
+.env
+**/.env
+
+# 빌드 결과물
+dist/
+build/
+
 
 # Editor directories and files
 .vscode/*
