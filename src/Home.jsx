@@ -4,7 +4,7 @@ import CardList from "./card/CardList";
 
 function Home() {
 
-    const [searchResults, setSearchResults] = useState([{ title: "", description: "", imgURL: "" }]);
+    const [searchResults, setSearchResults] = useState([]);
     return (
         <div>
             <BarContainer setSearchResults={setSearchResults} />
