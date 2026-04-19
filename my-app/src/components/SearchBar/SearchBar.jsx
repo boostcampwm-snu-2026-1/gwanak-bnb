@@ -9,6 +9,7 @@ function SearchBar() {
   const [activeField, setActiveField] = useState(null);
   const [locationQuery, setLocationQuery] = useState('');
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [guests, setGuests] = useState({ adults: 0, children: 0, infants: 0, pets: 0 });
 
   const inputRef = useRef(null);
 
@@ -41,6 +42,23 @@ function SearchBar() {
   const handleClose = () => {
     setActiveField(null);
     setIsGuestOpen(false);
+  };
+
+  const handleGuestIncrease = (type) => {
+    setGuests((prev) => ({ ...prev, [type]: prev[type] + 1 }));
+  };
+
+  const handleGuestDecrease = (type) => {
+    setGuests((prev) => ({ ...prev, [type]: prev[type] - 1 }));
+  };
+
+  const getGuestSummary = () => {
+    const total = guests.adults + guests.children;
+    const parts = [];
+    if (total > 0) parts.push(`게스트 ${total}명`);
+    if (guests.infants > 0) parts.push(`유아 ${guests.infants}명`);
+    if (guests.pets > 0) parts.push(`반려동물 ${guests.pets}마리`);
+    return parts.length > 0 ? parts.join(', ') : '';
   };
 
   const handleLocationSelect = (name) => {
@@ -125,7 +143,9 @@ function SearchBar() {
         onClick={() => handleFieldClick('guest')}
       >
         <span className={styles.label}>여행자</span>
-        <span className={styles.placeholder}>게스트 추가</span>
+        <span className={styles.placeholder}>
+          {getGuestSummary() || '게스트 추가'}
+        </span>
       </div>
 
       <button className={`${styles.searchButton} ${isExpanded ? styles.searchButtonExpanded : ''}`}>
@@ -145,6 +165,9 @@ function SearchBar() {
       <GuestSelector
         isOpen={isGuestOpen}
         onClose={handleClose}
+        guests={guests}
+        onIncrease={handleGuestIncrease}
+        onDecrease={handleGuestDecrease}
       />
     </div>
   );
