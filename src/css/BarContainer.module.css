@@ -12,3 +12,13 @@
     padding-right: 40px;
     margin: 20px auto;
 }
+
+.searchButton {
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
