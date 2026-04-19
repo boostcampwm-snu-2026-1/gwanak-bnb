@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SelectGuest from "./SelectGuest";
 import SelectLocation from "./SelectLocation";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 function SearchBar() {
   const [destination, setDestination] = useState("");
@@ -27,7 +28,7 @@ function SearchBar() {
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/search", {
+      const response = await fetch(`${API_BASE_URL}/api/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
