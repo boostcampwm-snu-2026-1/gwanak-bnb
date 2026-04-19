@@ -2,7 +2,7 @@ import LocationRow from './LocationRow';
 import useLocationSearch from './useLocationSearch';
 import './LocationModal.css';
 
-function LocationModal({ query }) {
+function LocationModal({ query, onSelect }) {
     const { results, loading } = useLocationSearch(query);
 
     return (
@@ -24,6 +24,7 @@ function LocationModal({ query }) {
                     key={loc.id}
                     name={loc.place_name}
                     description={loc.address_name}
+                    onSelect={onSelect}
                 />
             ))}
         </div>
