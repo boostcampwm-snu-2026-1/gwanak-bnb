@@ -1,29 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GuestModal from "./GuestModal";
 import styles from "./GuestSelector.module.css";
 
-function GuestSelector({ onGuestsChange }) {
+function GuestSelector({ onGuestsChange, closeSignal }) {
   const [isOpen, setIsOpen] = useState(false);
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
   const [infants, setInfants] = useState(0);
 
+  useEffect(() => {
+    if (closeSignal) setIsOpen(false);
+  }, [closeSignal]);
+
   const totalGuests = adults + children + infants;
 
-  const handleAdultsChange = (delta) => {
-    const newAdults = Math.max(0, adults + delta);
+  const handleAdultsChange = (value) => {
+    const newAdults = Math.max(0, value);
     setAdults(newAdults);
     if (onGuestsChange) onGuestsChange(newAdults + children + infants);
   };
 
-  const handleChildrenChange = (delta) => {
-    const newChildren = Math.max(0, children + delta);
+  const handleChildrenChange = (value) => {
+    const newChildren = Math.max(0, value);
     setChildren(newChildren);
     if (onGuestsChange) onGuestsChange(adults + newChildren + infants);
   };
 
-  const handleInfantsChange = (delta) => {
-    const newInfants = Math.max(0, infants + delta);
+  const handleInfantsChange = (value) => {
+    const newInfants = Math.max(0, value);
     setInfants(newInfants);
     if (onGuestsChange) onGuestsChange(adults + children + newInfants);
   };

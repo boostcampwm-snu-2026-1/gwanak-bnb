@@ -13,7 +13,7 @@ function SearchResults({ results, isLoading, searchedLocation }) {
     return (
       <div className={styles.container}>
         <div className={styles.empty}>
-          <p>검색 결과가 없습니다.</p>
+          <p>숙소가 없습니다.</p>
           <p>다른 여행지나 게스트 수로 검색해보세요.</p>
         </div>
       </div>

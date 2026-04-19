@@ -6,19 +6,23 @@ import styles from "./SearchBar.module.css";
 function SearchBar({ onSearch }) {
   const [destination, setDestination] = useState(null);
   const [totalGuests, setTotalGuests] = useState(0);
+  const [closeSignal, setCloseSignal] = useState(0);
 
   const handleSearch = () => {
-    if (onSearch && destination) {
-      onSearch({
-        location: destination.name,
-        guests: totalGuests,
-      });
-    }
+    setCloseSignal((c) => c + 1);
+    if (!onSearch) return;
+    onSearch({
+      location: destination?.name || "",
+      guests: totalGuests,
+    });
   };
 
   return (
     <div className={styles.searchBar}>
-      <DestinationSelector onDestinationChange={setDestination} />
+      <DestinationSelector
+        onDestinationChange={setDestination}
+        closeSignal={closeSignal}
+      />
 
       <div className={styles.divider} />
 
@@ -29,7 +33,10 @@ function SearchBar({ onSearch }) {
 
       <div className={styles.divider} />
 
-      <GuestSelector onGuestsChange={setTotalGuests} />
+      <GuestSelector
+        onGuestsChange={setTotalGuests}
+        closeSignal={closeSignal}
+      />
 
       <button className={styles.searchButton} onClick={handleSearch}>
         🔍
