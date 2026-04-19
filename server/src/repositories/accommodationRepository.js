@@ -14,7 +14,12 @@ export async function countAccommodations(filter) {
   return Accommodation.countDocuments(filter)
 }
 
+export async function findAccommodationById(id) {
+  return Accommodation.findById(id).lean()
+}
+
 export default {
   findAccommodations,
   countAccommodations,
+  findAccommodationById,
 }

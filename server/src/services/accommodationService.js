@@ -1,7 +1,10 @@
+import mongoose from 'mongoose'
 import {
   countAccommodations,
+  findAccommodationById,
   findAccommodations,
 } from '../repositories/accommodationRepository.js'
+import AppError from '../errors/appError.js'
 
 const DEFAULT_PAGE = 1
 const DEFAULT_LIMIT = 10
@@ -60,6 +63,16 @@ function buildAccommodationFilter(query) {
 }
 
 export async function getAccommodations(query = {}) {
+  const trimmedDestination = query.destination?.trim()
+  const primaryGuestCount = parsePositiveInteger(query.primaryGuests, null)
+
+  if (!trimmedDestination || primaryGuestCount === null) {
+    throw new AppError(
+      'destination and primaryGuests are required',
+      400,
+    )
+  }
+
   const page = parsePositiveInteger(query.page, DEFAULT_PAGE)
   const limit = Math.min(
     parsePositiveInteger(query.limit, DEFAULT_LIMIT),
@@ -84,6 +97,23 @@ export async function getAccommodations(query = {}) {
   }
 }
 
+export async function getAccommodationById(id) {
+  if (!mongoose.isValidObjectId(id)) {
+    throw new AppError('Invalid accommodation id', 400)
+  }
+
+  const accommodation = await findAccommodationById(id)
+
+  if (!accommodation) {
+    throw new AppError('Accommodation not found', 404)
+  }
+
+  return {
+    data: accommodation,
+  }
+}
+
 export default {
   getAccommodations,
+  getAccommodationById,
 }

@@ -1,15 +1,29 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import SearchBar from './SearchBar.jsx'
+import SearchResultsSection from './SearchResultsSection.jsx'
 import {
   MAX_INFANTS,
   MAX_PETS,
   MAX_PRIMARY_GUESTS,
   MIN_ADULTS_WITH_DEPENDENTS,
 } from '../constants/guestLimits.js'
+import { fetchAccommodations } from '../services/accommodationApi.js'
 import {
   compareDays,
   formatDayLabel,
 } from '../utils/date.js'
+
+function formatApiDate(date) {
+  if (!date) {
+    return null
+  }
+
+  const year = date.getFullYear()
+  const month = `${date.getMonth() + 1}`.padStart(2, '0')
+  const day = `${date.getDate()}`.padStart(2, '0')
+
+  return `${year}-${month}-${day}`
+}
 
 function SearchBarContainer() {
   const [activeTab, setActiveTab] = useState(null)
@@ -28,6 +42,15 @@ function SearchBarContainer() {
     infants: 0,
     pets: 0,
   })
+  const [searchResults, setSearchResults] = useState([])
+  const [searchMeta, setSearchMeta] = useState({
+    page: 1,
+    totalPages: 1,
+    totalCount: 0,
+  })
+  const [hasSearched, setHasSearched] = useState(false)
+  const [searchErrorMessage, setSearchErrorMessage] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
 
   const searchAreaRef = useRef(null)
 
@@ -42,6 +65,7 @@ function SearchBarContainer() {
   const hasFlexibleDateValue = flexibleStay !== null
   const hasDateValue =
     dateModalTab === 'flexible' ? hasFlexibleDateValue : hasExactDateValue
+  const primaryGuestCount = guests.adults + guests.children
 
   const guestSummaryText = useMemo(() => {
     const guestLabel =
@@ -262,6 +286,55 @@ function SearchBarContainer() {
     })
   }
 
+  const handleSearch = async () => {
+    const trimmedDestination = destinationQuery.trim()
+
+    if (!trimmedDestination || primaryGuestCount === 0) {
+      setHasSearched(true)
+      setSearchResults([])
+      setSearchMeta({
+        page: 1,
+        totalPages: 1,
+        totalCount: 0,
+      })
+      setSearchErrorMessage('여행지와 여행인원은 필수 선택 항목입니다.')
+      return
+    }
+
+    setIsSearching(true)
+    setHasSearched(true)
+    setSearchErrorMessage('')
+
+    try {
+      const result = await fetchAccommodations({
+        destination: trimmedDestination,
+        primaryGuests: primaryGuestCount,
+        infantGuests: guests.infants,
+        petGuests: guests.pets,
+        checkIn: formatApiDate(checkInDate),
+        checkOut: formatApiDate(checkOutDate),
+      })
+
+      setSearchResults(result.data)
+      setSearchMeta(result.meta)
+      setActiveTab(null)
+    } catch (error) {
+      setSearchResults([])
+      setSearchMeta({
+        page: 1,
+        totalPages: 1,
+        totalCount: 0,
+      })
+      setSearchErrorMessage(
+        error instanceof Error
+          ? error.message
+          : '검색 결과를 불러오지 못했습니다.',
+      )
+    } finally {
+      setIsSearching(false)
+    }
+  }
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -336,8 +409,18 @@ function SearchBarContainer() {
         dateSelection={dateSelection}
         dateActions={dateActions}
         guestSelection={guestSelection}
+        isSearching={isSearching}
         onOpenTab={handleOpenTab}
+        onSearch={handleSearch}
         onSelectTab={handleSelectTab}
+      />
+
+      <SearchResultsSection
+        hasSearched={hasSearched}
+        isSearching={isSearching}
+        errorMessage={searchErrorMessage}
+        results={searchResults}
+        meta={searchMeta}
       />
     </div>
   )
