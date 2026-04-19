@@ -18,6 +18,17 @@ function SearchBar({ setRooms }) {
   }
 
   const handleSearchSubmit = async () => {
+
+    if (!keyword.trim()) {
+    alert("여행지를 입력해주세요!");
+    return;
+  }
+
+  if (travelerCounts.adult === 0) {
+    alert("최소 성인 1명 이상은 선택해야 합니다.");
+    return;
+  }
+  
     const searchData = {
       destination: keyword,
       travelers: travelerCounts
