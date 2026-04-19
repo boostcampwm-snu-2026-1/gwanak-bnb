@@ -1,6 +1,6 @@
 import SearchBar from '../Search/SearchBar'
 
-export default function Header({ onGuestClick, guestCount = 0 }) {
+export default function Header({ onGuestClick, guestCount = 0, onSearch }) {
   const guestLabel = guestCount > 0 ? `게스트 ${guestCount}명` : '여행자 추가'
 
   return (
@@ -9,7 +9,7 @@ export default function Header({ onGuestClick, guestCount = 0 }) {
         <div className="flex items-center justify-center h-20">
           <div className="flex items-center border border-gray-300 rounded-full shadow-sm hover:shadow-md transition-shadow divide-x divide-gray-300 w-full max-w-2xl">
             <div className="px-6 py-3 flex-1 rounded-l-full hover:bg-gray-50 cursor-text min-w-0">
-              <SearchBar />
+              <SearchBar onSearch={onSearch} guestCount={guestCount} />
             </div>
             <button className="px-6 py-3 text-sm text-gray-500 hover:bg-gray-50 text-left whitespace-nowrap">
               날짜 추가
