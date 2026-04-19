@@ -1,7 +1,4 @@
-import {
-  formatGuestSummary,
-  type GuestCounts,
-} from '../guestPickerUtils'
+import { formatGuestSummary, type GuestCounts } from '../guestPickerUtils'
 import { DestinationField } from './DestinationField'
 import './SearchBar.css'
 
@@ -9,16 +6,27 @@ export type SearchBarProps = {
   guests: GuestCounts
   onGuestsOpen: () => void
   guestPickerOpen: boolean
+  committedDestinationId: string | null
+  onCommittedDestinationIdChange: (id: string | null) => void
+  onSearchClick: () => void
+  searchDisabled?: boolean
 }
 
 export function SearchBar({
   guests,
   onGuestsOpen,
   guestPickerOpen,
+  committedDestinationId,
+  onCommittedDestinationIdChange,
+  onSearchClick,
+  searchDisabled = false,
 }: SearchBarProps) {
   return (
     <div className="search-bar-mock" data-testid="search-bar-mock">
-      <DestinationField />
+      <DestinationField
+        committedDestinationId={committedDestinationId}
+        onCommittedDestinationIdChange={onCommittedDestinationIdChange}
+      />
       <div className="search-bar-mock-divider" aria-hidden />
       <div className="search-bar-mock-cell">
         <span className="search-bar-mock-kicker">날짜</span>
@@ -43,6 +51,8 @@ export function SearchBar({
         type="button"
         className="search-bar-mock-search"
         aria-label="검색"
+        onClick={onSearchClick}
+        disabled={searchDisabled}
       >
         <svg
           width="16"

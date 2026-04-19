@@ -36,6 +36,11 @@ function formatCommittedInputLine(id: string): string {
   return d.label
 }
 
+export type UseDestinationComboboxOptions = {
+  committedDestinationId: string | null
+  onCommittedDestinationIdChange: (id: string | null) => void
+}
+
 export type UseDestinationComboboxResult = {
   barRef: RefObject<HTMLDivElement | null>
   panelRef: RefObject<HTMLDivElement | null>
@@ -61,11 +66,14 @@ export type UseDestinationComboboxResult = {
   setItemRef: (index: number, el: HTMLDivElement | null) => void
 }
 
-export function useDestinationCombobox(): UseDestinationComboboxResult {
+export function useDestinationCombobox(
+  options: UseDestinationComboboxOptions,
+): UseDestinationComboboxResult {
+  const { committedDestinationId, onCommittedDestinationIdChange } = options
+
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [highlightIndex, setHighlightIndex] = useState(-1)
-  const [committedId, setCommittedId] = useState<string | null>(null)
 
   const barRef = useRef<HTMLDivElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
@@ -96,9 +104,10 @@ export function useDestinationCombobox(): UseDestinationComboboxResult {
 
   const inputValue = useMemo(() => {
     if (isOpen) return query
-    if (committedId) return formatCommittedInputLine(committedId)
+    if (committedDestinationId)
+      return formatCommittedInputLine(committedDestinationId)
     return query
-  }, [isOpen, committedId, query])
+  }, [isOpen, committedDestinationId, query])
 
   const setItemRef = useCallback((index: number, el: HTMLDivElement | null) => {
     const map = itemRefs.current
@@ -119,12 +128,12 @@ export function useDestinationCombobox(): UseDestinationComboboxResult {
 
   const openLayer = useCallback(() => {
     setIsOpen(true)
-    if (committedId) {
-      const d = catalogById.get(committedId)
+    if (committedDestinationId) {
+      const d = catalogById.get(committedDestinationId)
       if (d) setQuery(d.label)
     }
     setHighlightIndex(-1)
-  }, [committedId])
+  }, [committedDestinationId])
 
   useEffect(() => {
     if (!isOpen) return
@@ -163,11 +172,14 @@ export function useDestinationCombobox(): UseDestinationComboboxResult {
     setIsOpen(false)
   }, [])
 
-  const handleQueryChange = useCallback((value: string) => {
-    setCommittedId(null)
-    setQuery(value)
-    setHighlightIndex(-1)
-  }, [])
+  const handleQueryChange = useCallback(
+    (value: string) => {
+      onCommittedDestinationIdChange(null)
+      setQuery(value)
+      setHighlightIndex(-1)
+    },
+    [onCommittedDestinationIdChange],
+  )
 
   const applyHighlight = useCallback(
     (nextIndex: number) => {
@@ -183,12 +195,12 @@ export function useDestinationCombobox(): UseDestinationComboboxResult {
     (index: number) => {
       const item = suggestions[index]
       if (!item) return
-      setCommittedId(item.id)
+      onCommittedDestinationIdChange(item.id)
       setQuery(item.label)
       setHighlightIndex(index)
       closeLayer()
     },
-    [suggestions, closeLayer],
+    [suggestions, closeLayer, onCommittedDestinationIdChange],
   )
 
   const handleInputKeyDown = useCallback(
@@ -214,7 +226,7 @@ export function useDestinationCombobox(): UseDestinationComboboxResult {
         e.preventDefault()
         const idx = navigationHighlightIndex(highlightIndex, n)
         if (idx >= 0 && suggestions[idx]) {
-          setCommittedId(suggestions[idx].id)
+          onCommittedDestinationIdChange(suggestions[idx].id)
           setQuery(suggestions[idx].label)
         }
         closeLayer()
@@ -225,7 +237,13 @@ export function useDestinationCombobox(): UseDestinationComboboxResult {
         closeLayer()
       }
     },
-    [suggestions, highlightIndex, applyHighlight, closeLayer],
+    [
+      suggestions,
+      highlightIndex,
+      applyHighlight,
+      closeLayer,
+      onCommittedDestinationIdChange,
+    ],
   )
 
   const handleBarMouseDown = useCallback((e: ReactMouseEvent<HTMLDivElement>) => {

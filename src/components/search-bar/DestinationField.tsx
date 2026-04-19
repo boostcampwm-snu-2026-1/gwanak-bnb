@@ -3,53 +3,87 @@ import { DestinationSearchLayer } from './DestinationSearchLayer'
 import { useDestinationCombobox } from './useDestinationCombobox'
 import './DestinationField.css'
 
-export function DestinationField() {
-  const combo = useDestinationCombobox()
+export type DestinationFieldProps = {
+  committedDestinationId: string | null
+  onCommittedDestinationIdChange: (id: string | null) => void
+}
+
+export function DestinationField({
+  committedDestinationId,
+  onCommittedDestinationIdChange,
+}: DestinationFieldProps) {
+  const {
+    barRef,
+    panelRef,
+    inputRef,
+    kickerId,
+    listboxId,
+    comboboxId,
+    sectionTitleId,
+    describedById,
+    isOpen,
+    inputValue,
+    activeOptionId,
+    suggestions,
+    highlightIndex,
+    layerPanelTitle,
+    emptyMessage,
+    openLayer,
+    handleQueryChange,
+    handleInputKeyDown,
+    handleBarMouseDown,
+    getOptionId,
+    handlePick,
+    setItemRef,
+  } = useDestinationCombobox({
+    committedDestinationId,
+    onCommittedDestinationIdChange,
+  })
 
   return (
     <div className="destination-field">
-      <span id={combo.describedById} className="destination-field-visually-hidden">
+      <span id={describedById} className="destination-field-visually-hidden">
         지역이나 도시 이름을 입력하면 관련 여행지를 찾을 수 있습니다.
       </span>
       <div
-        ref={combo.barRef}
+        ref={barRef}
         className="destination-field-bar"
         data-testid="destination-field-trigger"
-        onMouseDown={combo.handleBarMouseDown}
+        onMouseDown={handleBarMouseDown}
       >
-        <div id={combo.kickerId} className="search-bar-mock-kicker">
+        <div id={kickerId} className="search-bar-mock-kicker">
           여행지
         </div>
         <div className="destination-field-input-shell">
           <DestinationSearchInput
-            id={combo.comboboxId}
-            listboxId={combo.listboxId}
-            value={combo.inputValue}
-            expanded={combo.isOpen}
-            activeOptionId={combo.activeOptionId}
-            inputRef={combo.inputRef}
-            onChange={combo.handleQueryChange}
-            onKeyDown={combo.handleInputKeyDown}
+            id={comboboxId}
+            listboxId={listboxId}
+            value={inputValue}
+            expanded={isOpen}
+            activeOptionId={activeOptionId}
+            inputRef={inputRef}
+            onChange={handleQueryChange}
+            onKeyDown={handleInputKeyDown}
             variant="bar"
-            onFocus={combo.openLayer}
-            describedById={combo.describedById}
-            ariaLabelledBy={combo.kickerId}
+            onFocus={openLayer}
+            describedById={describedById}
+            ariaLabelledBy={kickerId}
           />
         </div>
       </div>
 
-      {combo.isOpen ? (
+      {isOpen ? (
         <DestinationSearchLayer
-          panelRef={combo.panelRef}
-          listboxId={combo.listboxId}
-          sectionTitleId={combo.sectionTitleId}
-          panelTitle={combo.layerPanelTitle}
-          suggestions={combo.suggestions}
-          highlightIndex={combo.highlightIndex}
-          getOptionId={combo.getOptionId}
-          onPick={combo.handlePick}
-          setItemRef={combo.setItemRef}
-          emptyMessage={combo.emptyMessage}
+          panelRef={panelRef}
+          listboxId={listboxId}
+          sectionTitleId={sectionTitleId}
+          panelTitle={layerPanelTitle}
+          suggestions={suggestions}
+          highlightIndex={highlightIndex}
+          getOptionId={getOptionId}
+          onPick={handlePick}
+          setItemRef={setItemRef}
+          emptyMessage={emptyMessage}
         />
       ) : null}
     </div>
