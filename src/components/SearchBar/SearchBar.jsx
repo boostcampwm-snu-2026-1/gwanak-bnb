@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import GuestSelector from '../GuestSelector/GuestSelector'
 import LocationSearch from '../LocationSearch/LocationSearch'
+import { searchAccommodations } from '../../api/accommodations'
 import './SearchBar.css'
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
   const [isGuestOpen, setIsGuestOpen] = useState(false)
   const [isLocationOpen, setIsLocationOpen] = useState(false)
   const [selectedLocation, setSelectedLocation] = useState('')
@@ -13,6 +14,8 @@ function SearchBar() {
     infants: 0,
     pets: 0,
   })
+  const [errorMessage, setErrorMessage] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
 
   const totalGuests = guests.adults + guests.children
   const guestText =
@@ -33,6 +36,43 @@ function SearchBar() {
   const handleLocationSelect = (name) => {
     setSelectedLocation(name)
     setIsLocationOpen(false)
+    setErrorMessage('')
+  }
+
+  const handleSearch = async () => {
+    if (!selectedLocation) {
+      setErrorMessage('여행지를 선택해주세요')
+      return
+    }
+    if (totalGuests < 1) {
+      setErrorMessage('여행 인원을 선택해주세요')
+      return
+    }
+    setErrorMessage('')
+    setIsSearching(true)
+    try {
+      const data = await searchAccommodations({
+        location: selectedLocation,
+        guests: totalGuests,
+      })
+      onSearch?.({
+        location: selectedLocation,
+        guests: totalGuests,
+        results: data.results ?? [],
+        count: data.count ?? 0,
+      })
+    } catch (err) {
+      setErrorMessage(err.message || '검색 중 오류가 발생했습니다')
+      onSearch?.({
+        location: selectedLocation,
+        guests: totalGuests,
+        results: [],
+        count: 0,
+        error: true,
+      })
+    } finally {
+      setIsSearching(false)
+    }
   }
 
   return (
@@ -68,9 +108,19 @@ function SearchBar() {
               {guestText}
             </span>
           </div>
+        </button>
+        <button
+          type="button"
+          className="search-button"
+          onClick={handleSearch}
+          disabled={isSearching}
+          aria-label="검색"
+        >
           <span className="search-icon">🔍</span>
         </button>
       </div>
+
+      {errorMessage && <p className="search-error">{errorMessage}</p>}
 
       {isLocationOpen && (
         <LocationSearch
