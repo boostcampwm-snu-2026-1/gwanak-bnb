@@ -66,6 +66,8 @@ function BarContainer({ setSearchResults }) {
                 console.error("검색 결과 불러오기 실패:", err);
                 setSearchResults([]);
               });
+            setIsDestinationModalOpen(false);
+            setIsTravelModalOpen(false);
           }}>
             검색
           </button>
