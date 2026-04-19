@@ -5,8 +5,15 @@ const search = async (query) => {
 
   const filter = {};
 
-  if (city) {
-    filter['address.city'] = { $regex: city, $options: 'i' };
+  if (city && city.trim()) {
+    const tokens = city.trim().split(/\s+/);
+    filter.$and = tokens.map((token) => ({
+      $or: [
+        { 'address.city': { $regex: token, $options: 'i' } },
+        { 'address.district': { $regex: token, $options: 'i' } },
+        { 'address.detail': { $regex: token, $options: 'i' } },
+      ],
+    }));
   }
 
   if (guests) {

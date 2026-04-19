@@ -5,7 +5,7 @@ import LocationSearch from '../LocationSearch/LocationSearch';
 import { searchKeywords } from '../../data/destinations';
 import styles from './SearchBar.module.css';
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
   const [isGuestOpen, setIsGuestOpen] = useState(false);
   const [activeField, setActiveField] = useState(null);
   const [locationQuery, setLocationQuery] = useState('');
@@ -85,6 +85,12 @@ function SearchBar() {
 
   const handleLocationSelect = (name) => {
     setLocationQuery(name);
+    setActiveField(null);
+  };
+
+  const handleSearchClick = () => {
+    const totalGuests = guests.adults + guests.children;
+    onSearch?.({ city: locationQuery, guests: totalGuests });
     setActiveField(null);
   };
 
@@ -185,7 +191,10 @@ function SearchBar() {
         </span>
       </div>
 
-      <button className={`${styles.searchButton} ${isExpanded ? styles.searchButtonExpanded : ''}`}>
+      <button
+        className={`${styles.searchButton} ${isExpanded ? styles.searchButtonExpanded : ''}`}
+        onClick={handleSearchClick}
+      >
         <span>🔍</span>
         {isExpanded && <span>검색</span>}
       </button>
