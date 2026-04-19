@@ -1,0 +1,65 @@
+.guest-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.guest-counter:last-child {
+  border-bottom: none;
+}
+
+.guest-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.guest-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+.guest-description {
+  font-size: 13px;
+  color: #999;
+}
+
+.guest-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.guest-controls button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guest-controls button:disabled {
+  border-color: #eee;
+  color: #ddd;
+  cursor: not-allowed;
+}
+
+.guest-controls button:not(:disabled):hover {
+  border-color: #222;
+  color: #222;
+}
+
+.guest-count {
+  font-size: 16px;
+  min-width: 20px;
+  text-align: center;
+}
