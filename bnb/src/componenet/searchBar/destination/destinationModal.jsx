@@ -11,11 +11,9 @@ function DestinationModal() {
             {destination.displayList.map(((item, index) => (
                 <DestinationRow 
                     key={item.id}
-                    iconClass={item.icon}
-                    destination={item.title}
-                    desc={item.desc}
+                    item={item}
                     isActive={index === destination.selectedIndex}
-                    update={destination.onSearchChange}
+                    update={destination.onSelectLocation}
                     close={destination.closeModal}
                 />
             )))}

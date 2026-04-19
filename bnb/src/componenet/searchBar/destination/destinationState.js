@@ -6,7 +6,17 @@ const useDestinationState = () => {
     // 여행지 입력 창에 입력된 검색어
     const [searchTerm, setSearchTerm] = useState("");
     
-    const onSearchChange = (value) => setSearchTerm(value);
+    const onSearchChange = (value) => {
+        setSearchTerm(value);
+        setLocationId(null);
+    }
+
+    const [locationId, setLocationId] = useState(null);
+
+    const onSelectLocation = (location) => {
+        setSearchTerm(location.title);
+        setLocationId(location.id);
+    };
 
     // location에서 각 요소의 부모들을 추출
     const getParentDesc = (location) => {
@@ -72,7 +82,9 @@ const useDestinationState = () => {
         onSearchChange,
         displayList,
         selectedIndex,
-        handleKeyDown
+        handleKeyDown,
+        onSelectLocation,
+        locationId
     };
 };
 

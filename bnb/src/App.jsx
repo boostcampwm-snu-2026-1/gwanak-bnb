@@ -9,7 +9,10 @@ import DateSearch from './componenet/searchBar/date/dateSearch'
 
 import DestinationSearch from './componenet/searchBar/destination/destinationSearch'
 import DestinationModal from './componenet/searchBar/destination/destinationModal'
+
 import DateModal from './componenet/searchBar/date/dateModal'
+
+import SearchResult from './componenet/searchResult/searchResult'
 
 import { SearchProvider } from './context/searchContext'
 
@@ -38,7 +41,7 @@ function App() {
                     </>
                 } />
 
-                <Route path="/search" element={<div>검색 결과</div>} />
+                <Route path="/search" element={<SearchResult />} />
             </Routes>
         </SearchProvider>
     )

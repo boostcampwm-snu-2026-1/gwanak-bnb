@@ -45,18 +45,17 @@ export const SearchProvider = ({ children }) => {
     // 검색 함수
     const search = () => {
         const { adults, children, infants, pets } = guest.counts;
-        const loc = destination.searchTerm;
+        const locId = destination.locationId;
         const checkIn = date.startDate;
         const checkOut = date.endDate;
 
         const params = new URLSearchParams();
-        if (loc) params.append('location', loc);
+        if (locId) params.append('locationId', locId);
         if (adults + children + infants + pets > 0) params.append('guests', adults + children + infants + pets);
         if (checkIn) params.append('checkIn', checkIn.toISOString());
         if (checkOut) params.append('checkOut', checkOut.toISOString());
 
         navigate(`search?${params.toString()}`);
-
         closeModal();
     };
 
