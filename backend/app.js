@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
+import AccommodationRouter from "./routers/AccommodationRouter.js"
 
 dotenv.config()
 
@@ -18,6 +19,8 @@ mongoose.connect(process.env.MONGODB_URI)
 app.get("/", (req, res) => {
   res.json({ message: "서버 정상 동작 중" })
 })
+
+app.use("/accommodations", AccommodationRouter)
 
 app.listen(PORT, () => {
   console.log(`서버 실행 중: ${PORT}`)
