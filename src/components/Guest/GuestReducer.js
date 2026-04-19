@@ -7,9 +7,10 @@ export const GUEST_LIMITS = {
 }
 
 export function guestReducer(state, action) {
-  const { type, delta } = action;
+  const { type, delta, payload } = action;
 
   if (type === 'RESET') return INITIAL_GUESTS;
+  if (type === 'REPLACE') return payload || INITIAL_GUESTS;
 
   const nextValue = state[type] + delta;
   const totalGuests = state.adults + state.children;
