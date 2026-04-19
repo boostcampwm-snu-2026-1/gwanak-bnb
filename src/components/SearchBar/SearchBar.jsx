@@ -28,14 +28,14 @@ function SearchBar({ setRooms }) {
     alert("최소 성인 1명 이상은 선택해야 합니다.");
     return;
   }
-  
+
     const searchData = {
       destination: keyword,
       travelers: travelerCounts
     };
 
     try {
-      const response = await fetch('http://localhost:3000/api/search', {
+      const response = await fetch('https://gwanak-bnb-mfrk.onrender.com/api/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
