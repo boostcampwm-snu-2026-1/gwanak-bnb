@@ -32,7 +32,9 @@ function App() {
       const params = new URLSearchParams({
         destination: destination.trim(),
         adults: String(guests.adults),
-        children: String(guests.children)
+        children: String(guests.children),
+        infants: String(guests.infants),
+        pets: String(guests.pets)
       });
 
       const response = await fetch(`${API_BASE_URL}/api/search?${params.toString()}`);

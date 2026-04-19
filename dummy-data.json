@@ -1,0 +1,2441 @@
+[
+  {
+    "title": "성산일출봉 펜션",
+    "description": "성산일출봉이 보이는 아름다운 펜션입니다. 일출 감상과 함께하는 아침을 즐길 수 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "성산읍",
+      "searchTags": [
+        "제주",
+        "서귀포",
+        "성산",
+        "일출봉",
+        "펜션",
+        "오션뷰"
+      ],
+      "address": "제주특별자치도 서귀포시 성산읍 일출로 284"
+    },
+    "capacity": {
+      "maxGuests": 4,
+      "maxInfants": 2,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 2
+    },
+    "pricing": {
+      "basePrice": 180000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 45
+    },
+    "amenities": [
+      "Wi-Fi",
+      "주방",
+      "주차",
+      "에어컨",
+      "세탁기",
+      "헤어드라이어"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
+        "alt": "성산 펜션 외관",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-05-01T00:00:00.000Z",
+      "availableTo": "2025-10-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김제주",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "구좌 숲속 하우스",
+    "description": "제주 숲 속에 위치한 아늑한 하우스입니다. 자연과 함께 힐링 여행을 즐겨보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "구좌읍",
+      "searchTags": [
+        "제주",
+        "서귀포",
+        "구좌",
+        "숲뷰",
+        "힐링",
+        "자연"
+      ],
+      "address": "제주특별자치도 서귀포시 구좌읍 만장굴로 15"
+    },
+    "capacity": {
+      "maxGuests": 3,
+      "maxInfants": 1,
+      "allowPets": true,
+      "maxPets": 3
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 2,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 120000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.8,
+      "reviewCount": 67
+    },
+    "amenities": [
+      "온수 욕조",
+      "주방",
+      "무료 주차",
+      "테라스",
+      "바비큐",
+      "난방"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+        "alt": "구좌 하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-05-10T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "박자연",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "중문 타운하우스",
+    "description": "가족 여행에 적합한 넓은 타운하우스입니다. 아이들과 함께하는 즐거운 제주 여행을 즐겨보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "중문동",
+      "searchTags": [
+        "제주",
+        "서귀포",
+        "중문",
+        "타운하우스",
+        "가족",
+        "키즈"
+      ],
+      "address": "제주특별자치도 서귀포시 중문동 광양9길 10"
+    },
+    "capacity": {
+      "maxGuests": 6,
+      "maxInfants": 3,
+      "allowPets": true,
+      "maxPets": 3
+    },
+    "details": {
+      "bedrooms": 3,
+      "beds": 4,
+      "bathrooms": 2
+    },
+    "pricing": {
+      "basePrice": 250000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 5,
+      "reviewCount": 89
+    },
+    "amenities": [
+      "주차",
+      "주방",
+      "넷플릭스",
+      "바비큐",
+      "수영장",
+      "게임룸"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
+        "alt": "중문 타운하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-04-01T00:00:00.000Z",
+      "availableTo": "2025-11-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "이패밀리",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "strict"
+    }
+  },
+  {
+    "title": "한림 게스트하우스",
+    "description": "젊은 여행자들을 위한 편안한 게스트하우스입니다. 다양한 사람들과의 만남이 기다리고 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "한림읍",
+      "searchTags": [
+        "제주",
+        "제주시",
+        "한림",
+        "게스트하우스",
+        "청년",
+        "도미토리"
+      ],
+      "address": "제주특별자치도 제주시 한림읍 협재로 15"
+    },
+    "capacity": {
+      "maxGuests": 8,
+      "maxInfants": 0,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 4,
+      "beds": 8,
+      "bathrooms": 2
+    },
+    "pricing": {
+      "basePrice": 35000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.7,
+      "reviewCount": 156
+    },
+    "amenities": [
+      "공용 주방",
+      "세탁실",
+      "라운지",
+      "무료 와이파이",
+      "공용 샤워실"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80",
+        "alt": "한림 게스트하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-03-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "최트래블",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "애월 바다빌라",
+    "description": "애월 해안가에 위치한 프라이빗 빌라입니다. 아름다운 바다를 감상하며 휴식을 취해보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "애월읍",
+      "searchTags": [
+        "제주",
+        "제주시",
+        "애월",
+        "빌라",
+        "바다",
+        "프라이빗"
+      ],
+      "address": "제주특별자치도 제주시 애월읍 애월로 123"
+    },
+    "capacity": {
+      "maxGuests": 2,
+      "maxInfants": 1,
+      "allowPets": true,
+      "maxPets": 4
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 150000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 78
+    },
+    "amenities": [
+      "프라이빗 풀",
+      "주방",
+      "테라스",
+      "바비큐",
+      "넷플릭스",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+        "alt": "애월 빌라",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-04-15T00:00:00.000Z",
+      "availableTo": "2025-11-15T00:00:00.000Z"
+    },
+    "host": {
+      "name": "정바다",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "노형 아파트먼트",
+    "description": "도심 속 편안한 아파트먼트입니다. 쇼핑과 맛집이 가까워 편리한 여행을 즐길 수 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "노형동",
+      "searchTags": [
+        "제주",
+        "제주시",
+        "노형",
+        "아파트먼트",
+        "도심",
+        "편의시설"
+      ],
+      "address": "제주특별자치도 제주시 노형동 노연로 45"
+    },
+    "capacity": {
+      "maxGuests": 4,
+      "maxInfants": 2,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 2,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 90000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.6,
+      "reviewCount": 123
+    },
+    "amenities": [
+      "주차",
+      "엘리베이터",
+      "세탁기",
+      "주방",
+      "넷플릭스",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+        "alt": "노형 아파트먼트",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "한도심",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "표선 리조트",
+    "description": "럭셔리 리조트에서 특별한 휴가를 즐겨보세요. 다양한 부대시설과 서비스가 준비되어 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "표선면",
+      "searchTags": [
+        "제주",
+        "서귀포",
+        "표선",
+        "리조트",
+        "럭셔리",
+        "부대시설"
+      ],
+      "address": "제주특별자치도 서귀포시 표선면 민속해안로 537"
+    },
+    "capacity": {
+      "maxGuests": 8,
+      "maxInfants": 4,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 4,
+      "beds": 6,
+      "bathrooms": 3
+    },
+    "pricing": {
+      "basePrice": 450000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 234
+    },
+    "amenities": [
+      "수영장",
+      "스파",
+      "레스토랑",
+      "주차",
+      "콘시어지",
+      "룸서비스"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=800&q=80",
+        "alt": "표선 리조트",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-03-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김럭셔리",
+      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "strict"
+    }
+  },
+  {
+    "title": "우도 게스트하우스",
+    "description": "우도에서 즐기는 아일랜드 라이프! 자전거로 섬을 한 바퀴 도는 재미를 느껴보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "우도면",
+      "searchTags": [
+        "제주",
+        "우도",
+        "섬",
+        "게스트하우스",
+        "자전거",
+        "아일랜드"
+      ],
+      "address": "제주특별자치도 제주시 우도면 우도로 123"
+    },
+    "capacity": {
+      "maxGuests": 6,
+      "maxInfants": 1,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 3,
+      "beds": 6,
+      "bathrooms": 2
+    },
+    "pricing": {
+      "basePrice": 60000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.8,
+      "reviewCount": 98
+    },
+    "amenities": [
+      "공용 주방",
+      "자전거 대여",
+      "라운지",
+      "무료 와이파이",
+      "공용 샤워실"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+        "alt": "우도 게스트하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-04-01T00:00:00.000Z",
+      "availableTo": "2025-11-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "박섬사람",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "14:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "함덕 풀빌라",
+    "description": "함덕 해수욕장 근처의 프라이빗 풀빌라입니다. 물놀이와 휴식을 동시에 즐길 수 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "조천읍",
+      "searchTags": [
+        "제주",
+        "함덕",
+        "풀빌라",
+        "해수욕장",
+        "물놀이",
+        "프라이빗"
+      ],
+      "address": "제주특별자치도 제주시 조천읍 함덕로 456"
+    },
+    "capacity": {
+      "maxGuests": 5,
+      "maxInfants": 2,
+      "allowPets": true,
+      "maxPets": 3
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 2
+    },
+    "pricing": {
+      "basePrice": 280000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 145
+    },
+    "amenities": [
+      "프라이빗 풀",
+      "테라스",
+      "바비큐",
+      "주방",
+      "넷플릭스",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80",
+        "alt": "함덕 풀빌라",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-06-01T00:00:00.000Z",
+      "availableTo": "2025-09-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "최리조트",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "금능 해변 펜션",
+    "description": "금능 해변 바로 앞에 위치한 펜션입니다. 파도 소리를 들으며 잠드는 특별한 경험을 해보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "한림읍",
+      "searchTags": [
+        "제주",
+        "금능",
+        "해변",
+        "펜션",
+        "파도",
+        "오션뷰"
+      ],
+      "address": "제주특별자치도 제주시 한림읍 금능로 789"
+    },
+    "capacity": {
+      "maxGuests": 3,
+      "maxInfants": 1,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 2,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 140000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.7,
+      "reviewCount": 87
+    },
+    "amenities": [
+      "테라스",
+      "주방",
+      "주차",
+      "에어컨",
+      "세탁기",
+      "헤어드라이어"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+        "alt": "금능 펜션",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-05-01T00:00:00.000Z",
+      "availableTo": "2025-10-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김바다",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "대정 프라이빗 하우스",
+    "description": "대정의 조용한 시골 마을에 위치한 프라이빗 하우스입니다. 제주 본연의 모습을 느낄 수 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "대정읍",
+      "searchTags": [
+        "제주",
+        "대정",
+        "시골",
+        "프라이빗",
+        "전통",
+        "조용함"
+      ],
+      "address": "제주특별자치도 서귀포시 대정읍 상모로 321"
+    },
+    "capacity": {
+      "maxGuests": 4,
+      "maxInfants": 2,
+      "allowPets": true,
+      "maxPets": 2
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 110000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.8,
+      "reviewCount": 56
+    },
+    "amenities": [
+      "주방",
+      "주차",
+      "테라스",
+      "바비큐",
+      "난방",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80",
+        "alt": "대정 하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "박전통",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "안덕 현대적 아파트",
+    "description": "안덕면에 위치한 현대적인 아파트입니다. 편의시설이 가까워 편리한 여행을 즐길 수 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "안덕면",
+      "searchTags": [
+        "제주",
+        "안덕",
+        "아파트",
+        "현대적",
+        "편의시설",
+        "도심"
+      ],
+      "address": "제주특별자치도 서귀포시 안덕면 신화역사로 654"
+    },
+    "capacity": {
+      "maxGuests": 2,
+      "maxInfants": 1,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 85000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.5,
+      "reviewCount": 92
+    },
+    "amenities": [
+      "엘리베이터",
+      "주차",
+      "세탁기",
+      "주방",
+      "넷플릭스",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+        "alt": "안덕 아파트",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "최모던",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "남원 포레스트 하우스",
+    "description": "남원 숲 속에 위치한 아늑한 하우스입니다. 자연과 함께하는 평화로운 휴식을 즐겨보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "남원읍",
+      "searchTags": [
+        "제주",
+        "남원",
+        "숲",
+        "포레스트",
+        "자연",
+        "평화"
+      ],
+      "address": "제주특별자치도 서귀포시 남원읍 남태해안로 987"
+    },
+    "capacity": {
+      "maxGuests": 4,
+      "maxInfants": 2,
+      "allowPets": true,
+      "maxPets": 2
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 2,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 130000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 73
+    },
+    "amenities": [
+      "테라스",
+      "주방",
+      "주차",
+      "바비큐",
+      "난방",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+        "alt": "남원 포레스트 하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-03-01T00:00:00.000Z",
+      "availableTo": "2025-11-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김포레스트",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "구좌 게스트하우스",
+    "description": "구좌의 아름다운 자연 속 게스트하우스입니다. 다양한 여행자들과의 만남을 즐겨보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "구좌읍",
+      "searchTags": [
+        "제주",
+        "구좌",
+        "게스트하우스",
+        "자연",
+        "커뮤니티",
+        "청년"
+      ],
+      "address": "제주특별자치도 서귀포시 구좌읍 해맞이해안로 147"
+    },
+    "capacity": {
+      "maxGuests": 10,
+      "maxInfants": 0,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 5,
+      "beds": 10,
+      "bathrooms": 3
+    },
+    "pricing": {
+      "basePrice": 40000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.6,
+      "reviewCount": 189
+    },
+    "amenities": [
+      "공용 주방",
+      "세탁실",
+      "라운지",
+      "무료 와이파이",
+      "공용 샤워실",
+      "자전거 대여"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80",
+        "alt": "구좌 게스트하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-04-01T00:00:00.000Z",
+      "availableTo": "2025-11-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "박커뮤니티",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "14:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "애월 카페 하우스",
+    "description": "애월의 감성적인 카페와 연결된 하우스입니다. 커피와 함께하는 아침을 즐겨보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "애월읍",
+      "searchTags": [
+        "제주",
+        "애월",
+        "카페",
+        "감성",
+        "커피",
+        "브런치"
+      ],
+      "address": "제주특별자치도 제주시 애월읍 애월해안로 258"
+    },
+    "capacity": {
+      "maxGuests": 2,
+      "maxInfants": 0,
+      "allowPets": true,
+      "maxPets": 2
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 95000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.8,
+      "reviewCount": 67
+    },
+    "amenities": [
+      "커피 머신",
+      "주방",
+      "테라스",
+      "넷플릭스",
+      "에어컨",
+      "주차"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1559494007-9f5847c49d94?auto=format&fit=crop&w=800&q=80",
+        "alt": "애월 카페 하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김카페",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "한경면 전통 한옥",
+    "description": "한경면의 아름다운 전통 한옥입니다. 제주 전통 건축의 아름다움을 느껴보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "한경면",
+      "searchTags": [
+        "제주",
+        "한경",
+        "한옥",
+        "전통",
+        "문화",
+        "역사"
+      ],
+      "address": "제주특별자치도 제주시 한경면 녹차분재로 369"
+    },
+    "capacity": {
+      "maxGuests": 6,
+      "maxInfants": 3,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 3,
+      "beds": 4,
+      "bathrooms": 2
+    },
+    "pricing": {
+      "basePrice": 200000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 112
+    },
+    "amenities": [
+      "마루",
+      "주방",
+      "주차",
+      "난방",
+      "에어컨",
+      "전통 차"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80",
+        "alt": "한경 한옥",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-03-01T00:00:00.000Z",
+      "availableTo": "2025-11-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "박전통",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "strict"
+    }
+  },
+  {
+    "title": "추자도 아일랜드 하우스",
+    "description": "추자도에서 즐기는 아일랜드 라이프! 아름다운 섬의 자연을 만끽해보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "추자면",
+      "searchTags": [
+        "제주",
+        "추자도",
+        "섬",
+        "아일랜드",
+        "자연",
+        "오지"
+      ],
+      "address": "제주특별자치도 제주시 추자면 추자로 741"
+    },
+    "capacity": {
+      "maxGuests": 4,
+      "maxInfants": 2,
+      "allowPets": true,
+      "maxPets": 4
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 100000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.7,
+      "reviewCount": 34
+    },
+    "amenities": [
+      "주방",
+      "주차",
+      "테라스",
+      "바비큐",
+      "난방",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+        "alt": "추자도 하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-04-01T00:00:00.000Z",
+      "availableTo": "2025-10-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김섬사람",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "서귀포 시내 호텔",
+    "description": "서귀포 시내 중심에 위치한 편안한 호텔입니다. 쇼핑과 관광이 편리합니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "서귀동",
+      "searchTags": [
+        "제주",
+        "서귀포",
+        "시내",
+        "호텔",
+        "편의시설",
+        "관광"
+      ],
+      "address": "제주특별자치도 서귀포시 서귀동 중정로 123"
+    },
+    "capacity": {
+      "maxGuests": 2,
+      "maxInfants": 1,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 120000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.4,
+      "reviewCount": 267
+    },
+    "amenities": [
+      "룸서비스",
+      "주차",
+      "헬스장",
+      "레스토랑",
+      "넷플릭스",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+        "alt": "서귀포 호텔",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "최호텔",
+      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "제주시 도심 스튜디오",
+    "description": "제주시 도심에 위치한 컴팩트한 스튜디오입니다. 비즈니스 여행에 최적화되어 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "연동",
+      "searchTags": [
+        "제주",
+        "제주시",
+        "도심",
+        "스튜디오",
+        "비즈니스",
+        "컴팩트"
+      ],
+      "address": "제주특별자치도 제주시 연동 중앙로 456"
+    },
+    "capacity": {
+      "maxGuests": 1,
+      "maxInfants": 0,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 70000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.3,
+      "reviewCount": 145
+    },
+    "amenities": [
+      "업무 데스크",
+      "주방",
+      "넷플릭스",
+      "에어컨",
+      "세탁기",
+      "엘리베이터"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+        "alt": "제주시 스튜디오",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "한비즈니스",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "표선 감귤밭 하우스",
+    "description": "표선의 아름다운 감귤밭 옆에 위치한 하우스입니다. 제주의 상징인 감귤을 만날 수 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "표선면",
+      "searchTags": [
+        "제주",
+        "표선",
+        "감귤",
+        "농촌",
+        "자연",
+        "제주특산물"
+      ],
+      "address": "제주특별자치도 서귀포시 표선면 표선백사로 852"
+    },
+    "capacity": {
+      "maxGuests": 5,
+      "maxInfants": 2,
+      "allowPets": true,
+      "maxPets": 3
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 115000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.8,
+      "reviewCount": 89
+    },
+    "amenities": [
+      "주방",
+      "주차",
+      "테라스",
+      "바비큐",
+      "난방",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+        "alt": "표선 감귤밭 하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-10-01T00:00:00.000Z",
+      "availableTo": "2026-03-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김감귤",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "성산 아트 스튜디오",
+    "description": "성산의 예술적인 분위기가 물씬 나는 스튜디오입니다. 창작 활동에 영감을 주는 공간입니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "성산읍",
+      "searchTags": [
+        "제주",
+        "성산",
+        "아트",
+        "스튜디오",
+        "창작",
+        "예술"
+      ],
+      "address": "제주특별자치도 서귀포시 성산읍 섭지코지로 963"
+    },
+    "capacity": {
+      "maxGuests": 2,
+      "maxInfants": 0,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 110000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 45
+    },
+    "amenities": [
+      "작업대",
+      "주방",
+      "넷플릭스",
+      "에어컨",
+      "주차",
+      "테라스"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+        "alt": "성산 아트 스튜디오",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "박아티스트",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "중문 럭셔리 빌라",
+    "description": "중문의 고급스러운 프라이빗 빌라입니다. 최고급 시설과 서비스를 경험해보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "중문동",
+      "searchTags": [
+        "제주",
+        "중문",
+        "럭셔리",
+        "빌라",
+        "프라이빗",
+        "고급"
+      ],
+      "address": "제주특별자치도 서귀포시 중문동 천제연로 147"
+    },
+    "capacity": {
+      "maxGuests": 8,
+      "maxInfants": 4,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 4,
+      "beds": 5,
+      "bathrooms": 4
+    },
+    "pricing": {
+      "basePrice": 550000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 5,
+      "reviewCount": 78
+    },
+    "amenities": [
+      "프라이빗 풀",
+      "스파",
+      "주방",
+      "넷플릭스",
+      "룸서비스",
+      "컨시어지"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80",
+        "alt": "중문 럭셔리 빌라",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-05-01T00:00:00.000Z",
+      "availableTo": "2025-10-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김럭셔리",
+      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "strict"
+    }
+  },
+  {
+    "title": "한림 코티지",
+    "description": "한림의 아늑한 코티지입니다. 가족 단위 여행객들에게 사랑받는 공간입니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "한림읍",
+      "searchTags": [
+        "제주",
+        "한림",
+        "코티지",
+        "가족",
+        "아늑함",
+        "편안함"
+      ],
+      "address": "제주특별자치도 제주시 한림읍 한림로 258"
+    },
+    "capacity": {
+      "maxGuests": 4,
+      "maxInfants": 2,
+      "allowPets": true,
+      "maxPets": 4
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 3,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 135000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.7,
+      "reviewCount": 134
+    },
+    "amenities": [
+      "주방",
+      "주차",
+      "테라스",
+      "바비큐",
+      "난방",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80",
+        "alt": "한림 코티지",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "최코티지",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "구좌 바다 전망 하우스",
+    "description": "구좌의 탁 트인 바다를 볼 수 있는 전망 좋은 하우스입니다. 일출과 일몰을 모두 즐길 수 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "구좌읍",
+      "searchTags": [
+        "제주",
+        "구좌",
+        "바다",
+        "전망",
+        "일출",
+        "일몰"
+      ],
+      "address": "제주특별자치도 서귀포시 구좌읍 해맞이해안로 369"
+    },
+    "capacity": {
+      "maxGuests": 3,
+      "maxInfants": 1,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 2,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 160000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 92
+    },
+    "amenities": [
+      "테라스",
+      "주방",
+      "주차",
+      "에어컨",
+      "세탁기",
+      "헤어드라이어"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+        "alt": "구좌 바다 전망 하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-05-01T00:00:00.000Z",
+      "availableTo": "2025-10-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김오션",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "애월 게스트하우스",
+    "description": "애월의 해변 근처 게스트하우스입니다. 서핑과 다양한 액티비티를 즐길 수 있는 위치입니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "애월읍",
+      "searchTags": [
+        "제주",
+        "애월",
+        "게스트하우스",
+        "서핑",
+        "액티비티",
+        "해변"
+      ],
+      "address": "제주특별자치도 제주시 애월읍 애월해안로 741"
+    },
+    "capacity": {
+      "maxGuests": 12,
+      "maxInfants": 0,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 6,
+      "beds": 12,
+      "bathrooms": 4
+    },
+    "pricing": {
+      "basePrice": 45000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.5,
+      "reviewCount": 203
+    },
+    "amenities": [
+      "공용 주방",
+      "세탁실",
+      "라운지",
+      "무료 와이파이",
+      "공용 샤워실",
+      "서핑보드 대여"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80",
+        "alt": "애월 게스트하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-04-01T00:00:00.000Z",
+      "availableTo": "2025-11-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "박서핑",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "14:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "대정 에코 하우스",
+    "description": "대정의 자연 친화적인 에코 하우스입니다. 지속 가능한 여행을 추구하는 분들에게 추천합니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "대정읍",
+      "searchTags": [
+        "제주",
+        "대정",
+        "에코",
+        "지속가능",
+        "자연친화",
+        "친환경"
+      ],
+      "address": "제주특별자치도 서귀포시 대정읍 에코로 852"
+    },
+    "capacity": {
+      "maxGuests": 4,
+      "maxInfants": 2,
+      "allowPets": true,
+      "maxPets": 2
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 2,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 125000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.8,
+      "reviewCount": 67
+    },
+    "amenities": [
+      "태양광 발전",
+      "재활용 시스템",
+      "주방",
+      "주차",
+      "테라스",
+      "바비큐"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+        "alt": "대정 에코 하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김에코",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "안덕 빌라",
+    "description": "안덕의 편안한 빌라입니다. 공항과 가까워 이동이 편리한 위치입니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "안덕면",
+      "searchTags": [
+        "제주",
+        "안덕",
+        "빌라",
+        "공항근처",
+        "편의성",
+        "접근성"
+      ],
+      "address": "제주특별자치도 서귀포시 안덕면 신화역사로 369"
+    },
+    "capacity": {
+      "maxGuests": 6,
+      "maxInfants": 3,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 3,
+      "beds": 4,
+      "bathrooms": 2
+    },
+    "pricing": {
+      "basePrice": 180000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.6,
+      "reviewCount": 178
+    },
+    "amenities": [
+      "주차",
+      "주방",
+      "넷플릭스",
+      "에어컨",
+      "세탁기",
+      "헤어드라이어"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+        "alt": "안덕 빌라",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "최편안",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "남원 트리하우스",
+    "description": "남원의 숲 속 트리하우스입니다. 나무 위에서의 특별한 경험을 해보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "남원읍",
+      "searchTags": [
+        "제주",
+        "남원",
+        "트리하우스",
+        "나무위",
+        "특별함",
+        "어드벤처"
+      ],
+      "address": "제주특별자치도 서귀포시 남원읍 남태해안로 963"
+    },
+    "capacity": {
+      "maxGuests": 2,
+      "maxInfants": 0,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 200000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 56
+    },
+    "amenities": [
+      "테라스",
+      "주방",
+      "넷플릭스",
+      "에어컨",
+      "난방",
+      "특별한 경험"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+        "alt": "남원 트리하우스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-04-01T00:00:00.000Z",
+      "availableTo": "2025-11-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김트리",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "strict"
+    }
+  },
+  {
+    "title": "구좌 민박",
+    "description": "구좌의 전통적인 민박집입니다. 제주 할머니의 손맛을 느낄 수 있는 곳입니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "구좌읍",
+      "searchTags": [
+        "제주",
+        "구좌",
+        "민박",
+        "전통",
+        "손맛",
+        "할머니"
+      ],
+      "address": "제주특별자치도 서귀포시 구좌읍 구좌로 147"
+    },
+    "capacity": {
+      "maxGuests": 5,
+      "maxInfants": 2,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 2,
+      "beds": 4,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 95000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.8,
+      "reviewCount": 145
+    },
+    "amenities": [
+      "집밥",
+      "주차",
+      "테라스",
+      "난방",
+      "에어컨",
+      "전통 차"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80",
+        "alt": "구좌 민박",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김할머니",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "애월 캠핑장",
+    "description": "애월의 해변 옆 캠핑장입니다. 텐트와 함께하는 특별한 야영 경험을 즐겨보세요.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "애월읍",
+      "searchTags": [
+        "제주",
+        "애월",
+        "캠핑",
+        "텐트",
+        "야영",
+        "해변"
+      ],
+      "address": "제주특별자치도 제주시 애월읍 애월해안로 852"
+    },
+    "capacity": {
+      "maxGuests": 4,
+      "maxInfants": 1,
+      "allowPets": true,
+      "maxPets": 4
+    },
+    "details": {
+      "bedrooms": 0,
+      "beds": 0,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 80000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.6,
+      "reviewCount": 89
+    },
+    "amenities": [
+      "텐트",
+      "공용 화장실",
+      "샤워실",
+      "주차",
+      "바비큐",
+      "모닥불"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&w=800&q=80",
+        "alt": "애월 캠핑장",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-05-01T00:00:00.000Z",
+      "availableTo": "2025-10-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "박캠핑",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "14:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "한경면 글램핑장",
+    "description": "한경면의 고급 글램핑장입니다. 캠핑의 편리함과 호텔의 안락함을 동시에 누릴 수 있습니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "한경면",
+      "searchTags": [
+        "제주",
+        "한경",
+        "글램핑",
+        "고급",
+        "편안함",
+        "럭셔리캠핑"
+      ],
+      "address": "제주특별자치도 제주시 한경면 저지로 741"
+    },
+    "capacity": {
+      "maxGuests": 4,
+      "maxInfants": 2,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 2,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 180000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 123
+    },
+    "amenities": [
+      "글램핑 텐트",
+      "에어컨",
+      "난방",
+      "주방",
+      "바비큐",
+      "샤워실"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&w=800&q=80",
+        "alt": "한경 글램핑장",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-04-01T00:00:00.000Z",
+      "availableTo": "2025-11-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "최글램핑",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "추자도 전통 가옥",
+    "description": "추자도의 오래된 전통 가옥입니다. 제주도의 역사를 느낄 수 있는 특별한 공간입니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "추자면",
+      "searchTags": [
+        "제주",
+        "추자도",
+        "전통가옥",
+        "역사",
+        "문화유산",
+        "특별함"
+      ],
+      "address": "제주특별자치도 제주시 추자면 추자로 369"
+    },
+    "capacity": {
+      "maxGuests": 6,
+      "maxInfants": 3,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 3,
+      "beds": 4,
+      "bathrooms": 2
+    },
+    "pricing": {
+      "basePrice": 140000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.7,
+      "reviewCount": 45
+    },
+    "amenities": [
+      "마루",
+      "주방",
+      "주차",
+      "난방",
+      "에어컨",
+      "전통 차"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80",
+        "alt": "추자도 전통 가옥",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-03-01T00:00:00.000Z",
+      "availableTo": "2025-11-30T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김역사",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "strict"
+    }
+  },
+  {
+    "title": "서귀포 시내 모텔",
+    "description": "서귀포 시내에 위치한 깔끔한 모텔입니다. 단기 여행이나 비즈니스 출장에 적합합니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "서귀동",
+      "searchTags": [
+        "제주",
+        "서귀포",
+        "모텔",
+        "시내",
+        "단기",
+        "비즈니스"
+      ],
+      "address": "제주특별자치도 서귀포시 서귀동 일주동로 456"
+    },
+    "capacity": {
+      "maxGuests": 2,
+      "maxInfants": 1,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 60000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.2,
+      "reviewCount": 345
+    },
+    "amenities": [
+      "넷플릭스",
+      "에어컨",
+      "세탁기",
+      "헤어드라이어",
+      "무료 와이파이"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+        "alt": "서귀포 모텔",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "최모텔",
+      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "제주시 도심 게스트룸",
+    "description": "제주시 도심에 위치한 게스트룸입니다. 쇼핑과 관광이 편리한 최적의 위치입니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "제주시",
+      "district": "연동",
+      "searchTags": [
+        "제주",
+        "제주시",
+        "게스트룸",
+        "도심",
+        "쇼핑",
+        "관광"
+      ],
+      "address": "제주특별자치도 제주시 연동 중앙로 789"
+    },
+    "capacity": {
+      "maxGuests": 3,
+      "maxInfants": 1,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 2,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 75000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.4,
+      "reviewCount": 198
+    },
+    "amenities": [
+      "넷플릭스",
+      "에어컨",
+      "세탁기",
+      "헤어드라이어",
+      "무료 와이파이",
+      "엘리베이터"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+        "alt": "제주시 게스트룸",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "한게스트",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "flexible"
+    }
+  },
+  {
+    "title": "표선 감귤밭 펜션",
+    "description": "표선의 감귤밭 사이에 위치한 펜션입니다. 감귤 따기 체험도 가능합니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "표선면",
+      "searchTags": [
+        "제주",
+        "표선",
+        "감귤밭",
+        "펜션",
+        "체험",
+        "농촌"
+      ],
+      "address": "제주특별자치도 서귀포시 표선면 표선백사로 963"
+    },
+    "capacity": {
+      "maxGuests": 6,
+      "maxInfants": 2,
+      "allowPets": true,
+      "maxPets": 2
+    },
+    "details": {
+      "bedrooms": 3,
+      "beds": 4,
+      "bathrooms": 2
+    },
+    "pricing": {
+      "basePrice": 145000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.8,
+      "reviewCount": 167
+    },
+    "amenities": [
+      "주방",
+      "주차",
+      "테라스",
+      "바비큐",
+      "난방",
+      "에어컨"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+        "alt": "표선 감귤밭 펜션",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-10-01T00:00:00.000Z",
+      "availableTo": "2026-03-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김감귤농장",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": false
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "성산 예술인 레지던스",
+    "description": "성산의 예술인들이 모이는 레지던스입니다. 창작 활동을 위한 최적의 환경을 제공합니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "성산읍",
+      "searchTags": [
+        "제주",
+        "성산",
+        "예술",
+        "레지던스",
+        "창작",
+        "아티스트"
+      ],
+      "address": "제주특별자치도 서귀포시 성산읍 섭지코지로 852"
+    },
+    "capacity": {
+      "maxGuests": 2,
+      "maxInfants": 0,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 1,
+      "beds": 1,
+      "bathrooms": 1
+    },
+    "pricing": {
+      "basePrice": 130000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 4.9,
+      "reviewCount": 78
+    },
+    "amenities": [
+      "작업대",
+      "주방",
+      "넷플릭스",
+      "에어컨",
+      "주차",
+      "테라스"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+        "alt": "성산 예술인 레지던스",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-01-01T00:00:00.000Z",
+      "availableTo": "2025-12-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "박아티스트",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "15:00",
+      "checkOutTime": "11:00",
+      "cancellationPolicy": "moderate"
+    }
+  },
+  {
+    "title": "중문 프라이빗 리조트",
+    "description": "중문의 고급 프라이빗 리조트입니다. VIP 고객을 위한 특별한 서비스를 제공합니다.",
+    "location": {
+      "province": "제주특별자치도",
+      "city": "서귀포시",
+      "district": "중문동",
+      "searchTags": [
+        "제주",
+        "중문",
+        "리조트",
+        "프라이빗",
+        "VIP",
+        "럭셔리"
+      ],
+      "address": "제주특별자치도 서귀포시 중문동 천제연로 258"
+    },
+    "capacity": {
+      "maxGuests": 10,
+      "maxInfants": 5,
+      "allowPets": false,
+      "maxPets": 0
+    },
+    "details": {
+      "bedrooms": 5,
+      "beds": 7,
+      "bathrooms": 5
+    },
+    "pricing": {
+      "basePrice": 750000,
+      "currency": "KRW"
+    },
+    "ratings": {
+      "overall": 5,
+      "reviewCount": 45
+    },
+    "amenities": [
+      "프라이빗 풀",
+      "스파",
+      "레스토랑",
+      "룸서비스",
+      "컨시어지",
+      "헬리콥터"
+    ],
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80",
+        "alt": "중문 프라이빗 리조트",
+        "isMain": true
+      }
+    ],
+    "availability": {
+      "availableFrom": "2025-05-01T00:00:00.000Z",
+      "availableTo": "2025-10-31T00:00:00.000Z"
+    },
+    "host": {
+      "name": "김VIP",
+      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80",
+      "isSuperhost": true
+    },
+    "policies": {
+      "checkInTime": "16:00",
+      "checkOutTime": "10:00",
+      "cancellationPolicy": "strict"
+    }
+  }
+]

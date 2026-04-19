@@ -11,6 +11,9 @@ export const RECOMMENDATIONS = [
   { id: 'rec10', title: '강릉시, 강원도', description: '자연을 만끽하기 좋은 곳', type: 'destination' },
   { id: 'rec11', title: '다낭, 베트남', description: '관광 명소: 오행산', type: 'destination' },
   { id: 'rec12', title: '삿포로시, 일본', description: '최고급 다이닝을 즐기기 좋은 곳', type: 'destination' },
+  { id: 'rec13', title: '한림읍', description: '제주의 아름다운 해변 마을', type: 'destination' },
+  { id: 'rec14', title: '구좌읍', description: '제주의 일출 명소', type: 'destination' },
+  { id: 'rec15', title: '성산읍', description: '제주의 성산일출봉이 있는 곳', type: 'destination' },
 ];
 
 export const SEARCH_RESULTS = [
@@ -39,4 +42,20 @@ export const SEARCH_RESULTS = [
   { id: 'res23', title: '바르셀로나', description: '스페인', type: 'search' },
   { id: 'res24', title: '로마', description: '이탈리아', type: 'search' },
   { id: 'res25', title: '시드니', description: '호주', type: 'search' },
+  // 제주도 추가 지역들
+  { id: 'res26', title: '제주', description: '대한민국 · 제주특별자치도', type: 'search' },
+  { id: 'res27', title: '제주시', description: '대한민국 · 제주특별자치도 · 도시', type: 'search' },
+  { id: 'res28', title: '한림읍', description: '대한민국 · 제주 · 제주시', type: 'search' },
+  { id: 'res29', title: '애월읍', description: '대한민국 · 제주 · 제주시', type: 'search' },
+  { id: 'res30', title: '한경면', description: '대한민국 · 제주 · 제주시', type: 'search' },
+  { id: 'res31', title: '조천읍', description: '대한민국 · 제주 · 제주시', type: 'search' },
+  { id: 'res32', title: '우도면', description: '대한민국 · 제주 · 제주시', type: 'search' },
+  { id: 'res33', title: '추자면', description: '대한민국 · 제주 · 제주시', type: 'search' },
+  { id: 'res34', title: '성산읍', description: '대한민국 · 제주 · 서귀포시', type: 'search' },
+  { id: 'res35', title: '구좌읍', description: '대한민국 · 제주 · 서귀포시', type: 'search' },
+  { id: 'res36', title: '중문동', description: '대한민국 · 제주 · 서귀포시', type: 'search' },
+  { id: 'res37', title: '표선면', description: '대한민국 · 제주 · 서귀포시', type: 'search' },
+  { id: 'res38', title: '대정읍', description: '대한민국 · 제주 · 서귀포시', type: 'search' },
+  { id: 'res39', title: '안덕면', description: '대한민국 · 제주 · 서귀포시', type: 'search' },
+  { id: 'res40', title: '남원읍', description: '대한민국 · 제주 · 서귀포시', type: 'search' },
 ];
