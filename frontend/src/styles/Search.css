@@ -1,0 +1,128 @@
+/* Search.css */
+
+/* 1. 여행지/여행자 섹션 (알약 모양의 호버 영역) */
+.destination-selection,
+.traveler-selection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 32px; /* 좌우 여백을 조금 더 넓혀 쾌적하게 수정 */
+  
+  /* 🌟 근본 해결: 검색바(40px)와 일치하는 곡률 적용 */
+  border-radius: 40px !important; 
+  
+  height: 100%;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  
+  /* 부모인 search-bar-container의 relative를 이용하기 위해 여기서는 해제 */
+  position: static; 
+}
+
+/* 마우스를 올렸을 때 회색 배경이 둥글게 나타남 */
+.destination-selection:hover,
+.traveler-selection:hover {
+  background-color: #ebebeb !important;
+}
+
+/* 2. 여행지 입력창 내부 레이아웃 */
+.destination-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--dark-gray);
+  margin-bottom: 2px;
+}
+
+/* 3. 인풋창: 투박한 폰트와 위아래 짤림 완벽 해결 */
+input.search-input {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+  
+  /* 🌟 근본 해결: Noto Sans KR 강제 상속 및 지정 */
+  font-family: 'Noto Sans KR', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500;
+  color: var(--dark-gray);
+  
+  /* 🌟 짤림 방지: 라인 높이를 조절해 세로 중앙에 안착 */
+  line-height: 1.2 !important;
+}
+
+input.search-input::placeholder {
+  color: var(--light-gray);
+  font-weight: 400;
+}
+
+/* 4. 여행지 드롭다운 (중앙 고정 및 둥근 디자인) */
+.search-dropdown {
+  position: absolute;
+  /* 🌟 검색바 중앙 정렬 공식 */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  top: 75px; 
+  width: 450px; /* 가시성을 위해 조금 더 넓게 조정 */
+  
+  /* 🌟 배경색 투명 방지 및 둥근 모서리 */
+  background-color: #ffffff !important; 
+  border-radius: 32px !important; 
+  
+  box-shadow: var(--shadow-deep);
+  padding: 16px 0;
+  z-index: 2000;
+  overflow: hidden; /* 내부 아이템이 모서리를 뚫고 나가지 않게 함 */
+}
+
+.dropdown-header {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--dark-gray);
+  padding: 0 24px 12px 24px;
+}
+
+/* 5. 드롭다운 내부 아이템 스타일 */
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  cursor: pointer;
+  background-color: #ffffff !important;
+  transition: background-color 0.2s ease;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background-color: #f7f7f7 !important;
+}
+
+.suggestion-item .location-icon {
+  font-size: 18px;
+  margin-right: 16px;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.suggestion-item .location-name {
+  font-size: 15px;
+  color: #222222;
+  font-weight: 500;
+}
+
+.no-results {
+  padding: 16px 24px;
+  color: var(--light-gray);
+  font-size: 14px;
+  text-align: center;
+}

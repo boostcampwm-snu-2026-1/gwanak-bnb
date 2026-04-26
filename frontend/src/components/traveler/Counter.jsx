@@ -1,4 +1,4 @@
-import '../styles/Modal.css';
+import '../../styles/Modal.css';
 
 function Counter({label, sublabel, count, onIncrease, onDecrease, min = 0, max = 10}) {
     return (

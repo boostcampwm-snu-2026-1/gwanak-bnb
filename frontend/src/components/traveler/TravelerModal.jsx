@@ -1,5 +1,6 @@
-import Counter from '../components/Counter';
-import '../styles/Modal.css';
+import React from 'react';
+import Counter from './Counter';
+import '../../styles/Modal.css';
 
 function TravelerModal({ 
   adults, setAdults, 
@@ -12,8 +13,8 @@ function TravelerModal({
         label="성인" 
         sublabel="13세 이상" 
         count={adults} 
-        onIncrease={() => setAdults(adults + 1)} 
-        onDecrease={() => setAdults(adults - 1)} 
+        onIncrease={() => setAdults(prev => prev + 1)} 
+        onDecrease={() => setAdults(prev => prev - 1)} 
         min={0}
         max={10}
       />
@@ -21,8 +22,8 @@ function TravelerModal({
         label="어린이" 
         sublabel="2~12세" 
         count={children} 
-        onIncrease={() => setChildren(children + 1)} 
-        onDecrease={() => setChildren(children - 1)} 
+        onIncrease={() => setChildren(prev => prev + 1)} 
+        onDecrease={() => setChildren(prev => prev - 1)} 
         min={0}
         max={10}
       />
@@ -30,8 +31,8 @@ function TravelerModal({
         label="유아" 
         sublabel="2세 미만" 
         count={infants} 
-        onIncrease={() => setInfants(infants + 1)} 
-        onDecrease={() => setInfants(infants - 1)} 
+        onIncrease={() => setInfants(prev => prev + 1)} 
+        onDecrease={() => setInfants(prev => prev - 1)} 
         min={0}
         max={10}
       />

@@ -1,22 +1,34 @@
 .traveler-modal {
   position: absolute;
-  top: 90px;
+  top: 75px; 
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); 
   width: 400px;
   background: white;
   border-radius: 32px;
-  padding: 16px 32px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 8px 28px rgba(0,0,0,0.12);
-  z-index: 200;
+  padding: 12px 32px;
+  box-shadow: var(--shadow-deep);
+  z-index: 2000;
+  animation: slideDown 0.2s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 .counter-group {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 0;
-  border-bottom: 1px solid #ebebeb;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .counter-group:last-child {
@@ -25,13 +37,14 @@
 
 .counter-label h3 {
   font-size: 16px;
+  font-weight: 700;
   margin: 0;
 }
 
 .counter-label p {
   font-size: 14px;
-  color: var(--text-sub);
-  margin: 4px 0 0 0;
+  color: var(--light-gray);
+  margin: 2px 0 0 0;
 }
 
 .counter-controls {
@@ -47,16 +60,18 @@
   border: 1px solid #b0b0b0;
   background: white;
   color: #717171;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .counter-btn:hover:not(:disabled) {
-  border-color: #222222;
-  color: #222222;
+  border-color: var(--dark-gray);
+  color: var(--dark-gray);
+  background-color: #f7f7f7;
 }
 
 .counter-btn:disabled {
@@ -67,7 +82,7 @@
 
 .counter-number {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   width: 20px;
   text-align: center;
 }

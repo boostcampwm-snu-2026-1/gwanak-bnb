@@ -1,9 +1,9 @@
-/* 1. 디자인 시스템 변수 정의 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap');
 :root {
   --primary-red: #ff385c;
   --dark-gray: #222222;
   --light-gray: #717171;
+  --text-sub: #717171;
   --border-color: #dddddd;
   --bg-white: #ffffff;
   --bg-soft: #f7f7f7;
@@ -17,6 +17,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  background-color: var(--bg-white);
+}
+
 body {
   font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
   color: var(--dark-gray);
@@ -26,6 +31,9 @@ body {
 .app-container {
   min-height: 100vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-white);
 }
 
 #header {
@@ -45,15 +53,13 @@ body {
 .search-bar-container {
   display: flex;
   align-items: center;
-  width: fit-content;
-  min-width: 300px;
-  padding: 8px 8px 8px 24px;
+  height: 66px;
+  padding: 0 8px 0 24px;
   background: var(--bg-white);
   border: 1px solid var(--border-color);
   border-radius: 40px;
   box-shadow: var(--shadow-light);
-  transition: box-shadow 0.2s ease, transform 0.1s ease;
-  cursor: pointer;
+  position: relative;
 }
 
 .search-bar-container:hover {
@@ -109,7 +115,7 @@ body {
 
 .content-placeholder {
   width: 100%;
-  height: calc(100vh - 80px); 
+  min-height: calc(100vh - 80px);
   
   background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), 
               url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070');
@@ -122,6 +128,7 @@ body {
   
   justify-content: flex-start; 
   padding-top: 280px;
+  padding-bottom: 60px;
   
   color: white;
   text-align: center;
@@ -140,4 +147,52 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* 검색 결과 섹션 */
+.search-results {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.search-results h2 {
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* 카드 이미지 스타일 */
+.accommodation-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image-wrapper {
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.card-content {
+  height: 50%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
+  color: #222;
+  overflow: hidden;
 }
