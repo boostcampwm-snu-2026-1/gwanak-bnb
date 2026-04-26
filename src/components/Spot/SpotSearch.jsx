@@ -3,9 +3,9 @@ import SpotPopup from './SpotPopup';
 import './SpotSearch.css';
 import { Recommend, SpotList } from '../../constants/spotData';
 
-export default function SpotSearch() {
-  
-    const [keyword, setKeyword] = useState("");
+export default function SpotSearch({ keyword, setKeyword }) { // props
+
+    //const [keyword, setKeyword] = useState("");
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [selectedSpot, setSelectedSpot] = useState(-1); // 선택된 여행지 인덱스
 
