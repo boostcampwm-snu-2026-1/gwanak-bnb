@@ -1,0 +1,93 @@
+.modal-destination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 500px;
+    padding: 25px;
+    border: 1px solid #bbb;
+    position: absolute;
+    left: 0;
+    top: -10px;
+    border-radius: 50px;
+    background-color: white;
+    padding-bottom: 35px;
+    z-index: 100;
+}
+
+.destination-option {
+    width: 100%;
+    height: 87.5px;
+    z-index: 110;
+}
+
+.destination-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-radius: 20px;
+}
+
+.destination-row h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.destination-row p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.destination-row:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.loc-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: #eee;
+    text-align: center;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.loc-desc {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.input-dest {
+    margin-left: 30px;
+    border: none;
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.search:hover .onhover {
+    background-color: #eee;
+}
+
+.onhover::placeholder {
+    font-size: 14px;
+}
+
+.color-blue {
+    color: blue;
+}
+
+.color-red {
+    color: red;
+}
+
+.color-green {
+    color: green;
+}
+
+.active {
+    background-color: #eee;
+}
